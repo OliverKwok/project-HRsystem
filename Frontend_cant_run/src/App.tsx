@@ -27,21 +27,21 @@ import {
 
 import "./App.css";
 
-import { useStateContext } from "./contexts/ContextProvider";
+  import { useStateContext } from "./contexts/ContextProvider";
 
-const App = () => {
-  const {activeMenu} = useStateContext()
+  const App = () => {
+    const {activeMenu} = useStateContext()
 
   return (
     <div>
       <BrowserRouter>
-        <div class="flex relative dark:bg-main-dark-bg">
-          <div class="fixed right-4 bottom-4" style={{ zIndex: "100" }}>
+        <div className="flex relative dark:bg-main-dark-bg">
+          <div className="fixed right-4 bottom-4" style={{ zIndex: "100" }}>
             {/* <TooltipComponent content="Settings" position="Top"> */}
               {/* TODO cannot see setting word */}
               <button
                 type="button"
-                class="text-3xl p-3 hover:drop-shadow-lg hover:bg-light-gray text-white"
+                className="text-3xl p-3 hover:drop-shadow-lg hover:bg-light-gray text-white"
                 style={{ background: "RGB(20,184,166)", borderRadius: "50%" }}
               >
                 <FiSettings />
@@ -49,21 +49,21 @@ const App = () => {
             {/* </TooltipComponent> */}
           </div>
           {activeMenu ? (
-            <div class="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
+            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
               <Sidebar />
             </div>
           ) : (
-            <div class="w-0 dark:bg-secondary-dark-bg">
+            <div className="w-0 dark:bg-secondary-dark-bg">
               {" "}
               <Sidebar />
             </div>
           )}
           <div
-            class={`dark:bg-main-bg bg-main-bg mi -h-screen w-full ${
+            className={`dark:bg-main-bg bg-main-bg mi -h-screen w-full ${
               activeMenu ? "md:ml-72" : "flex-2"
             }`}
           >
-            <div class="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
+            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
               <Navbar />
             </div>
           </div>
