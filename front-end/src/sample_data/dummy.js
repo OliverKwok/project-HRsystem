@@ -526,7 +526,6 @@ export const links = [
       {
         name: "approval",
         icon: <IoMdContacts />,
-        // icon: <AiOutlineShoppingCart />,
       },
       {
         name: "attendence",
