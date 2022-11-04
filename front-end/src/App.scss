@@ -19,8 +19,13 @@
   color: RGB(53,85,138);
   font:bolder;
   font-size: 25px;
+  word-spacing: 2px;
 
 }
+
+// .menu-anchor {
+//   background: RGB(53,85,138);
+// }
 
 // .main-right {
 //   display: flex;
@@ -39,8 +44,8 @@
     border-radius: 50%;
     font-size: 30px;
     padding: 10px 10px 5px 10px;
+    color: white;
     &:hover {
-      color: white;
       box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
         rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     }

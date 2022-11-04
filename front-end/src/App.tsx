@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import "./App.scss";
 import { css } from "@emotion/react";
-import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React,  { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Link, NavLink} from "react-router-dom";
 import { FiSettings } from "react-icons/fi"; //icon
 
 import Organization from "./pages/Organization";
@@ -18,24 +18,27 @@ import {
   SubMenu,
   useProSidebar,
 } from "react-pro-sidebar";
-import { GiHumanPyramid } from "react-icons/gi";
+
 import { MdMarkAsUnread } from "react-icons/md";
 
 function App() {
-  // const { collapseSidebar } = useProSidebar();
+  const { collapseSidebar } = useProSidebar();
+
+  interface PageType{
+    page: React.ReactNode;
+}
+
 
   return (
     <BrowserRouter>
-      <div style={{ display: "flex", height: "100vh" }}>
+      <div style={{ display: "flex", height: "100vh", width: '250px'}}>
         <Sidebar>
           <Menu>
-            <MenuItem id="company-logo">
-              <MdMarkAsUnread />
-               <span> Company Logo</span>
-            </MenuItem>
-            <MenuItem>Dashboard</MenuItem>
-            <MenuItem>Organization</MenuItem>
-            <MenuItem>Employee</MenuItem>
+            <MenuItem id="company-logo" routerLink={<NavLink to="/" />}><MdMarkAsUnread /> <span> Company Logo</span></MenuItem>
+            <MenuItem routerLink={<NavLink to="/dashboard" />}> Dashboard</MenuItem>
+            <MenuItem routerLink={<NavLink to="/organization" />}> Organization</MenuItem>
+            <MenuItem routerLink={<NavLink to="/employee" />}> Employee</MenuItem>
+            <MenuItem routerLink={<NavLink to="/employee" />}> Employee</MenuItem>
             <SubMenu label="Attendance">
               <MenuItem>HR Calendar</MenuItem>
               <MenuItem>CSV Upload</MenuItem>
@@ -58,9 +61,16 @@ function App() {
             </SubMenu>
           </Menu>
         </Sidebar>
-        <main>
-          {/* <button onClick={() => collapseSidebar()}>Collapse</button> */}
-        </main>
+        <div>
+        <button onClick={() => collapseSidebar()}>Collapse</button>
+          <Routes>
+
+            <Route path="/" element={<Dashboard />}></Route>
+            <Route path="dashboard" element={<Dashboard />}></Route>
+            <Route path="organization" element={<Organization />}></Route>
+            <Route path="employee" element={<Employee />}></Route>
+          </Routes>
+        </div>
       </div>
 
       <div className="setting">
@@ -78,3 +88,7 @@ function App() {
 }
 
 export default App;
+function setPage(arg0: (page: any) => void): React.MouseEventHandler<HTMLAnchorElement> | undefined {
+  throw new Error("Function not implemented.");
+}
+
