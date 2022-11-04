@@ -86,8 +86,7 @@ function App() {
   );
 }
 
-export default App;
-function setPage(arg0: (page: any) => void): React.MouseEventHandler<HTMLAnchorElement> | undefined {
-  throw new Error("Function not implemented.");
-}
-// c
+// export default App;
+// function setPage(arg0: (page: any) => void): React.MouseEventHandler<HTMLAnchorElement> | undefined {
+//   throw new Error("Function not implemented.");
+// }
