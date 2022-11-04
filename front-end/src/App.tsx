@@ -31,13 +31,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div style={{ display: "flex", height: "100vh", width: '250px'}}>
+      <div style={{ display: "flex", height: "100vh", width: '25px'}}>
         <Sidebar>
           <Menu>
             <MenuItem id="company-logo" routerLink={<NavLink to="/" />}><MdMarkAsUnread /> <span> Company Logo</span></MenuItem>
             <MenuItem routerLink={<NavLink to="/dashboard" />}> Dashboard</MenuItem>
             <MenuItem routerLink={<NavLink to="/organization" />}> Organization</MenuItem>
-            <MenuItem routerLink={<NavLink to="/employee" />}> Employee</MenuItem>
             <MenuItem routerLink={<NavLink to="/employee" />}> Employee</MenuItem>
             <SubMenu label="Attendance">
               <MenuItem>HR Calendar</MenuItem>
