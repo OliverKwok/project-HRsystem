@@ -23,6 +23,9 @@ import entities from './typeorm';
       }),
       inject: [ConfigService],
     }),
-    AuthModule, UserModule, LeaveModule],
+    AuthModule,
+    UserModule,
+    LeaveModule,
+  ],
 })
 export class AppModule {}

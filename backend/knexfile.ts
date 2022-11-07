@@ -1,10 +1,8 @@
 import type { Knex } from 'knex';
 import dotenv from 'dotenv';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-const db_config = new ConfigService()
-
+// import { ConfigModule, ConfigService } from '@nestjs/config';
+// const db_config = new ConfigService();
 dotenv.config();
-console.log(process.env);
 
 const config: { [key: string]: Knex.Config } = {
   development: {
@@ -14,6 +12,10 @@ const config: { [key: string]: Knex.Config } = {
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       host: process.env.DB_HOST,
+      // database: db_config.get('DB_NAME'),
+      // user: db_config.get('DB_USER'),
+      // password: db_config.get('DB_PASSWORD'),
+      // host: db_config.get('DB_HOST'),
     },
     pool: {
       min: 2,
