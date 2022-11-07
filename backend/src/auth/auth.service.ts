@@ -14,4 +14,3 @@ login () {
     return 'logged in'
 }
 }
-
