@@ -1,8 +1,12 @@
-import type { Knex } from 'knex';
-import dotenv from 'dotenv';
+import { Knex } from 'knex';
+// import dotenv from 'dotenv';
+import { config as Config } from 'dotenv';
+
+Config();
 // import { ConfigModule, ConfigService } from '@nestjs/config';
 // const db_config = new ConfigService();
-dotenv.config();
+// dotenv.config();
+console.log(process.env);
 
 const config: { [key: string]: Knex.Config } = {
   development: {
