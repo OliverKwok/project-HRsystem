@@ -1,44 +1,34 @@
-// /** @jsxImportSource @emotion/react */
-import "./App.scss";
-// import { css } from "@emotion/react";
-import React from "react";
-// import React, { useState, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
-// import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
-// import { FiSettings } from "react-icons/fi"; //icon
+/** @jsxImportSource @emotion/react */
+import "../App.scss";
+import { css } from "@emotion/react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
+import { FiSettings } from "react-icons/fi"; //icon
 
-// import Organization from "./pages/02-Organization";
-// import Employee from "./pages/03-Employee";
-// import Attendance from "./pages/04-Attendance";
-// import Payroll from "./pages/05-Payroll";
-// import Dashboard from "./pages/01-Dashboard";
+import Organization from "../pages/02-Organization";
+import Employee from "../pages/03-Employee";
+import Attendance from "../pages/04-Attendance";
+import Payroll from "../pages/05-Payroll";
+import Dashboard from "../pages/01-Dashboard";
+import { ProSidebarProvider, useProSidebar } from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 
-// import {
-//   Sidebar,
-//   Menu,
-//   MenuItem,
-//   SubMenu,
-//   useProSidebar,
-// } from "react-pro-sidebar";
+const MenuSideBar = () => {
+  const { collapseSidebar } = useProSidebar();
 
-// import { MdMarkAsUnread } from "react-icons/md";
+  interface PageType {
+    page: React.ReactNode;
+  }
 
-import MenuSidebar from "./components/MenuSidebar";
-
-function App() {
-  return <MenuSidebar />;
-}
-
-//   const { collapseSidebar } = useProSidebar();
-
-// interface PageType {
-//   page: React.ReactNode;
-// }
-/* <div style={{ display: "flex", height: "100vh", width: "25px" }}>
+  return (
+    // <BrowserRouter>
+    <ProSidebarProvider>
+      <div style={{ display: "flex", height: "100vh", width: "25px" }}>
         <Sidebar>
           <Menu>
             <MenuItem id="company-logo" routerLink={<NavLink to="/" />}>
-              <MdMarkAsUnread /> <span> Company Logo</span>
+              {/* <MdMarkAsUnread />  */}
+              <span> Company Logo</span>
             </MenuItem>
             <MenuItem routerLink={<NavLink to="/dashboard" />}>
               {" "}
@@ -86,23 +76,19 @@ function App() {
       </div>
 
       <div className="setting">
-        <button
-          type="button"
-          css={css`
-             }
-          `}
-        >
+        <button type="button" css={css``}>
           <FiSettings />
         </button>
       </div>
-    </BrowserRouter>
+    </ProSidebarProvider>
+    // </BrowserRouter>
   );
-} */
+};
 
-export default App;
+export default MenuSideBar;
 
-// function setPage(
-//   arg0: (page: any) => void
-// ): React.MouseEventHandler<HTMLAnchorElement> | undefined {
-//   throw new Error("Function not implemented.");
-// }
+function setPage(
+  arg0: (page: any) => void
+): React.MouseEventHandler<HTMLAnchorElement> | undefined {
+  throw new Error("Function not implemented.");
+}
