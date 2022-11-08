@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 // import { UserModule } from './user/user.module';
 import { LeaveModule } from './leave/leave.module';
-<<<<<<< HEAD
 // import { ConfigModule, ConfigService } from '@nestjs/config';
 // import { TypeOrmModule } from '@nestjs/typeorm';
 // import entities from './typeorm';
@@ -38,29 +37,6 @@ dotenv.config();
     //   },
     // }),
 
-=======
-import { ConfigModule, ConfigService } from '@nestjs/config';
-// import { TypeOrmModule } from '@nestjs/typeorm';
-// import entities from './typeorm';
-
-@Module({
-  imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    // TypeOrmModule.forRootAsync({
-    //   imports: [ConfigModule],
-    //   useFactory: (configService: ConfigService) => ({
-    //     type: 'postgres',
-    //     host: configService.get('DB_HOST'),
-    //     port: +configService.get<number>('DB_PORT'),
-    //     username: configService.get('DB_USERNAME'),
-    //     password: configService.get('DB_PASSWORD'),
-    //     database: configService.get('DB_NAME'),
-    //     entities: entities,
-    //     synchronize: true,
-    //   }),
-    //   inject: [ConfigService],
-    // }),
->>>>>>> f9a1efda3b2d18610d03b7e6ca545bb5bd03d835
     AuthModule,
     // UserModule,
     LeaveModule,
