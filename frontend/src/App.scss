@@ -1,30 +1,62 @@
-.bg-container {
-  background: RGB(224, 224, 224);
-  // background: RGB(250, 250, 250);
-  height: 100%;
+.container {
+  background: #CCD7E4;
   display: flex;
+  height: 100vh;
 }
 
-.sidebar {
-  display: flex;
-  height: 100%; 
 
+.sidebar {
+  a {
+    text-decoration: none;
+    // &:hover {
+    //   background: #08dda5;
+    // }
+    &:visited {
+      color: black;
+    }
+  }
+  display: flex;
+  padding: 30px;
+  flex-direction: column;
   background: white;
-  // width: 18rem;
+  width: 300px;
   // position: fixed;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  // box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  NavLink, div{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+padding-left: 10px;
+    span {
+      padding-left: 10px;
+      text-transform: capitalize;
+    }
+
+  }
+.sub-item {
+  padding-left: 20px;
+}
+.active {
+  background:RGB(53, 85, 138);
+  color: white!important;
+}
 }
 
 #company-logo {
-  color: RGB(53,85,138);
-  font:bolder;
-  font-size: 25px;
+  color: RGB(53, 85, 138);
+  font: bolder;
+  font-size: 30px;
   word-spacing: 2px;
-
 }
 
-.active {
-  background: RGB(53,85,138);
+// .active {
+//   background: RGB(53,85,138);
+// }
+
+.main {
+  flex-grow: 1;
+  padding-left: 50px;
 }
 
 .setting {
@@ -34,15 +66,14 @@
   z-index: "100";
 
   button {
-    background: RGB(53,85,138);
+    background: RGB(53, 85, 138);
     border: 0px;
     border-radius: 50%;
     font-size: 30px;
     padding: 10px 10px 5px 10px;
     color: white;
     &:hover {
-      box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
-        rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+      background: #08dda5;
     }
   }
 }

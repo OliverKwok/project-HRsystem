@@ -29,6 +29,8 @@ function App() {
   return <MenuSidebar />;
 }
 
+export default App;
+
 //   const { collapseSidebar } = useProSidebar();
 
 // interface PageType {
@@ -95,11 +97,11 @@ function App() {
           <FiSettings />
         </button>
       </div>
-    </BrowserRouter>
+    </div>
   );
 } */
 
-export default App;
+
 
 // function setPage(
 //   arg0: (page: any) => void
