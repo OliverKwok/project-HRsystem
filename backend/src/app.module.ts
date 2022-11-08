@@ -7,8 +7,10 @@ import { LeaveModule } from './leave/leave.module';
 // import entities from './typeorm';
 import { KnexModule } from 'nestjs-knex';
 import * as config from '../knexfile';
-import dotenv from 'dotenv';
-dotenv.config();
+// import dotenv from 'dotenv';
+// dotenv.config();
+import { config as Config } from 'dotenv';
+Config();
 
 @Module({
   imports: [
