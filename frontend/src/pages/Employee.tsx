@@ -29,7 +29,7 @@ export default function Employee () {
   }
 
   return (
-    <div className="container">
+    <div className="page-container">
       <h1>New Employee</h1>
       <Form onSubmit={handleSubmit(submit)}>
         <Form.Group>

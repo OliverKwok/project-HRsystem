@@ -25,8 +25,6 @@ import {
 import { MdMarkAsUnread } from "react-icons/md";
 
 function App() {
-  // const { collapseSidebar } = useProSidebar();
-  // no need hide sidebar
 
   interface PageType {
     page: React.ReactNode;
@@ -40,17 +38,24 @@ function App() {
     <div className="container">
       <div className="sidebar">
         <div id="company-logo" onClick={() => navigate("dashboard")}>
-          <BsFillPeopleFill /> <span>Company logo</span>
+          <BsFillPeopleFill /> <span>HR System</span>
         </div>
-        <div onClick={() => navigate("dashboard")}>
-          <MdOutlineSpaceDashboard /> <span>Dashboard</span>
-        </div>
-        <div onClick={() => navigate("organization")}>
-          <MdOutlineSpaceDashboard /> <span>Organization</span>
-        </div>
-        <div onClick={() => navigate("employee")}>
-          <MdOutlineSpaceDashboard /> <span>Employee</span>
-        </div>
+        <NavLink to={"dashboard"}>
+          <div>
+          <MdOutlineSpaceDashboard /> <span>dashboard</span>
+          </div>
+        </NavLink>
+        <NavLink to={"organization"}>
+          <div>
+          <MdOutlineSpaceDashboard /> <span>organization</span>
+          </div>
+        </NavLink>
+        <NavLink to={"employee"}>
+          <div>
+          <MdOutlineSpaceDashboard /> <span>employee</span>
+          </div>
+        </NavLink>
+
         <div onClick={() => setSideBarItemShow1(!sideBarItemShow1)}>
           <MdOutlineSpaceDashboard />
           <span>Group 1</span>
@@ -58,12 +63,19 @@ function App() {
 
         {sideBarItemShow1 && (
           <>
-            <div className="sub-item" onClick={() => navigate("attendance")}>
-              <FaRegHandPointRight /> <span>Attendance</span>
-            </div>
-            <div className="sub-item" onClick={() => navigate("payroll")}>
-              <FaRegHandPointRight /> <span>Payroll</span>
-            </div>
+            <NavLink className="sub-item" to={"attendance"}>
+              <div>
+
+              <FaRegHandPointRight /> <span>attendance</span>
+              </div>
+            </NavLink>
+            <NavLink className="sub-item" to={"payroll"}>
+              <div>
+
+              <FaRegHandPointRight /> <span>payroll</span>
+              </div>
+            </NavLink>
+
           </>
         )}
         <div onClick={() => setSideBarItemShow2(!sideBarItemShow2)}>
@@ -71,14 +83,21 @@ function App() {
         </div>
 
         {sideBarItemShow2 && (
-          <>
-            <div className="sub-item" onClick={() => navigate("attendance")}>
-              <FaRegHandPointRight /> <span>Attendance</span>
-            </div>
-            <div className="sub-item" onClick={() => navigate("payroll")}>
-              <FaRegHandPointRight /> <span>Payroll</span>
-            </div>
-          </>
+   <>
+   <NavLink className="sub-item" to={"attendance"}>
+     <div>
+
+     <FaRegHandPointRight /> <span>attendance</span>
+     </div>
+   </NavLink>
+   <NavLink className="sub-item" to={"payroll"}>
+     <div>
+
+     <FaRegHandPointRight /> <span>payroll</span>
+     </div>
+   </NavLink>
+
+ </>
         )}
       </div>
       <div className="main">
