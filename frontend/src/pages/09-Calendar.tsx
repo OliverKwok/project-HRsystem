@@ -14,9 +14,9 @@ export default class DemoApp extends React.Component {
 
   render() {
     return (
-      <div className='demo-app'>
-        {this.renderSidebar()}
-        <div className='demo-app-main'>
+      <div className='calendar-container'>
+
+        <div className='calendar-main'>
           <FullCalendar
             plugins={[dayGridPlugin, interactionPlugin]}
             headerToolbar={{
@@ -42,13 +42,16 @@ export default class DemoApp extends React.Component {
             */
           />
         </div>
+        <div className='calendar-info'>
+        {this.renderInfoBox()}
+        </div>
       </div>
     )
   }
 
   // test 
 
-  renderSidebar() {
+  renderInfoBox() {
     return (
       <div className='demo-app-sidebar'>
         <div className='demo-app-sidebar-section'>

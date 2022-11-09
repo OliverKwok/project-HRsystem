@@ -27,7 +27,7 @@ function App() {
         <div id="company-logo" onClick={() => navigate("dashboard")}>
           <BsFillPeopleFill /> <span>HR System</span>
         </div>
-        <NavLink to={"dashboard"}>
+        <NavLink className="nav-item" to={"dashboard"}>
           <div>
             <MdOutlineSpaceDashboard /> <span>dashboard</span>
           </div>

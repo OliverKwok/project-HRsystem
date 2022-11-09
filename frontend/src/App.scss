@@ -1,5 +1,11 @@
+:root {
+  --main-bg-color:RGB(250,250,250);
+  --sidebar-bg-color:RGB(241,247,247);
+  --theme-green: RGB(14,178,179)
+}
+
 .container {
-  background: #ccd7e4;
+  background: var(--main-bg-color);
   display: flex;
   height: 100vh;
 }
@@ -7,21 +13,20 @@
 .sidebar {
   a {
     text-decoration: none;
-    // &:hover {
-    //   background: #08dda5;
-    // }
+
     &:visited {
       color: black;
     }
   }
+  background: var(--sidebar-bg-color);
   display: flex;
   padding: 30px;
   flex-direction: column;
-  background: white;
   width: 300px;
-  // position: fixed;
-  // box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  NavLink,
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  .nav-item:hover {
+    background: var(--theme-green);
+  }
   div {
     cursor: pointer;
     display: flex;
@@ -37,15 +42,15 @@
     padding-left: 20px;
   }
   .active {
-    background: RGB(53, 85, 138);
+    background: var(--theme-green);
     color: white !important;
   }
 }
 
 #company-logo {
-  color: RGB(53, 85, 138);
-  font: bolder;
-  font-size: 30px;
+  color: var(--theme-green);
+  font-weight: 800;
+  font-size: 35px;
   word-spacing: 2px;
 }
 
@@ -65,7 +70,7 @@
   z-index: "100";
 
   button {
-    background: RGB(53, 85, 138);
+    background: var(--theme-green);
     border: 0px;
     border-radius: 50%;
     font-size: 30px;
@@ -75,4 +80,11 @@
       background: #08dda5;
     }
   }
+}
+
+
+// calendar
+
+.calendar-main {
+  
 }

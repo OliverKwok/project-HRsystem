@@ -50,11 +50,11 @@ export default function Employee() {
       <Form onSubmit={handleSubmit(submit)}>
         <Form.Group>
           <Form.Label>First Name</Form.Label>
-          <Form.Control type="text" {...register("firstName")} />
+          <Form.Control type="text" {...register("firstName", { required: true, maxLength: 20 })} />
         </Form.Group>
         <Form.Group>
           <Form.Label>Last Name</Form.Label>
-          <Form.Control type="text" {...register("lastName")} />
+          <Form.Control type="text" {...register("lastName",  { pattern: /^[A-Za-z]+$/i })} />
         </Form.Group>
         <Form.Group>
           <Form.Label>Chinese Name</Form.Label>
