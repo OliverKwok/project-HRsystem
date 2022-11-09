@@ -46,6 +46,8 @@ export default class DemoApp extends React.Component {
     )
   }
 
+  // test 
+
   renderSidebar() {
     return (
       <div className='demo-app-sidebar'>
