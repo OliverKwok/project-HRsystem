@@ -8,25 +8,15 @@ import { BsFillPeopleFill } from "react-icons/bs";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { FaRegHandPointRight } from "react-icons/fa";
 
+import Dashboard from "./pages/01-Dashboard";
 import Organization from "./pages/02-Organization";
 import Employee from "./pages/03-Employee";
 import Attendance from "./pages/04-Attendance";
 import Payroll from "./pages/05-Payroll";
-import Dashboard from "./pages/01-Dashboard";
-
-import {
-  Sidebar,
-  Menu,
-  MenuItem,
-  SubMenu,
-  useProSidebar,
-} from "react-pro-sidebar";
+import Calendar from "./pages/09-Calendar";
 
 function App() {
-  interface PageType {
-    page: React.ReactNode;
-  }
-
+  
   const navigate = useNavigate();
   const [sideBarItemShow1, setSideBarItemShow1] = useState(false);
   const [sideBarItemShow2, setSideBarItemShow2] = useState(false);
@@ -50,6 +40,11 @@ function App() {
         <NavLink to={"employee"}>
           <div>
             <MdOutlineSpaceDashboard /> <span>employee</span>
+          </div>
+        </NavLink>
+        <NavLink to={"calendar"}>
+          <div>
+            <MdOutlineSpaceDashboard /> <span>calendar</span>
           </div>
         </NavLink>
 
@@ -99,6 +94,7 @@ function App() {
           <Route path="employee" element={<Employee />}></Route>
           <Route path="attendance" element={<Attendance />}></Route>
           <Route path="payroll" element={<Payroll />}></Route>
+          <Route path="calendar" element={<Calendar />}></Route>
         </Routes>
       </div>
 
