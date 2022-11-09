@@ -172,7 +172,15 @@ export async function up(knex: Knex): Promise<void> {
     table.date('date');
     table.timestamp('time_checkedin');
     table.timestamp('time_checkedout');
-    table.enu('status', ['punctual', 'late', 'onleave', 'remote', 'other']);
+    table.enu('status', [
+      'punctual',
+      'late',
+      'onleave',
+      'onbustrip',
+      'remote',
+      'unknonwn',
+      'other',
+    ]);
   });
 
   // payroll
