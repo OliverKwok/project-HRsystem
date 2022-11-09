@@ -5,12 +5,16 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, NavLink, useNavigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { BsFillPeopleFill } from "react-icons/bs";
-import { MdOutlineSpaceDashboard } from "react-icons/md";
-import { FaRegHandPointRight } from "react-icons/fa";
+import { MdOutlineSpaceDashboard, MdOutlineSubtitles } from "react-icons/md";
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { SlOrganization} from "react-icons/sl";
+import { MdOutlinePeopleAlt } from "react-icons/md";
+import { TbReportSearch} from "react-icons/tb";
+import { GoTriangleLeft, GoTriangleDown } from "react-icons/go";
 
 import Dashboard from "./pages/01-Dashboard";
-import Organization from "./pages/02-Organization";
-import Employee from "./pages/03-Employee";
+import Organization from "./pages/02a-Organization";
+import Employee from "./pages/02d-Employee";
 import Attendance from "./pages/04-Attendance";
 import Payroll from "./pages/05-Payroll";
 import Calendar from "./pages/09-Calendar";
@@ -25,66 +29,61 @@ function App() {
     <div className="container">
       <div className="sidebar">
         <div id="company-logo" onClick={() => navigate("dashboard")}>
-          <BsFillPeopleFill /> <span>HR System</span>
+          <BsFillPeopleFill /> <span>HR Solution</span>
         </div>
-        <NavLink className="nav-item" to={"dashboard"}>
+
+        <NavLink to={"dashboard"}>
           <div>
             <MdOutlineSpaceDashboard /> <span>dashboard</span>
           </div>
         </NavLink>
-        <NavLink to={"organization"}>
+
+        <div onClick={() => setSideBarItemShow1(!sideBarItemShow1)}>
+          <HiOutlineOfficeBuilding />
+          <span>Company</span>
+          <div className="sub-list-triangle">
+          {sideBarItemShow1 ? <GoTriangleDown />: <GoTriangleLeft /> }
+            </div> 
+        </div>
+
+        {sideBarItemShow1 && (
+          <>
+            <NavLink className="sub-item" to={"organization"}>
+              <div>
+                <SlOrganization /> <span>organization</span>
+              </div>
+            </NavLink>
+            <NavLink className="sub-item" to={"grade"}>
+              <div>
+                <TbReportSearch /> <span>grade</span>
+              </div>
+            </NavLink>
+            <NavLink className="sub-item" to={"title"}>
+              <div>
+                <MdOutlineSubtitles /> <span>title</span>
+              </div>
+            </NavLink>
+            <NavLink className="sub-item" to={"employee"}>
+              <div>
+                <MdOutlinePeopleAlt /> <span>employee</span>
+              </div>
+            </NavLink>
+          </>
+        )}
+
+
+        <NavLink className="nav-item" to={"attendance"}>
           <div>
-            <MdOutlineSpaceDashboard /> <span>organization</span>
+            <MdOutlineSpaceDashboard /> <span>attendance</span>
           </div>
         </NavLink>
-        <NavLink to={"employee"}>
-          <div>
-            <MdOutlineSpaceDashboard /> <span>employee</span>
-          </div>
-        </NavLink>
-        <NavLink to={"calendar"}>
+        <NavLink className="nav-item" to={"calendar"}>
           <div>
             <MdOutlineSpaceDashboard /> <span>calendar</span>
           </div>
         </NavLink>
 
-        <div onClick={() => setSideBarItemShow1(!sideBarItemShow1)}>
-          <MdOutlineSpaceDashboard />
-          <span>Group 1</span>
-        </div>
 
-        {sideBarItemShow1 && (
-          <>
-            <NavLink className="sub-item" to={"attendance"}>
-              <div>
-                <FaRegHandPointRight /> <span>attendance</span>
-              </div>
-            </NavLink>
-            <NavLink className="sub-item" to={"payroll"}>
-              <div>
-                <FaRegHandPointRight /> <span>payroll</span>
-              </div>
-            </NavLink>
-          </>
-        )}
-        <div onClick={() => setSideBarItemShow2(!sideBarItemShow2)}>
-          <MdOutlineSpaceDashboard /> <span>Group 2</span>
-        </div>
-
-        {sideBarItemShow2 && (
-          <>
-            <NavLink className="sub-item" to={"attendance"}>
-              <div>
-                <FaRegHandPointRight /> <span>attendance</span>
-              </div>
-            </NavLink>
-            <NavLink className="sub-item" to={"payroll"}>
-              <div>
-                <FaRegHandPointRight /> <span>payroll</span>
-              </div>
-            </NavLink>
-          </>
-        )}
       </div>
       <div className="main">
         <Routes>

@@ -1,7 +1,8 @@
 :root {
   --main-bg-color:RGB(250,250,250);
   --sidebar-bg-color:RGB(241,247,247);
-  --theme-green: RGB(14,178,179)
+  --theme-green: RGB(14,178,179);
+  --theme-light-green: #9ceaef
 }
 
 .container {
@@ -24,9 +25,6 @@
   flex-direction: column;
   width: 300px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  .nav-item:hover {
-    background: var(--theme-green);
-  }
   div {
     cursor: pointer;
     display: flex;
@@ -40,10 +38,23 @@
   }
   .sub-item {
     padding-left: 20px;
+    margin-bottom: 10px; 
+  }
+  .nav-item {
+    margin-bottom: 10px;
   }
   .active {
     background: var(--theme-green);
-    color: white !important;
+    color: white!important;
+  }
+  .sub-list-triangle {
+    flex-grow: 1;
+    justify-content: flex-end;
+    padding-right: 10px;
+  }
+  .nav-item:hover, .sub-item:hover {
+    background: var(--theme-light-green);
+    color: black
   }
 }
 
