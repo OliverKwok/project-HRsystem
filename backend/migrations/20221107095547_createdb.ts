@@ -17,6 +17,7 @@ export async function up(knex: Knex): Promise<void> {
     // personal contact details + mobile app acct
     table.string('mobile_countrycode');
     table.string('mobile_no');
+    table.string('work_phone_no');
     table.string('email_personal');
     table.string('email_work');
     table.string('password'); //first psw = bday
