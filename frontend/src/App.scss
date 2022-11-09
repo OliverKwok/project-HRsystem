@@ -1,9 +1,8 @@
 .container {
-  background: #CCD7E4;
+  background: #ccd7e4;
   display: flex;
   height: 100vh;
 }
-
 
 .sidebar {
   a {
@@ -22,25 +21,25 @@
   width: 300px;
   // position: fixed;
   // box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  NavLink, div{
+  NavLink,
+  div {
     cursor: pointer;
     display: flex;
     align-items: center;
     margin: 10px 0px;
-padding-left: 10px;
+    padding-left: 10px;
     span {
       padding-left: 10px;
       text-transform: capitalize;
     }
-
   }
-.sub-item {
-  padding-left: 20px;
-}
-.active {
-  background:RGB(53, 85, 138);
-  color: white!important;
-}
+  .sub-item {
+    padding-left: 20px;
+  }
+  .active {
+    background: RGB(53, 85, 138);
+    color: white !important;
+  }
 }
 
 #company-logo {

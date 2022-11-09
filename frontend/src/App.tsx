@@ -1,90 +1,105 @@
-// /** @jsxImportSource @emotion/react */
+/** @jsxImportSource @emotion/react */
 import "./App.scss";
-// import { css } from "@emotion/react";
-import React from "react";
-// import React, { useState, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
-// import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
-// import { FiSettings } from "react-icons/fi"; //icon
+import { css } from "@emotion/react";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Link, NavLink, useNavigate } from "react-router-dom";
+import { FiSettings } from "react-icons/fi";
+import { BsFillPeopleFill } from "react-icons/bs";
+import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { FaRegHandPointRight } from "react-icons/fa";
 
-// import Organization from "./pages/02-Organization";
-// import Employee from "./pages/03-Employee";
-// import Attendance from "./pages/04-Attendance";
-// import Payroll from "./pages/05-Payroll";
-// import Dashboard from "./pages/01-Dashboard";
+import Organization from "./pages/02-Organization";
+import Employee from "./pages/03-Employee";
+import Attendance from "./pages/04-Attendance";
+import Payroll from "./pages/05-Payroll";
+import Dashboard from "./pages/01-Dashboard";
 
-// import {
-//   Sidebar,
-//   Menu,
-//   MenuItem,
-//   SubMenu,
-//   useProSidebar,
-// } from "react-pro-sidebar";
-
-// import { MdMarkAsUnread } from "react-icons/md";
-
-import MenuSidebar from "./components/MenuSidebar";
+import {
+  Sidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  useProSidebar,
+} from "react-pro-sidebar";
 
 function App() {
-  return <MenuSidebar />;
-}
+  interface PageType {
+    page: React.ReactNode;
+  }
 
-export default App;
+  const navigate = useNavigate();
+  const [sideBarItemShow1, setSideBarItemShow1] = useState(false);
+  const [sideBarItemShow2, setSideBarItemShow2] = useState(false);
 
-//   const { collapseSidebar } = useProSidebar();
-
-// interface PageType {
-//   page: React.ReactNode;
-// }
-/* <div style={{ display: "flex", height: "100vh", width: "25px" }}>
-        <Sidebar>
-          <Menu>
-            <MenuItem id="company-logo" routerLink={<NavLink to="/" />}>
-              <MdMarkAsUnread /> <span> Company Logo</span>
-            </MenuItem>
-            <MenuItem routerLink={<NavLink to="/dashboard" />}>
-              {" "}
-              Dashboard
-            </MenuItem>
-            <MenuItem routerLink={<NavLink to="/organization" />}>
-              {" "}
-              Organization
-            </MenuItem>
-            <MenuItem routerLink={<NavLink to="/employee" />}>
-              {" "}
-              Employee
-            </MenuItem>
-            <SubMenu label="Attendance">
-              <MenuItem>HR Calendar</MenuItem>
-              <MenuItem>CSV Upload</MenuItem>
-            </SubMenu>
-            <SubMenu label="Payroll">
-              <MenuItem>Monthly Summary</MenuItem>
-              <MenuItem>Set OT Logic</MenuItem>
-              <MenuItem>Salary Adj History</MenuItem>
-              <MenuItem>Payslip</MenuItem>
-            </SubMenu>
-            <SubMenu label="Leave">
-              <MenuItem>Summary</MenuItem>
-              <MenuItem>Leave Type</MenuItem>
-            </SubMenu>
-            <MenuItem>Termination</MenuItem>
-            <SubMenu label="Data Analysis">
-              <MenuItem>Diagram A</MenuItem>
-              <MenuItem>Diagram B</MenuItem>
-              <MenuItem>Diagram C</MenuItem>
-            </SubMenu>
-          </Menu>
-        </Sidebar>
-        <div>
-          <button onClick={() => collapseSidebar()}>Collapse</button>
-          <Routes>
-            <Route path="/" element={<Dashboard />}></Route>
-            <Route path="dashboard" element={<Dashboard />}></Route>
-            <Route path="organization" element={<Organization />}></Route>
-            <Route path="employee" element={<Employee />}></Route>
-          </Routes>
+  return (
+    <div className="container">
+      <div className="sidebar">
+        <div id="company-logo" onClick={() => navigate("dashboard")}>
+          <BsFillPeopleFill /> <span>HR System</span>
         </div>
+        <NavLink to={"dashboard"}>
+          <div>
+            <MdOutlineSpaceDashboard /> <span>dashboard</span>
+          </div>
+        </NavLink>
+        <NavLink to={"organization"}>
+          <div>
+            <MdOutlineSpaceDashboard /> <span>organization</span>
+          </div>
+        </NavLink>
+        <NavLink to={"employee"}>
+          <div>
+            <MdOutlineSpaceDashboard /> <span>employee</span>
+          </div>
+        </NavLink>
+
+        <div onClick={() => setSideBarItemShow1(!sideBarItemShow1)}>
+          <MdOutlineSpaceDashboard />
+          <span>Group 1</span>
+        </div>
+
+        {sideBarItemShow1 && (
+          <>
+            <NavLink className="sub-item" to={"attendance"}>
+              <div>
+                <FaRegHandPointRight /> <span>attendance</span>
+              </div>
+            </NavLink>
+            <NavLink className="sub-item" to={"payroll"}>
+              <div>
+                <FaRegHandPointRight /> <span>payroll</span>
+              </div>
+            </NavLink>
+          </>
+        )}
+        <div onClick={() => setSideBarItemShow2(!sideBarItemShow2)}>
+          <MdOutlineSpaceDashboard /> <span>Group 2</span>
+        </div>
+
+        {sideBarItemShow2 && (
+          <>
+            <NavLink className="sub-item" to={"attendance"}>
+              <div>
+                <FaRegHandPointRight /> <span>attendance</span>
+              </div>
+            </NavLink>
+            <NavLink className="sub-item" to={"payroll"}>
+              <div>
+                <FaRegHandPointRight /> <span>payroll</span>
+              </div>
+            </NavLink>
+          </>
+        )}
+      </div>
+      <div className="main">
+        <Routes>
+          <Route path="/" element={<Dashboard />}></Route>
+          <Route path="dashboard" element={<Dashboard />}></Route>
+          <Route path="organization" element={<Organization />}></Route>
+          <Route path="employee" element={<Employee />}></Route>
+          <Route path="attendance" element={<Attendance />}></Route>
+          <Route path="payroll" element={<Payroll />}></Route>
+        </Routes>
       </div>
 
       <div className="setting">
@@ -99,12 +114,11 @@ export default App;
       </div>
     </div>
   );
-} */
+}
 
-
-
-// function setPage(
-//   arg0: (page: any) => void
-// ): React.MouseEventHandler<HTMLAnchorElement> | undefined {
-//   throw new Error("Function not implemented.");
-// }
+export default App;
+function setPage(
+  arg0: (page: any) => void
+): React.MouseEventHandler<HTMLAnchorElement> | undefined {
+  throw new Error("Function not implemented.");
+}
