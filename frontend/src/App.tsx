@@ -6,11 +6,12 @@ import { Routes, Route, Link, NavLink, useNavigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { MdOutlineSpaceDashboard, MdOutlineSubtitles } from "react-icons/md";
-import { HiOutlineOfficeBuilding } from "react-icons/hi";
-import { SlOrganization} from "react-icons/sl";
-import { MdOutlinePeopleAlt } from "react-icons/md";
-import { TbReportSearch} from "react-icons/tb";
+import { HiOutlineOfficeBuilding, HiOutlineSpeakerphone } from "react-icons/hi";
+import { SlOrganization } from "react-icons/sl";
+import { MdOutlinePeopleAlt, MdNotificationsNone } from "react-icons/md";
+import { TbReportSearch } from "react-icons/tb";
 import { GoTriangleLeft, GoTriangleDown } from "react-icons/go";
+import { CgProfile } from "react-icons/cg";
 
 import Dashboard from "./pages/01-Dashboard";
 import Organization from "./pages/02a-Organization";
@@ -20,7 +21,6 @@ import Payroll from "./pages/05-Payroll";
 import Calendar from "./pages/09-Calendar";
 
 function App() {
-  
   const navigate = useNavigate();
   const [sideBarItemShow1, setSideBarItemShow1] = useState(false);
   const [sideBarItemShow2, setSideBarItemShow2] = useState(false);
@@ -42,8 +42,8 @@ function App() {
           <HiOutlineOfficeBuilding />
           <span>Company</span>
           <div className="sub-list-triangle">
-          {sideBarItemShow1 ? <GoTriangleDown />: <GoTriangleLeft /> }
-            </div> 
+            {sideBarItemShow1 ? <GoTriangleDown /> : <GoTriangleLeft />}
+          </div>
         </div>
 
         {sideBarItemShow1 && (
@@ -71,7 +71,6 @@ function App() {
           </>
         )}
 
-
         <NavLink className="nav-item" to={"attendance"}>
           <div>
             <MdOutlineSpaceDashboard /> <span>attendance</span>
@@ -82,30 +81,31 @@ function App() {
             <MdOutlineSpaceDashboard /> <span>calendar</span>
           </div>
         </NavLink>
-
-
       </div>
-      <div className="main">
-        <Routes>
-          <Route path="/" element={<Dashboard />}></Route>
-          <Route path="dashboard" element={<Dashboard />}></Route>
-          <Route path="organization" element={<Organization />}></Route>
-          <Route path="employee" element={<Employee />}></Route>
-          <Route path="attendance" element={<Attendance />}></Route>
-          <Route path="payroll" element={<Payroll />}></Route>
-          <Route path="calendar" element={<Calendar />}></Route>
-        </Routes>
-      </div>
-
-      <div className="setting">
-        <button
-          type="button"
-          css={css`
-             }
-          `}
-        >
+      <div className="main-container">
+        <div className="navbar">
+          <div className="navbar-grid">
+          <HiOutlineSpeakerphone />
+          </div>
+          <div id="announcement">Sample Company Announcement</div>
+          <div className="navbar-grid"><MdNotificationsNone /><span>
+            1</span></div>
+          <div className="navbar-grid">
           <FiSettings />
-        </button>
+          </div>
+          <div className="navbar-grid"><CgProfile /></div>
+        </div>
+        <div className="main">
+          <Routes>
+            <Route path="/" element={<Dashboard />}></Route>
+            <Route path="dashboard" element={<Dashboard />}></Route>
+            <Route path="organization" element={<Organization />}></Route>
+            <Route path="employee" element={<Employee />}></Route>
+            <Route path="attendance" element={<Attendance />}></Route>
+            <Route path="payroll" element={<Payroll />}></Route>
+            <Route path="calendar" element={<Calendar />}></Route>
+          </Routes>
+        </div>
       </div>
     </div>
   );
