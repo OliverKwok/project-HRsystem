@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import OrgChart from "./02a-OrgChart";
 import OrgListView from "./02a-OrgListView";
 import "./styles/02a-org.css";
@@ -6,6 +6,13 @@ import "./styles/02a-org.css";
 export default function Organization() {
   const [show1, setShow1] = useState(true);
   const [show2, setShow2] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const licenseBanner: any = document.querySelector("div#js-licensing");
+    licenseBanner.innerHTML = "";
+    licenseBanner.style.display = "none";
+  }, []);
 
   function showChart() {
     setShow1(true);
@@ -30,13 +37,6 @@ export default function Organization() {
 
       {show1 && <OrgChart />}
       {show2 && <OrgListView />}
-
-      {/* <div className="tabcontent">  */}
-      {/* <OrgChart /> */}
-      {/* </div> */}
-      {/* <div className="tabcontent"> */}
-      {/* <OrgListView /> */}
-      {/* </div> */}
     </div>
   );
 }
