@@ -108,6 +108,13 @@
   padding: 30px;
 }
 
+
+#new-employee-form {
+ display: grid;
+ grid-template-columns: auto auto auto auto auto;
+gap:10px;
+}
+
 // .setting {
 //   position: fixed;
 //   right: 20px;
