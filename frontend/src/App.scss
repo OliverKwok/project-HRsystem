@@ -2,7 +2,8 @@
   --main-bg-color:RGB(250,250,250);
   --sidebar-bg-color:RGB(241,247,247);
   --theme-green: RGB(14,178,179);
-  --theme-light-green: #9ceaef
+  --theme-sharp-green: #9ceaef;
+  --theme-light-green: #94b8b8;
 }
 
 .container {
@@ -24,7 +25,9 @@
   padding: 30px;
   flex-direction: column;
   width: 300px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  // box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 6px;
+  // box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.4);
   div {
     cursor: pointer;
     display: flex;
@@ -53,7 +56,7 @@
     padding-right: 10px;
   }
   .nav-item:hover, .sub-item:hover {
-    background: var(--theme-light-green);
+    background: var(--theme-sharp-green);
     color: black
   }
 }
@@ -65,37 +68,61 @@
   word-spacing: 2px;
 }
 
-// .active {
-//   background: RGB(53,85,138);
-// }
-
-.main {
+.main-container {
   flex-grow: 1;
-  padding-left: 50px;
 }
 
-.setting {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: "100";
-
-  button {
-    background: var(--theme-green);
-    border: 0px;
-    border-radius: 50%;
-    font-size: 30px;
-    padding: 10px 10px 5px 10px;
-    color: white;
-    &:hover {
-      background: #08dda5;
+.navbar {
+  background-color: white;
+  height:60px;
+  padding:0px 30px 0px 15px;
+  display:flex;
+  #announcement{
+    flex-grow:1;
+    display:flex;
+    justify-content:flex-start;
+    align-items: center;
+  }
+  .navbar-grid {
+    width:50px;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--theme-light-green);
+    span {
+      background: red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 5px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      color: white;
     }
   }
 }
 
-
-// calendar
-
-.calendar-main {
-  
+.main {
+  padding: 30px;
 }
+
+// .setting {
+//   position: fixed;
+//   right: 20px;
+//   bottom: 20px;
+//   z-index: "100";
+
+//   button {
+//     background: var(--theme-green);
+//     border: 0px;
+//     border-radius: 50%;
+//     font-size: 30px;
+//     padding: 10px 10px 5px 10px;
+//     color: white;
+//     &:hover {
+//       background: #08dda5;
+//     }
+//   }
+// }
