@@ -12,7 +12,6 @@ type FormState = {
   HKID: string;
   gender: string;
   nationality: string;
-  other_nationality: string;
   date_of_birth: Date;
   age: number;
 
@@ -21,7 +20,7 @@ type FormState = {
   work_phone_no: string;
   email_personal: string;
   email_work: string;
-  password: string;
+  // password: string;
 
   highest_education: string;
   institution_name: string;
@@ -38,6 +37,12 @@ type FormState = {
   notice_period: string;
   report_to: string;
 
+  AL_leave_entitled: string;
+  // AL_leave_taken: string;
+  // AL_leave_balance: string;
+  // sick_leave_taken: string;
+  // sick_leave_balance: string;
+ 
   pay_currency: string;
   basic_salary: string;
   payment_method: string;
@@ -47,12 +52,7 @@ type FormState = {
   bank_number: string;
   bank_payee: string;
   payment_remark: string;
-
-  AL_leave_entitled: string;
-  // AL_leave_taken: string;
-  // AL_leave_balance: string;
-  // sick_leave_taken: string;
-  // sick_leave_balance: string;
+  
 };
 
 export default function Employee() {
@@ -76,7 +76,7 @@ export default function Employee() {
         work_phone_no: "",
         email_personal: "",
         email_work: "",
-        password: "",
+        // password: "",
 
         highest_education: "",
         institution_name: "",
@@ -120,10 +120,10 @@ export default function Employee() {
   }
 
   const calAge = (event: any) => {
-    const todayDate: any = moment(new Date(),'YYYY-MM-DD');
-    const date_of_birth_input = moment(event.target.value,'YYYY-MM-DD');
+    const todayDate: any = moment(new Date(), "YYYY-MM-DD");
+    const date_of_birth_input = moment(event.target.value, "YYYY-MM-DD");
     let result = todayDate.diff(date_of_birth_input, "years");
-    setAge(result)
+    setAge(result);
 
     // if (date_of_birth_input) {
     //   const result = Math.abs(
@@ -138,92 +138,229 @@ export default function Employee() {
       <h1>New Employee</h1>
       <form onSubmit={handleSubmit(submit)}>
         <div id="new-employee-form">
+            <h2>Basic Infomation</h2>
+          <div className="five-column-grid">
+            <div>
+              <div>
+                <span>First Name</span>
+              </div>
+              <input type="text" {...register("first_name")} />
+            </div>
+            <div>
+              <div>
+                <span>Last Name</span>
+              </div>
+
+              <input type="text" {...register("last_name")} />
+            </div>
+            <div>
+              <div>
+                <span>Chinese Name</span>
+              </div>
+
+              <input type="text" {...register("chinese_name")} />
+            </div>
+            <div>
+              <div>
+                <span>Alias</span>
+              </div>
+
+              <input type="text" {...register("alias")} />
+            </div>
+            <div>
+              <div>
+                <span>HKID</span>
+              </div>
+
+              <input type="text" {...register("HKID")} />
+            </div>
+
+            <div>
+              <div>
+                <span>Gender</span>
+              </div>
+
+              <select {...register("gender")}>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+
+            <div>
+              <div>
+                <span>Nationality</span>
+              </div>
+
+              <select {...register("nationality")}>
+                <option value=""></option>
+                <option value="Hong Kong">Hong Kong</option>
+                <option value="China">China</option>
+                <option value="UK">UK</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <div>
+                <span>Date of Birth</span>
+              </div>
+
+              <input
+                type="date"
+                {...register("date_of_birth")}
+                onChange={calAge}
+              />
+            </div>
+
+            <div>
+              <div>
+                <span>Age</span>
+              </div>
+
+              <input value={age} type="text" {...register("age")} disabled />
+            </div>
+          </div>
+        <hr />
+        <h2>Contact Infomation</h2>
+        <div className="five-column-grid">
+
           <div>
             <div>
-              <span>First Name</span>
+              <span>Country Code</span>
             </div>
-            <input type="text" {...register("first_name")} />
+
+            <input type="text" {...register("mobile_countrycode")} />
           </div>
           <div>
             <div>
-              <span>Last Name</span>
+              <span>Mobile No</span>
             </div>
 
-            <input type="text" {...register("last_name")} />
+            <input type="text" {...register("mobile_no")} />
           </div>
           <div>
             <div>
-              <span>Chinese Name</span>
+              <span>Work Phone No</span>
             </div>
 
-            <input type="text" {...register("chinese_name")} />
+            <input type="text" {...register("work_phone_no")} />
           </div>
           <div>
             <div>
-              <span>Alias</span>
+              <span>Personal Email</span>
             </div>
 
-            <input type="text" {...register("alias")} />
+            <input type="text" {...register("email_personal")} />
           </div>
           <div>
             <div>
-              <span>HKID</span>
+              <span>Work Email</span>
             </div>
 
-            <input type="text" {...register("HKID")} />
+            <input type="text" {...register("email_work")} />
           </div>
+        </div>
+        <hr />
+        
+        <h2>Education and Previous Job</h2>
+        <div className="five-column-grid">
 
           <div>
             <div>
-              <span>Gender</span>
+              <span>Highest Education</span>
             </div>
 
-            <select {...register("gender")}>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </div>
-
-          <div>
-            <div>
-              <span>Nationality</span>
-            </div>
-
-            <select {...register("nationality")}>
-              <option value=""></option>
-              <option value="Hong Kong">Hong Kong</option>
-              <option value="China">China</option>
-              <option value="UK">UK</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <div>
-            <div>
-              <span>Other Nationality</span>
-            </div>
-
-            <input type="text" {...register("other_nationality")} />
+            <input type="text" {...register("highest_education")} />
           </div>
           <div>
             <div>
-              <span>Date of Birth</span>
+              <span>Institution Name</span>
             </div>
 
-            <input
-              type="date"
-              {...register("date_of_birth")}
-              onChange={calAge}
-            />
+            <input type="text" {...register("institution_name")} />
           </div>
+          <div>
+            <div>
+              <span>Major</span>
+            </div>
+
+            <input type="text" {...register("major")} />
+          </div>
+          <div>
+            <div>
+              <span>Last Job Company</span>
+            </div>
+
+            <input type="text" {...register("last_job_company")} />
+          </div>
+          <div>
+            <div>
+              <span>Last Job Title</span>
+            </div>
+
+            <input type="text" {...register("last_job_title")} />
+          </div>
+
+        </div>
+        <hr />
+
+
+        <h2>Employment Detail</h2>
+        <div className="five-column-grid">
 
           <div>
             <div>
-              <span>Age</span>
+              <span>Start Time</span>
             </div>
 
-            <input value={age} type="text" {...register("age")} disabled />
+            <input type="text" {...register("start_date")} />
           </div>
+          <div>
+            <div>
+              <span>Probation Period</span>
+            </div>
+
+            <input type="text" {...register("have_probation")} />
+          </div>
+          <div>
+            <div>
+              <span>Probation Status</span>
+            </div>
+
+            <input type="text" {...register("pass_probation")} />
+          </div>
+          <div>
+            <div>
+              <span>Job Status</span>
+            </div>
+
+            <input type="text" {...register("status")} />
+          </div>
+          <div>
+            <div>
+              <span>Job Nature</span>
+            </div>
+
+            <input type="text" {...register("job_nature")} />
+          </div>
+          <div>
+            <div>
+              <span>Notice Period</span>
+            </div>
+
+            <input type="text" {...register("notice_period")} />
+          </div>
+          <div>
+            <div>
+              <span>Report To</span>
+            </div>
+
+            <input type="text" {...register("report_to")} />
+          </div>
+
+        </div>
+        <hr />
+
         </div>
 
         <button type="submit">Submit</button>
