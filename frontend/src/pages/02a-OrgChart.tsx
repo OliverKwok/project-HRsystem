@@ -43,6 +43,7 @@ export default function OrgChart() {
   ];
 
   let items: DataManager = new DataManager(data as JSON[], new Query().take(7));
+  
   return (
     <DiagramComponent
       id="container"
