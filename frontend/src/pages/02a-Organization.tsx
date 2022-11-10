@@ -126,9 +126,9 @@ export default function OrgChart() {
   );
 }
 
-const chargeMe: any = document.querySelector("div#js-licensing");
-chargeMe.innerHTML = "";
-chargeMe.style.display = "none";
+// const chargeMe: any = document.querySelector("div#js-licensing");
+// chargeMe.innerHTML = "";
+// chargeMe.style.display = "none";
 //------------------------------------------------------------------------------
 // import * as ReactDOM from "react-dom";
 // import * as React from "react";
