@@ -33,6 +33,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.1",
     "react-icons": "^4.3.1",
+    "react-organizational-chart": "^2.2.0",
     "react-pro-sidebar": "^1.0.0-alpha.7",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
