@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
+// import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 type FormState = {
@@ -47,60 +47,65 @@ export default function Employee() {
   return (
     <div className="page-container">
       <h1>New Employee</h1>
-      <Form onSubmit={handleSubmit(submit)}>
-        <Form.Group>
-          <Form.Label>First Name</Form.Label>
-          <Form.Control type="text" {...register("firstName", { required: true, maxLength: 20 })} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control type="text" {...register("lastName",  { pattern: /^[A-Za-z]+$/i })} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Chinese Name</Form.Label>
-          <Form.Control type="text" {...register("chineseName")} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Alias</Form.Label>
-          <Form.Control type="text" {...register("alias")} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Mobile Location</Form.Label>
-          <Form.Control type="text" {...register("mobileLocation")} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Mobile</Form.Label>
-          <Form.Control type="text" {...register("mobile")} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Personal Email</Form.Label>
-          <Form.Control type="text" {...register("personalEmail")} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Work Email</Form.Label>
-          <Form.Control type="text" {...register("workEmail")} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Birthday</Form.Label>
-          <Form.Control type="text" {...register("birthday")} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>HKID</Form.Label>
-          <Form.Control type="text" {...register("hkid")} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Gender</Form.Label>
-        <select {...register("gender")}>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
+      <form onSubmit={handleSubmit(submit)}>
+        <div>
+          <span>First Name</span>
+          <input
+            type="text"
+            {...register("firstName", { required: true, maxLength: 20 })}
+          />
+        </div>
+        <div>
+          <span>Last Name</span>
+          <input
+            type="text"
+            {...register("lastName", { pattern: /^[A-Za-z]+$/i })}
+          />
+        </div>
+        <div>
+          <span>Chinese Name</span>
+          <input type="text" {...register("chineseName")} />
+        </div>
+        <div>
+          <span>Alias</span>
+          <input type="text" {...register("alias")} />
+        </div>
+        <div>
+          <span>Mobile Location</span>
+          <input type="text" {...register("mobileLocation")} />
+        </div>
+        <div>
+          <span>Mobile</span>
+          <input type="text" {...register("mobile")} />
+        </div>
+        <div>
+          <span>Personal Email</span>
+          <input type="text" {...register("personalEmail")} />
+        </div>
+        <div>
+          <span>Work Email</span>
+          <input type="text" {...register("workEmail")} />
+        </div>
+        <div>
+          <span>Birthday</span>
+          <input type="text" {...register("birthday")} />
+        </div>
+        <div>
+          <span>HKID</span>
+          <input type="text" {...register("hkid")} />
+        </div>
+        <div>
+          <span>Gender</span>
+          <select {...register("gender")}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
 
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
+        <button type="submit">
           Submit
-        </Button>
-      </Form>
+        </button>
+      </form>
     </div>
   );
 }
