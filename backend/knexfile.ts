@@ -6,7 +6,7 @@ Config();
 // import { ConfigModule, ConfigService } from '@nestjs/config';
 // const db_config = new ConfigService();
 // dotenv.config();
-console.log(process.env);
+// console.log(process.env);
 
 const config: { [key: string]: Knex.Config } = {
   development: {

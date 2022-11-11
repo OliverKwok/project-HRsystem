@@ -5,9 +5,14 @@ import { User } from 'src/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/user.dto';
 
-@Injectable()
+@Injectable({})
 export class UserService {
-  constructor(@InjectKnex() private readonly knex: Knex) {}
+  // constructor(@InjectKnex() private readonly knex: Knex) {}
+  createUser(createUserDto: CreateUserDto) {
+
+    return {message: 'reach create user'}
+
+  }
   //   @InjectRepository(User) private readonly userRepository: Repository<User>,
   // ) {}
 
