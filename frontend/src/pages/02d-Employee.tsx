@@ -93,6 +93,8 @@ export default function Employee() {
         notice_period: "",
         report_to: "",
 
+        AL_leave_entitled: "",
+
         pay_currency: "",
         basic_salary: "",
         payment_method: "",
@@ -103,7 +105,6 @@ export default function Employee() {
         bank_payee: "",
         payment_remark: "",
 
-        AL_leave_entitled: "",
       },
     });
 
@@ -357,10 +358,84 @@ export default function Employee() {
 
             <input type="text" {...register("report_to")} />
           </div>
+          <div>
+            <div>
+              <span>Annual Leave</span>
+            </div>
+
+            <input type="text" {...register("AL_leave_entitled")} />
+          </div>
 
         </div>
         <hr />
+        <h2>Employment Detail</h2>
+        <div className="five-column-grid">
 
+          <div>
+            <div>
+              <span>Salary Currency</span>
+            </div>
+
+            <input type="text" {...register("pay_currency")} />
+          </div>
+          <div>
+            <div>
+              <span>Basic Salary</span>
+            </div>
+
+            <input type="text" {...register("basic_salary")} />
+          </div>
+          <div>
+            <div>
+              <span>Payment Method</span>
+            </div>
+
+            <input type="text" {...register("payment_method")} />
+          </div>
+          <div>
+            <div>
+              <span>Home Address</span>
+            </div>
+
+            <input type="text" {...register("home_address")} />
+          </div>
+          <div>
+            <div>
+              <span>Bank Code</span>
+            </div>
+
+            <input type="text" {...register("bank_code")} />
+          </div>
+          <div>
+            <div>
+              <span>Bank Name</span>
+            </div>
+
+            <input type="text" {...register("bank_name")} />
+          </div>
+          <div>
+            <div>
+              <span>Bank Number</span>
+            </div>
+
+            <input type="text" {...register("bank_number")} />
+          </div>
+          <div>
+            <div>
+              <span>Payee Name</span>
+            </div>
+
+            <input type="text" {...register("bank_payee")} />
+          </div>
+          <div>
+            <div>
+              <span>Payment Remark</span>
+            </div>
+
+            <input type="text" {...register("payment_remark")} />
+          </div>
+
+        </div>
         </div>
 
         <button type="submit">Submit</button>

@@ -1,35 +1,15 @@
-import {
-    Body,
-    Controller,
-    Get,
-    Param,
-    ParseIntPipe,
-    Post,
-    UsePipes,
-    ValidationPipe,
-    } from '@nestjs/common';
-    import { CreateUserDto } from 'src/user/dto/user.dto';
-    import { UserService } from 'src/user/user.service';
-    
-    @Controller('user')
-    export class UserController {
-      constructor(private readonly userService: UserService) {}
-      
-    //   @Get()
-    //   getUsers() {
-    //     return this.userService.getUsers();
-    //   }
-      
-      // @Get('id/:id')
-      // findUsersById(@Param('id', ParseIntPipe) id: number) {
-      //   return this.userService.findUserById(id);
-      // }
-      
-      @Post('create')
-      @UsePipes(ValidationPipe)
-      createUsers(@Body() createUserDto: CreateUserDto) {
-        return
-        // return this.userService.createUser(createUserDto);
-        // createUser not yet ready 
-      }
-    }
+import { Body, Controller, Post } from '@nestjs/common';
+import { UserService } from './user.service';
+import { CreateUserDto } from './dto/user.dto';
+
+@Controller('user')
+export class UserController {
+  constructor(private userService: UserService) {}
+
+  @Post('create')
+  // @UsePipes(ValidationPipe)
+  createUser(@Body() createUserDto: CreateUserDto) {
+    return this.userService.createUser(createUserDto);
+
+  }
+}

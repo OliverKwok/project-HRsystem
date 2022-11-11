@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 // import { UserModule } from './user/user.module';
 import { LeaveModule } from './leave/leave.module';
 // import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -42,6 +43,7 @@ Config();
     AuthModule,
     // UserModule,
     LeaveModule,
+    UserModule,
 
     // ConfigModule.forRoot({ isGlobal: true }),
     // TypeOrmModule.forRootAsync({
