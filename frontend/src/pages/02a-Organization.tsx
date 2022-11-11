@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import OrgChart from "./02a-OrgChart";
-import OrgListView from "./02a-OrgListView";
+import NestedList from "./02a-OrgListView";
 import "./styles/02a-org.css";
 
 export default function Organization() {
@@ -36,7 +36,7 @@ export default function Organization() {
       </div>
 
       {show1 && <OrgChart />}
-      {show2 && <OrgListView />}
+      {show2 && <NestedList />}
     </div>
   );
 }
