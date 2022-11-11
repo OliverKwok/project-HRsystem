@@ -43,4 +43,6 @@ h2 {
   padding: 1rem;
   width: 100%;
   background: lightgray;
+  display: flex;
+  justify-content: space-between;
 }

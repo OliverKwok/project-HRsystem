@@ -37,15 +37,19 @@ export default function Organization() {
   return (
     <div>
       <div className="tab">
-        <button className="tablinks" onClick={showChart}>
-          Org Chart
-        </button>
-        <button className="tablinks" onClick={showList}>
-          List View
-        </button>
-        <button className="addnew" onClick={showAddNew}>
-          + NEW
-        </button>
+        <div>
+          <button className="tablinks" onClick={showChart}>
+            Org Chart
+          </button>
+          <button className="tablinks" onClick={showList}>
+            List View
+          </button>
+        </div>
+        <div>
+          <button className="addnew" onClick={showAddNew}>
+            + NEW
+          </button>
+        </div>
       </div>
 
       {show1 && <OrgChart />}
