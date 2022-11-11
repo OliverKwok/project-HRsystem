@@ -7,9 +7,13 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   // @IsEmail()
-  email: string;
+  employeeID: string;
 
   @IsNotEmpty()
-  // @MinLength(8)
-  password: string;
+  // @IsEmail()
+  first_name: string;
+
+  // @IsNotEmpty()
+  // // @MinLength(8)
+  // last_name: string;
 }

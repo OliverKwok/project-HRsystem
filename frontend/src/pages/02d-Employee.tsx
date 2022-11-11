@@ -5,6 +5,7 @@ import moment from "moment";
 moment().format();
 
 type FormState = {
+  employeeID: string;
   first_name: string;
   last_name: string;
   chinese_name: string;
@@ -61,6 +62,8 @@ export default function Employee() {
   const { register, handleSubmit, watch, setValue, getValues } =
     useForm<FormState>({
       defaultValues: {
+  employeeID: "",
+
         first_name: "",
         last_name: "",
         chinese_name: "",
@@ -116,8 +119,22 @@ export default function Employee() {
     return () => sub.unsubscribe();
   }, [watch]);
 
-  function submit(data: FormState) {
-    console.log("submit form data:", data);
+async  function submit (data: FormState) {
+    // console.log("submit form data:", data);
+    
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+  };
+
+  const res = await fetch("http://localhost:3333/user/create", requestOptions);
+  const jsonData = await res.json();
+
+  if (jsonData.newEmployee.rowCount) {
+    
+    alert("inserted into DB");
+  }
   }
 
   const calAge = (event: any) => {
@@ -141,6 +158,12 @@ export default function Employee() {
         <div id="new-employee-form">
             <h2>Basic Infomation</h2>
           <div className="five-column-grid">
+            <div>
+              <div>
+                <span>Employee ID</span>
+              </div>
+              <input type="text" {...register("employeeID")} />
+            </div>
             <div>
               <div>
                 <span>First Name</span>
