@@ -16,8 +16,10 @@ import { CgProfile } from "react-icons/cg";
 import Dashboard from "./pages/01-Dashboard";
 import Organization from "./pages/02a-Organization";
 import Employee from "./pages/02d-Employee";
-import Attendance from "./pages/04-Attendance";
-import Payroll from "./pages/05-Payroll";
+import Attendance from "./pages/03-Attendance";
+import PaySummary from "./pages/04a-PaySummary";
+import PayExport from "./pages/04b-PayExport";
+import PaySetting from "./pages/04c-PaySetting";
 import Calendar from "./pages/09-Calendar";
 
 function App() {
@@ -71,6 +73,35 @@ function App() {
           </>
         )}
 
+<div onClick={() => setSideBarItemShow2(!sideBarItemShow2)}>
+          <HiOutlineOfficeBuilding />
+          <span>Payroll</span>
+          <div className="sub-list-triangle">
+            {sideBarItemShow1 ? <GoTriangleDown /> : <GoTriangleLeft />}
+          </div>
+        </div>
+
+        {sideBarItemShow2 && (
+          <>
+            <NavLink className="sub-item" to={"paySummary"}>
+              <div>
+                <SlOrganization /> <span>summary</span>
+              </div>
+            </NavLink>
+            <NavLink className="sub-item" to={"payExport"}>
+              <div>
+                <TbReportSearch /> <span>export</span>
+              </div>
+            </NavLink>
+            <NavLink className="sub-item" to={"paySetting"}>
+              <div>
+                <MdOutlineSubtitles /> <span>setting</span>
+              </div>
+            </NavLink>
+   
+          </>
+        )}
+
         <NavLink className="nav-item" to={"attendance"}>
           <div>
             <MdOutlineSpaceDashboard /> <span>attendance</span>
@@ -102,7 +133,9 @@ function App() {
             <Route path="organization" element={<Organization />}></Route>
             <Route path="employee" element={<Employee />}></Route>
             <Route path="attendance" element={<Attendance />}></Route>
-            <Route path="payroll" element={<Payroll />}></Route>
+            <Route path="paySummary" element={<PaySummary />}></Route>
+            <Route path="payExport" element={<PayExport />}></Route>
+            <Route path="paySetting" element={<PaySetting />}></Route>
             <Route path="calendar" element={<Calendar />}></Route>
           </Routes>
         </div>
