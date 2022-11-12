@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import DataTable from "react-data-table-component";
 import "../styles/02c-title.css";
+import Filter from "../components/02c-Filter";
 
 const Title = () => {
-
   const columns = [
     {
       name: "Title",
@@ -97,16 +97,50 @@ const Title = () => {
     selectAllRowsItemText: "All",
   };
 
+  const [filterText, setFilterText] = useState("");
+  const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+
+  const filteredItems = data.filter(
+    item => item.title && item.title.includes(filterText)
+  );
+  // const filteredItems = data.filter(
+  //   (item) =>
+  //     JSON.stringify(item).toLowerCase().indexOf(filterText.toLowerCase()) !==
+  //     -1
+  // );
+
+  const subHeaderComponent = useMemo(() => {
+    const handleClear = () => {
+      if (filterText) {
+        setResetPaginationToggle(!resetPaginationToggle);
+        setFilterText("");
+      }
+    };
+
+    return (
+      <Filter
+        onFilter={(e: any) => setFilterText(e.target.value)}
+        onClear={handleClear}
+        filterText={filterText}
+      />
+    );
+  }, [filterText, resetPaginationToggle]);
+
+  // const clickhandler = (name: any) => console.log("delete", name);
+
   return (
     <div>
       <button className="addtitleBtn">Add Title</button>
-      
+      <Filter />
       <DataTable
         title="Titles"
         columns={columns}
-        data={data}
+        data={filteredItems}
+        striped
         pagination
         paginationComponentOptions={paginationComponentOptions}
+        subHeader
+        subHeaderComponent={subHeaderComponent}
       />
     </div>
   );
