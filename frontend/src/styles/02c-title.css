@@ -2,3 +2,20 @@ img.title_employee_photo {
   height: auto;
   width: 100px;
 }
+
+button.addtitleBtn {
+  background-color: rgb(14, 178, 179);
+  color: white;
+  position: absolute;
+  right: 20px;
+  z-index: 100;
+  cursor: pointer;
+  padding: 10px;
+}
+
+button.edittitleBtn {
+  background-color: rgb(14, 178, 179);
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+}

@@ -2,6 +2,8 @@ import React, { useState, useMemo } from "react";
 import DataTable from "react-data-table-component";
 import "../styles/02c-title.css";
 import Filter from "../components/02c-Filter";
+import PopupAddTitle from "../components/02c-PopupAddTitle";
+import PopupEditTitle from "../components/02c-PopupEditTitle";
 
 const Title = () => {
   // table columns
@@ -58,7 +60,7 @@ const Title = () => {
           src="https://images.pexels.com/photos/3041768/pexels-photo-3041768.jpeg?cs=srgb&dl=pexels-danil-shostak-3041768.jpg&fm=jpg&_gl=1*hp5cao*_ga*MTE1NDk5Mjc2LjE2NjYwNjMzMzQ.*_ga_8JE65Q40S6*MTY2ODI1NTM1Ni4zLjEuMTY2ODI1NTM3MS4wLjAuMA.."
         ></img>
       ),
-      edit: <button>Edit</button>,
+      edit: <PopupEditTitle />,
     },
     {
       id: 2,
@@ -73,7 +75,7 @@ const Title = () => {
           src="https://images.pexels.com/photos/9758175/pexels-photo-9758175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         ></img>
       ),
-      edit: <button>Edit</button>,
+      edit: <PopupEditTitle />,
     },
     {
       id: 3,
@@ -88,7 +90,7 @@ const Title = () => {
           src="https://images.pexels.com/photos/14349266/pexels-photo-14349266.jpeg?auto=compress&cs=tinysrgb&w=600"
         ></img>
       ),
-      edit: <button>Edit</button>,
+      edit: <PopupEditTitle />,
     },
   ];
 
@@ -109,7 +111,8 @@ const Title = () => {
       (item.title && item.title.toLowerCase().includes(filterText)) ||
       (item.employee && item.employee.toLowerCase().includes(filterText)) ||
       (item.department && item.department.toLowerCase().includes(filterText)) ||
-      (item.nature && item.nature.toLowerCase().includes(filterText))
+      (item.nature && item.nature.toLowerCase().includes(filterText)) ||
+      (item.grade && item.grade.toLowerCase().includes(filterText))
   );
   // const filteredItems = data.filter(
   //   (item) =>
@@ -124,7 +127,6 @@ const Title = () => {
         setFilterText("");
       }
     };
-
     return (
       <Filter
         onFilter={(e: any) => setFilterText(e.target.value)}
@@ -134,18 +136,16 @@ const Title = () => {
     );
   }, [filterText, resetPaginationToggle]);
 
-  // const clickhandler = (name: any) => console.log("delete", name);
-
   //rendering
 
   return (
     <div>
-      <button className="addtitleBtn">Add Title</button>
+      <PopupAddTitle />
       <DataTable
         title="Titles"
         columns={columns}
         data={filteredItems}
-        striped
+        // striped
         pagination
         paginationComponentOptions={paginationComponentOptions}
         subHeader

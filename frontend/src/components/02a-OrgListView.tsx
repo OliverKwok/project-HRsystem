@@ -9,18 +9,18 @@ export default function NestedList() {
   const [categories, setCategories] = useState([
     {
       id: "q101",
-      name: "Category 1",
+      name: "Sales & Marketing",
       items: [
-        { id: "abc", name: "First" },
-        { id: "def", name: "Second" },
+        { id: "abc", name: "Sales" },
+        { id: "def", name: "Marketing" },
       ],
     },
     {
       id: "wkqx",
-      name: "Category 2",
+      name: "Human Resources",
       items: [
-        { id: "ghi", name: "Third" },
-        { id: "jkl", name: "Fourth" },
+        { id: "ghi", name: "Recruitment" },
+        { id: "jkl", name: "Payroll" },
       ],
     },
   ]);
