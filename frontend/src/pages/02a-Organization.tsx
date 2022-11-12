@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import OrgChart from "./02a-OrgChart";
-import NestedList from "./02a-OrgListView";
-import OrgAddNew from "./02a-OrgAddNew";
-import "./styles/02a-Org.css";
+import OrgChart from "../components/02a-OrgChart";
+import NestedList from "../components/02a-OrgListView";
+import OrgAddNew from "../components/02a-OrgAddNew";
+import "../styles/02a-Org.css";
 
 export default function Organization() {
   const [show1, setShow1] = useState(true);

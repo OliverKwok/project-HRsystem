@@ -1,9 +1,9 @@
 import { useState } from "react";
 // import Popup from "reactjs-popup";
 // import "reactjs-popup/dist/index.css";
-import "./styles/02a-Popup.css";
+import "../styles/02a-Popup.css";
 
-export default function PopupEditTeam() {
+export default function PopupEditDept() {
   const [popup, setPopup] = useState(false);
   const openPopup = () => {
     setPopup(!popup);
@@ -18,26 +18,23 @@ export default function PopupEditTeam() {
       {popup && (
         <div className="popupBody">
           <div className="popupHeader">
-            <h2>Edit Team</h2>
+            <h2>Edit Deparment</h2>
             <h2 onClick={closePopup} className="closeBtn">
               X
             </h2>
           </div>
           <form>
             <p>
-              Name: <input type="text"></input>
+              Name: <input type="text"></input>{" "}
             </p>
             <p>
-              Lead: <input type="text"></input>
+              Head: <input type="text"></input>
             </p>
             <p>
-              Under which department: <input type="text"></input>
-            </p>
-            <p>
-              Under which team: <input type="text"></input>
+              Led by: <input type="text"></input>
             </p>
             <button type="submit">Save</button>
-            <button type="submit">Delete Team</button>
+            <button type="submit">Delete Dept</button>
           </form>
         </div>
       )}

@@ -3,7 +3,7 @@ import { DragAndDrop, Drag, Drop } from "./drag-and-drop/Index";
 import { reorder } from "./drag-and-drop/helpers";
 import PopupEditDept from "./02a-PopupEditDept";
 import PopupEditTeam from "./02a-PopupEditTeam";
-import "./styles/02a-OrgListView.css";
+import "../styles/02a-OrgListView.css";
 
 export default function NestedList() {
   const [categories, setCategories] = useState([
