@@ -1,0 +1,17 @@
+div.gradeCol {grid-area: grade; } 
+div.titleCol {grid-area: title;}
+div.employeeCol {grid-area:employee}
+
+div.mainTable {
+  display: grid;
+grid-template-areas: 'grade title employee';
+gap: 5px;
+padding: 5px;
+}
+
+div.gradeCol, div.titleCol, div.employeeCol{
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
+
+}
