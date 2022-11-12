@@ -1,10 +1,11 @@
 .popupBody {
   height: 400px;
   width: 50%;
-  background-color: beige;
+  background-color: rgb(238, 254, 255);
   position: absolute;
   top: 20%;
   right: 10%;
+  padding: 20px;
 }
 
 .popupHeader {
@@ -12,6 +13,16 @@
   justify-content: space-between;
   padding: 0 30px 0 15px;
   border-bottom: 2px solid black;
+  padding-bottom: 10px;
+}
+
+.closeBtn {
+  cursor: pointer;
+  border-width: 1px;
+  border-color: grey;
+  border-style: solid;
+  padding: 0 10px;
+  background-color: white;
 }
 
 /* .modal {

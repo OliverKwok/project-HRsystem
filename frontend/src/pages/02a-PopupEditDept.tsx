@@ -19,11 +19,12 @@ export default function PopupEditDept() {
         <div className="popupBody">
           <div className="popupHeader">
             <h2>Edit Deparment</h2>
-            <h2 onClick={closePopup}>X</h2>
+            <h2 onClick={closePopup} className="closeBtn">X</h2>
           </div>
           <form>
-            Name: <input type="text"></input>
-            <br />
+            <p>Name: <input type="text"></input>  </p>
+            <p>Head: <input type="text"></input></p>          
+            <p>Led by: <input type="text"></input></p>     
             <button type="submit">Save</button>
           </form>
         </div>
