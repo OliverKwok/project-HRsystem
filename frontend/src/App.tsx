@@ -16,6 +16,8 @@ import { CgProfile } from "react-icons/cg";
 import Dashboard from "./pages/01-Dashboard";
 import Organization from "./pages/02a-Organization";
 import Employee from "./pages/02d-Employee";
+import Grade from "./pages/02b-Grade";
+import Title from "./pages/02c-Title";
 import Attendance from "./pages/03-Attendance";
 import PaySummary from "./pages/04a-PaySummary";
 import PayExport from "./pages/04b-PayExport";
@@ -73,7 +75,7 @@ function App() {
           </>
         )}
 
-<div onClick={() => setSideBarItemShow2(!sideBarItemShow2)}>
+        <div onClick={() => setSideBarItemShow2(!sideBarItemShow2)}>
           <HiOutlineOfficeBuilding />
           <span>Payroll</span>
           <div className="sub-list-triangle">
@@ -98,7 +100,6 @@ function App() {
                 <MdOutlineSubtitles /> <span>setting</span>
               </div>
             </NavLink>
-   
           </>
         )}
 
@@ -116,21 +117,27 @@ function App() {
       <div className="main-container">
         <div className="navbar">
           <div className="navbar-grid">
-          <HiOutlineSpeakerphone />
+            <HiOutlineSpeakerphone />
           </div>
           <div id="announcement">Sample Company Announcement</div>
-          <div className="navbar-grid"><MdNotificationsNone /><span>
-            1</span></div>
           <div className="navbar-grid">
-          <FiSettings />
+            <MdNotificationsNone />
+            <span>1</span>
           </div>
-          <div className="navbar-grid"><CgProfile /></div>
+          <div className="navbar-grid">
+            <FiSettings />
+          </div>
+          <div className="navbar-grid">
+            <CgProfile />
+          </div>
         </div>
         <div className="main">
           <Routes>
             <Route path="/" element={<Dashboard />}></Route>
             <Route path="dashboard" element={<Dashboard />}></Route>
             <Route path="organization" element={<Organization />}></Route>
+            <Route path="grade" element={<Grade />}></Route>
+            <Route path="title" element={<Title />}></Route>
             <Route path="employee" element={<Employee />}></Route>
             <Route path="attendance" element={<Attendance />}></Route>
             <Route path="paySummary" element={<PaySummary />}></Route>

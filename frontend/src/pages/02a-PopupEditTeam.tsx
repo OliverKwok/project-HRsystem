@@ -37,6 +37,7 @@ export default function PopupEditTeam() {
               Under which team: <input type="text"></input>
             </p>
             <button type="submit">Save</button>
+            <button type="submit">Delete Team</button>
           </form>
         </div>
       )}
