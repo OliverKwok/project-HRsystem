@@ -4,6 +4,7 @@ import "../styles/02c-title.css";
 import Filter from "../components/02c-Filter";
 
 const Title = () => {
+  // table columns
   const columns = [
     {
       name: "Title",
@@ -42,6 +43,7 @@ const Title = () => {
     },
   ];
 
+  // table rows (data)
   const data = [
     {
       id: 1,
@@ -90,6 +92,7 @@ const Title = () => {
     },
   ];
 
+  // pagination configuration
   const paginationComponentOptions = {
     rowsPerPageText: "Rows per page",
     rangeSeparatorText: "of",
@@ -97,11 +100,16 @@ const Title = () => {
     selectAllRowsItemText: "All",
   };
 
+  // filtering
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
   const filteredItems = data.filter(
-    item => item.title && item.title.includes(filterText)
+    (item) =>
+      (item.title && item.title.toLowerCase().includes(filterText)) ||
+      (item.employee && item.employee.toLowerCase().includes(filterText)) ||
+      (item.department && item.department.toLowerCase().includes(filterText)) ||
+      (item.nature && item.nature.toLowerCase().includes(filterText))
   );
   // const filteredItems = data.filter(
   //   (item) =>
@@ -128,10 +136,11 @@ const Title = () => {
 
   // const clickhandler = (name: any) => console.log("delete", name);
 
+  //rendering
+
   return (
     <div>
       <button className="addtitleBtn">Add Title</button>
-      <Filter />
       <DataTable
         title="Titles"
         columns={columns}
