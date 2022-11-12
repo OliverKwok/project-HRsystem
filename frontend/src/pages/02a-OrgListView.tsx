@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { DragAndDrop, Drag, Drop } from "./drag-and-drop/Index";
 import { reorder } from "./drag-and-drop/helpers";
+import PopupEditDept from "./02a-PopupEdit";
 import "./styles/02a-OrgListView.css";
 
 export default function NestedList() {
@@ -86,8 +87,7 @@ export default function NestedList() {
     }
   };
 
-  
-
+  // popup edit
 
   return (
     <DragAndDrop onDragEnd={handleDragEnd}>
@@ -101,8 +101,10 @@ export default function NestedList() {
               index={categoryIndex}
             >
               <div className="category-container">
-                <h2 className="item">{category.name}<button>EDIT</button></h2>
-          
+                <h2 className="item">
+                  {category.name}
+                  <PopupEditDept />
+                </h2>
 
                 <Drop key={category.id} id={category.id} type="droppable-item">
                   {category.items.map((item, index) => {
@@ -113,7 +115,9 @@ export default function NestedList() {
                         id={item.id}
                         index={index}
                       >
-                        <div className="item">{item.name} <button>EDIT</button></div>
+                        <div className="item">
+                          {item.name} <button>EDIT</button>
+                        </div>
                       </Drag>
                     );
                   })}
