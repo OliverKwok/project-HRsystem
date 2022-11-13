@@ -1,34 +1,11 @@
-@import "../../node_modules/@syncfusion/ej2-base/styles/material.css";
-@import "../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
-@import "../../node_modules/@syncfusion/ej2-calendars/styles/material.css";
-@import "../../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
-@import "../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
-@import "../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
-@import "../../node_modules/@syncfusion/ej2-popups/styles/material.css";
-@import "../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 @import "../../node_modules/@syncfusion/ej2-react-grids/styles/material.css";
 
-div.gradeCol {
-  grid-area: grade;
-}
-div.titleCol {
-  grid-area: title;
-}
-div.employeeCol {
-  grid-area: employee;
-}
-
-div.mainTable {
-  display: grid;
-  grid-template-areas: "grade title employee";
-  gap: 5px;
-  padding: 5px;
-}
-
-div.gradeCol,
-div.titleCol,
-div.employeeCol {
-  border-style: solid;
-  border-color: grey;
-  border-width: 1px;
+button.addnewgradeBtn{
+    background-color: rgb(14, 178, 179);
+  color: white;
+  position: absolute;
+  right: 30px;
+  z-index: 100;
+  cursor: pointer;
+  padding: 10px;
 }

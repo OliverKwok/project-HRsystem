@@ -1,6 +1,7 @@
 img.title_employee_photo {
   height: auto;
   width: 100px;
+  border-radius: 50%;
 }
 
 button.addtitleBtn {
