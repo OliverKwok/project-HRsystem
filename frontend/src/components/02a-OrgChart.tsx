@@ -143,9 +143,9 @@ export default function OrgChart() {
         return connector;
       }}
     >
-      let options: IExportOptions = {}; options.mode = 'Download';
-      options.format = 'SVG'; diagram.exportDiagram(options);
-      <Inject services={[DataBinding, HierarchicalTree, PrintAndExport]} />
+      {/* let options: IExportOptions = {}; options.mode = 'Download';
+      options.format = 'SVG'; diagram.exportDiagram(options); */}
+      <Inject services={[DataBinding, HierarchicalTree]} />
     </DiagramComponent>
     // download option
   );
