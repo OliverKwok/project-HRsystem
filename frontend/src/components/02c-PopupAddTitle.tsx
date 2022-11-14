@@ -37,7 +37,6 @@ export default function PopupAddTitle() {
             </p>
 
             <button type="submit">Save</button>
-            <button type="submit">Delete Dept</button>
           </form>
         </div>
       )}
