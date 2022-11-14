@@ -119,7 +119,7 @@ export default function Employee() {
     return () => sub.unsubscribe();
   }, [watch]);
 
-async  function submit (data: FormState) {
+async function submit (data: FormState) {
     // console.log("submit form data:", data);
     
     const requestOptions = {
