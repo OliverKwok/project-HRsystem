@@ -22,12 +22,19 @@ import Attendance from "./pages/03-Attendance";
 import PaySummary from "./pages/04a-PaySummary";
 import PayExport from "./pages/04b-PayExport";
 import PaySetting from "./pages/04c-PaySetting";
+import Leaves from "./pages/05-Leaves";
+import LeavesSummary from "./pages/05a-LeavesSummary";
+import LeavesType from "./pages/05b-LeavesType";
+import LeavesSetting from "./pages/05c-LeavesSetting";
+import StatusChange from "./pages/06-StatusChange";
+import DataInsights from "./pages/07-DataInsights";
 import Calendar from "./pages/09-Calendar";
 
 function App() {
   const navigate = useNavigate();
   const [sideBarItemShow1, setSideBarItemShow1] = useState(false);
   const [sideBarItemShow2, setSideBarItemShow2] = useState(false);
+  const [sideBarItemShow3, setSideBarItemShow3] = useState(false);
 
   return (
     <div className="container">
@@ -108,6 +115,45 @@ function App() {
             <MdOutlineSpaceDashboard /> <span>attendance</span>
           </div>
         </NavLink>
+
+        <div onClick={() => setSideBarItemShow3(!sideBarItemShow3)}>
+          <HiOutlineOfficeBuilding />
+          <span>Leaves</span>
+          <div className="sub-list-triangle">
+            {sideBarItemShow3 ? <GoTriangleDown /> : <GoTriangleLeft />}
+          </div>
+        </div>
+
+        {sideBarItemShow3 && (
+          <>
+            <NavLink className="sub-item" to={"leavesSummary"}>
+              <div>
+                <SlOrganization /> <span>summary</span>
+              </div>
+            </NavLink>
+            <NavLink className="sub-item" to={"leavesType"}>
+              <div>
+                <TbReportSearch /> <span>leavestype</span>
+              </div>
+            </NavLink>
+            <NavLink className="sub-item" to={"leavesSetting"}>
+              <div>
+                <MdOutlineSubtitles /> <span>setting</span>
+              </div>
+            </NavLink>
+          </>
+        )}
+
+        <NavLink className="nav-item" to={"statuschange"}>
+          <div>
+            <MdOutlineSpaceDashboard /> <span>statuschange</span>
+          </div>
+        </NavLink>
+        <NavLink className="nav-item" to={"datainsights"}>
+          <div>
+            <MdOutlineSpaceDashboard /> <span>datainsights</span>
+          </div>
+        </NavLink>
         <NavLink className="nav-item" to={"calendar"}>
           <div>
             <MdOutlineSpaceDashboard /> <span>calendar</span>
@@ -143,6 +189,12 @@ function App() {
             <Route path="paySummary" element={<PaySummary />}></Route>
             <Route path="payExport" element={<PayExport />}></Route>
             <Route path="paySetting" element={<PaySetting />}></Route>
+            <Route path="leaves" element={<Leaves />}></Route>
+            <Route path="leavessummary" element={<LeavesSummary />}></Route>
+            <Route path="leavestype" element={<LeavesType />}></Route>
+            <Route path="leavessetting" element={<LeavesSetting />}></Route>
+            <Route path="statuschange" element={<StatusChange />}></Route>
+            <Route path="datainsights" element={<DataInsights />}></Route>
             <Route path="calendar" element={<Calendar />}></Route>
           </Routes>
         </div>
