@@ -11,6 +11,7 @@ import * as config from '../knexfile';
 // import dotenv from 'dotenv';
 // dotenv.config();
 import { config as Config } from 'dotenv';
+import { DepartmentModule } from './department/department.module';
 Config();
 
 @Module({
@@ -44,6 +45,7 @@ Config();
     // UserModule,
     LeaveModule,
     UserModule,
+    DepartmentModule,
 
     // ConfigModule.forRoot({ isGlobal: true }),
     // TypeOrmModule.forRootAsync({
