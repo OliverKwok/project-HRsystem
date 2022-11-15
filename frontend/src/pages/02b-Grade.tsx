@@ -3,6 +3,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
 import "../styles/02b-Grade2.css";
+import PopupAddGrade from "../components/02b-PopupAddGrade";
 
 export default function Grade() {
 
@@ -990,6 +991,8 @@ export default function Grade() {
     }
 
     return (
+      <>
+        <PopupAddGrade />
         <div className="datatable-rowgroup-demo">
             <Toast ref={toast}></Toast>
 
@@ -1010,6 +1013,7 @@ export default function Grade() {
 
       
         </div>
+        </>
     );
 }
 

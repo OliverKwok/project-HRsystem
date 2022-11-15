@@ -26,6 +26,11 @@
   background-color: white;
 }
 
+.btn_div{
+  display:inline-flex;
+  flex-direction: row;
+}
+
 /* .modal {
   font-size: 12px;
 }

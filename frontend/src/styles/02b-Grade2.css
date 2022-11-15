@@ -10,4 +10,15 @@
     vertical-align: middle;
     margin-right: .25rem;
 }
-                 
+
+@import "../../node_modules/@syncfusion/ej2-react-grids/styles/material.css";
+
+button.addnewgradeBtn{
+    background-color: rgb(14, 178, 179);
+  color: white;
+  position: absolute;
+  right: 30px;
+  z-index: 100;
+  cursor: pointer;
+  padding: 10px;
+}
