@@ -43,7 +43,7 @@ type FormState = {
   // AL_leave_balance: string;
   // sick_leave_taken: string;
   // sick_leave_balance: string;
- 
+
   pay_currency: string;
   basic_salary: string;
   payment_method: string;
@@ -53,7 +53,6 @@ type FormState = {
   bank_number: string;
   bank_payee: string;
   payment_remark: string;
-  
 };
 
 export default function Employee() {
@@ -62,7 +61,7 @@ export default function Employee() {
   const { register, handleSubmit, watch, setValue, getValues } =
     useForm<FormState>({
       defaultValues: {
-  employeeID: "",
+        employeeID: "",
 
         first_name: "",
         last_name: "",
@@ -107,7 +106,6 @@ export default function Employee() {
         bank_number: "",
         bank_payee: "",
         payment_remark: "",
-
       },
     });
 
@@ -119,22 +117,24 @@ export default function Employee() {
     return () => sub.unsubscribe();
   }, [watch]);
 
-async function submit (data: FormState) {
+  async function submit(data: FormState) {
     // console.log("submit form data:", data);
-    
+
     const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-  };
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
 
-  const res = await fetch("http://localhost:3333/user/create", requestOptions);
-  const jsonData = await res.json();
+    const res = await fetch(
+      "http://localhost:3333/user/create",
+      requestOptions
+    );
+    const jsonData = await res.json();
 
-  if (jsonData.newEmployee.rowCount) {
-    
-    alert("inserted into DB");
-  }
+    if (jsonData.newEmployee.rowCount) {
+      alert("inserted into DB");
+    }
   }
 
   const calAge = (event: any) => {
@@ -156,7 +156,7 @@ async function submit (data: FormState) {
       <h1>New Employee</h1>
       <form onSubmit={handleSubmit(submit)}>
         <div id="new-employee-form">
-            <h2>Basic Infomation</h2>
+          <h2>Basic Infomation</h2>
           <div className="five-column-grid">
             <div>
               <div>
@@ -244,221 +244,213 @@ async function submit (data: FormState) {
               <input value={age} type="text" {...register("age")} disabled />
             </div>
           </div>
-        <hr />
-        <h2>Contact Infomation</h2>
-        <div className="five-column-grid">
-
-          <div>
+          <hr />
+          <h2>Contact Infomation</h2>
+          <div className="five-column-grid">
             <div>
-              <span>Country Code</span>
-            </div>
+              <div>
+                <span>Country Code</span>
+              </div>
 
-            <input type="text" {...register("mobile_countrycode")} />
-          </div>
-          <div>
+              <input type="text" {...register("mobile_countrycode")} />
+            </div>
             <div>
-              <span>Mobile No</span>
-            </div>
+              <div>
+                <span>Mobile No</span>
+              </div>
 
-            <input type="text" {...register("mobile_no")} />
-          </div>
-          <div>
+              <input type="text" {...register("mobile_no")} />
+            </div>
             <div>
-              <span>Work Phone No</span>
-            </div>
+              <div>
+                <span>Work Phone No</span>
+              </div>
 
-            <input type="text" {...register("work_phone_no")} />
-          </div>
-          <div>
+              <input type="text" {...register("work_phone_no")} />
+            </div>
             <div>
-              <span>Personal Email</span>
-            </div>
+              <div>
+                <span>Personal Email</span>
+              </div>
 
-            <input type="text" {...register("email_personal")} />
-          </div>
-          <div>
+              <input type="text" {...register("email_personal")} />
+            </div>
             <div>
-              <span>Work Email</span>
+              <div>
+                <span>Work Email</span>
+              </div>
+
+              <input type="text" {...register("email_work")} />
             </div>
-
-            <input type="text" {...register("email_work")} />
           </div>
-        </div>
-        <hr />
-        
-        <h2>Education and Previous Job</h2>
-        <div className="five-column-grid">
+          <hr />
 
-          <div>
+          <h2>Education and Previous Job</h2>
+          <div className="five-column-grid">
             <div>
-              <span>Highest Education</span>
-            </div>
+              <div>
+                <span>Highest Education</span>
+              </div>
 
-            <input type="text" {...register("highest_education")} />
-          </div>
-          <div>
+              <input type="text" {...register("highest_education")} />
+            </div>
             <div>
-              <span>Institution Name</span>
-            </div>
+              <div>
+                <span>Institution Name</span>
+              </div>
 
-            <input type="text" {...register("institution_name")} />
-          </div>
-          <div>
+              <input type="text" {...register("institution_name")} />
+            </div>
             <div>
-              <span>Major</span>
-            </div>
+              <div>
+                <span>Major</span>
+              </div>
 
-            <input type="text" {...register("major")} />
-          </div>
-          <div>
+              <input type="text" {...register("major")} />
+            </div>
             <div>
-              <span>Last Job Company</span>
-            </div>
+              <div>
+                <span>Last Job Company</span>
+              </div>
 
-            <input type="text" {...register("last_job_company")} />
-          </div>
-          <div>
+              <input type="text" {...register("last_job_company")} />
+            </div>
             <div>
-              <span>Last Job Title</span>
+              <div>
+                <span>Last Job Title</span>
+              </div>
+
+              <input type="text" {...register("last_job_title")} />
             </div>
-
-            <input type="text" {...register("last_job_title")} />
           </div>
+          <hr />
 
-        </div>
-        <hr />
-
-
-        <h2>Employment Detail</h2>
-        <div className="five-column-grid">
-
-          <div>
+          <h2>Employment Detail</h2>
+          <div className="five-column-grid">
             <div>
-              <span>Start Time</span>
-            </div>
+              <div>
+                <span>Start Time</span>
+              </div>
 
-            <input type="text" {...register("start_date")} />
-          </div>
-          <div>
+              <input type="text" {...register("start_date")} />
+            </div>
             <div>
-              <span>Probation Period</span>
-            </div>
+              <div>
+                <span>Probation Period</span>
+              </div>
 
-            <input type="text" {...register("have_probation")} />
-          </div>
-          <div>
+              <input type="text" {...register("have_probation")} />
+            </div>
             <div>
-              <span>Probation Status</span>
-            </div>
+              <div>
+                <span>Probation Status</span>
+              </div>
 
-            <input type="text" {...register("pass_probation")} />
-          </div>
-          <div>
+              <input type="text" {...register("pass_probation")} />
+            </div>
             <div>
-              <span>Job Status</span>
-            </div>
+              <div>
+                <span>Job Status</span>
+              </div>
 
-            <input type="text" {...register("status")} />
-          </div>
-          <div>
+              <input type="text" {...register("status")} />
+            </div>
             <div>
-              <span>Job Nature</span>
-            </div>
+              <div>
+                <span>Job Nature</span>
+              </div>
 
-            <input type="text" {...register("job_nature")} />
-          </div>
-          <div>
+              <input type="text" {...register("job_nature")} />
+            </div>
             <div>
-              <span>Notice Period</span>
-            </div>
+              <div>
+                <span>Notice Period</span>
+              </div>
 
-            <input type="text" {...register("notice_period")} />
-          </div>
-          <div>
+              <input type="text" {...register("notice_period")} />
+            </div>
             <div>
-              <span>Report To</span>
-            </div>
+              <div>
+                <span>Report To</span>
+              </div>
 
-            <input type="text" {...register("report_to")} />
-          </div>
-          <div>
+              <input type="text" {...register("report_to")} />
+            </div>
             <div>
-              <span>Annual Leave</span>
+              <div>
+                <span>Annual Leave</span>
+              </div>
+
+              <input type="text" {...register("AL_leave_entitled")} />
             </div>
-
-            <input type="text" {...register("AL_leave_entitled")} />
           </div>
-
-        </div>
-        <hr />
-        <h2>Employment Detail</h2>
-        <div className="five-column-grid">
-
-          <div>
+          <hr />
+          <h2>Employment Detail</h2>
+          <div className="five-column-grid">
             <div>
-              <span>Salary Currency</span>
-            </div>
+              <div>
+                <span>Salary Currency</span>
+              </div>
 
-            <input type="text" {...register("pay_currency")} />
-          </div>
-          <div>
+              <input type="text" {...register("pay_currency")} />
+            </div>
             <div>
-              <span>Basic Salary</span>
-            </div>
+              <div>
+                <span>Basic Salary</span>
+              </div>
 
-            <input type="text" {...register("basic_salary")} />
-          </div>
-          <div>
+              <input type="text" {...register("basic_salary")} />
+            </div>
             <div>
-              <span>Payment Method</span>
-            </div>
+              <div>
+                <span>Payment Method</span>
+              </div>
 
-            <input type="text" {...register("payment_method")} />
-          </div>
-          <div>
+              <input type="text" {...register("payment_method")} />
+            </div>
             <div>
-              <span>Home Address</span>
-            </div>
+              <div>
+                <span>Home Address</span>
+              </div>
 
-            <input type="text" {...register("home_address")} />
-          </div>
-          <div>
+              <input type="text" {...register("home_address")} />
+            </div>
             <div>
-              <span>Bank Code</span>
-            </div>
+              <div>
+                <span>Bank Code</span>
+              </div>
 
-            <input type="text" {...register("bank_code")} />
-          </div>
-          <div>
+              <input type="text" {...register("bank_code")} />
+            </div>
             <div>
-              <span>Bank Name</span>
-            </div>
+              <div>
+                <span>Bank Name</span>
+              </div>
 
-            <input type="text" {...register("bank_name")} />
-          </div>
-          <div>
+              <input type="text" {...register("bank_name")} />
+            </div>
             <div>
-              <span>Bank Number</span>
-            </div>
+              <div>
+                <span>Bank Number</span>
+              </div>
 
-            <input type="text" {...register("bank_number")} />
-          </div>
-          <div>
+              <input type="text" {...register("bank_number")} />
+            </div>
             <div>
-              <span>Payee Name</span>
-            </div>
+              <div>
+                <span>Payee Name</span>
+              </div>
 
-            <input type="text" {...register("bank_payee")} />
-          </div>
-          <div>
+              <input type="text" {...register("bank_payee")} />
+            </div>
             <div>
-              <span>Payment Remark</span>
+              <div>
+                <span>Payment Remark</span>
+              </div>
+
+              <input type="text" {...register("payment_remark")} />
             </div>
-
-            <input type="text" {...register("payment_remark")} />
           </div>
-
-        </div>
         </div>
 
         <button type="submit">Submit</button>
