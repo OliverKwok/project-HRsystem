@@ -1,7 +1,10 @@
 import React from "react";
+import Calendar from "../components/01-Calendar";
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <Calendar />
+  );
 };
 
 export default Dashboard;

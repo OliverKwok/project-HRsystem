@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import DataTable, { TableColumn } from "react-data-table-component";
 import AnimatedMulti from "../components/04a-MonthFilter"
@@ -179,10 +179,43 @@ const data = [
 
 const PaySummary = () => {
 
+  const [filterText, setFilterText] = useState("");
+  const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+
+  const filteredItems = data.filter(
+    (item) =>
+      (item.year_month && item.year_month.includes(filterText))
+  );
+
+  const paginationComponentOptions = {
+    rowsPerPageText: "Rows per page",
+    rangeSeparatorText: "of",
+    selectAllRowsItem: true,
+    selectAllRowsItemText: "All",
+  };
+
+  const subHeaderComponent = useMemo(() => {
+    const handleClear = () => {
+      if (filterText) {
+        setResetPaginationToggle(!resetPaginationToggle);
+        setFilterText("");
+      }
+    };
+    return (
+      <AnimatedMulti
+      onFilter={(e: any) => setFilterText(e.target.value)}
+      onClear={handleClear}
+        filterText={filterText}
+      />
+    );
+  }, [filterText, resetPaginationToggle]);
+
   return (
     <>
-<AnimatedMulti />
-      <DataTable pagination columns={columns} data={data} selectableRows />
+      <DataTable columns={columns}  data={filteredItems} pagination         
+      paginationComponentOptions={paginationComponentOptions}
+        subHeader
+        subHeaderComponent={subHeaderComponent} />
     </>
   );
 };
