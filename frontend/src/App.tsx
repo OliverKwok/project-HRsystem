@@ -28,7 +28,6 @@ import LeavesType from "./pages/05b-LeavesType";
 import LeavesSetting from "./pages/05c-LeavesSetting";
 import StatusChange from "./pages/06-StatusChange";
 import DataInsights from "./pages/07-DataInsights";
-import Calendar from "./pages/09-Calendar";
 
 function App() {
   const navigate = useNavigate();
@@ -154,11 +153,11 @@ function App() {
             <MdOutlineSpaceDashboard /> <span>datainsights</span>
           </div>
         </NavLink>
-        <NavLink className="nav-item" to={"calendar"}>
+        {/* <NavLink className="nav-item" to={"calendar"}>
           <div>
             <MdOutlineSpaceDashboard /> <span>calendar</span>
           </div>
-        </NavLink>
+        </NavLink> */}
       </div>
       <div className="main-container">
         <div className="navbar">
@@ -195,7 +194,7 @@ function App() {
             <Route path="leavessetting" element={<LeavesSetting />}></Route>
             <Route path="statuschange" element={<StatusChange />}></Route>
             <Route path="datainsights" element={<DataInsights />}></Route>
-            <Route path="calendar" element={<Calendar />}></Route>
+            {/* <Route path="calendar" element={<Calendar />}></Route> */}
           </Routes>
         </div>
       </div>
