@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import DataTable, { TableColumn } from "react-data-table-component";
-import AnimatedMulti from "../components/04a-MonthFilter"
+
+type YearMonth = {
+  year_month: string;
+};
 
 type DataRow = {
   year_month: string;
@@ -68,20 +71,20 @@ const data = [
     year_month: "2022-10",
 
     employeeID: "1",
-    first_name: "James",
-    last_name: "Chan",
-    basic_salary: "14000",
-    AL_pay: "400",
+    first_name: "Peter",
+    last_name: "Wong",
+    basic_salary: "15000",
+    AL_pay: "300",
     mpf: "765",
     net_pay: "14535",
   },
   {
     year_month: "2022-10",
     employeeID: "1",
-    first_name: "Good",
-    last_name: "Morning",
-    basic_salary: "20000",
-    AL_pay: "10000",
+    first_name: "Peter",
+    last_name: "Wong",
+    basic_salary: "15000",
+    AL_pay: "300",
     mpf: "765",
     net_pay: "14535",
   },
@@ -122,10 +125,10 @@ const data = [
     year_month: "2022-11",
 
     employeeID: "1",
-    first_name: "Hello",
-    last_name: "World",
-    basic_salary: "30000",
-    AL_pay: "2000",
+    first_name: "Peter",
+    last_name: "Wong",
+    basic_salary: "15000",
+    AL_pay: "300",
     mpf: "765",
     net_pay: "14535",
   },
@@ -175,13 +178,34 @@ const data = [
   },
 ];
 
-
-
 const PaySummary = () => {
+  const { register, handleSubmit, watch, setValue, getValues } =
+    useForm<YearMonth>({
+      defaultValues: {
+        year_month: "",
+      },
+    });
+
+  useEffect(() => {
+    let sub = watch((data) => {
+      console.log("update form data:", data);
+    });
+    return () => sub.unsubscribe();
+  }, [watch]);
 
   return (
     <>
-<AnimatedMulti />
+      <form>
+        <div>
+          <span>Select Month </span>
+
+          <select {...register("year_month")}>
+            <option value="2022-10">2022-10</option>
+            <option value="2022-11">2022-11</option>
+          </select>
+        </div>
+      </form>
+
       <DataTable pagination columns={columns} data={data} selectableRows />
     </>
   );
