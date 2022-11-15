@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import DataTable, { TableColumn } from "react-data-table-component";
-import AnimatedMulti from "../components/04a-MonthFilter"
+import AnimatedMulti from "../components/04a-MonthFilter";
 
 type DataRow = {
   year_month: string;
@@ -175,16 +175,17 @@ const data = [
   },
 ];
 
-
-
 const PaySummary = () => {
-
+  const [filterOption, setFilterOption] = useState([]);
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
   const filteredItems = data.filter(
-    (item) =>
-      (item.year_month && item.year_month.includes(filterText))
+    (item) => item.year_month && item.year_month.includes(filterText)
+  );
+
+  const filteredOptionItems = data.filter(
+    (item) => item.year_month && item.year_month.includes(filterOption[0])
   );
 
   const paginationComponentOptions = {
@@ -203,8 +204,8 @@ const PaySummary = () => {
     };
     return (
       <AnimatedMulti
-      onFilter={(e: any) => setFilterText(e.target.value)}
-      onClear={handleClear}
+        onFilter={(e: any) => setFilterText(e.target.value)}
+        onClear={handleClear}
         filterText={filterText}
       />
     );
@@ -212,10 +213,14 @@ const PaySummary = () => {
 
   return (
     <>
-      <DataTable columns={columns}  data={filteredItems} pagination         
-      paginationComponentOptions={paginationComponentOptions}
+      <DataTable
+        columns={columns}
+        data={filteredItems}
+        pagination
+        paginationComponentOptions={paginationComponentOptions}
         subHeader
-        subHeaderComponent={subHeaderComponent} />
+        subHeaderComponent={subHeaderComponent}
+      />
     </>
   );
 };
