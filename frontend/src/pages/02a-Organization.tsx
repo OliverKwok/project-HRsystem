@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import OrgChart from "../components/02a-OrgChart";
+import OrgChart2 from "../components/02a-OrgChart2";
 import NestedList from "../components/02a-OrgListView";
 import OrgAddNew from "../components/02a-OrgAddNew";
 import "../styles/02a-Org.css";
@@ -8,13 +8,13 @@ export default function Organization() {
   const [show1, setShow1] = useState(true);
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);
-  const ref = useRef(null);
+  // const ref = useRef(null);
 
-  useEffect(() => {
-    const licenseBanner: any = document.querySelector("div#js-licensing");
-    licenseBanner.innerHTML = "";
-    licenseBanner.style.display = "none";
-  }, []);
+  // useEffect(() => {
+  //   const licenseBanner: any = document.querySelector("div#js-licensing");
+  //   licenseBanner.innerHTML = "";
+  //   licenseBanner.style.display = "none";
+  // }, []);
 
   function showChart() {
     setShow1(true);
@@ -52,7 +52,7 @@ export default function Organization() {
         </div>
       </div>
 
-      {show1 && <OrgChart />}
+      {show1 && <OrgChart2 />}
       {show2 && <NestedList />}
       {show3 && <OrgAddNew />}
     </div>

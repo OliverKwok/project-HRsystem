@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import LeaveSetTable from "../components/05c-LeaveSetTable";
 
 const LeavesSetting = () => {
-  return (
-    <div>Leaves Setting</div>
-  )
-}
+  return <LeaveSetTable />;
+};
 
-export default LeavesSetting
+export default LeavesSetting;
