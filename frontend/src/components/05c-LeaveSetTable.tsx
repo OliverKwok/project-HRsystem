@@ -28,7 +28,7 @@ export default function LeaveSetTable() {
     { label: "Out of Stock", value: "OUTOFSTOCK" },
   ];
 
-  const dataTableFuncMap = {
+  const dataTableFuncMap: any = {
     products1: setProducts1,
     products2: setProducts2,
     products3: setProducts3,
@@ -158,16 +158,15 @@ export default function LeaveSetTable() {
     },
   ];
 
-  // useEffect(() => {
-  //     fetchProductData('products1');
-  //     fetchProductData('products2');
-  //     fetchProductData('products3');
-  //     fetchProductData('products4');
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // const fetchProductData = (productStateKey: any) => {
-  //     return dataTableFuncMap[{productStateKey}](data);
-  // }
+  const fetchProductData = (productStateKey: any) => {
+    return dataTableFuncMap[`${productStateKey}`](data);
+  };
+  useEffect(() => {
+    fetchProductData("products1");
+    fetchProductData("products2");
+    fetchProductData("products3");
+    fetchProductData("products4");
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const isPositiveInteger = (val: any) => {
     let str = String(val);
