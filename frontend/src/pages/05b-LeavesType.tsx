@@ -2,30 +2,15 @@ import React from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import LeavesTypeCard from "../components/05b-LeavesTypeCard";
+import "../styles/05b-LeavesType.css";
+import PopupAddType from "../components/05b-PopupAddType";
+
 interface typeState {
   id: string;
   type: string;
   description: string;
 }
 export default function LeavesType() {
-  // const header = (
-  //   <img
-  //     alt="Card"
-  //     src="images/usercard.png"
-  //     // onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}
-  //   />
-  // );
-  // const footer = (
-  //   <span>
-  //     <Button label="Save" icon="pi pi-check" />
-  //     <Button
-  //       label="Cancel"
-  //       icon="pi pi-times"
-  //       className="p-button-secondary ml-2"
-  //     />
-  //   </span>
-  // );
-
   const types: typeState[] = [
     {
       id: "01",
@@ -46,9 +31,12 @@ export default function LeavesType() {
 
   return (
     <>
-      {types.map((type, id) => (
-        <LeavesTypeCard key={id} obj={type} />
-      ))}
+      <PopupAddType />
+      <div className="cards">
+        {types.map((type, id) => (
+          <LeavesTypeCard key={id} obj={type} />
+        ))}
+      </div>
     </>
   );
 }

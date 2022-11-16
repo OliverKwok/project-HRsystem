@@ -10,8 +10,8 @@ import { ProgressBar } from "primereact/progressbar";
 import { Calendar } from "primereact/calendar";
 // import { MultiSelect } from "primereact/multiselect";
 import { Slider } from "primereact/slider";
-import "../styles/05a-LeavesSummary.css"
-import PopupEditLeavesRecord from "../components/05a-PopupEditLeavesRecord"
+import "../styles/05a-LeavesSummary.css";
+import PopupEditLeavesRecord from "../components/05a-PopupEditLeavesRecord";
 
 export default function LeavesSummary() {
   const [customers, setCustomers] = useState([]);
@@ -21,7 +21,7 @@ export default function LeavesSummary() {
     name: {
       operator: FilterOperator.AND,
       constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
-    }, 
+    },
     "country.name": {
       operator: FilterOperator.AND,
       constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
@@ -78,6 +78,8 @@ export default function LeavesSummary() {
       date: "2015-09-13",
       status: "unqualified",
       verified: true,
+      remainingAL: 2,
+      entitledAL: 14,
       activity: 12,
       representative: {
         name: "Ioni Bowcher",
@@ -96,7 +98,9 @@ export default function LeavesSummary() {
       date: "2019-02-09",
       status: "proposal",
       verified: true,
-      activity: 0,
+      remainingAL: 0,
+      entitledAL: 14,
+      activity: 14,
       representative: {
         name: "Amy Elsner",
         image: "amyelsner.png",
@@ -114,6 +118,8 @@ export default function LeavesSummary() {
       date: "2017-05-13",
       status: "qualified",
       verified: false,
+      remainingAL: 11,
+      entitledAL: 14,
       activity: 3,
       representative: {
         name: "Asiya Javayant",
@@ -132,6 +138,8 @@ export default function LeavesSummary() {
       date: "2020-09-15",
       status: "new",
       verified: false,
+      remainingAL: 7,
+      entitledAL: 14,
       activity: 7,
       representative: {
         name: "Xuxue Feng",
@@ -150,6 +158,8 @@ export default function LeavesSummary() {
       date: "2016-05-20",
       status: "proposal",
       verified: true,
+      remainingAL: 8,
+      entitledAL: 14,
       activity: 6,
       representative: {
         name: "Asiya Javayant",
@@ -168,6 +178,8 @@ export default function LeavesSummary() {
       date: "2018-02-16",
       status: "qualified",
       verified: false,
+      remainingAL: 6,
+      entitledAL: 14,
       activity: 8,
       representative: {
         name: "Ivan Magalhaes",
@@ -186,6 +198,8 @@ export default function LeavesSummary() {
       date: "2018-02-19",
       status: "renewal",
       verified: true,
+      remainingAL: 5,
+      entitledAL: 14,
       activity: 9,
       representative: {
         name: "Ivan Magalhaes",
@@ -204,7 +218,9 @@ export default function LeavesSummary() {
       date: "2019-08-13",
       status: "renewal",
       verified: true,
-      activity: 0,
+      remainingAL: 13,
+      entitledAL: 14,
+      activity: 1,
       representative: {
         name: "Onyama Limba",
         image: "onyamalimba.png",
@@ -222,6 +238,8 @@ export default function LeavesSummary() {
       date: "2018-11-21",
       status: "unqualified",
       verified: true,
+      remainingAL: 1,
+      entitledAL: 14,
       activity: 13,
       representative: {
         name: "Ivan Magalhaes",
@@ -240,6 +258,8 @@ export default function LeavesSummary() {
       date: "2015-07-07",
       status: "proposal",
       verified: false,
+      remainingAL: 11,
+      entitledAL: 14,
       activity: 3,
       representative: {
         name: "Onyama Limba",
@@ -258,7 +278,9 @@ export default function LeavesSummary() {
       date: "2018-11-07",
       status: "qualified",
       verified: false,
-      activity: 38,
+      remainingAL: 4,
+      entitledAL: 14,
+      activity: 10,
       representative: {
         name: "Anna Fali",
         image: "annafali.png",
@@ -276,7 +298,9 @@ export default function LeavesSummary() {
       date: "2017-03-11",
       status: "qualified",
       verified: true,
-      activity: 87,
+      remainingAL: 9,
+      entitledAL: 14,
+      activity: 5,
       representative: {
         name: "Bernardo Dominic",
         image: "bernardodominic.png",
@@ -294,7 +318,9 @@ export default function LeavesSummary() {
       date: "2015-10-20",
       status: "unqualified",
       verified: false,
-      activity: 80,
+      remainingAL: 11,
+      entitledAL: 14,
+      activity: 3,
       representative: {
         name: "Onyama Limba",
         image: "onyamalimba.png",
@@ -312,7 +338,9 @@ export default function LeavesSummary() {
       date: "2016-07-25",
       status: "negotiation",
       verified: false,
-      activity: 59,
+      remainingAL: 5,
+      entitledAL: 14,
+      activity: 9,
       representative: {
         name: "Amy Elsner",
         image: "amyelsner.png",
@@ -330,7 +358,9 @@ export default function LeavesSummary() {
       date: "2019-06-25",
       status: "new",
       verified: true,
-      activity: 90,
+      remainingAL: 0,
+      entitledAL: 14,
+      activity: 14,
       representative: {
         name: "Asiya Javayant",
         image: "asiyajavayant.png",
@@ -348,7 +378,9 @@ export default function LeavesSummary() {
       date: "2017-12-12",
       status: "negotiation",
       verified: false,
-      activity: 52,
+      remainingAL: 2,
+      entitledAL: 14,
+      activity: 12,
       representative: {
         name: "Anna Fali",
         image: "annafali.png",
@@ -530,41 +562,40 @@ export default function LeavesSummary() {
   //   return <span className={`customer-badge status-${option}`}>{option}</span>;
   // };
 
-
-
-    const displayValueTemplate = (value: any) => {
-        return (
-            <React.Fragment>
-                {value}/<b>14</b>
-            </React.Fragment>
-        );
-    }
-
-  const activityBodyTemplate = (rowData: any) => {
-    return (
-      <ProgressBar 
-      value={rowData.activity} 
-      // showValue={true}> 
-      displayValueTemplate={displayValueTemplate}></ProgressBar>
-    );
-  };
-
-  const activityFilterTemplate = (options: any) => {
+  const displayValueTemplate = (value: any) => {
     return (
       <React.Fragment>
-        <Slider
-          value={options.value}
-          onChange={(e) => options.filterCallback(e.value)}
-          range
-          className="m-3"
-        ></Slider>
-        <div className="flex align-items-center justify-content-between px-2">
-          <span>{options.value ? options.value[0] : 0}</span>
-          <span>{options.value ? options.value[1] : 100}</span>
-        </div>
+        {value}/<b>100</b>
       </React.Fragment>
     );
   };
+
+  const activityBodyTemplate = (rowData: any) => {
+    return (
+      <ProgressBar
+        value={rowData.activity * (100 / 14)}
+        showValue={false}
+        displayValueTemplate={displayValueTemplate}
+      ></ProgressBar>
+    );
+  };
+
+  // const activityFilterTemplate = (options: any) => {
+  //   return (
+  //     <React.Fragment>
+  //       <Slider
+  //         value={options.value}
+  //         onChange={(e) => options.filterCallback(e.value)}
+  //         range
+  //         className="m-3"
+  //       ></Slider>
+  //       <div className="flex align-items-center justify-content-between px-2">
+  //         <span>{options.value ? options.value[0] : 0}</span>
+  //         <span>{options.value ? options.value[1] : 100}</span>
+  //       </div>
+  //     </React.Fragment>
+  //   );
+  // };
 
   // const representativeRowFilterTemplate = (options: any) => {
   //   return (
@@ -603,74 +634,75 @@ export default function LeavesSummary() {
 
   return (
     <>
-    <div className='leaveSummaryHeader'>
-    <h3>Leaves Summary</h3>
-    <PopupEditLeavesRecord/>
-    </div>
-    <div className="datatable-doc-demo">
-      <div className="card">
-        <DataTable
-          value={customers}
-          paginator
-          className="p-datatable-customers"
-          header={header}
-          rows={10}
-          paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-          rowsPerPageOptions={[10, 25, 50]}
-          dataKey="id"
-          rowHover
-          // selection={selectedCustomers}
-          // onSelectionChange={(e) => setSelectedCustomers(e.value)}
-          filters={filters}
-          filterDisplay="menu"
-          loading={loading}
-          responsiveLayout="scroll"
-          globalFilterFields={[
-            "name",
-            "country.name",
-            "representative.name",
-            "balance",
-            "status",
-          ]}
-          emptyMessage="No customers found."
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        >
-          <Column
-            // selectionMode="multiple"
-            // selectionAriaLabel="name"
-            headerStyle={{ width: "3em" }}
-          ></Column>
-          <Column
-            field="name"
-            header="Employee Name"
-            sortable
-            filter
-            filterPlaceholder="Search by name"
-            style={{ minWidth: "14rem" }}
-          />
-          {/* <Column
-            field="country.name"
-            header="Country"
-            sortable
-            filterField="country.name"
-            style={{ minWidth: "14rem" }}
-            body={countryBodyTemplate}
-            filter
-            filterPlaceholder="Search by country"
-          />
-          <Column
-            header="Agent"
-            sortable
-            sortField="representative.name"
-            filterField="representative"
-            showFilterMatchModes={false}
-            filterMenuStyle={{ width: "14rem" }}
-            style={{ minWidth: "14rem" }}
-            body={representativeBodyTemplate}
-            filter
-            filterElement={representativeFilterTemplate}
-          />
-          <Column
+      <div className="leaveSummaryHeader">
+        <h3>Leaves Summary</h3>
+        <PopupEditLeavesRecord />
+      </div>
+      <div className="datatable-doc-demo">
+        <div className="card">
+          <DataTable
+            value={customers}
+            paginator
+            className="p-datatable-customers"
+            header={header}
+            rows={10}
+            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+            rowsPerPageOptions={[10, 25, 50]}
+            dataKey="id"
+            rowHover
+            // selection={selectedCustomers}
+            // onSelectionChange={(e) => setSelectedCustomers(e.value)}
+            filters={filters}
+            filterDisplay="menu"
+            loading={loading}
+            responsiveLayout="scroll"
+            globalFilterFields={[
+              "name",
+              "country.name",
+              "representative.name",
+              "balance",
+              "status",
+            ]}
+            emptyMessage="No customers found."
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          >
+            <Column
+              // selectionMode="multiple"
+              // selectionAriaLabel="name"
+              headerStyle={{ width: "3em" }}
+            ></Column>
+            <Column
+              field="name"
+              header="Employee Name"
+              sortable
+              // filter
+              // filterPlaceholder="Search by name"
+              style={{ minWidth: "14rem" }}
+            />
+            <Column
+              field="remainingAL"
+              header="Remaining AL"
+              sortable
+              filterField="country.name"
+              style={{ minWidth: "5rem" }}
+              // body={countryBodyTemplate}
+              // filter
+              // filterPlaceholder="Search by country"
+            />
+            <Column
+              field="entitledAL"
+              header="Entitled AL"
+              sortable
+              sortField="entitledAL"
+              // filterField="entitledAL"
+              // showFilterMatchModes={false}
+              // filterMenuStyle={{ width: "14rem" }}
+              style={{ minWidth: "5rem" }}
+              // body={representativeBodyTemplate}
+              // filter
+              // filterElement={representativeFilterTemplate}
+            />
+            {/* <Column
             field="date"
             header="Date"
             sortable
@@ -701,24 +733,24 @@ export default function LeavesSummary() {
             filter
             filterElement={statusFilterTemplate}
           /> */}
-          <Column
-            field="activity"
-            header="AL Leave Balance"
-            sortable
-            showFilterMatchModes={false}
-            style={{ minWidth: "10rem" }}
-            body={activityBodyTemplate}
-            filter
-            filterElement={activityFilterTemplate}
-          />
-          {/* <Column
+            <Column
+              field="activity"
+              header="AL Leave Balance"
+              sortable
+              showFilterMatchModes={false}
+              style={{ minWidth: "10rem" }}
+              body={activityBodyTemplate}
+              // filter
+              // filterElement={activityFilterTemplate}
+            />
+            {/* <Column
             headerStyle={{ width: "4rem", textAlign: "center" }}
             bodyStyle={{ textAlign: "center", overflow: "visible" }}
             body={actionBodyTemplate}
           /> */}
-        </DataTable>
+          </DataTable>
+        </div>
       </div>
-    </div>
     </>
   );
 }
