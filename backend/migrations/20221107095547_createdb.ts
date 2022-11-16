@@ -2,9 +2,9 @@ import { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('employee', (table) => {
-    table.increments('id');
+    table.increments('id').primary();
     // personal identification details
-    table.integer('employeeID').primary();
+    table.string('employeeID');
     table.string('first_name');
     table.string('last_name');
     table.string('chinese_name');
@@ -53,7 +53,7 @@ export async function up(knex: Knex): Promise<void> {
     // table.integer('team_id').references('team.id');
     // table.integer('grade_id').references('grade.id');
     // table.integer('title_id').references('title.id');
-    table.integer('report_to').references('employee.employeeID');
+    table.integer('report_to').references('employee.id');
     // payroll
     table.enu('pay_currency', ['HKD', 'USD', 'RMB', 'other']);
     table.float('basic_salary');
@@ -78,7 +78,7 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('department', (table) => {
     table.increments('id');
     table.string('dept_name');
-    table.integer('head_of_dept').references('employee.employeeID');
+    table.integer('head_of_dept').references('employee.id');
     table.integer('dept_upstream').references('department.id');
     table.integer('dept_downstream').references('department.id');
   });
@@ -87,7 +87,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id');
     table.string('team_name');
     table.integer('belonged_to_dept').references('department.id');
-    table.integer('team_lead').references('employee.employeeID');
+    table.integer('team_lead').references('employee.id');
     // table.integer('report_to').references('employee.employeeID');
   });
 
@@ -116,7 +116,7 @@ export async function up(knex: Knex): Promise<void> {
   // employee role, referencing tables above
   await knex.schema.createTable('employee_role', (table) => {
     table.increments('id');
-    table.integer('employeeID').references('employee.employeeID');
+    table.integer('employeeID').references('employee.id');
     table.integer('department_id').references('department.id');
     table.integer('team_id').references('team.id');
     table.integer('grade_id').references('grade.id');
@@ -142,7 +142,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id');
     table.timestamp('created_at', { precision: 6 }).defaultTo(knex.fn.now(6));
     table.dateTime('updated_at');
-    table.integer('employee_id').references('employee.employeeID');
+    table.integer('employee_id').references('employee.id');
     table.integer('leave_type').references('leave_type.id');
     table.date('start_date');
     table.enu('start_date_period', ['full_day', 'first_half', 'second_half']);
@@ -156,7 +156,7 @@ export async function up(knex: Knex): Promise<void> {
       'cancelled',
       'taken',
     ]);
-    table.integer('approved_by').references('employee.employeeID');
+    table.integer('approved_by').references('employee.id');
   });
 
   await knex.schema.createTable('public_holidays', (table) => {
@@ -169,7 +169,7 @@ export async function up(knex: Knex): Promise<void> {
 
   await knex.schema.createTable('attendance', (table) => {
     table.increments('id');
-    table.integer('employee').references('employee.employeeID');
+    table.integer('employee').references('employee.id');
     table.date('date');
     table.timestamp('time_checkedin');
     table.timestamp('time_checkedout');
@@ -195,7 +195,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id');
     table.integer('year');
     table.integer('month');
-    table.integer('employee').references('employee.employeeID');
+    table.integer('employee').references('employee.id');
     table.float('salary');
     table.float('OT_pay');
     table.float('nopay_leave_deduction');
@@ -207,8 +207,8 @@ export async function up(knex: Knex): Promise<void> {
   // termination
   await knex.schema.createTable('termination', (table) => {
     table.increments('id');
-    table.integer('employee').references('employee.employeeID');
-    table.integer('employee_report_to').references('employee.employeeID');
+    table.integer('employee').references('employee.id');
+    table.integer('employee_report_to').references('employee.id');
     table.enu('type', ['resignation', 'termination']);
     table.date('date_applied');
     table.date('date_effective');
