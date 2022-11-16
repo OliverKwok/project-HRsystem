@@ -33,6 +33,5 @@ export async function seed(knex: Knex): Promise<void> {
   await seedRow('title', { title_name: 'Designer Intern' });
   await seedRow('title', { title_name: 'Designer' });
   
-  
-  
+
 }
