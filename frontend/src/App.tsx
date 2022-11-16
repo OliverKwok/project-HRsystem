@@ -132,7 +132,7 @@ function App() {
             </NavLink>
             <NavLink className="sub-item" to={"leavesType"}>
               <div>
-                <TbReportSearch /> <span>leavestype</span>
+                <TbReportSearch /> <span>leaves type</span>
               </div>
             </NavLink>
             <NavLink className="sub-item" to={"leavesSetting"}>
@@ -145,12 +145,12 @@ function App() {
 
         <NavLink className="nav-item" to={"statuschange"}>
           <div>
-            <MdOutlineSpaceDashboard /> <span>statuschange</span>
+            <MdOutlineSpaceDashboard /> <span>status change</span>
           </div>
         </NavLink>
         <NavLink className="nav-item" to={"datainsights"}>
           <div>
-            <MdOutlineSpaceDashboard /> <span>datainsights</span>
+            <MdOutlineSpaceDashboard /> <span>data insights</span>
           </div>
         </NavLink>
         {/* <NavLink className="nav-item" to={"calendar"}>
