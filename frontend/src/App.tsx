@@ -28,6 +28,7 @@ import LeavesType from "./pages/05b-LeavesType";
 import LeavesSetting from "./pages/05c-LeavesSetting";
 import StatusChange from "./pages/06-StatusChange";
 import DataInsights from "./pages/07-DataInsights";
+import LoginForm from "./LoginForm";
 
 function App() {
   const navigate = useNavigate();
@@ -194,6 +195,7 @@ function App() {
             <Route path="leavessetting" element={<LeavesSetting />}></Route>
             <Route path="statuschange" element={<StatusChange />}></Route>
             <Route path="datainsights" element={<DataInsights />}></Route>
+            <Route path="login" element={<LoginForm />}></Route>
             {/* <Route path="calendar" element={<Calendar />}></Route> */}
           </Routes>
         </div>
