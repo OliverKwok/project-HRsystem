@@ -1,3 +1,7 @@
+// 想係typescript用emotion就要加呢句
+//emotion 係 css in js 嘅其中一款
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import React, { useEffect, useState } from "react";
 
 function Attendance_compo({
@@ -6,56 +10,48 @@ function Attendance_compo({
   handleClickOpen,
   onClick,
 }: {
-  show_word:
-    | {
-        id: number;
-        name: string;
-        department: string;
-        grade: string;
-        "1": string;
-        "2": string;
-        "3": string;
-        "4": string;
-        "5": string;
-        "6": string;
-        "7": string;
-        "8": string;
-        "9": string;
-        "10": string;
-        "11": string;
-        "12": string;
-        "13": string;
-        "14": string;
-        "15": string;
-        "16": string;
-        "17": string;
-        "18": string;
-        "19": string;
-        "20": string;
-        "21": string;
-        "22": string;
-        "23": string;
-        "24": string;
-        "25": string;
-        "26": string;
-        "27": string;
-        "28": string;
-        "29": string;
-        "30": string;
-        "31": string;
-      }
-    | any;
+  show_word: {
+    employeeId: number;
+    name: string;
+    department: string;
+    grade: string;
+    attendance: {
+      employeeId: number;
+      date: string;
+      time_checkedin: string;
+      time_checkedout: string;
+      status: string;
+    }[];
+  };
   month_days: number;
   handleClickOpen: () => void;
   onClick: (status: string) => void;
 }) {
   const [workedDays, setWorkDays] = useState(0);
   useEffect(() => {
-    const ary = Object.values(show_word);
-    const ans = ary.reduce(
-      (count: number, b) => (b == "P" ? count + 1 : count),
+    const ans_arr = show_word.attendance.map((data) => data.status);
+    console.log(ans_arr);
+
+    const ans = ans_arr.reduce(
+      (count: number, b) => (b == "P" || b == "L" ? count + 1 : count),
       0
     );
+    console.log(ans);
+
+    // console.log(
+    //   show_word.attendance
+    //     .map((data) => data.status)
+    //     .reduce(function (count: number, b: string) {
+    //       b == "P" ? count + 1 : count;
+    //     }, 0)
+    // );
+
+    // const ary = Object.values(show_word);
+    // const ans = ary.reduce(
+    //   (count: number, b) => (b == "P" ? count + 1 : count),
+    //   0
+    // );
+
     setWorkDays(ans);
   }, [show_word]);
 
@@ -65,17 +61,46 @@ function Attendance_compo({
       <div className="attendance-info">{show_word.department}</div>
       <div className="attendance-info">{show_word.grade}</div>
       <div className="attendance-loop-container">
-        {new Array(month_days).fill(0).map((_: any, index: number) => {
-          return (
+        {new Array(month_days).fill(0).map(function (_: any, index: number) {
+          let day_of_week: any = show_word.attendance.filter(
+            (data) => new Date(data.date).getDate() === index + 1
+          );
+
+          return new Date(
+            `${new Date(`${show_word.attendance[0]["date"]}`).getFullYear()},${
+              new Date(`${show_word.attendance[0]["date"]}`).getMonth() + 1
+            },${index + 1}`
+          ).getDay() == 6 ||
+            new Date(
+              `${new Date(
+                `${show_word.attendance[0]["date"]}`
+              ).getFullYear()},${
+                new Date(`${show_word.attendance[0]["date"]}`).getMonth() + 1
+              },${index + 1}`
+            ).getDay() == 0 ? (
             <div
               className="attendance-loop"
               onClick={() => {
                 handleClickOpen();
-                onClick(show_word[index + 1]);
+                // onClick();
               }}
-              key={index + 1}
+              key={index}
+              css={css`
+                background-color: #9294a2;
+              `}
             >
-              {show_word[index + 1]}
+              {day_of_week.length == 1 ? day_of_week[0]["status"] : ""}
+            </div>
+          ) : (
+            <div
+              className="attendance-loop"
+              onClick={() => {
+                handleClickOpen();
+                // onClick();
+              }}
+              key={index}
+            >
+              {day_of_week.length == 1 ? day_of_week[0]["status"] : ""}
             </div>
           );
         })}

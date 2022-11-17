@@ -1,10 +1,20 @@
+.month-picker-container {
+  display: flex;
+  justify-content: flex-end;
+
+  .month-picker {
+    margin: 0 0 25px 0;
+    width: 200px;
+  }
+}
+
 .attendance-container {
   * {
     margin: 0;
     padding: 0px;
   }
   $border-color: #3d3333;
-  position: relative;
+  // position: relative;
 
   .header-attendance-row {
     display: flex;
@@ -12,7 +22,7 @@
     outline: 3px solid $border-color;
     min-height: 13%;
     width: 100%;
-    background-color: #9b9ac1;
+    background-color: #0db1b3;
 
     .attendance-info {
       outline: 0.1px solid $border-color;
@@ -27,13 +37,13 @@
     }
     .attendance-loop-container {
       display: flex;
-      width: 65%;
+      width: 75%;
       flex-wrap: wrap;
 
       .attendance-loop {
         outline: 0.1px solid $border-color;
         min-width: 20px;
-        width: 4%;
+        width: 3.3333%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -59,6 +69,7 @@
     outline: 1px solid $border-color;
     min-height: 13%;
     width: 100%;
+    background-color: #f1f7f7;
 
     .attendance-info {
       outline: 0.1px solid $border-color;
@@ -73,13 +84,14 @@
     }
     .attendance-loop-container {
       display: flex;
-      width: 65%;
+      width: 75%;
       flex-wrap: wrap;
 
       .attendance-loop {
         outline: 0.1px solid $border-color;
         min-width: 20px;
-        width: 4%;
+        width: 3.3333%;
+        height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -109,9 +121,9 @@
   justify-content: space-evenly;
   padding: 15px;
   font-size: 18px;
-  position: absolute;
-  left: 30%;
-  top: 30%;
+  position: fixed;
+  left: 45%;
+  top: 33%;
   z-index: 10;
   background-color: #9594b2;
 
