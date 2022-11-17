@@ -25,11 +25,15 @@ export default function StatusChangeCard(props: any) {
     color: "white",
     fontWeight: "bold",
   };
+
+  const statusColor: any = {
+  backgroundColor: props.barColor,
+  }
   
   
   return (
     <div className="statusCard">
-      <h2 className="status">{props.status}</h2>
+      <h2 className="status" style={statusColor}>{props.status}</h2>
       <div>
         <img
           className="profilepic"

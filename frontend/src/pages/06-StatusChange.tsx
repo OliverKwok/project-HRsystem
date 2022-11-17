@@ -5,6 +5,7 @@ import { Carousel } from "primereact/carousel";
 interface statusCard {
   id: string;
   status: string;
+  barColor: string;
   profilepic: string;
   person: string;
   position: string;
@@ -17,6 +18,7 @@ export default function StatusChange() {
     {
       id: "01",
       status: "Resignation",
+      barColor: "#FFC0CB",
       profilepic:
         "https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw",
       person: "Alex Chan",
@@ -27,6 +29,7 @@ export default function StatusChange() {
     {
       id: "02",
       status: "Termination",
+      barColor: "#EB5406",
       profilepic:
         "https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw",
       person: "Ben Man",
@@ -37,6 +40,7 @@ export default function StatusChange() {
     {
       id: "03",
       status: "Resignation",
+      barColor: "#FFC0CB",
       profilepic:
         "https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw",
       person: "Katherine Wong",
@@ -47,6 +51,7 @@ export default function StatusChange() {
     {
       id: "04",
       status: "Resignation",
+      barColor: "#FFC0CB",
       profilepic:
         "https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw",
       person: "Charlotte Cakad",
@@ -57,6 +62,7 @@ export default function StatusChange() {
     {
       id: "05",
       status: "Resignation",
+      barColor: "#FFC0CB",
       profilepic:
         "https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw",
       person: "David Manhill",
