@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { OrganizationChart } from "primereact/organizationchart";
-import "../styles/02a-OrgChart2.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
-import "primeicons/primeicons.css";                
+import "primeicons/primeicons.css";      
+import "../styles/02a-OrgChart2.css";          
 
 export default function OrgChart2() {
   const [selection, setSelection] = useState([]);

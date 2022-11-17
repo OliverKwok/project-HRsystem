@@ -1,4 +1,4 @@
-button {
+/* button {
   background-color: rgb(14, 178, 179);
   color: white;
   position: absolute;
@@ -6,7 +6,7 @@ button {
   z-index: 100;
   cursor: pointer;
   padding: 10px;
-}
+} */
 
 .popupBody {
   height: 400px;

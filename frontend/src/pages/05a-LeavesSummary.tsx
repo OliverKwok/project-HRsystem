@@ -573,7 +573,7 @@ export default function LeavesSummary() {
   const activityBodyTemplate = (rowData: any) => {
     return (
       <ProgressBar
-        value={rowData.activity * (100 / 14)}
+        value={rowData.activity * (100 / rowData.entitledAL)}
         showValue={false}
         displayValueTemplate={displayValueTemplate}
       ></ProgressBar>

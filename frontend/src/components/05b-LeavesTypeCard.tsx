@@ -1,7 +1,10 @@
 import React from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
+import { type } from "os";
+
 interface typeState {
+  id: string;
   type: string;
   description: string;
 }
@@ -34,7 +37,7 @@ const LeavesTypeCard: React.FC<{ obj: typeState }> = ({ obj }) => {
         header={header}
       >
         <p className="m-0" style={{ lineHeight: "1.5" }}>
-          {obj.description}
+          {obj.description} 
         </p>
       </Card>
     </div>
