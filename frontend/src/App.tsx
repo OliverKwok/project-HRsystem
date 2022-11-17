@@ -28,6 +28,7 @@ import LeavesType from "./pages/05b-LeavesType";
 import LeavesSetting from "./pages/05c-LeavesSetting";
 import StatusChange from "./pages/06-StatusChange";
 import DataInsights from "./pages/07-DataInsights";
+import LoginForm from "./LoginForm";
 
 function App() {
   const navigate = useNavigate();
@@ -132,7 +133,7 @@ function App() {
             </NavLink>
             <NavLink className="sub-item" to={"leavesType"}>
               <div>
-                <TbReportSearch /> <span>leavestype</span>
+                <TbReportSearch /> <span>leaves type</span>
               </div>
             </NavLink>
             <NavLink className="sub-item" to={"leavesSetting"}>
@@ -145,12 +146,12 @@ function App() {
 
         <NavLink className="nav-item" to={"statuschange"}>
           <div>
-            <MdOutlineSpaceDashboard /> <span>statuschange</span>
+            <MdOutlineSpaceDashboard /> <span>status change</span>
           </div>
         </NavLink>
         <NavLink className="nav-item" to={"datainsights"}>
           <div>
-            <MdOutlineSpaceDashboard /> <span>datainsights</span>
+            <MdOutlineSpaceDashboard /> <span>data insights</span>
           </div>
         </NavLink>
         {/* <NavLink className="nav-item" to={"calendar"}>
@@ -194,6 +195,7 @@ function App() {
             <Route path="leavessetting" element={<LeavesSetting />}></Route>
             <Route path="statuschange" element={<StatusChange />}></Route>
             <Route path="datainsights" element={<DataInsights />}></Route>
+            <Route path="login" element={<LoginForm />}></Route>
             {/* <Route path="calendar" element={<Calendar />}></Route> */}
           </Routes>
         </div>

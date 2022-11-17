@@ -10,6 +10,5 @@ export class UserController {
   // @UsePipes(ValidationPipe)
   createUser(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
-
   }
 }
