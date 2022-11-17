@@ -10,13 +10,14 @@ function LoginForm() {
       <form
         onSubmit={handleSubmit(async (data) => {
           const res = await fetch(`${process.env.REACT_APP_PUBLIC_URL}/auth/login`, {
+            method: 'POST',
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
           });
           const json = await res.json()
-          console.log(json)
+          console.log(json) 
         })}
       >
         <input placeholder="username" {...register("username")} />
