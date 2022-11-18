@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
 import StatusChangeCard from "../components/06-statusChangeCard";
 import { Carousel } from "primereact/carousel";
+import { Splitter, SplitterPanel } from "primereact/splitter";
+import "../styles/06-Carousel.css";
+import HandleStatusForm from "../components/06-HandleStatusForm";
 
 interface statusCard {
   id: string;
@@ -50,12 +52,34 @@ export default function StatusChange() {
     },
     {
       id: "04",
-      status: "Resignation",
-      barColor: "#FFC0CB",
+      status: "End of Probation",
+      barColor: "#fbffa0",
       profilepic:
         "https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw",
       person: "Charlotte Cakad",
-      position: "CEO",
+      position: "Programmer",
+      bgcolor: "#6a1b9a",
+      completed: 10,
+    },
+    {
+      id: "05",
+      status: "End of Contract",
+      barColor: "#cca0ff",
+      profilepic:
+        "https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw",
+      person: "Angela Baby",
+      position: "UX Designer",
+      bgcolor: "#6a1b9a",
+      completed: 50,
+    },
+    {
+      id: "04",
+      status: "Retirement",
+      barColor: "#a0fff0",
+      profilepic:
+        "https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw",
+      person: "Howard Lane",
+      position: "Sales Director",
       bgcolor: "#6a1b9a",
       completed: 10,
     },
@@ -72,35 +96,44 @@ export default function StatusChange() {
     },
   ];
 
-  // const responsiveOptions = [
-  //   {
-  //     breakpoint: "1024px",
-  //     numVisible: 4,
-  //     numScroll: 4,
-  //   },
-  //   {
-  //     breakpoint: "600px",
-  //     numVisible: 2,
-  //     numScroll: 2,
-  //   },
-  //   {
-  //     breakpoint: "480px",
-  //     numVisible: 1,
-  //     numScroll: 1,
-  //   },
-  // ];
+  const responsiveOptions = [
+    {
+      breakpoint: "1024px",
+      numVisible: 4,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "600px",
+      numVisible: 2,
+      numScroll: 2,
+    },
+    {
+      breakpoint: "480px",
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
 
   return (
     <>
-      <div className="card">
-        <Carousel
-          value={statuses}
-          itemTemplate={StatusChangeCard}
-          numVisible={4}
-          numScroll={1}
-          // responsiveOptions={responsiveOptions}
-        />
-      </div>
+      <Splitter style={{ height: "500px" }} layout="vertical">
+        <SplitterPanel className="flex align-items-center justify-content-center">
+          <div className="card">
+            <Carousel
+              value={statuses}
+              itemTemplate={StatusChangeCard}
+              numVisible={5}
+              numScroll={1}
+              responsiveOptions={responsiveOptions}
+            />
+          </div>
+        </SplitterPanel>
+        <SplitterPanel className="flex align-items-center justify-content-center">
+          <div className="space"></div>
+          <HandleStatusForm />
+        </SplitterPanel>
+      </Splitter>
+
       {/* 
       {statuses.map((item: any, id) => (
         <StatusChangeCard

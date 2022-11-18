@@ -212,6 +212,7 @@ export async function up(knex: Knex): Promise<void> {
     table.enu('type', ['resignation', 'termination']);
     table.date('date_applied');
     table.date('date_effective');
+    table.date('date_lastday');
     table.boolean('is_within_notice_period');
     table.float('compensation');
     table.float('leave_balance');
