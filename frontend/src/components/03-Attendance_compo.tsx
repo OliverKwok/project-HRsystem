@@ -8,7 +8,7 @@ function Attendance_compo({
   show_word,
   month_days,
   handleClickOpen,
-  onClick,
+  infoTran,
 }: {
   show_word: {
     employeeId: number;
@@ -25,32 +25,18 @@ function Attendance_compo({
   };
   month_days: number;
   handleClickOpen: () => void;
-  onClick: (status: string) => void;
+  infoTran: (status: string, employeeId: number, date: string) => void;
 }) {
   const [workedDays, setWorkDays] = useState(0);
   useEffect(() => {
     const ans_arr = show_word.attendance.map((data) => data.status);
-    console.log(ans_arr);
+    // console.log(ans_arr);
 
     const ans = ans_arr.reduce(
       (count: number, b) => (b == "P" || b == "L" ? count + 1 : count),
       0
     );
-    console.log(ans);
-
-    // console.log(
-    //   show_word.attendance
-    //     .map((data) => data.status)
-    //     .reduce(function (count: number, b: string) {
-    //       b == "P" ? count + 1 : count;
-    //     }, 0)
-    // );
-
-    // const ary = Object.values(show_word);
-    // const ans = ary.reduce(
-    //   (count: number, b) => (b == "P" ? count + 1 : count),
-    //   0
-    // );
+    // console.log(ans);
 
     setWorkDays(ans);
   }, [show_word]);
@@ -81,12 +67,18 @@ function Attendance_compo({
             <div
               className="attendance-loop"
               onClick={() => {
+                // console.log(day_of_week[0]["status"]);
                 handleClickOpen();
-                // onClick();
+                infoTran(
+                  day_of_week[0]["status"],
+                  day_of_week[0]["employeeId"],
+                  day_of_week[0]["Date"]
+                );
               }}
               key={index}
               css={css`
                 background-color: #9294a2;
+                pointer-events: none;
               `}
             >
               {day_of_week.length == 1 ? day_of_week[0]["status"] : ""}
@@ -96,7 +88,13 @@ function Attendance_compo({
               className="attendance-loop"
               onClick={() => {
                 handleClickOpen();
-                // onClick();
+                // console.log(day_of_week[0]["status"]);
+
+                infoTran(
+                  day_of_week[0]["status"],
+                  day_of_week[0]["employeeId"],
+                  day_of_week[0]["date"]
+                );
               }}
               key={index}
             >
