@@ -219,6 +219,7 @@ const PaySummary = () => {
         pagination
         paginationComponentOptions={paginationComponentOptions}
         subHeader
+        selectableRows
         subHeaderComponent={subHeaderComponent}
       />
     </>
