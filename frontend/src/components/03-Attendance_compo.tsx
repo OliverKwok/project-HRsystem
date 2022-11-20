@@ -3,29 +3,50 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useEffect, useState } from "react";
+interface attendanceState {
+  employeeId: number;
+  date: string;
+  time_checkedin: string;
+  time_checkedout: string;
+  status: string;
+}
+interface show_word_state {
+  employeeId: number;
+  name: string;
+  department: string;
+  grade: string;
+  attendance: attendanceState[];
+}
+interface state {
+  isShow: boolean;
+  attendanceStatus: string;
+  employeeId: number;
+  attendanceDate: string;
+}
+
+interface headerState {
+  name: string;
+  department: string;
+  grade: string;
+  year: number;
+  month: number;
+  month_days: number;
+}
 
 function Attendance_compo({
   show_word,
-  month_days,
+  header_info,
   handleClickOpen,
-  infoTran,
+  obj,
 }: {
-  show_word: {
-    employeeId: number;
-    name: string;
-    department: string;
-    grade: string;
-    attendance: {
-      employeeId: number;
-      date: string;
-      time_checkedin: string;
-      time_checkedout: string;
-      status: string;
-    }[];
-  };
-  month_days: number;
-  handleClickOpen: () => void;
-  infoTran: (status: string, employeeId: number, date: string) => void;
+  show_word: show_word_state;
+  header_info: headerState;
+  handleClickOpen: (
+    status: string,
+    employeeId: number,
+    attendanceDate: string
+  ) => void;
+  obj: state;
 }) {
   const [workedDays, setWorkDays] = useState(0);
   useEffect(() => {
@@ -41,67 +62,81 @@ function Attendance_compo({
     setWorkDays(ans);
   }, [show_word]);
 
+  function handleClick(
+    status: string,
+    employeeId: number,
+    attendanceDate: string
+  ) {
+    // alert("click open");
+    // console.log(day_of_week[0]["status"]);
+    handleClickOpen(status, employeeId, attendanceDate);
+  }
+
   return (
     <div className="attendance-row">
       <div className="attendance-info">{show_word.name}</div>
       <div className="attendance-info">{show_word.department}</div>
       <div className="attendance-info">{show_word.grade}</div>
       <div className="attendance-loop-container">
-        {new Array(month_days).fill(0).map(function (_: any, index: number) {
-          let day_of_week: any = show_word.attendance.filter(
-            (data) => new Date(data.date).getDate() === index + 1
-          );
+        {new Array(header_info.month_days)
+          .fill(0)
+          .map(function (_: any, index: number) {
+            let day_of_week: any = show_word.attendance.filter(
+              (data) => new Date(data.date).getDate() === index + 1
+            );
 
-          return new Date(
-            `${new Date(`${show_word.attendance[0]["date"]}`).getFullYear()},${
-              new Date(`${show_word.attendance[0]["date"]}`).getMonth() + 1
-            },${index + 1}`
-          ).getDay() == 6 ||
-            new Date(
+            return new Date(
               `${new Date(
                 `${show_word.attendance[0]["date"]}`
               ).getFullYear()},${
                 new Date(`${show_word.attendance[0]["date"]}`).getMonth() + 1
               },${index + 1}`
-            ).getDay() == 0 ? (
-            <div
-              className="attendance-loop"
-              onClick={() => {
-                // console.log(day_of_week[0]["status"]);
-                handleClickOpen();
-                infoTran(
-                  day_of_week[0]["status"],
-                  day_of_week[0]["employeeId"],
-                  day_of_week[0]["Date"]
-                );
-              }}
-              key={index}
-              css={css`
-                background-color: #9294a2;
-                pointer-events: none;
-              `}
-            >
-              {day_of_week.length == 1 ? day_of_week[0]["status"] : ""}
-            </div>
-          ) : (
-            <div
-              className="attendance-loop"
-              onClick={() => {
-                handleClickOpen();
-                // console.log(day_of_week[0]["status"]);
+            ).getDay() == 6 ||
+              new Date(
+                `${new Date(
+                  `${show_word.attendance[0]["date"]}`
+                ).getFullYear()},${
+                  new Date(`${show_word.attendance[0]["date"]}`).getMonth() + 1
+                },${index + 1}`
+              ).getDay() == 0 ? (
+              <div
+                className="attendance-loop"
+                onClick={() => {
+                  // console.log(day_of_week[0]["status"]);
+                  // handleClick(
+                  //   day_of_week[0]["status"],
+                  //   day_of_week[0]["employeeId"],
+                  //   day_of_week[0]["date"]
+                  // );
+                }}
+                key={index}
+                css={css`
+                  background-color: #9294a2;
+                  pointer-events: none;
+                `}
+              >
+                {day_of_week.length == 1 ? day_of_week[0]["status"] : ""}
+              </div>
+            ) : (
+              <div
+                className="attendance-loop"
+                onClick={() => {
+                  let status = day_of_week[0] ? day_of_week[0]["status"] : "";
+                  let employeeId = day_of_week[0]
+                    ? day_of_week[0]["employeeId"]
+                    : show_word.employeeId;
+                  let date = day_of_week[0]
+                    ? day_of_week[0]["date"]
+                    : `${header_info.year}-${header_info.month}-${index + 1}`;
 
-                infoTran(
-                  day_of_week[0]["status"],
-                  day_of_week[0]["employeeId"],
-                  day_of_week[0]["date"]
-                );
-              }}
-              key={index}
-            >
-              {day_of_week.length == 1 ? day_of_week[0]["status"] : ""}
-            </div>
-          );
-        })}
+                  handleClick(status, employeeId, date);
+                }}
+                key={index}
+              >
+                {day_of_week.length == 1 ? day_of_week[0]["status"] : ""}
+              </div>
+            );
+          })}
       </div>
       <div className="header-action">
         <div>{workedDays}</div>

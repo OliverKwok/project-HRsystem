@@ -18,7 +18,7 @@ import Organization from "./pages/02a-Organization";
 import Employee from "./pages/02d-Employee";
 import Grade from "./pages/02b-Grade";
 import Title from "./pages/02c-Title";
-import Attendance from "./pages/03-Attendance_copy";
+import Attendance from "./pages/03-Attendance";
 import PaySummary from "./pages/04a-PaySummary";
 import PayExport from "./pages/04b-PayExport";
 import PaySetting from "./pages/04c-PaySetting";
@@ -36,14 +36,7 @@ function App() {
   const [sideBarItemShow2, setSideBarItemShow2] = useState(false);
   const [sideBarItemShow3, setSideBarItemShow3] = useState(false);
 
-
-
   return (
-    
-    
-    
-
-
     <div className="container">
       <div className="sidebar">
         <div id="company-logo" onClick={() => navigate("dashboard")}>
