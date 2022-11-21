@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { OrganizationChart } from "primereact/organizationchart";
-import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
-import "primereact/resources/primereact.min.css";                  //core css
-import "primeicons/primeicons.css";      
-import "../styles/02a-OrgChart2.css";          
+import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
+import "primereact/resources/primereact.min.css"; //core css
+import "primeicons/primeicons.css";
+import "../styles/02a-OrgChart2.css";
 
 export default function OrgChart2() {
   const [selection, setSelection] = useState([]);
@@ -26,6 +26,15 @@ export default function OrgChart2() {
             {
               label: "Tax",
               className: "department-cfo",
+              children: [
+                {
+                  label: "Tax Manager",
+                  type: "person",
+                  className: "p-person",
+                  expanded: true,
+                  data: { name: "Mary Chan", avatar: "hello.jpg" },
+                },
+              ],
             },
             {
               label: "Legal",
@@ -95,10 +104,10 @@ export default function OrgChart2() {
             <img
               alt={node.data.avatar}
               src={`images/organization/${node.data.avatar}`}
-                // onError={(e) =>
-                //   (e.target.src =
-                //     "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")
-                // }
+              // onError={(e) =>
+              //   (e.target.src =
+              //     "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")
+              // }
               style={{ width: "32px" }}
             />
             <div>{node.data.name}</div>
@@ -115,9 +124,9 @@ export default function OrgChart2() {
         <OrganizationChart
           value={data}
           nodeTemplate={nodeTemplate}
-          selection={selection} 
+          selection={selection}
           selectionMode="multiple"
-        //   onSelectionChange={(event: any) => setSelection(event.data)}
+          //   onSelectionChange={(event: any) => setSelection(event.data)}
           className="company"
         ></OrganizationChart>
       </div>
