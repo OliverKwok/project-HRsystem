@@ -14,6 +14,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('nationality');
     table.date('date_of_birth');
     table.integer('age');
+    table.string('profilepic');
     // personal contact details + mobile app acct
     table.string('mobile_countrycode');
     table.string('mobile_no');

@@ -3,7 +3,6 @@ import { Knex } from 'knex';
 export async function seed(knex: Knex): Promise<void> {
   // check before insert instead of deleting table
 
-
   async function seedRow(table: string, rowData: object) {
     let row = await knex(table).select('id').where(rowData).first();
     if (!row) {
@@ -32,6 +31,8 @@ export async function seed(knex: Knex): Promise<void> {
   await seedRow('title', { title_name: 'Programmer' });
   await seedRow('title', { title_name: 'Designer Intern' });
   await seedRow('title', { title_name: 'Designer' });
-  
 
+  await seedRow('title', { title_name: 'Human Resource Manager' });
+  await seedRow('title', { title_name: 'Human Resources Officer' });
+  await seedRow('title', { title_name: 'Human Resource Assistant' });
 }
