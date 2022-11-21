@@ -10,10 +10,11 @@ export async function up(knex: Knex): Promise<void> {
     table.string('chinese_name');
     table.string('alias');
     table.string('HKID');
+    table.string('passport');
     table.enu('gender', ['M', 'F']);
     table.string('nationality');
     table.date('date_of_birth');
-    table.integer('age');
+    // table.integer('age');
     table.string('profilepic');
     // personal contact details + mobile app acct
     table.string('mobile_countrycode');
@@ -30,8 +31,8 @@ export async function up(knex: Knex): Promise<void> {
     table.string('last_job_title');
     // work
     table.date('start_date');
-    table.boolean('have_probation');
-    table.boolean('pass_probation');
+    // table.boolean('have_probation');
+    // table.boolean('pass_probation');
     table.enu('status', [
       'probation',
       'perm',
@@ -66,7 +67,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('bank_payee');
     table.string('payment_remark');
     // leave
-    table.float('AL_leave_entitled');
+    table.float('AL_leave_entitled_peryear');
     table.float('AL_leave_taken');
     table.float('AL_leave_balance');
     table.float('sick_leave_taken');
@@ -81,14 +82,15 @@ export async function up(knex: Knex): Promise<void> {
     table.string('dept_name');
     table.integer('head_of_dept').references('employee.id');
     table.integer('dept_upstream').references('department.id');
-    table.integer('dept_downstream').references('department.id');
+    // table.integer('dept_downstream').references('department.id');
   });
 
   await knex.schema.createTable('team', (table) => {
     table.increments('id');
     table.string('team_name');
-    table.integer('belonged_to_dept').references('department.id');
     table.integer('team_lead').references('employee.id');
+    table.integer('belonged_to_dept').references('department.id');
+    table.integer('team_upstream').references('team.id');
     // table.integer('report_to').references('employee.employeeID');
   });
 
@@ -209,14 +211,14 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('termination', (table) => {
     table.increments('id');
     table.integer('employee').references('employee.id');
-    table.integer('employee_report_to').references('employee.id');
+    // table.integer('employee_report_to').references('employee.id');
     table.enu('type', ['resignation', 'termination']);
     table.date('date_applied');
     table.date('date_effective');
     table.date('date_lastday');
     table.boolean('is_within_notice_period');
     table.float('compensation');
-    table.float('leave_balance');
+    table.float('leave_balance').references('employee.AL_leave_balance');
     table.float('leave_inlieu');
     table.float('severance_pay');
   });
@@ -233,6 +235,7 @@ export async function up(knex: Knex): Promise<void> {
       'company',
       'other',
     ]);
+    table.integer('recipient').references('employee.id');
   });
 }
 
