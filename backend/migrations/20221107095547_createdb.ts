@@ -235,6 +235,7 @@ export async function up(knex: Knex): Promise<void> {
       'company',
       'other',
     ]);
+    table.integer('recipient').references('employee.id');
   });
 }
 
