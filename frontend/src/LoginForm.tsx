@@ -1,11 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "./store";
-import { login, restoreLogin } from './redux/auth/actions';
+import { login, restoreLogin } from "./redux/auth/actions";
 
 function LoginForm() {
   const { handleSubmit, register } = useForm();
-const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   return (
     <div>
@@ -13,7 +13,7 @@ const dispatch = useAppDispatch()
       <form
         onSubmit={handleSubmit(async (data) => {
           const res = await fetch(
-            `${process.env.REACT_APP_PUBLIC_URL}/auth/login`,
+            `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
             {
               method: "POST",
               headers: {
@@ -32,11 +32,11 @@ const dispatch = useAppDispatch()
           }
 
           const profileRes = await fetch(
-            `${process.env.REACT_APP_PUBLIC_URL}/profile`,
+            `${process.env.REACT_APP_BACKEND_URL}/profile`,
             {
               headers: {
                 "Content-Type": "application/json",
-                'Authorization': `Bearer ${json.access_token}`,
+                Authorization: `Bearer ${json.access_token}`,
               },
             }
           );
@@ -45,7 +45,7 @@ const dispatch = useAppDispatch()
           if (profileJson.username) {
             alert(`welcome back, hello ${profileJson.username}`);
           }
-          dispatch(login(profileJson,json.access_token))
+          dispatch(login(profileJson, json.access_token));
         })}
       >
         <input placeholder="username" {...register("username")} />

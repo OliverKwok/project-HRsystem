@@ -57,11 +57,12 @@ type FormState = {
 
 export default function Employee() {
   const [age, setAge] = useState("0");
+  const [employeeID, setEmployeeID] = useState("DEMO");
 
   const { register, handleSubmit, watch, setValue, getValues } =
     useForm<FormState>({
       defaultValues: {
-        employeeID: "",
+        employeeID: "DEMO",
 
         first_name: "",
         last_name: "",
@@ -109,10 +110,38 @@ export default function Employee() {
       },
     });
 
+  async function checkEmployeeID() {
+    const requestOptions = {
+      method: "Get",
+    };
+
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/user/count`,
+      requestOptions
+    );
+    const jsonData = await res.json();
+    let newEmployeeID = "DEMO";
+    if (jsonData.maxId < 10) {
+      newEmployeeID = newEmployeeID + "00" + (jsonData.maxId + 1);
+    } else if (jsonData.maxId < 100) {
+      newEmployeeID = newEmployeeID + "0" + (jsonData.maxId + 1);
+    } else if (jsonData.maxId < 1000) {
+      newEmployeeID = newEmployeeID + (jsonData.maxId + 1);
+    } else {
+      throw new Error();
+    }
+
+    setEmployeeID(newEmployeeID);
+  }
+
+  useEffect(() => {
+    checkEmployeeID();
+  }, []);
+
   useEffect(() => {
     let sub = watch((data) => {
-      console.log("update form data:", data);
-      console.log(data.date_of_birth);
+      // console.log("update form data:", data);
+      // console.log(data.date_of_birth);
     });
     return () => sub.unsubscribe();
   }, [watch]);
@@ -127,7 +156,7 @@ export default function Employee() {
     };
 
     const res = await fetch(
-      "http://localhost:8000/user/create",
+      `${process.env.REACT_APP_BACKEND_URL}/user/create`,
       requestOptions
     );
     const jsonData = await res.json();
@@ -135,6 +164,7 @@ export default function Employee() {
     if (jsonData.newEmployee.rowCount) {
       alert("inserted into DB");
     }
+    checkEmployeeID();
   }
 
   const calAge = (event: any) => {
@@ -143,11 +173,6 @@ export default function Employee() {
     let result = todayDate.diff(date_of_birth_input, "years");
     setAge(result);
 
-    // if (date_of_birth_input) {
-    //   const result = Math.abs(
-    //     date_of_birth_input.getFullYear() - new Date(today).getFullYear()
-    //   );
-    //   console.log(result)
     return result;
   };
 
@@ -162,7 +187,13 @@ export default function Employee() {
               <div>
                 <span>Employee ID</span>
               </div>
-              <input type="text" {...register("employeeID")} />
+              {/* <input type="text" {...register("employeeID")} /> */}
+              <input
+                value={employeeID}
+                type="text"
+                {...register("employeeID")}
+                disabled
+              />
             </div>
             <div>
               <div>
