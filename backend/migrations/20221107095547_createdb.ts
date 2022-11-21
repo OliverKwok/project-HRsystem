@@ -218,7 +218,7 @@ export async function up(knex: Knex): Promise<void> {
     table.date('date_lastday');
     table.boolean('is_within_notice_period');
     table.float('compensation');
-    table.float('leave_balance').references('employee.AL_leave_balance');
+    // table.float('leave_balance');
     table.float('leave_inlieu');
     table.float('severance_pay');
   });
