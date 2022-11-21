@@ -2,17 +2,23 @@ import React from "react";
 
 export default function PopUp({
   handleClickClose,
+  attendanceStatus,
+  employeeId,
+  attendanceDate,
 }: {
   handleClickClose: () => void;
+  attendanceStatus: string;
+  employeeId: number;
+  attendanceDate: string;
 }) {
   return (
     <div className="attendance-pop-up">
       <div className="employeeInfo-container">
         <div className="employeeId">
-          Employee ID : <div>adsfdas</div>{" "}
+          Employee ID : <div>{employeeId}</div>{" "}
         </div>
         <div className="attendance-date">
-          Date : <div>ddsafds</div>
+          Date : <div>{attendanceDate}</div>
         </div>
       </div>
       <div className="attendance-time-container">
@@ -24,10 +30,10 @@ export default function PopUp({
         </div>
       </div>
       <div className="attendance-form-container">
-        <form action="">
+        <form>
           <div className="attendance-status-container">
             Status :
-            <input type="text" />
+            <input type="text" value={attendanceStatus} />
           </div>
           <div className="button-container">
             <button type="submit">Confirm</button>

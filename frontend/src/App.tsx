@@ -36,14 +36,7 @@ function App() {
   const [sideBarItemShow2, setSideBarItemShow2] = useState(false);
   const [sideBarItemShow3, setSideBarItemShow3] = useState(false);
 
-
-
   return (
-    
-    
-    
-
-
     <div className="container">
       <div className="sidebar">
         <div id="company-logo" onClick={() => navigate("dashboard")}>

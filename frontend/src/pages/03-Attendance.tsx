@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import "../styles/03-Attendance.scss";
 import { nanoid } from "nanoid";
 // import path from "path";
@@ -16,20 +16,73 @@ import Stack from "@mui/material/Stack";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+interface state {
+  isShow: boolean;
+  attendanceStatus: string;
+  employeeId: number;
+  attendanceDate: string;
+}
+
+interface headerState {
+  name: string;
+  department: string;
+  grade: string;
+  year: number;
+  month: number;
+  month_days: number;
+}
 
 const Attendance = () => {
-  const [showPopUp, setShowPopUp] = useState(false);
-  const [attendanceStatus, setAttendanceStatus] = useState("");
+  // const [showPopUp, setShowPopUp] = useState(false);
+  // const [attendanceStatus, setAttendanceStatus] = useState("");
+  // const [employeeId, setEmployeeId] = useState(0);
+  // const [attendanceDate, setAttendanceDate] = useState("");
+
+  const [obj, setObj] = useState<state>({
+    isShow: false,
+    attendanceStatus: "",
+    employeeId: 0,
+    attendanceDate: "",
+  });
+
   const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date()));
-  console.log(value);
-  const handleClickOpen = () => {
-    setShowPopUp(true);
-  };
-  const handleClickClose = () => {
-    setShowPopUp(false);
+  // console.log(value);
+
+  const handleClickOp = useCallback(
+    (status: string, employeeId: number, attendanceDate: string) => {
+      handleClickOpen(status, employeeId, attendanceDate);
+    },
+    []
+  );
+
+  const handleClickOpen = (
+    status: string,
+    employeeId: number,
+    attendanceDate: string
+  ) => {
+    setObj({
+      ...obj,
+      isShow: true,
+      attendanceStatus: status,
+      employeeId: employeeId,
+      attendanceDate: attendanceDate,
+    });
+
+    console.log(obj);
   };
 
-  let header_name = {
+  const handleClickCl = useCallback(() => {
+    handleClickClose();
+  }, []);
+
+  const handleClickClose = () => {
+    setObj({
+      ...obj,
+      isShow: false,
+    });
+  };
+
+  let header_name: headerState = {
     name: "Name",
     department: "Department",
     grade: "Grade",
@@ -45,7 +98,7 @@ const Attendance = () => {
   //   ${header_name.month_days}
   //   `).getDay()
   // );
-
+  // console.log("renderParent");
   return (
     <>
       <div className="month-picker-container">
@@ -94,6 +147,9 @@ const Attendance = () => {
                     key={index + 1}
                     css={css`
                       background-color: #9294a2;
+                      &:hover {
+                        background-color: #9294a2;
+                      }
                     `}
                   >
                     {index + 1}
@@ -111,17 +167,21 @@ const Attendance = () => {
           return (
             <Attendance_compo
               show_word={data}
-              month_days={header_name.month_days}
-              handleClickOpen={handleClickOpen}
-              onClick={(status: string) => {
-                setAttendanceStatus(status);
-                console.log(status);
-              }}
+              header_info={header_name}
+              handleClickOpen={handleClickOp}
+              obj={obj}
               key={data.employeeId}
             />
           );
         })}
-        {showPopUp && <PopUp handleClickClose={handleClickClose} />}
+        {obj.isShow ? (
+          <PopUp
+            handleClickClose={handleClickCl}
+            attendanceStatus={obj.attendanceStatus}
+            employeeId={obj.employeeId}
+            attendanceDate={obj.attendanceDate}
+          />
+        ) : null}
       </div>
     </>
   );
