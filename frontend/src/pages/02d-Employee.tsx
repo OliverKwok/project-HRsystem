@@ -127,7 +127,7 @@ export default function Employee() {
     };
 
     const res = await fetch(
-      "http://localhost:3333/user/create",
+      "http://localhost:8000/user/create",
       requestOptions
     );
     const jsonData = await res.json();

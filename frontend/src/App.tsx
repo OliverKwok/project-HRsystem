@@ -29,178 +29,187 @@ import LeavesSetting from "./pages/05c-LeavesSetting";
 import StatusChange from "./pages/06-StatusChange";
 import DataInsights from "./pages/07-DataInsights";
 import LoginForm from "./LoginForm";
+import { useAppDispatch, useAppSelector } from "./store";
 
 function App() {
   const navigate = useNavigate();
   const [sideBarItemShow1, setSideBarItemShow1] = useState(false);
   const [sideBarItemShow2, setSideBarItemShow2] = useState(false);
   const [sideBarItemShow3, setSideBarItemShow3] = useState(false);
+  const dispatch = useAppDispatch();
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   return (
-    <div className="container">
-      <div className="sidebar">
-        <div id="company-logo" onClick={() => navigate("dashboard")}>
-          <BsFillPeopleFill /> <span>HR Solution</span>
-        </div>
+    <>
+      {isAuthenticated == true ? (
+        <div className="container">
+          <div className="sidebar">
+            <div id="company-logo" onClick={() => navigate("dashboard")}>
+              <BsFillPeopleFill /> <span>HR Solution</span>
+            </div>
 
-        <NavLink to={"dashboard"}>
-          <div>
-            <MdOutlineSpaceDashboard /> <span>dashboard</span>
-          </div>
-        </NavLink>
+            <NavLink to={"dashboard"}>
+              <div>
+                <MdOutlineSpaceDashboard /> <span>dashboard</span>
+              </div>
+            </NavLink>
 
-        <div onClick={() => setSideBarItemShow1(!sideBarItemShow1)}>
-          <HiOutlineOfficeBuilding />
-          <span>Company</span>
-          <div className="sub-list-triangle">
-            {sideBarItemShow1 ? <GoTriangleDown /> : <GoTriangleLeft />}
-          </div>
-        </div>
+            <div onClick={() => setSideBarItemShow1(!sideBarItemShow1)}>
+              <HiOutlineOfficeBuilding />
+              <span>Company</span>
+              <div className="sub-list-triangle">
+                {sideBarItemShow1 ? <GoTriangleDown /> : <GoTriangleLeft />}
+              </div>
+            </div>
 
-        {sideBarItemShow1 && (
-          <>
-            <NavLink className="sub-item" to={"organization"}>
-              <div>
-                <SlOrganization /> <span>organization</span>
-              </div>
-            </NavLink>
-            <NavLink className="sub-item" to={"grade"}>
-              <div>
-                <TbReportSearch /> <span>grade</span>
-              </div>
-            </NavLink>
-            <NavLink className="sub-item" to={"title"}>
-              <div>
-                <MdOutlineSubtitles /> <span>title</span>
-              </div>
-            </NavLink>
-            <NavLink className="sub-item" to={"employee"}>
-              <div>
-                <MdOutlinePeopleAlt /> <span>employee</span>
-              </div>
-            </NavLink>
-          </>
-        )}
+            {sideBarItemShow1 && (
+              <>
+                <NavLink className="sub-item" to={"organization"}>
+                  <div>
+                    <SlOrganization /> <span>organization</span>
+                  </div>
+                </NavLink>
+                <NavLink className="sub-item" to={"grade"}>
+                  <div>
+                    <TbReportSearch /> <span>grade</span>
+                  </div>
+                </NavLink>
+                <NavLink className="sub-item" to={"title"}>
+                  <div>
+                    <MdOutlineSubtitles /> <span>title</span>
+                  </div>
+                </NavLink>
+                <NavLink className="sub-item" to={"employee"}>
+                  <div>
+                    <MdOutlinePeopleAlt /> <span>employee</span>
+                  </div>
+                </NavLink>
+              </>
+            )}
 
-        <div onClick={() => setSideBarItemShow2(!sideBarItemShow2)}>
-          <HiOutlineOfficeBuilding />
-          <span>Payroll</span>
-          <div className="sub-list-triangle">
-            {sideBarItemShow1 ? <GoTriangleDown /> : <GoTriangleLeft />}
-          </div>
-        </div>
+            <div onClick={() => setSideBarItemShow2(!sideBarItemShow2)}>
+              <HiOutlineOfficeBuilding />
+              <span>Payroll</span>
+              <div className="sub-list-triangle">
+                {sideBarItemShow1 ? <GoTriangleDown /> : <GoTriangleLeft />}
+              </div>
+            </div>
 
-        {sideBarItemShow2 && (
-          <>
-            <NavLink className="sub-item" to={"paySummary"}>
-              <div>
-                <SlOrganization /> <span>summary</span>
-              </div>
-            </NavLink>
-            <NavLink className="sub-item" to={"payExport"}>
-              <div>
-                <TbReportSearch /> <span>export</span>
-              </div>
-            </NavLink>
-            <NavLink className="sub-item" to={"paySetting"}>
-              <div>
-                <MdOutlineSubtitles /> <span>setting</span>
-              </div>
-            </NavLink>
-          </>
-        )}
+            {sideBarItemShow2 && (
+              <>
+                <NavLink className="sub-item" to={"paySummary"}>
+                  <div>
+                    <SlOrganization /> <span>summary</span>
+                  </div>
+                </NavLink>
+                <NavLink className="sub-item" to={"payExport"}>
+                  <div>
+                    <TbReportSearch /> <span>export</span>
+                  </div>
+                </NavLink>
+                <NavLink className="sub-item" to={"paySetting"}>
+                  <div>
+                    <MdOutlineSubtitles /> <span>setting</span>
+                  </div>
+                </NavLink>
+              </>
+            )}
 
-        <NavLink className="nav-item" to={"attendance"}>
-          <div>
-            <MdOutlineSpaceDashboard /> <span>attendance</span>
-          </div>
-        </NavLink>
-
-        <div onClick={() => setSideBarItemShow3(!sideBarItemShow3)}>
-          <HiOutlineOfficeBuilding />
-          <span>Leaves</span>
-          <div className="sub-list-triangle">
-            {sideBarItemShow3 ? <GoTriangleDown /> : <GoTriangleLeft />}
-          </div>
-        </div>
-
-        {sideBarItemShow3 && (
-          <>
-            <NavLink className="sub-item" to={"leavesSummary"}>
+            <NavLink className="nav-item" to={"attendance"}>
               <div>
-                <SlOrganization /> <span>summary</span>
+                <MdOutlineSpaceDashboard /> <span>attendance</span>
               </div>
             </NavLink>
-            <NavLink className="sub-item" to={"leavesType"}>
-              <div>
-                <TbReportSearch /> <span>leaves type</span>
-              </div>
-            </NavLink>
-            <NavLink className="sub-item" to={"leavesSetting"}>
-              <div>
-                <MdOutlineSubtitles /> <span>setting</span>
-              </div>
-            </NavLink>
-          </>
-        )}
 
-        <NavLink className="nav-item" to={"statuschange"}>
-          <div>
-            <MdOutlineSpaceDashboard /> <span>status change</span>
-          </div>
-        </NavLink>
-        <NavLink className="nav-item" to={"datainsights"}>
-          <div>
-            <MdOutlineSpaceDashboard /> <span>data insights</span>
-          </div>
-        </NavLink>
-        {/* <NavLink className="nav-item" to={"calendar"}>
+            <div onClick={() => setSideBarItemShow3(!sideBarItemShow3)}>
+              <HiOutlineOfficeBuilding />
+              <span>Leaves</span>
+              <div className="sub-list-triangle">
+                {sideBarItemShow3 ? <GoTriangleDown /> : <GoTriangleLeft />}
+              </div>
+            </div>
+
+            {sideBarItemShow3 && (
+              <>
+                <NavLink className="sub-item" to={"leavesSummary"}>
+                  <div>
+                    <SlOrganization /> <span>summary</span>
+                  </div>
+                </NavLink>
+                <NavLink className="sub-item" to={"leavesType"}>
+                  <div>
+                    <TbReportSearch /> <span>leaves type</span>
+                  </div>
+                </NavLink>
+                <NavLink className="sub-item" to={"leavesSetting"}>
+                  <div>
+                    <MdOutlineSubtitles /> <span>setting</span>
+                  </div>
+                </NavLink>
+              </>
+            )}
+
+            <NavLink className="nav-item" to={"statuschange"}>
+              <div>
+                <MdOutlineSpaceDashboard /> <span>status change</span>
+              </div>
+            </NavLink>
+            <NavLink className="nav-item" to={"datainsights"}>
+              <div>
+                <MdOutlineSpaceDashboard /> <span>data insights</span>
+              </div>
+            </NavLink>
+            {/* <NavLink className="nav-item" to={"calendar"}>
           <div>
             <MdOutlineSpaceDashboard /> <span>calendar</span>
           </div>
         </NavLink> */}
-      </div>
-      <div className="main-container">
-        <div className="navbar">
-          <div className="navbar-grid">
-            <HiOutlineSpeakerphone />
           </div>
-          <div id="announcement">Sample Company Announcement</div>
-          <div className="navbar-grid">
-            <MdNotificationsNone />
-            <span>1</span>
-          </div>
-          <div className="navbar-grid">
-            <FiSettings />
-          </div>
-          <div className="navbar-grid">
-            <CgProfile />
+          <div className="main-container">
+            <div className="navbar">
+              <div className="navbar-grid">
+                <HiOutlineSpeakerphone />
+              </div>
+              <div id="announcement">Sample Company Announcement</div>
+              <div className="navbar-grid">
+                <MdNotificationsNone />
+                <span>1</span>
+              </div>
+              <div className="navbar-grid">
+                <FiSettings />
+              </div>
+              <div className="navbar-grid">
+                <CgProfile />
+              </div>
+            </div>
+            <div className="main">
+              <Routes>
+                <Route path="/" element={<Dashboard />}></Route>
+                <Route path="dashboard" element={<Dashboard />}></Route>
+                <Route path="organization" element={<Organization />}></Route>
+                <Route path="grade" element={<Grade />}></Route>
+                <Route path="title" element={<Title />}></Route>
+                <Route path="employee" element={<Employee />}></Route>
+                <Route path="attendance" element={<Attendance />}></Route>
+                <Route path="paySummary" element={<PaySummary />}></Route>
+                <Route path="payExport" element={<PayExport />}></Route>
+                <Route path="paySetting" element={<PaySetting />}></Route>
+                <Route path="leaves" element={<Leaves />}></Route>
+                <Route path="leavessummary" element={<LeavesSummary />}></Route>
+                <Route path="leavestype" element={<LeavesType />}></Route>
+                <Route path="leavessetting" element={<LeavesSetting />}></Route>
+                <Route path="statuschange" element={<StatusChange />}></Route>
+                <Route path="datainsights" element={<DataInsights />}></Route>
+                <Route path="login" element={<LoginForm />}></Route>
+                {/* <Route path="calendar" element={<Calendar />}></Route> */}
+              </Routes>
+            </div>
           </div>
         </div>
-        <div className="main">
-          <Routes>
-            <Route path="/" element={<Dashboard />}></Route>
-            <Route path="dashboard" element={<Dashboard />}></Route>
-            <Route path="organization" element={<Organization />}></Route>
-            <Route path="grade" element={<Grade />}></Route>
-            <Route path="title" element={<Title />}></Route>
-            <Route path="employee" element={<Employee />}></Route>
-            <Route path="attendance" element={<Attendance />}></Route>
-            <Route path="paySummary" element={<PaySummary />}></Route>
-            <Route path="payExport" element={<PayExport />}></Route>
-            <Route path="paySetting" element={<PaySetting />}></Route>
-            <Route path="leaves" element={<Leaves />}></Route>
-            <Route path="leavessummary" element={<LeavesSummary />}></Route>
-            <Route path="leavestype" element={<LeavesType />}></Route>
-            <Route path="leavessetting" element={<LeavesSetting />}></Route>
-            <Route path="statuschange" element={<StatusChange />}></Route>
-            <Route path="datainsights" element={<DataInsights />}></Route>
-            <Route path="login" element={<LoginForm />}></Route>
-            {/* <Route path="calendar" element={<Calendar />}></Route> */}
-          </Routes>
-        </div>
-      </div>
-    </div>
+      ) : (
+        <LoginForm />
+      )}
+    </>
   );
 }
 
