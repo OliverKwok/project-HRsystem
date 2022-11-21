@@ -1,8 +1,6 @@
 import { Steps } from "primereact/steps";
 import "../styles/06-HandleSteps.css";
 import { useForm } from "react-hook-form";
-import ReactPDF from "@react-pdf/renderer";
-import MyDocument from "./06-GeneratePDF";
 
 export default function HandleStatusForm(props: any) {
   const steps = [{ label: "Step 1" }, { label: "Step 2" }, { label: "Step 3" }];
@@ -47,8 +45,6 @@ export default function HandleStatusForm(props: any) {
         <input {...register("totaltoEmployee")} />
         <br />
         <input type="submit" />
-        ReactPDF.render(
-        <MyDocument />, `${__dirname}/example.pdf`);
       </form>
       {/* Termination */}
       <form onSubmit={handleSubmit(submitResignForm)}>
