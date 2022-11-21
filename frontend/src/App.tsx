@@ -16,8 +16,9 @@ import { CgProfile } from "react-icons/cg";
 import Dashboard from "./pages/01-Dashboard";
 import Organization from "./pages/02a-Organization";
 import Employee from "./pages/02d-Employee";
-import Grade from "./pages/02b-Grade";
+// import Grade from "./pages/02b-Grade";
 import Title from "./pages/02c-Title";
+import StatusUpdate from "./pages/02e-StatusUpdate";
 import Attendance from "./pages/03-Attendance";
 import PaySummary from "./pages/04a-PaySummary";
 import PayExport from "./pages/04b-PayExport";
@@ -25,9 +26,11 @@ import PaySetting from "./pages/04c-PaySetting";
 import Leaves from "./pages/05-Leaves";
 import LeavesSummary from "./pages/05a-LeavesSummary";
 import LeavesType from "./pages/05b-LeavesType";
-import LeavesSetting from "./pages/05c-LeavesSetting";
-import StatusChange from "./pages/06-StatusChange";
+// import LeavesSetting from "./pages/05c-LeavesSetting";
+import LeavesRequest from "./pages/05c-LeavesRequest";
+import Offboarding from "./pages/06-Offboarding";
 import DataInsights from "./pages/07-DataInsights";
+import Notifications from "./pages/08-Notifications";
 import LoginForm from "./LoginForm";
 import { useAppDispatch, useAppSelector } from "./store";
 
@@ -76,11 +79,11 @@ function App() {
                     <SlOrganization /> <span>organization</span>
                   </div>
                 </NavLink>
-                <NavLink className="sub-item" to={"grade"}>
+                {/* <NavLink className="sub-item" to={"grade"}>
                   <div>
                     <TbReportSearch /> <span>grade</span>
                   </div>
-                </NavLink>
+                </NavLink> */}
                 <NavLink className="sub-item" to={"title"}>
                   <div>
                     <MdOutlineSubtitles /> <span>title</span>
@@ -89,6 +92,11 @@ function App() {
                 <NavLink className="sub-item" to={"employee"}>
                   <div>
                     <MdOutlinePeopleAlt /> <span>employee</span>
+                  </div>
+                </NavLink>
+                <NavLink className="sub-item" to={"statusupdate"}>
+                  <div>
+                    <MdOutlinePeopleAlt /> <span>status update</span>
                   </div>
                 </NavLink>
               </>
@@ -148,17 +156,17 @@ function App() {
                     <TbReportSearch /> <span>leaves type</span>
                   </div>
                 </NavLink>
-                <NavLink className="sub-item" to={"leavesSetting"}>
+                <NavLink className="sub-item" to={"leavesRequest"}>
                   <div>
-                    <MdOutlineSubtitles /> <span>setting</span>
+                    <MdOutlineSubtitles /> <span>requests</span>
                   </div>
                 </NavLink>
               </>
             )}
 
-            <NavLink className="nav-item" to={"statuschange"}>
+            <NavLink className="nav-item" to={"offboarding"}>
               <div>
-                <MdOutlineSpaceDashboard /> <span>status change</span>
+                <MdOutlineSpaceDashboard /> <span>offboarding</span>
               </div>
             </NavLink>
             <NavLink className="nav-item" to={"datainsights"}>
@@ -166,11 +174,11 @@ function App() {
                 <MdOutlineSpaceDashboard /> <span>data insights</span>
               </div>
             </NavLink>
-            {/* <NavLink className="nav-item" to={"calendar"}>
-          <div>
-            <MdOutlineSpaceDashboard /> <span>calendar</span>
-          </div>
-        </NavLink> */}
+            <NavLink className="nav-item" to={"notifications"}>
+              <div>
+                <MdOutlineSpaceDashboard /> <span>notifications</span>
+              </div>
+            </NavLink>
           </div>
           <div className="main-container">
             <div className="navbar">
@@ -194,9 +202,10 @@ function App() {
                 <Route path="/" element={<Dashboard />}></Route>
                 <Route path="dashboard" element={<Dashboard />}></Route>
                 <Route path="organization" element={<Organization />}></Route>
-                <Route path="grade" element={<Grade />}></Route>
+                {/* <Route path="grade" element={<Grade />}></Route> */}
                 <Route path="title" element={<Title />}></Route>
                 <Route path="employee" element={<Employee />}></Route>
+                <Route path="statusUpdate" element={<StatusUpdate />}></Route>
                 <Route path="attendance" element={<Attendance />}></Route>
                 <Route path="paySummary" element={<PaySummary />}></Route>
                 <Route path="payExport" element={<PayExport />}></Route>
@@ -204,9 +213,11 @@ function App() {
                 <Route path="leaves" element={<Leaves />}></Route>
                 <Route path="leavessummary" element={<LeavesSummary />}></Route>
                 <Route path="leavestype" element={<LeavesType />}></Route>
-                <Route path="leavessetting" element={<LeavesSetting />}></Route>
-                <Route path="statuschange" element={<StatusChange />}></Route>
+                {/* <Route path="leavessetting" element={<LeavesSetting />}></Route> */}
+                <Route path="leavesrequest" element={<LeavesRequest />}></Route>
+                <Route path="offboarding" element={<Offboarding />}></Route>
                 <Route path="datainsights" element={<DataInsights />}></Route>
+                <Route path="notifications" element={<Notifications />}></Route>
                 <Route path="login" element={<LoginForm />}></Route>
                 {/* <Route path="calendar" element={<Calendar />}></Route> */}
               </Routes>

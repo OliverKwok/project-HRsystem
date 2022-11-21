@@ -2,7 +2,7 @@ import StatusChangeCard from "../components/06-statusChangeCard";
 import { Carousel } from "primereact/carousel";
 import { Splitter, SplitterPanel } from "primereact/splitter";
 import "../styles/06-Carousel.css";
-import HandleStatusForm from "../components/06-HandleStatusForm";
+import OffboardingForm from "../components/06-OffboardingForm";
 
 interface statusCard {
   id: string;
@@ -49,28 +49,6 @@ export default function StatusChange() {
       position: "Finance Officer",
       bgcolor: "#6a1b9a",
       completed: 60,
-    },
-    {
-      id: "04",
-      status: "End of Probation",
-      barColor: "#fbffa0",
-      profilepic:
-        "https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw",
-      person: "Charlotte Cakad",
-      position: "Programmer",
-      bgcolor: "#6a1b9a",
-      completed: 10,
-    },
-    {
-      id: "05",
-      status: "End of Contract",
-      barColor: "#cca0ff",
-      profilepic:
-        "https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw",
-      person: "Angela Baby",
-      position: "UX Designer",
-      bgcolor: "#6a1b9a",
-      completed: 50,
     },
     {
       id: "04",
@@ -130,7 +108,7 @@ export default function StatusChange() {
         </SplitterPanel>
         <SplitterPanel className="flex align-items-center justify-content-center">
           <div className="space"></div>
-          <HandleStatusForm />
+          <OffboardingForm />
         </SplitterPanel>
       </Splitter>
 
