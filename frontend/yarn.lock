@@ -6605,11 +6605,6 @@
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
 
-"fsevents@^2.3.2", "fsevents@~2.3.2":
-  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
-  "version" "2.3.2"
-
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
   "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
@@ -8490,8 +8485,6 @@
     "semver" "^6.0.0"
 
 "make-fetch-happen@^10.0.3":
-  "integrity" "sha512-NgOPbRiaQM10DYXvN3/hhGVI2M5MtITFryzBGxHM5p4wnFxsVCbxkrBrDsk+EZ5OB4jEOT7AjDxtdF+KVEFT7w=="
-  "resolved" "https://registry.npmjs.org/make-fetch-happen/-/make-fetch-happen-10.2.1.tgz"
   "version" "10.2.1"
   dependencies:
     "agentkeepalive" "^4.2.1"
@@ -8880,8 +8873,6 @@
   "version" "2.0.6"
 
 "nopt@^6.0.0":
-  "integrity" "sha512-ZwLpbTgdhuZUnZzjd7nb1ZV+4DoiC6/sfiVKok72ym/4Tlf+DFdlHYmT2JPmcNNWV6Pi3SDf1kT+A4r9RTuT9g=="
-  "resolved" "https://registry.npmjs.org/nopt/-/nopt-6.0.0.tgz"
   "version" "6.0.0"
   dependencies:
     "abbrev" "^1.0.0"
@@ -9086,8 +9077,6 @@
     "write-file-atomic" "^5.0.0"
 
 "npmlog@^6.0.0":
-  "integrity" "sha512-/vBvz5Jfr9dT/aFWd0FIRf+T/Q2WBsLENygUaFUqstqsycmZAP/t5BvFJTK0viFmSUxiUKTUplWy5vt+rvKIxg=="
-  "resolved" "https://registry.npmjs.org/npmlog/-/npmlog-6.0.2.tgz"
   "version" "6.0.2"
   dependencies:
     "are-we-there-yet" "^3.0.0"
@@ -10651,8 +10640,6 @@
     "util-deprecate" "^1.0.1"
 
 "readable-stream@^4.1.0":
-  "integrity" "sha512-gJrBHsaI3lgBoGMW/jHZsQ/o/TIWiu5ENCJG1BB7fuCKzpFM8GaS2UoBVt9NO+oI+3FcrBNbUkl3ilDe09aY4A=="
-  "resolved" "https://registry.npmjs.org/readable-stream/-/readable-stream-4.2.0.tgz"
   "version" "4.2.0"
   dependencies:
     "abort-controller" "^3.0.0"
@@ -12455,8 +12442,6 @@
     "isexe" "^2.0.0"
 
 "which@^2.0.2":
-  "integrity" "sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA=="
-  "resolved" "https://registry.npmjs.org/which/-/which-2.0.2.tgz"
   "version" "2.0.2"
   dependencies:
     "isexe" "^2.0.0"
