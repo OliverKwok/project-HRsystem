@@ -1,6 +1,7 @@
 import { Steps } from "primereact/steps";
 import "../styles/06-HandleSteps.css";
 import { useForm } from "react-hook-form";
+import GenRefLetter from "./06-genRefLetter";
 
 export default function HandleStatusForm(props: any) {
   const steps = [{ label: "Step 1" }, { label: "Step 2" }, { label: "Step 3" }];
@@ -46,6 +47,7 @@ export default function HandleStatusForm(props: any) {
         <br />
         <input type="submit" />
       </form>
+      <GenRefLetter />
       {/* Termination */}
       <form onSubmit={handleSubmit(submitResignForm)}>
         <h2>Termination</h2>

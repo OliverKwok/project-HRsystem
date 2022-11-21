@@ -44,6 +44,8 @@
     "bootstrap": "^5.2.2",
     "chart.js": "^4.0.1",
     "dayjs": "^1.11.6",
+    "docx": "^7.7.0",
+    "file-saver": "^2.0.5",
     "install": "^0.13.0",
     "moment": "^2.29.4",
     "moment-jalaali": "^0.9.6",
@@ -97,6 +99,7 @@
     ]
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "@types/react-beautiful-dnd": "^13.1.2"
   }
 }
