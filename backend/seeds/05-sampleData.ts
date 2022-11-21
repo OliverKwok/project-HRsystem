@@ -21,7 +21,7 @@ export async function seed(knex: Knex): Promise<void> {
     HKID: 'X522891(9)',
     gender: 'M',
     nationality: 'China',
-    date_of_birth: '24/7/1997',
+    date_of_birth: '1997-07-24',
     age: '25',
     mobile_countrycode: '86',
     mobile_no: '62862337',
