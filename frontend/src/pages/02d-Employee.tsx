@@ -15,7 +15,7 @@ type FormState = {
   nationality: string;
   date_of_birth: Date;
   age: number;
-  profilepic: File;
+  profilepic: FileList;
 
   mobile_countrycode: string;
   mobile_no: string;
@@ -57,9 +57,6 @@ type FormState = {
 };
 
 export default function Employee() {
-  const [age, setAge] = useState("0");
-  const [employeeID, setEmployeeID] = useState("DEMO");
-
   const {
     register,
     handleSubmit,
@@ -117,6 +114,12 @@ export default function Employee() {
     },
   });
 
+  const [age, setAge] = useState("0");
+  const [employeeID, setEmployeeID] = useState("DEMO");
+  const profilepic = watch("profilepic");
+  const [previewSrc, setpreviewSrc] = useState("");
+
+  // check lastest employeeID
   async function checkEmployeeID() {
     const requestOptions = {
       method: "Get",
@@ -145,6 +148,7 @@ export default function Employee() {
     checkEmployeeID();
   }, []);
 
+  // monitor every step
   useEffect(() => {
     let sub = watch((data) => {
       // console.log("update form data:", data);
@@ -153,9 +157,20 @@ export default function Employee() {
     return () => sub.unsubscribe();
   }, [watch]);
 
+  // preview photo
+  useEffect(() => {
+    if (profilepic?.length > 0) {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        setpreviewSrc(reader.result as string);
+      });
+      reader.readAsDataURL(profilepic[0]);
+    }
+  }, [profilepic]);
+
+  // submit
   async function submit(data: FormState) {
     // console.log("submit form data:", data);
-
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -207,7 +222,7 @@ export default function Employee() {
                 <span>
                   First Name*{" "}
                   {errors.first_name && (
-                    <span style={{ color: "red" }}>必填</span>
+                    <span style={{ color: "red" }}>[Required]</span>
                   )}
                 </span>
               </div>
@@ -221,7 +236,7 @@ export default function Employee() {
                 <span>
                   Last Name*{" "}
                   {errors.last_name && (
-                    <span style={{ color: "red" }}>必填</span>
+                    <span style={{ color: "red" }}>[Required]</span>
                   )}
                 </span>
               </div>
@@ -247,10 +262,25 @@ export default function Employee() {
             </div>
             <div>
               <div>
-                <span>HKID</span>
+                <span>
+                  HKID{" "}
+                  {errors.HKID && (
+                    <span style={{ color: "red" }}>[Wrong format]</span>
+                  )}
+                </span>
               </div>
 
-              <input type="text" {...register("HKID")} />
+              <input
+                type="text"
+                {...register("HKID", {
+                  pattern: /^([A-Z]{1,2})([0-9]{6})([A0-9])$/,
+                })}
+              />
+              <div>
+                <span style={{ fontSize: "small" }}>
+                  eg. Z9876543 [no brackets]
+                </span>
+              </div>
             </div>
 
             <div>
@@ -509,10 +539,29 @@ export default function Employee() {
         <hr />
         <div>
           <div>
-            <span>Profile Pic</span>
+            <h3>Profile Pic</h3>
           </div>
 
           <input type="file" {...register("profilepic")} />
+          {previewSrc && (
+            <div>
+              <div>Preview:</div>
+              <div>
+                <img
+                  src={previewSrc}
+                  alt="Preview"
+                  // height="200px"
+
+                  style={{
+                    borderRadius: "50%",
+                    width: "200px",
+                    height: "200px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            </div>
+          )}
         </div>
         <hr />
         <button type="submit">Submit</button>
