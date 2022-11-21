@@ -15,6 +15,7 @@ type FormState = {
   nationality: string;
   date_of_birth: Date;
   age: number;
+  profilepic: File;
 
   mobile_countrycode: string;
   mobile_no: string;
@@ -59,56 +60,62 @@ export default function Employee() {
   const [age, setAge] = useState("0");
   const [employeeID, setEmployeeID] = useState("DEMO");
 
-  const { register, handleSubmit, watch, setValue, getValues } =
-    useForm<FormState>({
-      defaultValues: {
-        employeeID: "DEMO",
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm<FormState>({
+    defaultValues: {
+      employeeID: "DEMO",
 
-        first_name: "",
-        last_name: "",
-        chinese_name: "",
-        alias: "",
-        HKID: "",
-        gender: "",
-        nationality: "",
-        date_of_birth: new Date(),
-        age: 0,
+      first_name: "",
+      last_name: "",
+      chinese_name: "",
+      alias: "",
+      HKID: "",
+      gender: "",
+      nationality: "",
+      date_of_birth: new Date(),
+      age: 0,
 
-        mobile_countrycode: "",
-        mobile_no: "",
-        work_phone_no: "",
-        email_personal: "",
-        email_work: "",
-        // password: "",
+      mobile_countrycode: "",
+      mobile_no: "",
+      work_phone_no: "",
+      email_personal: "",
+      email_work: "",
+      // password: "",
 
-        highest_education: "",
-        institution_name: "",
-        major: "",
-        last_job_company: "",
-        last_job_title: "",
+      highest_education: "",
+      institution_name: "",
+      major: "",
+      last_job_company: "",
+      last_job_title: "",
 
-        start_date: "",
-        have_probation: "",
-        pass_probation: "",
-        status: "",
-        job_nature: "",
-        // length_of_service: "",
-        notice_period: "",
-        report_to: "",
+      start_date: "",
+      have_probation: "",
+      pass_probation: "",
+      status: "",
+      job_nature: "",
+      // length_of_service: "",
+      notice_period: "",
+      report_to: "",
 
-        AL_leave_entitled: "",
+      AL_leave_entitled: "",
 
-        pay_currency: "",
-        basic_salary: "",
-        payment_method: "",
-        home_address: "",
-        bank_code: "",
-        bank_name: "",
-        bank_number: "",
-        bank_payee: "",
-        payment_remark: "",
-      },
-    });
+      pay_currency: "",
+      basic_salary: "",
+      payment_method: "",
+      home_address: "",
+      bank_code: "",
+      bank_name: "",
+      bank_number: "",
+      bank_payee: "",
+      payment_remark: "",
+    },
+  });
 
   async function checkEmployeeID() {
     const requestOptions = {
@@ -197,16 +204,32 @@ export default function Employee() {
             </div>
             <div>
               <div>
-                <span>First Name</span>
+                <span>
+                  First Name*{" "}
+                  {errors.first_name && (
+                    <span style={{ color: "red" }}>必填</span>
+                  )}
+                </span>
               </div>
-              <input type="text" {...register("first_name")} />
+              <input
+                type="text"
+                {...register("first_name", { required: true })}
+              />
             </div>
             <div>
               <div>
-                <span>Last Name</span>
+                <span>
+                  Last Name*{" "}
+                  {errors.last_name && (
+                    <span style={{ color: "red" }}>必填</span>
+                  )}
+                </span>
               </div>
 
-              <input type="text" {...register("last_name")} />
+              <input
+                type="text"
+                {...register("last_name", { required: true })}
+              />
             </div>
             <div>
               <div>
@@ -483,7 +506,15 @@ export default function Employee() {
             </div>
           </div>
         </div>
+        <hr />
+        <div>
+          <div>
+            <span>Profile Pic</span>
+          </div>
 
+          <input type="file" {...register("profilepic")} />
+        </div>
+        <hr />
         <button type="submit">Submit</button>
       </form>
     </div>
