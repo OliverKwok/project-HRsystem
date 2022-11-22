@@ -5,7 +5,7 @@ import Filter from "../components/02c-Filter";
 import PopupAddTitle from "../components/02c-PopupAddTitle";
 import PopupEditTitle from "../components/02c-PopupEditTitle";
 
-const Title = () => {
+export default function Title(){
   // table columns
   const columns = [
     {
@@ -155,4 +155,3 @@ const Title = () => {
   );
 };
 
-export default Title;

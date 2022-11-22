@@ -21,7 +21,7 @@ import Employee from "./pages/02d-Employee";
 import Title from "./pages/02c-Title";
 import StatusUpdate from "./pages/02e-StatusUpdate";
 import Attendance from "./pages/03-Attendance";
-import PaySummary from "./pages/04a-PaySummary";
+import PaySummary2 from "./pages/04a-PaySummary2";
 import PayExport from "./pages/04b-PayExport";
 import PaySetting from "./pages/04c-PaySetting";
 import Leaves from "./pages/05-Leaves";
@@ -141,7 +141,7 @@ function App() {
 
             {sideBarItemShow2 && (
               <>
-                <NavLink className="sub-item" to={"paySummary"}>
+                <NavLink className="sub-item" to={"paySummary2"}>
                   <div>
                     <SlOrganization /> <span>summary</span>
                   </div>
@@ -240,7 +240,7 @@ function App() {
                 <Route path="employee" element={<Employee />}></Route>
                 <Route path="statusUpdate" element={<StatusUpdate />}></Route>
                 <Route path="attendance" element={<Attendance />}></Route>
-                <Route path="paySummary" element={<PaySummary />}></Route>
+                <Route path="paySummary2" element={<PaySummary2 />}></Route>
                 <Route path="payExport" element={<PayExport />}></Route>
                 <Route path="paySetting" element={<PaySetting />}></Route>
                 <Route path="leaves" element={<Leaves />}></Route>

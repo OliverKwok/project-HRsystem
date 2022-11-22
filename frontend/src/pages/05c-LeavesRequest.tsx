@@ -25,6 +25,28 @@ export default function LeavesRequest() {
       ActionApprove: <button>Approve</button>,
       ActionCancel: <button>Cancel</button>,
     },
+    {
+      Employee: "Mandy Ho",
+      LeaveType: "Annual Leave",
+      AppliedDate: "2022-11-18",
+      FromDate: "2022-12-20",
+      ToDate: "2022-12-21",
+      Duration: "1 day",
+      Status: "approved",
+      ActionApprove: <button>Reject</button>,
+      ActionCancel: <button>Cancel</button>,
+    },
+    {
+      Employee: "Jackie Chan",
+      LeaveType: "Annual Leave",
+      AppliedDate: "2022-11-18",
+      FromDate: "2022-12-20",
+      ToDate: "2022-12-21",
+      Duration: "1 day",
+      Status: "taken",
+      ActionApprove: <button>Approve</button>,
+      ActionCancel: <button>Cancel</button>,
+    },
   ];
   const [rows, setRows] = useState(data);
 
