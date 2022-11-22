@@ -11,7 +11,7 @@ function LoginForm() {
   return (
     <div className="login-page-container">
       <div className="login-page-box">
-        <div id="headerTitle">Login</div>
+        <div id="headerTitle">Easy HR Solutions</div>
         <form
           onSubmit={handleSubmit(async (data) => {
             const res = await fetch(
@@ -25,39 +25,47 @@ function LoginForm() {
               }
             );
             const json = await res.json();
-            console.log(json);
+            // console.log(json);
             if (json.statusCode == 401) {
               alert("wrong user or password");
+            } else {
+              const profileRes = await fetch(
+                `${process.env.REACT_APP_BACKEND_URL}/profile`,
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${json.access_token}`,
+                  },
+                }
+              );
+              const profileJson = await profileRes.json();
+              console.log(profileJson);
+              // if (profileJson.username) {
+              //   alert(`welcome back, hello ${profileJson.username}`);
+              // }
+              dispatch(login(profileJson, json.access_token));
+              localStorage.setItem("token", json.access_token);
             }
             // if (json.access_token) {
             //   alert("get the token");
             // }
-
-            const profileRes = await fetch(
-              `${process.env.REACT_APP_BACKEND_URL}/profile`,
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${json.access_token}`,
-                },
-              }
-            );
-            const profileJson = await profileRes.json();
-            console.log(profileJson);
-            // if (profileJson.username) {
-            //   alert(`welcome back, hello ${profileJson.username}`);
-            // }
-            dispatch(login(profileJson, json.access_token));
-            localStorage.setItem("token", json.access_token);
           })}
         >
-          <input placeholder="username" {...register("username")} />
-          <input
-            type="password"
-            placeholder="password"
-            {...register("password")}
-          />
-          <input type="submit" />
+          <div className="row">
+            <label htmlFor="username">Username</label>
+            <input placeholder="Enter the username" {...register("username")} />
+          </div>
+          <div className="row">
+            <label htmlFor="password">Username</label>
+            <input
+              type="password"
+              placeholder="Enter the password"
+              {...register("password")}
+            />
+          </div>
+          <div className="row">
+            <input id="login-button" type="submit" value="Login" />
+          </div>
         </form>
       </div>
     </div>
