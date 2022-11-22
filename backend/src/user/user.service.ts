@@ -28,20 +28,6 @@ export class UserService {
   }
 
   async findOne(username: string) {
-    // try {
-    //   const employeeLogin = await this.knex.table('employee').select({
-    //     email_work: username,
-    //     // last_Name: createUserDto.last_name,
-    //   });
-
-    //   return {
-    //     id: 1,
-    //     username: employeeLogin,
-    //     password: await bcrypt.hash('sys', 10),
-    //   };
-    // } catch (err) {
-    //   throw new HttpException(err, HttpStatus.BAD_REQUEST);
-    // }
     return {
       id: 1,
       username: username,
@@ -49,22 +35,32 @@ export class UserService {
     };
   }
 
-  // upload file code
-  // signup(@UploadedFile() file, @Body() body) {
-  //   console.log(file);
-  //   console.log(body);
-  // }
-
-  // return {message: 'reach create user'}
-
-  // async function insertUser (knex: Knex, createUserDto: CreateUserDto): Promise<void> {
-  //   const ids = knex
-  //   .insert({
-  //     employeeID: createUserDto.employeeID,
-  //     date_of_birth: "1971-01-02",
-  //   })
-  //   .into("employee")
-  //   .returning("id");
-  //   return ids
-  //   }
+  async userCount() {
+    try {
+      const res = await this.knex('employee').max('id as maxId').first();
+      const maxId = res.maxId;
+      return { maxId };
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
 }
+
+// upload file code
+// signup(@UploadedFile() file, @Body() body) {
+//   console.log(file);
+//   console.log(body);
+// }
+
+// return {message: 'reach create user'}
+
+// async function insertUser (knex: Knex, createUserDto: CreateUserDto): Promise<void> {
+//   const ids = knex
+//   .insert({
+//     employeeID: createUserDto.employeeID,
+//     date_of_birth: "1971-01-02",
+//   })
+//   .into("employee")
+//   .returning("id");
+//   return ids
+//   }

@@ -47,8 +47,15 @@ function App() {
       {isAuthenticated == true ? (
         <div className="container">
           <div className="sidebar">
-            <div id="company-logo" onClick={() => navigate("dashboard")}>
-              <BsFillPeopleFill /> <span>HR Solution</span>
+            <div
+              className="company-logo-container"
+              onClick={() => navigate("dashboard")}
+            >
+              <div id="logo">
+                <BsFillPeopleFill />
+                {/* <img src="../public/logo.png" /> */}
+              </div>
+              <div>Easy HR Solutions</div>
             </div>
 
             <NavLink to={"dashboard"}>

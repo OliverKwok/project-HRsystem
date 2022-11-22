@@ -62,11 +62,15 @@
   }
 }
 
-#company-logo {
+.company-logo-container {
   color: var(--theme-green);
   font-weight: 800;
   font-size: 30px;
   word-spacing: 3px;
+  line-height: 100%;
+  #logo {
+    font-size: 50px;
+  }
 }
 
 .main-container {
@@ -115,17 +119,16 @@
   gap: 10px;
 }
 
-
 .calendar-container {
-  display:flex;
-  
+  display: flex;
+
   .calendar-main {
-    flex-grow:5
+    flex-grow: 5;
   }
   .calendar-info {
-    max-width:400px
+    max-width: 400px;
   }
   .calendar-sidebar {
-    margin:0px 20px;
+    margin: 0px 20px;
   }
 }

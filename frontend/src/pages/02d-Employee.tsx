@@ -15,6 +15,7 @@ type FormState = {
   nationality: string;
   date_of_birth: Date;
   age: number;
+  profilepic: FileList;
 
   mobile_countrycode: string;
   mobile_no: string;
@@ -56,70 +57,119 @@ type FormState = {
 };
 
 export default function Employee() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm<FormState>({
+    defaultValues: {
+      employeeID: "",
+      first_name: "",
+      last_name: "",
+      chinese_name: "",
+      alias: "",
+      HKID: "",
+      gender: "",
+      nationality: "",
+      date_of_birth: new Date(),
+      age: 0,
+
+      mobile_countrycode: "",
+      mobile_no: "",
+      work_phone_no: "",
+      email_personal: "",
+      email_work: "",
+      // password: "",
+
+      highest_education: "",
+      institution_name: "",
+      major: "",
+      last_job_company: "",
+      last_job_title: "",
+
+      start_date: "",
+      have_probation: "",
+      pass_probation: "",
+      status: "",
+      job_nature: "",
+      // length_of_service: "",
+      notice_period: "",
+      report_to: "",
+
+      AL_leave_entitled: "",
+
+      pay_currency: "",
+      basic_salary: "",
+      payment_method: "",
+      home_address: "",
+      bank_code: "",
+      bank_name: "",
+      bank_number: "",
+      bank_payee: "",
+      payment_remark: "",
+    },
+  });
+
   const [age, setAge] = useState("0");
+  const [employeeID, setEmployeeID] = useState("DEMO");
+  const profilepic = watch("profilepic");
+  const [previewSrc, setpreviewSrc] = useState("");
 
-  const { register, handleSubmit, watch, setValue, getValues } =
-    useForm<FormState>({
-      defaultValues: {
-        employeeID: "",
+  // check lastest employeeID
+  async function checkEmployeeID() {
+    const requestOptions = {
+      method: "Get",
+    };
 
-        first_name: "",
-        last_name: "",
-        chinese_name: "",
-        alias: "",
-        HKID: "",
-        gender: "",
-        nationality: "",
-        date_of_birth: new Date(),
-        age: 0,
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/user/count`,
+      requestOptions
+    );
+    const jsonData = await res.json();
+    let newEmployeeID = "DEMO";
+    if (jsonData.maxId < 10) {
+      newEmployeeID = newEmployeeID + "00" + (jsonData.maxId + 1);
+    } else if (jsonData.maxId < 100) {
+      newEmployeeID = newEmployeeID + "0" + (jsonData.maxId + 1);
+    } else if (jsonData.maxId < 1000) {
+      newEmployeeID = newEmployeeID + (jsonData.maxId + 1);
+    } else {
+      throw new Error();
+    }
 
-        mobile_countrycode: "",
-        mobile_no: "",
-        work_phone_no: "",
-        email_personal: "",
-        email_work: "",
-        // password: "",
-
-        highest_education: "",
-        institution_name: "",
-        major: "",
-        last_job_company: "",
-        last_job_title: "",
-
-        start_date: "",
-        have_probation: "",
-        pass_probation: "",
-        status: "",
-        job_nature: "",
-        // length_of_service: "",
-        notice_period: "",
-        report_to: "",
-
-        AL_leave_entitled: "",
-
-        pay_currency: "",
-        basic_salary: "",
-        payment_method: "",
-        home_address: "",
-        bank_code: "",
-        bank_name: "",
-        bank_number: "",
-        bank_payee: "",
-        payment_remark: "",
-      },
-    });
+    setEmployeeID(newEmployeeID);
+  }
 
   useEffect(() => {
+    checkEmployeeID();
+  }, []);
+
+  // monitor every step
+  useEffect(() => {
     let sub = watch((data) => {
-      console.log("update form data:", data);
-      console.log(data.date_of_birth);
+      // console.log("update form data:", data);
+      // console.log(data.date_of_birth);
     });
     return () => sub.unsubscribe();
   }, [watch]);
 
+  // preview photo
+  useEffect(() => {
+    if (profilepic?.length > 0) {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        setpreviewSrc(reader.result as string);
+      });
+      reader.readAsDataURL(profilepic[0]);
+    }
+  }, [profilepic]);
+
+  // submit
   async function submit(data: FormState) {
     // console.log("submit form data:", data);
-
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -127,7 +177,7 @@ export default function Employee() {
     };
 
     const res = await fetch(
-      "http://localhost:8000/user/create",
+      `${process.env.REACT_APP_BACKEND_URL}/user/create`,
       requestOptions
     );
     const jsonData = await res.json();
@@ -135,6 +185,7 @@ export default function Employee() {
     if (jsonData.newEmployee.rowCount) {
       alert("inserted into DB");
     }
+    checkEmployeeID();
   }
 
   const calAge = (event: any) => {
@@ -143,11 +194,6 @@ export default function Employee() {
     let result = todayDate.diff(date_of_birth_input, "years");
     setAge(result);
 
-    // if (date_of_birth_input) {
-    //   const result = Math.abs(
-    //     date_of_birth_input.getFullYear() - new Date(today).getFullYear()
-    //   );
-    //   console.log(result)
     return result;
   };
 
@@ -162,20 +208,42 @@ export default function Employee() {
               <div>
                 <span>Employee ID</span>
               </div>
-              <input type="text" {...register("employeeID")} />
+              {/* <input type="text" {...register("employeeID")} /> */}
+              <input
+                value={employeeID}
+                type="text"
+                {...register("employeeID")}
+                disabled
+              />
             </div>
             <div>
               <div>
-                <span>First Name</span>
+                <span>
+                  First Name*{" "}
+                  {errors.first_name && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
               </div>
-              <input type="text" {...register("first_name")} />
+              <input
+                type="text"
+                {...register("first_name", { required: true })}
+              />
             </div>
             <div>
               <div>
-                <span>Last Name</span>
+                <span>
+                  Last Name*{" "}
+                  {errors.last_name && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
               </div>
 
-              <input type="text" {...register("last_name")} />
+              <input
+                type="text"
+                {...register("last_name", { required: true })}
+              />
             </div>
             <div>
               <div>
@@ -193,10 +261,25 @@ export default function Employee() {
             </div>
             <div>
               <div>
-                <span>HKID</span>
+                <span>
+                  HKID{" "}
+                  {errors.HKID && (
+                    <span style={{ color: "red" }}>[Wrong format]</span>
+                  )}
+                </span>
               </div>
 
-              <input type="text" {...register("HKID")} />
+              <input
+                type="text"
+                {...register("HKID", {
+                  pattern: /^([A-Z]{1,2})([0-9]{6})\(([A0-9])\)$/,
+                })}
+              />
+              <div>
+                <span style={{ fontSize: "small" }}>
+                  eg. Z987654(3) [no brackets]
+                </span>
+              </div>
             </div>
 
             <div>
@@ -452,7 +535,34 @@ export default function Employee() {
             </div>
           </div>
         </div>
+        <hr />
+        <div>
+          <div>
+            <h3>Profile Pic</h3>
+          </div>
 
+          <input type="file" {...register("profilepic")} />
+          {previewSrc && (
+            <div>
+              <div>Preview:</div>
+              <div>
+                <img
+                  src={previewSrc}
+                  alt="Preview"
+                  // height="200px"
+
+                  style={{
+                    borderRadius: "50%",
+                    width: "200px",
+                    height: "200px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        <hr />
         <button type="submit">Submit</button>
       </form>
     </div>
