@@ -66,8 +66,7 @@ export default function Employee() {
     formState: { errors },
   } = useForm<FormState>({
     defaultValues: {
-      employeeID: "DEMO",
-
+      employeeID: "",
       first_name: "",
       last_name: "",
       chinese_name: "",
@@ -273,12 +272,12 @@ export default function Employee() {
               <input
                 type="text"
                 {...register("HKID", {
-                  pattern: /^([A-Z]{1,2})([0-9]{6})([A0-9])$/,
+                  pattern: /^([A-Z]{1,2})([0-9]{6})\(([A0-9])\)$/,
                 })}
               />
               <div>
                 <span style={{ fontSize: "small" }}>
-                  eg. Z9876543 [no brackets]
+                  eg. Z987654(3) [no brackets]
                 </span>
               </div>
             </div>
