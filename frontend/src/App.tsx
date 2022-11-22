@@ -32,7 +32,7 @@ import LeavesRequest from "./pages/05c-LeavesRequest";
 import Offboarding from "./pages/06-Offboarding";
 import DataInsights from "./pages/07-DataInsights";
 import Notifications from "./pages/08-Notifications";
-import LoginForm from "./LoginForm";
+import LoginForm from "./pages/00-LoginForm";
 import { useAppDispatch, useAppSelector } from "./store";
 import { login, logout, restoreLogin } from "./redux/auth/actions";
 
@@ -62,14 +62,14 @@ function App() {
       // console.log(profileJson);
       dispatch(login(profileJson, token));
       localStorage.setItem("token", token);
-      setUsername(profileJson.username);
+      // setUsername(profileJson.username);
     }
     if (token == undefined) {
       dispatch(logout());
     } else if (token) {
       checkLogin();
     }
-  }, [dispatch, username]);
+  }, [dispatch]);
 
   return (
     <>
@@ -216,9 +216,9 @@ function App() {
               </div>
               <div id="announcement">Sample Company Announcement</div>
 
-              <div className="navbar-grid-username">
+              {/* <div className="navbar-grid-username">
                 Welcome back: {username}
-              </div>
+              </div> */}
               <div className="navbar-grid">
                 <MdNotificationsNone />
                 <span>1</span>

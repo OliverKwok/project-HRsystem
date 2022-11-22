@@ -14,6 +14,7 @@ export function authReducer(
         isAuthenticated: action.token ? true : null,
       };
     case "@@auth/LOGOUT":
+      localStorage.removeItem("token");
       return {
         ...state,
         user: null,
