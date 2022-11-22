@@ -8,6 +8,7 @@ import * as config from '../knexfile';
 import { config as Config } from 'dotenv';
 import { DepartmentModule } from './department/department.module';
 import { AppService } from './app.service';
+import { TitleModule } from './title/title.module';
 Config();
 
 @Module({
@@ -22,6 +23,7 @@ Config();
     LeaveModule,
     UserModule,
     DepartmentModule,
+    TitleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
