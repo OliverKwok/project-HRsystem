@@ -4,12 +4,12 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('employee', (table) => {
     table.increments('id').primary();
     // personal identification details
-    table.string('employeeID');
+    table.string('employeeid');
     table.string('first_name');
     table.string('last_name');
     table.string('chinese_name');
     table.string('alias');
-    table.string('HKID');
+    table.string('hkid');
     table.string('passport');
     table.enu('gender', ['M', 'F']);
     table.string('nationality');
@@ -67,9 +67,9 @@ export async function up(knex: Knex): Promise<void> {
     table.string('bank_payee');
     table.string('payment_remark');
     // leave
-    table.float('AL_leave_entitled_peryear');
-    table.float('AL_leave_taken');
-    table.float('AL_leave_balance');
+    table.float('al_leave_entitled_peryear');
+    table.float('al_leave_taken');
+    table.float('al_leave_balance');
     table.float('sick_leave_taken');
     table.float('sick_leave_balance');
     // system permission
@@ -100,13 +100,13 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('team_lead').references('employee.id');
     table.integer('belonged_to_dept').references('department.id');
     table.integer('team_upstream').references('team.id');
-    // table.integer('report_to').references('employee.employeeID');
+    // table.integer('report_to').references('employee.employeeid');
   });
 
   // await knex.schema.createTable('grade', (table) => {
   //   table.increments('id');
   //   table.string('grade_name');
-  //   table.integer('AL_days_entitled');
+  //   table.integer('al_days_entitled');
   //   table.integer('years_of_service');
   //   table.integer('notice_period(month)');
   // });
@@ -120,7 +120,7 @@ export async function up(knex: Knex): Promise<void> {
   // employee role, referencing tables above
   await knex.schema.createTable('employee_role', (table) => {
     table.increments('id');
-    table.integer('employeeID').references('employee.id');
+    table.integer('employeeid').references('employee.id');
     table.integer('department_id').references('department.id');
     table.integer('team_id').references('team.id');
     // table.integer('grade_id').references('grade.id');
@@ -138,8 +138,8 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('leave_setting', (table) => {
     table.increments('id');
     table.string('company_name');
-    table.string('AL_clearance_day');
-    table.boolean('AL_carried_forward');
+    table.string('al_clearance_day');
+    table.boolean('al_carried_forward');
   });
 
   await knex.schema.createTable('leave_application', (table) => {
@@ -201,7 +201,7 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('month');
     table.integer('employee').references('employee.id');
     table.float('salary');
-    table.float('OT_pay');
+    table.float('ot_pay');
     table.float('nopay_leave_deduction');
     table.float('mpf_employer');
     table.float('mpf_employee');
@@ -253,9 +253,9 @@ export async function down(knex: Knex): Promise<void> {
   await knex.schema.dropTableIfExists('leave_type');
   await knex.schema.dropTableIfExists('employee_role');
   await knex.schema.dropTableIfExists('permission');
-  await knex.schema.dropTableIfExists('title');
-  await knex.schema.dropTableIfExists('grade');
+  // await knex.schema.dropTableIfExists('grade');
   await knex.schema.dropTableIfExists('team');
   await knex.schema.dropTableIfExists('department');
+  await knex.schema.dropTableIfExists('title');
   await knex.schema.dropTableIfExists('employee');
 }

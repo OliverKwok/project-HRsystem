@@ -11,141 +11,141 @@ export async function seed(knex: Knex): Promise<void> {
     return row;
   }
   await seedRow('employee_role', {
-    employeeID: 1,
+    employeeid: 1,
     department_id: 1,
-    team_id: 6,
+    team_id: 1,
     title_id: 1,
   });
   await seedRow('employee_role', {
-    employeeID: 2,
+    employeeid: 2,
     department_id: 1,
-    team_id: 6,
+    team_id: 1,
     title_id: 2,
   });
   await seedRow('employee_role', {
-    employeeID: 3,
+    employeeid: 3,
     department_id: 1,
-    team_id: 6,
+    team_id: 1,
     title_id: 3,
   });
   await seedRow('employee_role', {
-    employeeID: 4,
+    employeeid: 4,
     department_id: 4,
-    team_id: 6,
+    team_id: 1,
     title_id: 4,
   });
   await seedRow('employee_role', {
-    employeeID: 5,
+    employeeid: 5,
     department_id: 4,
-    team_id: 6,
+    team_id: 1,
     title_id: 5,
   });
   await seedRow('employee_role', {
-    employeeID: 6,
+    employeeid: 6,
     department_id: 5,
-    team_id: 6,
+    team_id: 1,
     title_id: 6,
   });
   await seedRow('employee_role', {
-    employeeID: 7,
+    employeeid: 7,
     department_id: 9,
-    team_id: 6,
-    title_id: 7,
-  });
-  await seedRow('employee_role', {
-    employeeID: 8,
-    department_id: 9,
-    team_id: 6,
-    title_id: 7,
-  });
-  await seedRow('employee_role', {
-    employeeID: 9,
-    department_id: 5,
     team_id: 1,
+    title_id: 7,
+  });
+  await seedRow('employee_role', {
+    employeeid: 8,
+    department_id: 9,
+    team_id: 1,
+    title_id: 7,
+  });
+  await seedRow('employee_role', {
+    employeeid: 9,
+    department_id: 5,
+    team_id: 2,
     title_id: 9,
   });
   await seedRow('employee_role', {
-    employeeID: 10,
+    employeeid: 10,
     department_id: 9,
-    team_id: 6,
+    team_id: 1,
     title_id: 10,
   });
   await seedRow('employee_role', {
-    employeeID: 11,
+    employeeid: 11,
     department_id: 4,
-    team_id: 6,
+    team_id: 1,
     title_id: 11,
   });
   await seedRow('employee_role', {
-    employeeID: 12,
+    employeeid: 12,
     department_id: 5,
-    team_id: 2,
+    team_id: 3,
     title_id: 12,
   });
   await seedRow('employee_role', {
-    employeeID: 13,
+    employeeid: 13,
     department_id: 9,
-    team_id: 6,
+    team_id: 1,
     title_id: 13,
   });
   await seedRow('employee_role', {
-    employeeID: 14,
+    employeeid: 14,
     department_id: 5,
-    team_id: 1,
+    team_id: 2,
     title_id: 14,
   });
   await seedRow('employee_role', {
-    employeeID: 15,
+    employeeid: 15,
     department_id: 5,
-    team_id: 1,
+    team_id: 2,
     title_id: 15,
   });
   await seedRow('employee_role', {
-    employeeID: 16,
+    employeeid: 16,
     department_id: 4,
-    team_id: 6,
+    team_id: 1,
     title_id: 16,
   });
   await seedRow('employee_role', {
-    employeeID: 17,
+    employeeid: 17,
     department_id: 4,
-    team_id: 6,
+    team_id: 1,
     title_id: 16,
   });
   await seedRow('employee_role', {
-    employeeID: 18,
+    employeeid: 18,
     department_id: 4,
-    team_id: 6,
+    team_id: 1,
     title_id: 16,
   });
   await seedRow('employee_role', {
-    employeeID: 19,
+    employeeid: 19,
     department_id: 5,
-    team_id: 6,
+    team_id: 1,
     title_id: 19,
   });
   await seedRow('employee_role', {
-    employeeID: 20,
+    employeeid: 20,
     department_id: 5,
-    team_id: 2,
+    team_id: 3,
     title_id: 20,
   });
   await seedRow('employee_role', {
-    employeeID: 21,
+    employeeid: 21,
     department_id: 6,
-    team_id: 6,
+    team_id: 1,
     title_id: 21,
   });
   await seedRow('employee_role', {
-    employeeID: 22,
+    employeeid: 22,
     department_id: 6,
-    team_id: 6,
+    team_id: 1,
     title_id: 22,
   });
   await seedRow('employee_role', {
-    employeeID: 23,
+    employeeid: 23,
     department_id: 6,
-    team_id: 6,
+    team_id: 1,
     title_id: 23,
   });
 }
