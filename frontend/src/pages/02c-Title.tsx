@@ -1,10 +1,9 @@
 import React, { useState, useMemo, useEffect } from "react";
 import DataTable from "react-data-table-component";
-import "../styles/02c-title.css";
 import Filter from "../components/02c-Filter";
 import PopupAddTitle from "../components/02c-PopupAddTitle";
 import PopupEditTitle from "../components/02c-PopupEditTitle";
-import { timeLog } from "console";
+import "../styles/02c-title.css";
 
 export default function Title() {
   // table columns
@@ -69,9 +68,9 @@ export default function Title() {
             photo: (
               <img
                 className="title_employee_photo"
-                src="../public/profilepic/"
-                {...employee.profilepic}
-              ></img>
+                src={process.env.PUBLIC_URL + employee.profilepic}
+                alt="image"
+              />
             ),
             edit: <PopupEditTitle />,
           };
