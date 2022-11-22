@@ -12,6 +12,7 @@ import { MdOutlinePeopleAlt, MdNotificationsNone } from "react-icons/md";
 import { TbReportSearch } from "react-icons/tb";
 import { GoTriangleLeft, GoTriangleDown } from "react-icons/go";
 import { CgProfile } from "react-icons/cg";
+import { AiOutlineLogout } from "react-icons/ai";
 
 import Dashboard from "./pages/01-Dashboard";
 import Organization from "./pages/02a-Organization";
@@ -31,24 +32,42 @@ import LeavesRequest from "./pages/05c-LeavesRequest";
 import Offboarding from "./pages/06-Offboarding";
 import DataInsights from "./pages/07-DataInsights";
 import Notifications from "./pages/08-Notifications";
-import LoginForm from "./LoginForm";
+import LoginForm from "./pages/00-LoginForm";
 import { useAppDispatch, useAppSelector } from "./store";
-import { logout, restoreLogin } from "./redux/auth/actions";
+import { login, logout, restoreLogin } from "./redux/auth/actions";
 
 function App() {
   const navigate = useNavigate();
   const [sideBarItemShow1, setSideBarItemShow1] = useState(false);
   const [sideBarItemShow2, setSideBarItemShow2] = useState(false);
   const [sideBarItemShow3, setSideBarItemShow3] = useState(false);
+  const [username, setUsername] = useState("");
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    async function checkLogin() {
+      if (token == null) return;
+      const profileRes = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/profile`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const profileJson = await profileRes.json();
+      // console.log(profileJson);
+      dispatch(login(profileJson, token));
+      localStorage.setItem("token", token);
+      // setUsername(profileJson.username);
+    }
     if (token == undefined) {
       dispatch(logout());
-      console.log("no token");
-    } else {
+    } else if (token) {
+      checkLogin();
     }
   }, [dispatch]);
 
@@ -196,6 +215,10 @@ function App() {
                 <HiOutlineSpeakerphone />
               </div>
               <div id="announcement">Sample Company Announcement</div>
+
+              {/* <div className="navbar-grid-username">
+                Welcome back: {username}
+              </div> */}
               <div className="navbar-grid">
                 <MdNotificationsNone />
                 <span>1</span>
@@ -204,7 +227,7 @@ function App() {
                 <FiSettings />
               </div>
               <div className="navbar-grid">
-                <CgProfile />
+                <AiOutlineLogout onClick={() => dispatch(logout())} />
               </div>
             </div>
             <div className="main">

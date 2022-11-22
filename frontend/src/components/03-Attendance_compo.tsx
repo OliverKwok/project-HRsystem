@@ -78,7 +78,7 @@ function Attendance_compo({
       <div className="attendance-info">{show_word.department}</div>
       <div className="attendance-info">{show_word.grade}</div>
       <div className="attendance-loop-container">
-        {new Array(header_info.month_days)
+        {new Array(new Date(2022, header_info.month, 0, 0, 0, 0, 0).getDate())
           .fill(0)
           .map(function (_: any, index: number) {
             let day_of_week: any = show_word.attendance.filter(

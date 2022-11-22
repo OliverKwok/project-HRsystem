@@ -91,6 +91,8 @@ const Attendance = () => {
     month_days: 31,
   };
 
+  // console.log(new Date(2022, header_name.month, 0, 0, 0, 0, 0).getDate());
+
   // console.log(
   //   new Date(`
   //   ${header_name.year},
@@ -129,7 +131,9 @@ const Attendance = () => {
           <div className="attendance-info">{header_name.department}</div>
           <div className="attendance-info">{header_name.grade}</div>
           <div className="attendance-loop-container">
-            {new Array(header_name.month_days)
+            {new Array(
+              new Date(2022, header_name.month, 0, 0, 0, 0, 0).getDate()
+            )
               .fill(0)
               .map((_: any, index: number) => {
                 return new Date(`
@@ -161,7 +165,7 @@ const Attendance = () => {
                 );
               })}
           </div>
-          <div className="header-action">出席日子</div>
+          <div className="header-action">Days of Attendance</div>
         </div>
         {data_arr.map((data) => {
           return (

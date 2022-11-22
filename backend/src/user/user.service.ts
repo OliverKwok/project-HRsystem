@@ -16,7 +16,7 @@ export class UserService {
     console.log(createUserDto);
     try {
       const newEmployee = await this.knex.table('employee').insert({
-        employeeID: createUserDto.employeeID,
+        employeeid: createUserDto.employeeid,
         first_name: createUserDto.first_name,
         // last_Name: createUserDto.last_name,
       });
@@ -31,7 +31,7 @@ export class UserService {
     return {
       id: 1,
       username: username,
-      password: await bcrypt.hash('sys', 10),
+      password: await bcrypt.hash('1', 10),
     };
   }
 
