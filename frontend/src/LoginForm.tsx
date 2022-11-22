@@ -27,9 +27,9 @@ function LoginForm() {
           if (json.statusCode == 401) {
             alert("wrong user or password");
           }
-          if (json.access_token) {
-            alert("get the token");
-          }
+          // if (json.access_token) {
+          //   alert("get the token");
+          // }
 
           const profileRes = await fetch(
             `${process.env.REACT_APP_BACKEND_URL}/profile`,
@@ -42,9 +42,9 @@ function LoginForm() {
           );
           const profileJson = await profileRes.json();
           console.log(profileJson);
-          if (profileJson.username) {
-            alert(`welcome back, hello ${profileJson.username}`);
-          }
+          // if (profileJson.username) {
+          //   alert(`welcome back, hello ${profileJson.username}`);
+          // }
           dispatch(login(profileJson, json.access_token));
           localStorage.setItem("token", json.access_token);
         })}

@@ -5,12 +5,12 @@ import moment from "moment";
 moment().format();
 
 type FormState = {
-  employeeID: string;
+  employeeid: string;
   first_name: string;
   last_name: string;
   chinese_name: string;
   alias: string;
-  HKID: string;
+  hkid: string;
   gender: string;
   nationality: string;
   date_of_birth: Date;
@@ -66,12 +66,12 @@ export default function Employee() {
     formState: { errors },
   } = useForm<FormState>({
     defaultValues: {
-      employeeID: "",
+      employeeid: "",
       first_name: "",
       last_name: "",
       chinese_name: "",
       alias: "",
-      HKID: "",
+      hkid: "",
       gender: "",
       nationality: "",
       date_of_birth: new Date(),
@@ -114,12 +114,12 @@ export default function Employee() {
   });
 
   const [age, setAge] = useState("0");
-  const [employeeID, setEmployeeID] = useState("DEMO");
+  const [employeeid, setEmployeeid] = useState("DEMO");
   const profilepic = watch("profilepic");
   const [previewSrc, setpreviewSrc] = useState("");
 
-  // check lastest employeeID
-  async function checkEmployeeID() {
+  // check lastest employeeid
+  async function checkEmployeeid() {
     const requestOptions = {
       method: "Get",
     };
@@ -129,22 +129,22 @@ export default function Employee() {
       requestOptions
     );
     const jsonData = await res.json();
-    let newEmployeeID = "DEMO";
-    if (jsonData.maxId < 10) {
-      newEmployeeID = newEmployeeID + "00" + (jsonData.maxId + 1);
-    } else if (jsonData.maxId < 100) {
-      newEmployeeID = newEmployeeID + "0" + (jsonData.maxId + 1);
-    } else if (jsonData.maxId < 1000) {
-      newEmployeeID = newEmployeeID + (jsonData.maxId + 1);
+    let newEmployeeid = "DEMO";
+    if (jsonData.maxid < 10) {
+      newEmployeeid = newEmployeeid + "00" + (jsonData.maxid + 1);
+    } else if (jsonData.maxid < 100) {
+      newEmployeeid = newEmployeeid + "0" + (jsonData.maxid + 1);
+    } else if (jsonData.maxid < 1000) {
+      newEmployeeid = newEmployeeid + (jsonData.maxid + 1);
     } else {
       throw new Error();
     }
 
-    setEmployeeID(newEmployeeID);
+    setEmployeeid(newEmployeeid);
   }
 
   useEffect(() => {
-    checkEmployeeID();
+    checkEmployeeid();
   }, []);
 
   // monitor every step
@@ -185,7 +185,7 @@ export default function Employee() {
     if (jsonData.newEmployee.rowCount) {
       alert("inserted into DB");
     }
-    checkEmployeeID();
+    checkEmployeeid();
   }
 
   const calAge = (event: any) => {
@@ -206,13 +206,13 @@ export default function Employee() {
           <div className="five-column-grid">
             <div>
               <div>
-                <span>Employee ID</span>
+                <span>Employee id</span>
               </div>
-              {/* <input type="text" {...register("employeeID")} /> */}
+              {/* <input type="text" {...register("employeeid")} /> */}
               <input
-                value={employeeID}
+                value={employeeid}
                 type="text"
-                {...register("employeeID")}
+                {...register("employeeid")}
                 disabled
               />
             </div>
@@ -263,7 +263,7 @@ export default function Employee() {
               <div>
                 <span>
                   HKID{" "}
-                  {errors.HKID && (
+                  {errors.hkid && (
                     <span style={{ color: "red" }}>[Wrong format]</span>
                   )}
                 </span>
@@ -271,7 +271,7 @@ export default function Employee() {
 
               <input
                 type="text"
-                {...register("HKID", {
+                {...register("hkid", {
                   pattern: /^([A-Z]{1,2})([0-9]{6})\(([A0-9])\)$/,
                 })}
               />
