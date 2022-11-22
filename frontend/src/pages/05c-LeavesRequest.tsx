@@ -1,3 +1,4 @@
+import { R } from "chart.js/dist/chunks/helpers.core";
 import React, { useState } from "react";
 
 export default function LeavesRequest() {
@@ -10,7 +11,8 @@ export default function LeavesRequest() {
       ToDate: "2022-12-31",
       Duration: "10 days",
       Status: "pending",
-      Action: "Approve/Cancel/Delete",
+      ActionApprove: <button>Approve</button>,
+      ActionCancel: <button>Cancel</button>,
     },
     {
       Employee: "Peter So",
@@ -20,7 +22,8 @@ export default function LeavesRequest() {
       ToDate: "2022-12-21",
       Duration: "1 day",
       Status: "pending",
-      Action: "Approve/Cancel/Delete",
+      ActionApprove: <button>Approve</button>,
+      ActionCancel: <button>Cancel</button>,
     },
   ];
   const [rows, setRows] = useState(data);
@@ -34,7 +37,8 @@ export default function LeavesRequest() {
       ToDate,
       Duration,
       Status,
-      Action,
+      ActionApprove,
+      ActionCancel,
     } = props;
     return (
       <tr>
@@ -45,7 +49,8 @@ export default function LeavesRequest() {
         <td>{ToDate}</td>
         <td>{Duration}</td>
         <td>{Status}</td>
-        <td>{Action}</td>
+        <td>{ActionApprove}</td>
+        <td>{ActionCancel}</td>
       </tr>
     );
   };
@@ -65,7 +70,8 @@ export default function LeavesRequest() {
               ToDate={row.ToDate}
               Duration={row.Duration}
               Status={row.Status}
-              Action={row.Action}
+              ActionApprove={row.ActionApprove}
+              ActionCancel={row.ActionCancel}
             />
           ))}
         </tbody>
