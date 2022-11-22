@@ -8,7 +8,8 @@ export function login(user: any, token: string) {
   };
 }
 
-export function logout(user: any) {
+// export function logout(user:any) {
+export function logout() {
   return {
     type: "@@auth/LOGOUT" as const,
   };
@@ -32,6 +33,4 @@ export function restoreLogin(token: string) {
   // }
 }
 
-export type AuthActions =
-ReturnType<typeof login> |
-ReturnType<typeof logout>;
+export type AuthActions = ReturnType<typeof login> | ReturnType<typeof logout>;

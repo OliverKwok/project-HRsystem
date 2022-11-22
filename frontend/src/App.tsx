@@ -33,6 +33,7 @@ import DataInsights from "./pages/07-DataInsights";
 import Notifications from "./pages/08-Notifications";
 import LoginForm from "./LoginForm";
 import { useAppDispatch, useAppSelector } from "./store";
+import { logout, restoreLogin } from "./redux/auth/actions";
 
 function App() {
   const navigate = useNavigate();
@@ -41,6 +42,15 @@ function App() {
   const [sideBarItemShow3, setSideBarItemShow3] = useState(false);
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token == undefined) {
+      dispatch(logout());
+      console.log("no token");
+    } else {
+    }
+  }, [dispatch]);
 
   return (
     <>
