@@ -76,12 +76,21 @@ export async function up(knex: Knex): Promise<void> {
     // table.integer('permission').references('permission.id');
   });
 
+  await knex.schema.createTable('title', (table) => {
+    table.increments('id');
+    table.string('title_name');
+    // table.integer('grade_id').references('grade.id');
+    table.string('office_hour_start');
+    table.string('office_hour_end');
+  });
+
   // company structure: department, team, grade, title
   await knex.schema.createTable('department', (table) => {
     table.increments('id');
     table.string('dept_name');
     table.integer('head_of_dept').references('employee.id');
-    table.integer('dept_upstream').references('department.id');
+    table.integer('managed_by').references('title.id');
+    // table.integer('dept_upstream').references('department.id');
     // table.integer('dept_downstream').references('department.id');
   });
 
@@ -94,21 +103,13 @@ export async function up(knex: Knex): Promise<void> {
     // table.integer('report_to').references('employee.employeeID');
   });
 
-  await knex.schema.createTable('grade', (table) => {
-    table.increments('id');
-    table.string('grade_name');
-    table.integer('AL_days_entitled');
-    table.integer('years_of_service');
-    table.integer('notice_period(month)');
-  });
-
-  await knex.schema.createTable('title', (table) => {
-    table.increments('id');
-    table.string('title_name');
-    table.integer('grade_id').references('grade.id');
-    table.string('office_hour_start');
-    table.string('office_hour_end');
-  });
+  // await knex.schema.createTable('grade', (table) => {
+  //   table.increments('id');
+  //   table.string('grade_name');
+  //   table.integer('AL_days_entitled');
+  //   table.integer('years_of_service');
+  //   table.integer('notice_period(month)');
+  // });
 
   // hr system permission
   await knex.schema.createTable('permission', (table) => {
@@ -122,7 +123,7 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('employeeID').references('employee.id');
     table.integer('department_id').references('department.id');
     table.integer('team_id').references('team.id');
-    table.integer('grade_id').references('grade.id');
+    // table.integer('grade_id').references('grade.id');
     table.integer('title_id').references('title.id');
     // table.integer('report_to').references('employee.id');
     table.integer('permission').references('permission.id');

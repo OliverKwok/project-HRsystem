@@ -46,6 +46,7 @@ function LoginForm() {
             alert(`welcome back, hello ${profileJson.username}`);
           }
           dispatch(login(profileJson, json.access_token));
+          localStorage.setItem("token", json.access_token);
         })}
       >
         <input placeholder="username" {...register("username")} />
