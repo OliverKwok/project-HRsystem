@@ -17,11 +17,6 @@ export default function PopupAddTitle() {
   // department dropdown
   let [dept, setDept] = useState([]);
 
-  // let handleDeptDropdown = (e: any) => {
-  //   setDept(e.target.value);
-  //   console.log(e.target.value);
-  // };
-
   const requestOptions = {
     method: "Get",
   };
@@ -32,7 +27,7 @@ export default function PopupAddTitle() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setDept(data);
       });
   }, []);
@@ -44,10 +39,14 @@ export default function PopupAddTitle() {
 
   async function addTitleHandler(event: any) {
     event.preventDefault();
+    console.log({
+      title_name: title,
+      dept: department,
+    });
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      // body: JSON.stringify(event.target.value),
       body: JSON.stringify({
         title_name: title,
         dept: department,
@@ -58,6 +57,8 @@ export default function PopupAddTitle() {
       requestOptions
     );
     const jsonData = await res.json();
+    // return jsonData;
+    console.log(jsonData);
   }
 
   return (
@@ -76,17 +77,19 @@ export default function PopupAddTitle() {
           </div>
           <form onSubmit={addTitleHandler}>
             <p>
-              Title Name:{" "}
+              Title Name:
               <input
                 type="text"
                 value={title}
                 onChange={(event) => setTitle(event.target.value)}
-              ></input>{" "}
+              ></input>
             </p>
             <p>
               Department:
               <select
-                onChange={(event: any) => setDepartment(event.option.value)}
+                onChange={(event: any) => {
+                  setDepartment(event.target.value);
+                }}
               >
                 {dept.length > 0 &&
                   dept.map((dept) => (

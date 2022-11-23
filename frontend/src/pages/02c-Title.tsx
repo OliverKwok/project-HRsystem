@@ -57,14 +57,14 @@ export default function Title() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         let fetchData = data.map((employee: any) => {
           return {
             id: employee.id,
             title: employee.title_name,
             department: employee.dept_name,
             nature: employee.job_nature,
-            employee: employee.first_name + employee.last_name,
+            employee: employee.first_name + ", " + employee.last_name,
             photo: (
               <img
                 className="title_employee_photo"
@@ -75,7 +75,7 @@ export default function Title() {
             edit: <PopupEditTitle />,
           };
         });
-        console.log(fetchData);
+        // console.log(fetchData);
         setData(fetchData);
       });
   }, []);
