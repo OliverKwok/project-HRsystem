@@ -339,14 +339,14 @@ export default function Employee() {
           <div className="five-column-grid">
             <div>
               <div>
-                <span>Country Code</span>
+                <span>Country Code*</span>
               </div>
 
               <input type="text" {...register("mobile_countrycode")} />
             </div>
             <div>
               <div>
-                <span>Mobile No</span>
+                <span>Mobile No*</span>
               </div>
 
               <input type="text" {...register("mobile_no")} />
@@ -441,7 +441,7 @@ export default function Employee() {
           <div className="five-column-grid">
             <div>
               <div>
-                <span>Start Date</span>
+                <span>Start Date*</span>
               </div>
 
               <input type="date" {...register("start_date")} />
@@ -477,12 +477,9 @@ export default function Employee() {
             </div>
             <div>
               <div>
-                <span>Notice Period (Days)</span>
+                <span>Notice Period* (Days)</span>
               </div>
-
-              <select {...register("notice_period")}>
-                <input type="text" {...register("notice_period")} />
-              </select>
+              <input type="text" {...register("notice_period")} />
             </div>
 
             <div>
@@ -505,19 +502,17 @@ export default function Employee() {
           <div className="five-column-grid">
             <div>
               <div>
-                <span>Salary Currency</span>
+                <span>Salary Currency*</span>
               </div>
-
-              <input
-                value="HKD"
-                type="text"
-                {...register("pay_currency")}
-                disabled
-              />
+              <select {...register("pay_currency")}>
+                <option value="HKD" selected>
+                  HKD
+                </option>
+              </select>
             </div>
             <div>
               <div>
-                <span>Basic Salary</span>
+                <span>Basic Salary*</span>
               </div>
 
               <input type="text" {...register("basic_salary")} />

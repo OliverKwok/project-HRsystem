@@ -25,10 +25,10 @@ export class TitleController {
     return this.titleService.getDept();
   }
 
-  @Post('create')
-  createTitle(@Body() createTitleDto: createTitleDto){
-    return this.titleService.createTitle(createTitleDto);
-  }
+  // @Post('create')
+  // createTitle(@Body() createTitleDto: createTitleDto){
+  //   return this.titleService.createTitle(createTitleDto);
+  // }
 
   // @Post()
   // create(@Body() createTitleDto: CreateTitleDto) {
