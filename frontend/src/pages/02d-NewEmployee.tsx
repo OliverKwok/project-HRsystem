@@ -37,10 +37,10 @@ type FormState = {
   status: string;
   job_nature: string;
   // length_of_service: string;
-  notice_period: string;
+  notice_period: number;
   report_to: string;
 
-  al_leave_entitled_peryear: string;
+  al_leave_entitled_peryear: number;
   // AL_leave_taken: string;
   // AL_leave_balance: string;
   // sick_leave_taken: string;
@@ -98,10 +98,10 @@ export default function Employee() {
       status: "",
       job_nature: "",
       // length_of_service: "",
-      notice_period: "",
+      notice_period: 30,
       report_to: "",
 
-      al_leave_entitled_peryear: "",
+      al_leave_entitled_peryear: 0,
 
       pay_currency: "",
       basic_salary: "",
@@ -492,10 +492,15 @@ export default function Employee() {
           </div>
           <div>
             <div>
-              <span>Report To</span>
+              <span>
+                Report to*{" "}
+                {errors.report_to && (
+                  <span style={{ color: "red" }}>[Required]</span>
+                )}
+              </span>
             </div>
 
-            <input type="text" {...register("report_to")} />
+            <input type="text" {...register("report_to", { required: true })} />
           </div>
           <hr />
           <h2>Payment Detail</h2>
@@ -517,12 +522,29 @@ export default function Employee() {
 
               <input type="text" {...register("basic_salary")} />
             </div>
-            <div>
+            {/* <div>
               <div>
                 <span>Payment Method</span>
               </div>
 
               <select {...register("payment_method")}>
+                <option value="bank_transfer">Bank Transfer</option>
+                <option value="cheque">Cheque</option>
+                <option value="cash">Cash</option>
+                <option value="other">Other</option>
+              </select>
+            </div> */}
+            <div>
+              <div>
+                <span>
+                  Payment Method*{" "}
+                  {errors.payment_method && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
+              </div>
+
+              <select {...register("payment_method", { required: true })}>
                 <option value="bank_transfer">Bank Transfer</option>
                 <option value="cheque">Cheque</option>
                 <option value="cash">Cash</option>

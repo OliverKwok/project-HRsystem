@@ -26,7 +26,7 @@ export class TitleController {
   }
 
   @Post('create')
-  createTitle(@Body() createTitleDto: CreateTitleDto){
+  createTitle(@Body() createTitleDto: CreateTitleDto) {
     return this.titleService.createTitle(createTitleDto);
   }
 
