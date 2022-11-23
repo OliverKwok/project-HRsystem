@@ -19,11 +19,11 @@ export default function Title() {
       sortable: true,
     },
 
-    // {
-    //   name: "Grade",
-    //   selector: (row: any) => row.grade,
-    //   sortable: true,
-    // },
+    {
+      name: "Team",
+      selector: (row: any) => row.team,
+      sortable: true,
+    },
 
     {
       name: "Nature",
@@ -63,8 +63,9 @@ export default function Title() {
             id: employee.id,
             title: employee.title_name,
             department: employee.dept_name,
+            team: employee.team_name,
             nature: employee.job_nature,
-            employee: employee.first_name + ", " + employee.last_name,
+            employee: employee.last_name +", "+ employee.first_name,
             photo: (
               <img
                 className="title_employee_photo"
@@ -79,54 +80,6 @@ export default function Title() {
         setData(fetchData);
       });
   }, []);
-
-  // const data = [
-  //   {
-  //     id: 1,
-  //     title: "Admin Assistant",
-  //     department: "Administration",
-  //     grade: "E1",
-  //     nature: "temp",
-  //     employee: "Mary Lam",
-  //     photo: (
-  //       <img
-  //         className="title_employee_photo"
-  //         src="https://images.pexels.com/photos/3041768/pexels-photo-3041768.jpeg?cs=srgb&dl=pexels-danil-shostak-3041768.jpg&fm=jpg&_gl=1*hp5cao*_ga*MTE1NDk5Mjc2LjE2NjYwNjMzMzQ.*_ga_8JE65Q40S6*MTY2ODI1NTM1Ni4zLjEuMTY2ODI1NTM3MS4wLjAuMA.."
-  //       ></img>
-  //     ),
-  //     edit: <PopupEditTitle />,
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Finance Manager",
-  //     department: "Finance",
-  //     grade: "B2",
-  //     nature: "perm",
-  //     employee: "Peter Chan",
-  //     photo: (
-  //       <img
-  //         className="title_employee_photo"
-  //         src="https://images.pexels.com/photos/9758175/pexels-photo-9758175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-  //       ></img>
-  //     ),
-  //     edit: <PopupEditTitle />,
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Sales Officer",
-  //     department: "Sales",
-  //     grade: "C3",
-  //     nature: "contract",
-  //     employee: "Olivia Law",
-  //     photo: (
-  //       <img
-  //         className="title_employee_photo"
-  //         src="https://images.pexels.com/photos/14349266/pexels-photo-14349266.jpeg?auto=compress&cs=tinysrgb&w=600"
-  //       ></img>
-  //     ),
-  //     edit: <PopupEditTitle />,
-  //   },
-  // ];
 
   // pagination configuration
   const paginationComponentOptions = {

@@ -18,6 +18,7 @@ export class DepartmentService {
         ),
         'employee.id as employee_id',
         'title_name as title',
+        'profilepic',
       )
       .from('employee')
       .join('employee_role', 'employee.id', '=', 'employee_role.employeeid')
@@ -34,6 +35,7 @@ export class DepartmentService {
           `concat(employee.first_name, ' ', employee.last_name) as name`,
         ),
         'employee.id as employee_id',
+        'employee.profilepic',
       )
       .distinct('title_name as title')
       .from('employee')
@@ -76,6 +78,7 @@ export class DepartmentService {
           `concat(employee.first_name, ' ', employee.last_name) as name`,
         ),
         'employee.id as employee_id',
+        'employee.profilepic',
       )
       .distinct('title_name as title')
       .from('employee')

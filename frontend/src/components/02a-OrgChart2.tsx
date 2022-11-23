@@ -7,6 +7,7 @@ import "../styles/02a-OrgChart2.css";
 
 export default function OrgChart2() {
   const [selection, setSelection] = useState([]);
+  // const [myData, setMyData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -15,6 +16,72 @@ export default function OrgChart2() {
       );
       let result = await response.json();
       console.log(result);
+
+      // let myData = () => {
+      //   let resultArr: any =[];
+      //   for (let i=0; i<result.length; i++){
+      //     resultArr.push({
+      //       label:"",
+      //       className:"",
+      //       expanded:"",
+      //       data: "",
+      //       children:"",
+      //     });
+
+      //     resultArr[i].label = result.label,
+      //     resultArr[i].className = "p-person",
+      //     result.Arr[i].expanded = true,
+      //     result.Arr[i].data = {name: result.name, avatar: (
+      //                   <img
+      //                     src={process.env.PUBLIC_URL + result.profilepic}
+      //                     alt="image"
+      //                   />
+      //                 ),
+      //   }
+      //   result.Arr[i].children =
+      // }
+
+      //          label: result.title,
+      //               type: "person",
+      //               className: "p-person",
+      //               expanded: true,
+      //               data: {
+      //                 name: clevel.name,
+      //                 avatar: (
+      //                   <img
+      //                     src={process.env.PUBLIC_URL + clevel.profilepic}
+      //                     alt="image"
+      //                   />
+      //                 ),
+      //               },
+      //               children: createTree(),
+      //   })
+
+      // }
+
+      // let myData: any = function createTree() {
+      //   for (let i = 0; i < result.length; i++) {
+      //     result.map((clevel: any) => {
+      //       return {
+      //         label: clevel.title,
+      //         type: "person",
+      //         className: "p-person",
+      //         expanded: true,
+      //         data: {
+      //           name: clevel.name,
+      //           avatar: (
+      //             <img
+      //               src={process.env.PUBLIC_URL + clevel.profilepic}
+      //               alt="image"
+      //             />
+      //           ),
+      //         },
+      //         children: createTree(),
+      //       };
+      //     });
+      //   }
+      // };
+      // setMyData(myData);
     }
     fetchData();
   }, []);
@@ -114,11 +181,7 @@ export default function OrgChart2() {
           <div className="node-content">
             <img
               alt={node.data.avatar}
-              src={`images/organization/${node.data.avatar}`}
-              // onError={(e) =>
-              //   (e.target.src =
-              //     "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")
-              // }
+              src={`{process.env.PUBLIC_URL/${node.data.avatar}`}
               style={{ width: "32px" }}
             />
             <div>{node.data.name}</div>
