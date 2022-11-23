@@ -73,8 +73,8 @@ export class CreateUserDto {
   @IsNotEmpty()
   start_date: Date;
 
-  @MinLength(0)
-  status: string;
+  // @MinLength(0)
+  // status: string;
 
   // @MinLength(0)
   // job_nature: string;
@@ -82,36 +82,36 @@ export class CreateUserDto {
   @IsNotEmpty()
   notice_period: number;
 
-  // @MinLength(0)
-  // report_to: number;
+  @MinLength(0)
+  report_to: number;
 
-  // @MinLength(0)
-  // al_leave_entitled_peryear: number;
+  @IsNotEmpty()
+  al_leave_entitled_peryear: number;
 
-  // @IsNotEmpty()
-  // pay_currency: string;
+  @IsNotEmpty()
+  pay_currency: string;
 
-  // @IsNotEmpty()
-  // basic_salary: number;
+  @IsNotEmpty()
+  basic_salary: number;
 
-  // @MinLength(0)
-  // payment_method: string;
+  @MinLength(0)
+  payment_method: string;
 
-  // @MinLength(0)
-  // home_address: string;
+  @MinLength(0)
+  home_address: string;
 
-  // @MinLength(0)
-  // bank_code: string;
+  @MinLength(0)
+  bank_code: string;
 
-  // @MinLength(0)
-  // bank_name: string;
+  @MinLength(0)
+  bank_name: string;
 
-  // @MinLength(0)
-  // bank_number: string;
+  @MinLength(0)
+  bank_number: string;
 
-  // @MinLength(0)
-  // bank_payee: string;
+  @MinLength(0)
+  bank_payee: string;
 
-  // @MinLength(0)
-  // payment_remark: string;
+  @MinLength(0)
+  payment_remark: string;
 }
