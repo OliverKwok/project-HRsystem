@@ -35,14 +35,14 @@ export default function PopupAddTitle() {
   // submit form to add title
 
   const [title, setTitle] = useState("");
-  const [department, setDepartment] = useState("");
+  const [department, setDepartment] = useState("Management");
 
   async function addTitleHandler(event: any) {
     event.preventDefault();
-    console.log({
-      title_name: title,
-      dept: department,
-    });
+    // console.log({
+    //   title_name: title,
+    //   dept: department,
+    // });
 
     const requestOptions = {
       method: "POST",
@@ -57,8 +57,10 @@ export default function PopupAddTitle() {
       requestOptions
     );
     const jsonData = await res.json();
-    // return jsonData;
     console.log(jsonData);
+
+    closePopup();
+    setTitle("");
   }
 
   return (
