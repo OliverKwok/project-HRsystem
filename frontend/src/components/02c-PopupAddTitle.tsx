@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { setUMLActivityDefaults } from "@syncfusion/ej2-react-diagrams";
+import { useState, useEffect, SyntheticEvent } from "react";
 // import Popup from "reactjs-popup";
 // import "reactjs-popup/dist/index.css";
 import "../styles/02a-Popup.css";
 
 export default function PopupAddTitle() {
-// open and close popup
+  // open and close popup
   const [popup, setPopup] = useState(false);
   const openPopup = () => {
     setPopup(!popup);
@@ -13,7 +14,7 @@ export default function PopupAddTitle() {
     setPopup(false);
   };
 
-// department dropdown
+  // department dropdown
   let [dept, setDept] = useState([]);
 
   // let handleDeptDropdown = (e: any) => {
@@ -36,15 +37,26 @@ export default function PopupAddTitle() {
       });
   }, []);
 
-// submit form to add title
-  async function addTitleHandler(event: any){
+  // submit form to add title
+
+  const [title, setTitle] = useState("");
+  const [department, setDepartment] = useState("");
+
+  async function addTitleHandler(event: any) {
     event.preventDefault();
-    const requestOptions ={
-      method:"POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(event.target.value),
-    }
-    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/title/create`, requestOptions);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      // body: JSON.stringify(event.target.value),
+      body: JSON.stringify({
+        title_name: title,
+        dept: department,
+      }),
+    };
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/title/create`,
+      requestOptions
+    );
     const jsonData = await res.json();
   }
 
@@ -53,6 +65,7 @@ export default function PopupAddTitle() {
       <button className="addtitleBtn" onClick={openPopup}>
         Add New Title
       </button>
+
       {popup && (
         <div className="popupBody">
           <div className="popupHeader">
@@ -63,11 +76,18 @@ export default function PopupAddTitle() {
           </div>
           <form onSubmit={addTitleHandler}>
             <p>
-              Title Name: <input type="text"></input>{" "}
+              Title Name:{" "}
+              <input
+                type="text"
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+              ></input>{" "}
             </p>
             <p>
               Department:
-              <select>
+              <select
+                onChange={(event: any) => setDepartment(event.option.value)}
+              >
                 {dept.length > 0 &&
                   dept.map((dept) => (
                     <option value={dept["dept_name"]}>
@@ -76,7 +96,7 @@ export default function PopupAddTitle() {
                   ))}
               </select>
             </p>
-            <button type="submit" >Add</button>
+            <button type="submit">Add</button>
           </form>
         </div>
       )}
