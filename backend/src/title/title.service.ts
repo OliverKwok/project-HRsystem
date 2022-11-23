@@ -2,6 +2,7 @@ import { HttpException, Injectable, HttpStatus } from '@nestjs/common';
 import { CreateTitleDto } from './dto/create-title.dto';
 import { UpdateTitleDto } from './dto/update-title.dto';
 import { InjectKnex, Knex } from 'nestjs-knex';
+import { identity } from 'rxjs';
 
 @Injectable()
 export class TitleService {
@@ -32,6 +33,25 @@ export class TitleService {
     }
   }
 
+  async createTitle(createTitleDto: CreateTitleDto) {
+    console.log(createTitleDto);
+    try {
+      const find_dept_id = await this.knex.raw(
+        `select id from Department where dept_name = '${createTitleDto.dept}'`,
+      );
+      const dept_id_to_insert = find_dept_id.rows[0].json;
+      console.log(dept_id_to_insert);
+
+      const newTitle = await this.knex.table('title').insert({
+        title_name: createTitleDto.title_name,
+        dept: dept_id_to_insert,
+        // TODO returning id of department string
+      });
+      return { newTitle };
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
 
   // create(createTitleDto: CreateTitleDto) {
   //   return 'This action adds a new title';

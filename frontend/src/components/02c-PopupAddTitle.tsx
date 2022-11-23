@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import "../styles/02a-Popup.css";
 
 export default function PopupAddTitle() {
+// open and close popup
   const [popup, setPopup] = useState(false);
   const openPopup = () => {
     setPopup(!popup);
@@ -12,6 +13,7 @@ export default function PopupAddTitle() {
     setPopup(false);
   };
 
+// department dropdown
   let [dept, setDept] = useState([]);
 
   // let handleDeptDropdown = (e: any) => {
@@ -34,6 +36,18 @@ export default function PopupAddTitle() {
       });
   }, []);
 
+// submit form to add title
+  async function addTitleHandler(event: any){
+    event.preventDefault();
+    const requestOptions ={
+      method:"POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(event),
+    }
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/title/create`, requestOptions);
+    const jsonData = await res.json();
+  }
+
   return (
     <div>
       <button className="addtitleBtn" onClick={openPopup}>
@@ -47,7 +61,7 @@ export default function PopupAddTitle() {
               X
             </h2>
           </div>
-          <form>
+          <form onSubmit={addTitleHandler}>
             <p>
               Title Name: <input type="text"></input>{" "}
             </p>
@@ -62,7 +76,7 @@ export default function PopupAddTitle() {
                   ))}
               </select>
             </p>
-            <button type="submit">Add</button>
+            <button type="submit" >Add</button>
           </form>
         </div>
       )}
