@@ -18,7 +18,7 @@ export default function PopupEditTitle() {
         Edit
       </button>
       {popup && (
-        <div className="popupBody">
+        <div className="popupBody_editTitle">
           <div className="popupHeader">
             <h2>Edit Title</h2>
             <h2 onClick={closePopup} className="closeBtn">
@@ -27,13 +27,10 @@ export default function PopupEditTitle() {
           </div>
           <form>
             <p>
-              Name: <input type="text"></input>{" "}
+              Name: <input type="text"></input>
             </p>
             <p>
               Department: <input type="text"></input>
-            </p>
-            <p>
-              Grade: <input type="text"></input>
             </p>
 
             <button type="submit">Save</button>

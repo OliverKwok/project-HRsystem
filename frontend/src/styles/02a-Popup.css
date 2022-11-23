@@ -41,6 +41,17 @@
   flex-direction: row;
 }
 
+.popupBody_editTitle{
+  height: 400px;
+  width: 300%;
+  background-color: rgb(238, 254, 255);
+  position: absolute;
+  left: -400%;
+  top: 5%;
+  padding: 20px;
+  z-index: 200;
+}
+
 /* .modal {
   font-size: 12px;
 }

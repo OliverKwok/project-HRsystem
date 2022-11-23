@@ -12,6 +12,7 @@ import * as bcrypt from 'bcrypt';
 @Injectable({})
 export class UserService {
   constructor(@InjectKnex() private readonly knex: Knex) {}
+
   async createUser(createUserDto: CreateUserDto) {
     console.log(createUserDto);
     try {
