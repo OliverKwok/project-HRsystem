@@ -75,16 +75,14 @@ export async function up(knex: Knex): Promise<void> {
     // system permission
     // table.integer('permission').references('permission.id');
   });
-
   await knex.schema.createTable('title', (table) => {
     table.increments('id');
     table.string('title_name');
-    table.integer('dept').references('department.id');
+    table.string('dept');
     // table.integer('grade_id').references('grade.id');
     table.string('office_hour_start');
     table.string('office_hour_end');
   });
-
   // company structure: department, team, grade, title
   await knex.schema.createTable('department', (table) => {
     table.increments('id');

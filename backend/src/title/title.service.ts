@@ -36,16 +36,15 @@ export class TitleService {
   async createTitle(createTitleDto: CreateTitleDto) {
     console.log(createTitleDto);
     try {
-      const find_dept_id = await this.knex.raw(
-        `select id from Department where dept_name = '${createTitleDto.dept}'`,
-      );
-      const dept_id_to_insert = find_dept_id.rows[0].json;
-      console.log(dept_id_to_insert);
+      // const find_dept_id = await this.knex.raw(
+      //   `select id from Department where dept_name = '${createTitleDto.dept}'`,
+      // );
+      // const dept_id_to_insert = find_dept_id.rows[0].json;
+      // console.log(dept_id_to_insert);
 
       const newTitle = await this.knex.table('title').insert({
         title_name: createTitleDto.title_name,
-        dept: dept_id_to_insert,
-        // TODO returning id of department string
+        dept: createTitleDto.dept,
       });
       return { newTitle };
     } catch (err) {

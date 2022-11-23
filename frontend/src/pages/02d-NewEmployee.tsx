@@ -11,6 +11,7 @@ type FormState = {
   chinese_name: string;
   alias: string;
   hkid: string;
+  passport: string;
   gender: string;
   nationality: string;
   date_of_birth: Date;
@@ -39,7 +40,7 @@ type FormState = {
   notice_period: string;
   report_to: string;
 
-  AL_leave_entitled: string;
+  al_leave_entitled_peryear: string;
   // AL_leave_taken: string;
   // AL_leave_balance: string;
   // sick_leave_taken: string;
@@ -72,6 +73,7 @@ export default function Employee() {
       chinese_name: "",
       alias: "",
       hkid: "",
+      passport: "",
       gender: "",
       nationality: "",
       date_of_birth: new Date(),
@@ -99,7 +101,7 @@ export default function Employee() {
       notice_period: "",
       report_to: "",
 
-      AL_leave_entitled: "",
+      al_leave_entitled_peryear: "",
 
       pay_currency: "",
       basic_salary: "",
@@ -114,7 +116,7 @@ export default function Employee() {
   });
 
   const [age, setAge] = useState("0");
-  const [employeeid, setEmployeeid] = useState("DEMO");
+  const [employeeid, setEmployeeid] = useState("");
   const profilepic = watch("profilepic");
   const [previewSrc, setpreviewSrc] = useState("");
 
@@ -139,8 +141,8 @@ export default function Employee() {
     } else {
       throw new Error();
     }
-
     setEmployeeid(newEmployeeid);
+    setValue("employeeid", newEmployeeid);
   }
 
   useEffect(() => {
@@ -150,7 +152,7 @@ export default function Employee() {
   // monitor every step
   useEffect(() => {
     let sub = watch((data) => {
-      // console.log("update form data:", data);
+      console.log("update form data:", data);
       // console.log(data.date_of_birth);
     });
     return () => sub.unsubscribe();
@@ -169,7 +171,7 @@ export default function Employee() {
 
   // submit
   async function submit(data: FormState) {
-    // console.log("submit form data:", data);
+    console.log("submit form data:", data);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -206,9 +208,8 @@ export default function Employee() {
           <div className="five-column-grid">
             <div>
               <div>
-                <span>Employee id</span>
+                <span>Employee ID*</span>
               </div>
-              {/* <input type="text" {...register("employeeid")} /> */}
               <input
                 value={employeeid}
                 type="text"
@@ -262,7 +263,7 @@ export default function Employee() {
             <div>
               <div>
                 <span>
-                  HKID{" "}
+                  HKID*{" "}
                   {errors.hkid && (
                     <span style={{ color: "red" }}>[Wrong format]</span>
                   )}
@@ -281,25 +282,31 @@ export default function Employee() {
                 </span>
               </div>
             </div>
+            <div>
+              <div>
+                <span>Passport Number</span>
+              </div>
+
+              <input type="text" {...register("passport")} />
+            </div>
 
             <div>
               <div>
-                <span>Gender</span>
+                <span>Gender*</span>
               </div>
 
               <select {...register("gender")}>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
               </select>
             </div>
 
             <div>
               <div>
-                <span>Nationality</span>
+                <span>Nationality*</span>
               </div>
 
               <select {...register("nationality")}>
-                <option value=""></option>
                 <option value="Hong Kong">Hong Kong</option>
                 <option value="China">China</option>
                 <option value="UK">UK</option>
@@ -309,7 +316,7 @@ export default function Employee() {
 
             <div>
               <div>
-                <span>Date of Birth</span>
+                <span>Date of Birth*</span>
               </div>
 
               <input
@@ -332,14 +339,14 @@ export default function Employee() {
           <div className="five-column-grid">
             <div>
               <div>
-                <span>Country Code</span>
+                <span>Country Code*</span>
               </div>
 
               <input type="text" {...register("mobile_countrycode")} />
             </div>
             <div>
               <div>
-                <span>Mobile No</span>
+                <span>Mobile No*</span>
               </div>
 
               <input type="text" {...register("mobile_no")} />
@@ -353,17 +360,39 @@ export default function Employee() {
             </div>
             <div>
               <div>
-                <span>Personal Email</span>
+                <span>
+                  Personal Email*{" "}
+                  {errors.email_personal && (
+                    <span style={{ color: "red" }}>[Wrong format]</span>
+                  )}
+                </span>
               </div>
 
-              <input type="text" {...register("email_personal")} />
+              <input
+                type="text"
+                {...register("email_personal", {
+                  pattern:
+                    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
+                })}
+              />
             </div>
             <div>
               <div>
-                <span>Work Email</span>
+                <span>
+                  Work Email*{" "}
+                  {errors.email_work && (
+                    <span style={{ color: "red" }}>[Wrong format]</span>
+                  )}
+                </span>
               </div>
 
-              <input type="text" {...register("email_work")} />
+              <input
+                type="text"
+                {...register("email_work", {
+                  pattern:
+                    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
+                })}
+              />
             </div>
           </div>
           <hr />
@@ -412,74 +441,78 @@ export default function Employee() {
           <div className="five-column-grid">
             <div>
               <div>
-                <span>Start Time</span>
+                <span>Start Date*</span>
               </div>
 
-              <input type="text" {...register("start_date")} />
+              <input type="date" {...register("start_date")} />
             </div>
-            <div>
-              <div>
-                <span>Probation Period</span>
-              </div>
 
-              <input type="text" {...register("have_probation")} />
-            </div>
-            <div>
-              <div>
-                <span>Probation Status</span>
-              </div>
-
-              <input type="text" {...register("pass_probation")} />
-            </div>
             <div>
               <div>
                 <span>Job Status</span>
               </div>
 
-              <input type="text" {...register("status")} />
+              <select {...register("status")}>
+                <option value="probation">Probation</option>
+                <option value="perm">Permanent</option>
+                <option value="contract">Contract</option>
+                <option value="terminated">Terminated</option>
+                <option value="resigned">Resigned</option>
+                <option value="retired">Retired</option>
+                <option value="other">Other</option>
+              </select>
             </div>
             <div>
               <div>
                 <span>Job Nature</span>
               </div>
 
-              <input type="text" {...register("job_nature")} />
+              <select {...register("job_nature")}>
+                <option value="full_time">Full Time</option>
+                <option value="part_time">Part Time</option>
+                <option value="temp">Temporary</option>
+                <option value="intern">Intern</option>
+                <option value="other">Other</option>
+              </select>
             </div>
             <div>
               <div>
-                <span>Notice Period</span>
+                <span>Notice Period* (Days)</span>
               </div>
-
               <input type="text" {...register("notice_period")} />
             </div>
+
             <div>
               <div>
-                <span>Report To</span>
+                <span>AL Entitle / Year</span>
               </div>
 
-              <input type="text" {...register("report_to")} />
-            </div>
-            <div>
-              <div>
-                <span>Annual Leave</span>
-              </div>
-
-              <input type="text" {...register("AL_leave_entitled")} />
+              <input type="text" {...register("al_leave_entitled_peryear")} />
             </div>
           </div>
+          <div>
+            <div>
+              <span>Report To</span>
+            </div>
+
+            <input type="text" {...register("report_to")} />
+          </div>
           <hr />
-          <h2>Employment Detail</h2>
+          <h2>Payment Detail</h2>
           <div className="five-column-grid">
             <div>
               <div>
-                <span>Salary Currency</span>
+                <span>Salary Currency*</span>
               </div>
-
-              <input type="text" {...register("pay_currency")} />
+              <select {...register("pay_currency")}>
+                <option value="HKD" selected>
+                  HKD
+                </option>
+              </select>
             </div>
             <div>
               <div>
-                <span>Basic Salary</span>
+                <span>Basic Salary*</span>
               </div>
 
               <input type="text" {...register("basic_salary")} />
@@ -489,7 +522,12 @@ export default function Employee() {
                 <span>Payment Method</span>
               </div>
 
-              <input type="text" {...register("payment_method")} />
+              <select {...register("payment_method")}>
+                <option value="bank_transfer">Bank Transfer</option>
+                <option value="cheque">Cheque</option>
+                <option value="cash">Cash</option>
+                <option value="other">Other</option>
+              </select>
             </div>
             <div>
               <div>

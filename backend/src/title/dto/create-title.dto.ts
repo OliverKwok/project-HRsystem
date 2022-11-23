@@ -1,4 +1,8 @@
+import { IsNotEmpty } from 'class-validator';
+
 export class CreateTitleDto {
-    title_name: string;
-    dept: string;
+  @IsNotEmpty()
+  title_name: string;
+  @IsNotEmpty()
+  dept: string;
 }

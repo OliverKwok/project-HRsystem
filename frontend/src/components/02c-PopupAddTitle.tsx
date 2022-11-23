@@ -42,7 +42,7 @@ export default function PopupAddTitle() {
     const requestOptions ={
       method:"POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(event),
+      body: JSON.stringify(event.target.value),
     }
     const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/title/create`, requestOptions);
     const jsonData = await res.json();

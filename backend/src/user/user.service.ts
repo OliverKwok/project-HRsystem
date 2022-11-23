@@ -19,7 +19,21 @@ export class UserService {
       const newEmployee = await this.knex.table('employee').insert({
         employeeid: createUserDto.employeeid,
         first_name: createUserDto.first_name,
-        // last_Name: createUserDto.last_name,
+        last_name: createUserDto.last_name,
+        hkid: createUserDto.hkid,
+        gender: createUserDto.gender,
+        nationality: createUserDto.nationality,
+        date_of_birth: createUserDto.date_of_birth,
+        mobile_countrycode: createUserDto.mobile_countrycode,
+        mobile_no: createUserDto.mobile_no,
+        email_personal: createUserDto.email_personal,
+        email_work: createUserDto.email_work,
+        // password: createUserDto.password,
+
+        start_date: createUserDto.start_date,
+        notice_period: createUserDto.notice_period,
+        pay_currency: createUserDto.pay_currency,
+        basic_salary: createUserDto.basic_salary,
       });
 
       return { newEmployee };
@@ -38,9 +52,9 @@ export class UserService {
 
   async userCount() {
     try {
-      const res = await this.knex('employee').max('id as maxId').first();
-      const maxId = res.maxId;
-      return { maxId };
+      const res = await this.knex('employee').max('id as maxid').first();
+      const maxid = res.maxid;
+      return { maxid };
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }

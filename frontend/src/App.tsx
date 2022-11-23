@@ -16,7 +16,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 
 import Dashboard from "./pages/01-Dashboard";
 import Organization from "./pages/02a-Organization";
-import Employee from "./pages/02d-Employee";
+import Employee from "./pages/02d-NewEmployee";
 // import Grade from "./pages/02b-Grade";
 import Title from "./pages/02c-Title";
 import StatusUpdate from "./pages/02e-StatusUpdate";
@@ -120,7 +120,7 @@ function App() {
                 </NavLink>
                 <NavLink className="sub-item" to={"employee"}>
                   <div>
-                    <MdOutlinePeopleAlt /> <span>employee</span>
+                    <MdOutlinePeopleAlt /> <span>new employee</span>
                   </div>
                 </NavLink>
                 <NavLink className="sub-item" to={"statusupdate"}>
