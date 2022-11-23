@@ -7,8 +7,8 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Post('create')
-  // @UsePipes(ValidationPipe)
   createUser(@Body() createUserDto: CreateUserDto) {
+    console.log(Body());
     return this.userService.createUser(createUserDto);
   }
 
