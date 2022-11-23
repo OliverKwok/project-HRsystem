@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { OrganizationChart } from "primereact/organizationchart";
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
@@ -7,6 +7,17 @@ import "../styles/02a-OrgChart2.css";
 
 export default function OrgChart2() {
   const [selection, setSelection] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      let response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/department/orgchart`
+      );
+      let result = await response.json();
+      console.log(result);
+    }
+    fetchData();
+  }, []);
 
   const data = [
     {
