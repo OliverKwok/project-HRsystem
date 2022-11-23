@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import Popup from "reactjs-popup";
 // import "reactjs-popup/dist/index.css";
 import "../styles/02a-Popup.css";
@@ -11,6 +11,28 @@ export default function PopupAddTitle() {
   const closePopup = () => {
     setPopup(false);
   };
+
+  let [dept, setDept] = useState([]);
+
+  // let handleDeptDropdown = (e: any) => {
+  //   setDept(e.target.value);
+  //   console.log(e.target.value);
+  // };
+
+  const requestOptions = {
+    method: "Get",
+  };
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/title/getdept`, requestOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setDept(data);
+      });
+  }, []);
 
   return (
     <div>
@@ -27,16 +49,20 @@ export default function PopupAddTitle() {
           </div>
           <form>
             <p>
-              Name: <input type="text"></input>{" "}
+              Title Name: <input type="text"></input>{" "}
             </p>
             <p>
-              Department: <input type="text"></input>
+              Department:
+              <select>
+                {dept.length > 0 &&
+                  dept.map((dept) => (
+                    <option value={dept["dept_name"]}>
+                      {dept["dept_name"]}
+                    </option>
+                  ))}
+              </select>
             </p>
-            <p>
-              Grade: <input type="text"></input>
-            </p>
-
-            <button type="submit">Save</button>
+            <button type="submit">Add</button>
           </form>
         </div>
       )}

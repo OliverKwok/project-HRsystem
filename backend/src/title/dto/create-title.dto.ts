@@ -1,1 +1,6 @@
-export class CreateTitleDto {}
+export class CreateTitleDto {
+    title_name: string;
+    
+
+
+}

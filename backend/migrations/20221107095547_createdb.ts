@@ -79,6 +79,7 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('title', (table) => {
     table.increments('id');
     table.string('title_name');
+    table.integer('dept').references('department.id');
     // table.integer('grade_id').references('grade.id');
     table.string('office_hour_start');
     table.string('office_hour_end');

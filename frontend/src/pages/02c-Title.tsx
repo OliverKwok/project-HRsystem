@@ -80,14 +80,6 @@ export default function Title() {
       });
   }, []);
 
-  // console.log(setData);
-
-  //       data = fetchTitles;
-  //     });
-  //   return data;
-  // }
-  // fetchData();
-
   // const data = [
   //   {
   //     id: 1,
@@ -188,7 +180,7 @@ export default function Title() {
           title="Titles"
           columns={columns}
           data={filteredItems}
-          // striped
+          striped
           pagination
           paginationComponentOptions={paginationComponentOptions}
           subHeader
