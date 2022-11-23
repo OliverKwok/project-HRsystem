@@ -37,7 +37,7 @@ type FormState = {
   status: string;
   job_nature: string;
   // length_of_service: string;
-  notice_period: string;
+  notice_period: number;
   report_to: string;
 
   al_leave_entitled_peryear: string;
@@ -98,7 +98,7 @@ export default function Employee() {
       status: "",
       job_nature: "",
       // length_of_service: "",
-      notice_period: "",
+      notice_period: 30,
       report_to: "",
 
       al_leave_entitled_peryear: "",
