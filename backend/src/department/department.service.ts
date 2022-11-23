@@ -123,7 +123,9 @@ export class DepartmentService {
 
       let departments = await this.getDepartments(managers);
       result['children'].forEach((chief) => {
-        chief['children'] = departments.filter((department) => department);
+        chief['children'] = departments.filter(
+          (department) => department.managed_by === chief.employee_id,
+        );
       });
 
       return result;

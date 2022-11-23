@@ -16,7 +16,7 @@ export async function seed(knex: Knex): Promise<void> {
   await seedRow('department', {
     dept_name: 'Management',
     head_of_dept: 1,
-    managed_by: 2,
+    managed_by: 1,
   });
   await seedRow('department', { dept_name: 'Administration', managed_by: 2 });
   await seedRow('department', { dept_name: 'Operation', managed_by: 2 });
