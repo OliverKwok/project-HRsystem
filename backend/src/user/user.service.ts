@@ -27,6 +27,7 @@ export class UserService {
         gender: createUserDto.gender,
         nationality: createUserDto.nationality,
         date_of_birth: createUserDto.date_of_birth,
+        // change to date format when use formData
         // profilepic: createUserDto.profilepic,
         mobile_countrycode: createUserDto.mobile_countrycode,
         mobile_no: createUserDto.mobile_no,
@@ -40,11 +41,14 @@ export class UserService {
         last_job_company: createUserDto.last_job_company,
         last_job_title: createUserDto.last_job_title,
         start_date: createUserDto.start_date,
+        // change to date format when use formData
         // status: createUserDto.status,
         // job_nature: createUserDto.job_nature,
         notice_period: createUserDto.notice_period,
+        // change to number format when use formData
         report_to: createUserDto.report_to,
         al_leave_entitled_peryear: createUserDto.al_leave_entitled_peryear,
+        // change to number format when use formData
         pay_currency: createUserDto.pay_currency,
         basic_salary: createUserDto.basic_salary,
         payment_method: createUserDto.payment_method,
