@@ -65,7 +65,7 @@ export default function Title() {
             department: employee.dept_name,
             team: employee.team_name,
             nature: employee.job_nature,
-            employee: employee.last_name +", "+ employee.first_name,
+            employee: employee.last_name + ", " + employee.first_name,
             photo: (
               <img
                 className="title_employee_photo"
@@ -73,7 +73,12 @@ export default function Title() {
                 alt="image"
               />
             ),
-            edit: <PopupEditTitle />,
+            edit: (
+              <PopupEditTitle
+                employeeTitle={employee.title_name}
+                employeeDepartment={employee.dept_name}
+              />
+            ),
           };
         });
         // console.log(fetchData);

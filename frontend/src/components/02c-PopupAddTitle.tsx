@@ -12,6 +12,7 @@ export default function PopupAddTitle() {
   };
   const closePopup = () => {
     setPopup(false);
+    setTitle("");
   };
 
   // department dropdown
@@ -60,7 +61,7 @@ export default function PopupAddTitle() {
     console.log(jsonData);
 
     closePopup();
-    setTitle("");
+    // setTitle("");
   }
 
   return (
