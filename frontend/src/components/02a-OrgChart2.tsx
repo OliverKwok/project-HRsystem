@@ -118,7 +118,7 @@ export default function OrgChart2() {
           <div className="node-content">
             <img
               alt={node.data.avatar}
-              src={`{process.env.PUBLIC_URL}`+ `${node.data.avatar}`}
+              src={process.env.PUBLIC_URL+ node.data.avatar}
               style={{ width: "32px" }}
             />
             <div>{node.data.name}</div>
