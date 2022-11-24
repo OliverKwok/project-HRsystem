@@ -6,23 +6,18 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import moment from "moment";
 moment().format();
 
-const initialEvent2: state[] = [
-  {
-    id: "1",
-    title: "Oliver Birthday",
-    start: "2022-11-25",
-  },
-];
 interface state {
   id: string;
   title: string;
   start: string;
+  backgroundColor: string;
+  borderColor: string;
 }
 export default function Calendar() {
   // const [weekendsVisible, setWeekendsVisible] = useState(true);
   // const [currentEvents, setCurrentEvents] = useState([]);
   const [initialEvent, setInitialEvent] = useState<state[]>([
-    { id: "", title: "", start: "" },
+    { id: "", title: "", start: "", backgroundColor: "", borderColor: "" },
   ]);
   // const [test, setTest] = useState("");
 
@@ -46,7 +41,9 @@ export default function Calendar() {
 
         item["id"] = i.toString();
         item["start"] = birthdayShown;
-        item["title"] = "Birthday of " + item["title"];
+        item["title"] = "Birthday: " + item["title"];
+        item["backgroundColor"] = "#0EB3B3";
+        item["borderColor"] = "#0EB3B3";
         i++;
       }
 
@@ -127,13 +124,13 @@ export default function Calendar() {
 //   }
 // }
 
-function renderEventContent(eventInfo: any) {
-  return (
-    <>
-      <div>"sss"</div>
-    </>
-  );
-}
+// function renderEventContent(eventInfo: any) {
+//   return (
+//     <>
+//       <div>"sss"</div>
+//     </>
+//   );
+// }
 
 // function renderSidebarEvent(event: any) {
 //   return (

@@ -86,7 +86,7 @@ export class UserService {
   async dayShowCalendar() {
     try {
       const res = await this.knex.raw(
-        `select concat(employee.first_name,' ',employee.last_name,', ',employee.alias) as title, date_of_birth as start from employee where date_of_birth is not null`,
+        `select concat(employee.alias,' ',employee.last_name) as title, date_of_birth as start from employee where date_of_birth is not null`,
       );
       const birthdays = res.rows;
 
