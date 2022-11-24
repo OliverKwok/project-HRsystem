@@ -1,16 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import { INITIAL_EVENTS, createEventId } from "./01-eventSetting";
+// import { INITIAL_EVENTS, createEventId } from "./01-eventSetting";
 
-export default class Calendar extends React.Component {
-  state = {
-    weekendsVisible: true,
-    currentEvents: [],
-  };
+import moment from "moment";
+moment().format();
 
-  render() {
-    return (
+const initialEvent2: state[] = [
+  {
+    id: "1",
+    title: "Oliver Birthday",
+    start: "2022-11-25",
+  },
+];
+interface state {
+  id: string;
+  title: string;
+  start: string;
+}
+export default function Calendar() {
+  // const [weekendsVisible, setWeekendsVisible] = useState(true);
+  // const [currentEvents, setCurrentEvents] = useState([]);
+  const [initialEvent, setInitialEvent] = useState<state[]>([
+    { id: "", title: "", start: "" },
+  ]);
+  // const [test, setTest] = useState("");
+
+  useEffect(() => {
+    async function checkDayShowCalendar() {
+      const requestOptions = {
+        method: "Get",
+      };
+
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/dayShowCalendar`,
+        requestOptions
+      );
+      const response = await res.json();
+
+      let i = 1;
+      for (let item of response) {
+        let orginalBirthday = moment(item["start"]).format("YYYY-MM-DD");
+        let birthdayShown =
+          moment(new Date()).format("YYYY") + orginalBirthday.substring(4);
+
+        item["id"] = i.toString();
+        item["start"] = birthdayShown;
+        item["title"] = "Birthday of " + item["title"];
+        i++;
+      }
+
+      console.log(initialEvent);
+      console.log(response);
+      setInitialEvent(response);
+    }
+    async function main() {
+      await checkDayShowCalendar();
+    }
+    main();
+  }, []);
+
+  return (
+    <>
       <div className="calendar-container">
         <div className="calendar-main">
           <FullCalendar
@@ -25,45 +76,76 @@ export default class Calendar extends React.Component {
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            eventContent={renderEventContent} // custom render function
+            events={initialEvent} // alternatively, use the `events` setting to fetch from a feed
+            // eventContent={renderEventContent} // custom render function
           />
         </div>
-        <div className="calendar-info">{this.renderInfoBox()}</div>
+        {/* <div className="calendar-info">{this.renderInfoBox()}</div> */}
       </div>
-    );
-  }
-
-  renderInfoBox() {
-    return (
-      <div className="calendar-sidebar">
-        <h2>All Events ({this.state.currentEvents.length})</h2>
-        <ul>{this.state.currentEvents.map(renderSidebarEvent)}</ul>
-      </div>
-    );
-  }
-}
-
-function renderEventContent(eventInfo: any) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
     </>
   );
 }
 
-function renderSidebarEvent(event: any) {
+// export class Calendar2 extends React.Component {
+//   state = {
+//     weekendsVisible: true,
+//     currentEvents: [],
+//   };
+
+//   render() {
+//     return (
+//       <div className="calendar-container">
+//         <div className="calendar-main">
+//           <FullCalendar
+//             plugins={[dayGridPlugin]}
+//             headerToolbar={{
+//               left: "prev,next today",
+//               center: "title",
+//               right: "dayGridMonth",
+//             }}
+//             initialView="dayGridMonth"
+//             editable={false} // disable drag and drop
+//             selectable={true}
+//             selectMirror={true}
+//             dayMaxEvents={true}
+//             initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+//             eventContent={renderEventContent} // custom render function
+//           />
+//         </div>
+//         <div className="calendar-info">{this.renderInfoBox()}</div>
+//       </div>
+//     );
+//   }
+
+//   renderInfoBox() {
+//     return (
+//       <div className="calendar-sidebar">
+//         <h2>All Events ({this.state.currentEvents.length})</h2>
+//         <ul>{this.state.currentEvents.map(renderSidebarEvent)}</ul>
+//       </div>
+//     );
+//   }
+// }
+
+function renderEventContent(eventInfo: any) {
   return (
-    <li key={event.id}>
-      <b>
-        {formatDate(event.start, {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })}
-      </b>
-      <i> {event.title}</i>
-    </li>
+    <>
+      <div>"sss"</div>
+    </>
   );
 }
+
+// function renderSidebarEvent(event: any) {
+//   return (
+//     <li key={event.id}>
+//       <b>
+//         {formatDate(event.start, {
+//           year: "numeric",
+//           month: "short",
+//           day: "numeric",
+//         })}
+//       </b>
+//       <i> {event.title}</i>
+//     </li>
+//   );
+// }
