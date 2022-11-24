@@ -27,6 +27,7 @@ export class UserService {
         gender: createUserDto.gender,
         nationality: createUserDto.nationality,
         date_of_birth: createUserDto.date_of_birth,
+        // change to date format when use formData
         // profilepic: createUserDto.profilepic,
         mobile_countrycode: createUserDto.mobile_countrycode,
         mobile_no: createUserDto.mobile_no,
@@ -40,11 +41,14 @@ export class UserService {
         last_job_company: createUserDto.last_job_company,
         last_job_title: createUserDto.last_job_title,
         start_date: createUserDto.start_date,
+        // change to date format when use formData
         // status: createUserDto.status,
         // job_nature: createUserDto.job_nature,
         notice_period: createUserDto.notice_period,
+        // change to number format when use formData
         report_to: createUserDto.report_to,
         al_leave_entitled_peryear: createUserDto.al_leave_entitled_peryear,
+        // change to number format when use formData
         pay_currency: createUserDto.pay_currency,
         basic_salary: createUserDto.basic_salary,
         payment_method: createUserDto.payment_method,
@@ -75,6 +79,18 @@ export class UserService {
       const res = await this.knex('employee').max('id as maxid').first();
       const maxid = res.maxid;
       return { maxid };
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+  async dayShowCalendar() {
+    try {
+      const res = await this.knex.raw(
+        `select concat(employee.first_name,' ',employee.last_name,', ',employee.alias) as title, date_of_birth as start from employee where date_of_birth is not null`,
+      );
+      const birthdays = res.rows;
+
+      return birthdays;
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }

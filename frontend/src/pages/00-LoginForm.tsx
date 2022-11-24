@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../store";
 import { login, restoreLogin } from "../redux/auth/actions";
 import "../styles/00-LoginForm.css";
 
-function LoginForm() {
+export default function LoginForm() {
   const { handleSubmit, register } = useForm();
   const dispatch = useAppDispatch();
+  const [showLogin, setShowLogin] = useState(false);
+
+  useEffect(() => {}, [showLogin]);
 
   return (
     <div className="login-page-container">
@@ -71,5 +74,3 @@ function LoginForm() {
     </div>
   );
 }
-
-export default LoginForm;
