@@ -70,6 +70,7 @@ export default function Calendar() {
             }}
             initialView="dayGridMonth"
             editable={false} // disable drag and drop
+            weekends={false}
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
