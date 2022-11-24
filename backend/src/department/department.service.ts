@@ -54,10 +54,6 @@ export class DepartmentService {
       .join('title', 'title.id', '=', 'employee_role.title_id')
       .where('title_name', 'CEO');
     this.editData(ceo);
-    // ceo.forEach((element) => {
-    //   delete element.children;
-    // });
-    // console.log(ceo);
     return ceo;
   }
 
@@ -71,6 +67,7 @@ export class DepartmentService {
         'employee.profilepic',
       )
       .distinct('title_name as label')
+      .whereNot('title_name', 'CEO')
       .from('employee')
       .join('employee_role', 'employee.id', '=', 'employee_role.employeeid')
       .join('title', 'title.id', '=', 'employee_role.title_id')

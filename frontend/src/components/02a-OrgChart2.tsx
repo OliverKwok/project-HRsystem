@@ -23,6 +23,7 @@ export default function OrgChart2() {
     fetchData();
   }, []);
 
+  // sample data structure
   // const data = [
   //   {
   //     label: "CEO",
@@ -118,7 +119,7 @@ export default function OrgChart2() {
           <div className="node-content">
             <img
               alt={node.data.avatar}
-              src={process.env.PUBLIC_URL+ node.data.avatar}
+              src={process.env.PUBLIC_URL + node.data.avatar}
               style={{ width: "32px" }}
             />
             <div>{node.data.name}</div>
@@ -132,14 +133,18 @@ export default function OrgChart2() {
   return (
     <div className="organizationchart-demo">
       <div className="card">
-        {myData.length > 0 ? <OrganizationChart
-          value={myData}
-          nodeTemplate={nodeTemplate}
-          selection={selection}
-          selectionMode="multiple"
-          //   onSelectionChange={(event: any) => setSelection(event.data)}
-          className="company"
-        ></OrganizationChart>: <>nothing</>}
+        {myData.length > 0 ? (
+          <OrganizationChart
+            value={myData}
+            nodeTemplate={nodeTemplate}
+            selection={selection}
+            selectionMode="multiple"
+            //   onSelectionChange={(event: any) => setSelection(event.data)}
+            className="company"
+          ></OrganizationChart>
+        ) : (
+          <>nothing</>
+        )}
         {/* <OrganizationChart
           value={myData}
           nodeTemplate={nodeTemplate}

@@ -30,8 +30,6 @@ export class DepartmentController {
     return this.departmentService.getOrgChart();
   }
 
- 
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.departmentService.findOne(+id);
