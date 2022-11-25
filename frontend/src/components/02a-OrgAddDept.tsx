@@ -13,11 +13,10 @@ export default function OrgAddDept() {
   // csuite dropdown
   const [managedBy, setManagedBy] = useState([]);
 
-  const requestOptions = {
-    method: "Get",
-  };
-
   useEffect(() => {
+    const requestOptions = {
+      method: "Get",
+    };
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/department/findcsuite`,
       requestOptions
