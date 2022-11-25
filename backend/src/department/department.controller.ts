@@ -38,6 +38,13 @@ export class DepartmentController {
     return this.departmentService.findAll();
   }
 
+  @Post('addteam')
+  createTeam(@Body() createTeamDto: CreateTeamDto) {
+    console.log(createTeamDto);
+    return this.departmentService.createTeam(createTeamDto);
+  }
+
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.departmentService.findOne(+id);

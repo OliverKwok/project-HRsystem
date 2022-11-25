@@ -3,11 +3,10 @@ import { useEffect, useState } from "react";
 export default function OrgAddTeam() {
   const [getDept, setGetDept] = useState([]);
 
-  const requestOptions = {
-    method: "Get",
-  };
-
   useEffect(() => {
+    const requestOptions = {
+      method: "Get",
+    };
     fetch(`${process.env.REACT_APP_BACKEND_URL}/department/all`, requestOptions)
       .then((response) => {
         return response.json();
@@ -15,10 +14,12 @@ export default function OrgAddTeam() {
       .then((data) => {
         setGetDept(data);
       });
+
   }, []);
 
   const [newTeamName, setNewTeamName] = useState("");
   const [teamDept, setTeamDept] = useState();
+  const [teamLead, setTeamLead] = useState();
 
   async function submitAddTeam(event: any) {
     event.preventDefault();
@@ -31,7 +32,7 @@ export default function OrgAddTeam() {
       }),
     };
     const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/department/add`,
+      `${process.env.REACT_APP_BACKEND_URL}/department/addteam`,
       requestOptions
     );
     const jsonData = await res.json();
@@ -51,14 +52,7 @@ export default function OrgAddTeam() {
               onChange={(event) => setNewTeamName(event.target.value)}
             ></input>
           </div>
-          {/* <div>
-            Team Lead
-            <select>
-              <option value="employee1">Employee1</option>
-              <option value="employee2">Employee2</option>
-              <option value="employee3">Employee3</option>
-            </select>
-          </div> */}
+
           <div>
             Under which department
             <select
@@ -72,32 +66,11 @@ export default function OrgAddTeam() {
                   <option value={dept["dept_name"]}>{dept["dept_name"]}</option>
                 ))}
             </select>
-            {/* <select>
-              <option value="dept1">CEO</option>
-              <option value="dept1">CFO</option>
-              <option value="dept1">COO</option>
-              <option value="dept1">CTO</option>
-              <option value="dept1">General Counsel</option>
-              <option value="dept1">Admin</option>
-              <option value="dept2">Finance</option>
-              <option value="dept3">HR</option>
-              <option value="dept3">Sales</option>
-              <option value="dept3">Marketing</option>
-              <option value="dept3">Operations</option>
-              <option value="dept3">Customer Service</option>
-              <option value="dept3">Technology</option>
-            </select> */}
           </div>
-          OR
           <div>
-            Under which team
-            <select>
-              <option value="team1">Team1</option>
-              <option value="team2">Team2</option>
-              <option value="team3">Team3</option>
-            </select>
+
+            <input type="submit" value="Add Team" />
           </div>
-          <input type="submit" value="Add Team" />
         </div>
       </form>
     </section>

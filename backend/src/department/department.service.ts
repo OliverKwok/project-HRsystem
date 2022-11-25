@@ -7,11 +7,13 @@ import {
 } from '@nestjs/common';
 import { InjectKnex, Knex } from 'nestjs-knex';
 import { CreateDepartmentDto } from './dto/create-department.dto';
+import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateDepartmentDto } from './dto/update-department.dto';
 
 @Injectable()
 export class DepartmentService {
   constructor(@InjectKnex() private readonly knex: Knex) {}
+
   create(createDepartmentDto: CreateDepartmentDto) {
     return 'This action adds a new department';
   }
@@ -283,6 +285,37 @@ export class DepartmentService {
     }
   }
 
+<<<<<<< HEAD
+  async createTeam(createTeamDto: CreateTeamDto) {
+    try {
+      const deptID = await this.knex('department')
+        .select('id')
+        .where({ dept_name: createTeamDto.belonged_to_dept });
+      console.log(deptID);
+
+      const newTeam = await this.knex.table('team').insert({
+        team_name: createTeamDto.team_name,
+        belonged_to_dept: deptID[0].id,
+      });
+      return { newTeam };
+    } catch (err) {
+      console.log(err);
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async findAll() {
+    try {
+      const allDept = await this.knex.raw(`select dept_name from department`);
+      return allDept.rows;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+
+=======
+>>>>>>> 045483a483088d3dd912a6f90f7c25230a01ddc9
   findOne(id: number) {
     return `This action returns a #${id} department`;
   }
