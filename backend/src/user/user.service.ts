@@ -83,6 +83,25 @@ export class UserService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+
+  async userReportTo() {
+    try {
+      const res = await this.knex.raw(
+        `select id, concat(employee.alias,' ',employee.last_name) as title from employee
+        where
+        employee.status = 'probation'
+        or employee.status = 'perm'
+        or employee.status = 'contract'
+        or employee.status = 'other'
+        `,
+      );
+
+      return res.rows;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
   async birthdayShowCalendar() {
     try {
       const res = await this.knex.raw(
@@ -114,7 +133,6 @@ export class UserService {
         `,
       );
       const leaveDays = res.rows;
-      console.log(leaveDays);
 
       return leaveDays;
     } catch (err) {

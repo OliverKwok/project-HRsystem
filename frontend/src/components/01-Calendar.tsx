@@ -61,7 +61,6 @@ export default function Calendar() {
           item["start_date_period"] == "full_day" &&
           item["end_date_period"] == "full_day"
         ) {
-          console.log("full day");
           item["start"] = item["start"];
           item["end"] = item["end"];
         } else if (
@@ -127,7 +126,6 @@ export default function Calendar() {
     async function main() {
       let array1 = await checkBirthdayShowCalendar();
       let array2 = await checkLeaveShowCalendar();
-      console.log(array2);
       let show = [...array1, ...array2];
       setInitialEvent(show);
     }

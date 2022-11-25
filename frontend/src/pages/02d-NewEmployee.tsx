@@ -119,6 +119,10 @@ export default function Employee() {
   const [employeeid, setEmployeeid] = useState("");
   const profilepic = watch("profilepic");
   const [previewSrc, setpreviewSrc] = useState("");
+  const [reportTo, setReportTo] = useState([]);
+  const [title, setTitle] = useState([]);
+  const [department, setDepartment] = useState([]);
+  const [team, setTeam] = useState([]);
 
   // check lastest employeeid
   async function checkEmployeeid() {
@@ -149,11 +153,22 @@ export default function Employee() {
     checkEmployeeid();
   }, []);
 
+  // check report to employee list
+  useEffect(() => {
+    async function fetchReportTo() {
+      let response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/reportTo`
+      );
+      let reportToFetch = await response.json();
+      setReportTo(reportToFetch);
+    }
+    fetchReportTo();
+  }, []);
+
   // monitor every step
   useEffect(() => {
     let sub = watch((data) => {
       console.log("update form data:", data);
-      // console.log(data.date_of_birth);
     });
     return () => sub.unsubscribe();
   }, [watch]);
@@ -547,7 +562,12 @@ export default function Employee() {
               </span>
             </div>
 
-            <input type="text" {...register("report_to", { required: true })} />
+            <select {...register("report_to", { required: true })}>
+              {reportTo.length > 0 &&
+                reportTo.map((reportTo) => (
+                  <option value={reportTo["id"]}>{reportTo["title"]}</option>
+                ))}
+            </select>
           </div>
           <hr />
           <h2>Payment Detail</h2>
