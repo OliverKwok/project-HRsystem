@@ -1,3 +1,4 @@
+import { time } from 'console';
 import { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
@@ -207,6 +208,15 @@ export async function up(knex: Knex): Promise<void> {
     table.float('total');
   });
 
+  await knex.schema.createTable('payroll_edit_history', (table) => {
+    table.increments('id');
+    table.integer('record').references('payroll.id');
+    table.string('original_value');
+    table.string('updated_value');
+    table.timestamp('updated_datetime');
+    table.boolean('isApproved');
+  });
+
   // termination
   await knex.schema.createTable('termination', (table) => {
     table.increments('id');
@@ -236,6 +246,13 @@ export async function up(knex: Knex): Promise<void> {
       'other',
     ]);
     table.integer('recipient').references('employee.id');
+  });
+
+  await knex.schema.createTable('event', (table) => {
+    table.increments('id');
+    table.string('event_name');
+    table.date('date');
+    table.string('details');
   });
 }
 

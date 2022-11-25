@@ -12,9 +12,8 @@ import * as bcrypt from 'bcrypt';
 @Injectable({})
 export class UserService {
   constructor(@InjectKnex() private readonly knex: Knex) {}
-
   async createUser(createUserDto: CreateUserDto) {
-    console.log(createUserDto);
+    // console.log(createUserDto);
     try {
       const newEmployee = await this.knex.table('employee').insert({
         employeeid: createUserDto.employeeid,
@@ -60,6 +59,18 @@ export class UserService {
         payment_remark: createUserDto.payment_remark,
       });
 
+      const checkid = await this.knex
+        .table('employee')
+        .select('id')
+        .where({ employeeid: createUserDto.employeeid });
+
+      const newRole = await this.knex.table('employee_role').insert({
+        employeeid: checkid[0].id,
+        department_id: createUserDto.department,
+        team_id: createUserDto.team,
+        title_id: createUserDto.title,
+      });
+
       return { newEmployee };
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
@@ -83,6 +94,25 @@ export class UserService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+
+  async userReportTo() {
+    try {
+      const res = await this.knex.raw(
+        `select id, concat(employee.first_name,' ',employee.last_name,', ',employee.alias) as full_name from employee
+        where
+        employee.status = 'probation'
+        or employee.status = 'perm'
+        or employee.status = 'contract'
+        or employee.status = 'other'
+        `,
+      );
+
+      return res.rows;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
   async birthdayShowCalendar() {
     try {
       const res = await this.knex.raw(
@@ -114,7 +144,6 @@ export class UserService {
         `,
       );
       const leaveDays = res.rows;
-      console.log(leaveDays);
 
       return leaveDays;
     } catch (err) {

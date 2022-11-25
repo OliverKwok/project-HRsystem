@@ -57,7 +57,7 @@ export default function Calendar() {
       for (let item of response) {
         if (
           // full day one day
-          item["start_date"] == item["end_date"] &&
+          item["start"] == item["end"] &&
           item["start_date_period"] == "full_day" &&
           item["end_date_period"] == "full_day"
         ) {
@@ -65,24 +65,23 @@ export default function Calendar() {
           item["end"] = item["end"];
         } else if (
           // full day more than one day
-          item["start_date"] != item["end_date"] &&
+          item["start"] != item["end"] &&
           item["start_date_period"] == "full_day" &&
           item["end_date_period"] == "full_day"
         ) {
           item["start"] = item["start"];
-          item["end"] = item["end"];
-        }
-        if (
+          item["end"] = item["end"] + "T23:00:00";
+        } else if (
           // one morning
-          item["start_date"] == item["end_date"] &&
+          item["start"] == item["end"] &&
           item["start_date_period"] == "first_half" &&
           item["end_date_period"] == "first_half"
         ) {
           item["start"] = item["start"] + "T09:00:00";
-          item["end"] = item["end"] + "T13:00:00";
+          item["end"] = item["end"] + "T14:00:00";
         } else if (
           // one afternoon
-          item["start_date"] == item["end_date"] &&
+          item["start"] == item["end"] &&
           item["start_date_period"] == "second_half" &&
           item["end_date_period"] == "second_half"
         ) {
@@ -90,20 +89,22 @@ export default function Calendar() {
           item["end"] = item["end"] + "T18:00:00";
         } else if (
           // more than one day with afternoon start
-          item["start_date"] != item["end_date"] &&
-          item["start_date_period"] == "full_day" &&
+          item["start"] != item["end"] &&
+          item["start_date_period"] == "second_half" &&
           item["end_date_period"] == "full_day"
         ) {
           item["start"] = item["start"] + "T14:00:00";
-          item["end"] = item["end"];
+          item["end"] = item["end"] + "T23:00:00";
         } else if (
           // more than one day with morning end
-          item["start_date"] != item["end_date"] &&
+          item["start"] != item["end"] &&
           item["start_date_period"] == "full_day" &&
-          item["end_date_period"] == "full_day"
+          item["end_date_period"] == "first_half"
         ) {
-          item["start"] = item["start"];
-          item["end"] = item["end"] + "T13:00:00";
+          item["start"] = item["start"] + "T09:00:00";
+          item["end"] = item["end"] + "T14:00:00";
+          // specified for half day end
+          item["title"] = item["title"] + " (2pm end)";
         }
 
         item["id"] = "leave" + i.toString();
@@ -125,8 +126,8 @@ export default function Calendar() {
     async function main() {
       let array1 = await checkBirthdayShowCalendar();
       let array2 = await checkLeaveShowCalendar();
-      console.log(array2);
       let show = [...array1, ...array2];
+      // console.log(show);
       setInitialEvent(show);
     }
     main();
@@ -144,7 +145,7 @@ export default function Calendar() {
               right: "dayGridMonth",
             }}
             initialView="dayGridMonth"
-            // nextDayThreshold="09:00:00"
+            nextDayThreshold="09:00:00"
             editable={false} // disable drag and drop
             weekends={false}
             selectable={true}
@@ -158,6 +159,7 @@ export default function Calendar() {
         <div className="calendar-info">
           <div className="calendar-sidebar">
             <h2>All Events ({initialEvent.length})</h2>
+
             <ul>{initialEvent.map(renderSidebarEvent)}</ul>
           </div>
         </div>

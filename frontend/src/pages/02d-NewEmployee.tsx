@@ -39,6 +39,9 @@ type FormState = {
   // length_of_service: string;
   notice_period: number;
   report_to: string;
+  title: string;
+  department: string;
+  team: string;
 
   al_leave_entitled_peryear: number;
   // AL_leave_taken: string;
@@ -100,6 +103,9 @@ export default function Employee() {
       // length_of_service: "",
       notice_period: 30,
       report_to: "",
+      title: "",
+      department: "",
+      team: "",
 
       al_leave_entitled_peryear: 0,
 
@@ -119,6 +125,10 @@ export default function Employee() {
   const [employeeid, setEmployeeid] = useState("");
   const profilepic = watch("profilepic");
   const [previewSrc, setpreviewSrc] = useState("");
+  const [reportTo, setReportTo] = useState([]);
+  const [title, setTitle] = useState([]);
+  const [department, setDepartment] = useState([]);
+  const [team, setTeam] = useState([]);
 
   // check lastest employeeid
   async function checkEmployeeid() {
@@ -149,11 +159,46 @@ export default function Employee() {
     checkEmployeeid();
   }, []);
 
+  // check report to employee list
+  useEffect(() => {
+    async function fetchReportTo() {
+      let response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/reportTo`
+      );
+      let reportToFetch = await response.json();
+      setReportTo(reportToFetch);
+    }
+    fetchReportTo();
+  }, []);
+
+  // check title list
+  useEffect(() => {
+    async function fetchTitle() {
+      let response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/title/all`
+      );
+      let titleFetch = await response.json();
+      setTitle(titleFetch);
+    }
+    fetchTitle();
+  }, []);
+
+  // check department list
+  useEffect(() => {
+    async function fetchDept() {
+      let response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/department/all`
+      );
+      let deptFetch = await response.json();
+      setDepartment(deptFetch);
+    }
+    fetchDept();
+  }, []);
+
   // monitor every step
   useEffect(() => {
     let sub = watch((data) => {
       console.log("update form data:", data);
-      // console.log(data.date_of_birth);
     });
     return () => sub.unsubscribe();
   }, [watch]);
@@ -509,6 +554,7 @@ export default function Employee() {
                 <option value="other">Other</option>
               </select>
             </div>
+
             <div>
               <div>
                 <span>Job Nature</span>
@@ -522,6 +568,7 @@ export default function Employee() {
                 <option value="other">Other</option>
               </select>
             </div>
+
             <div>
               <div>
                 <span>Notice Period* (Days)</span>
@@ -536,18 +583,64 @@ export default function Employee() {
 
               <input type="text" {...register("al_leave_entitled_peryear")} />
             </div>
-          </div>
-          <div>
-            <div>
-              <span>
-                Report to*{" "}
-                {errors.report_to && (
-                  <span style={{ color: "red" }}>[Required]</span>
-                )}
-              </span>
-            </div>
 
-            <input type="text" {...register("report_to", { required: true })} />
+            <div>
+              <div>
+                <span>
+                  Report to*{" "}
+                  {errors.report_to && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
+              </div>
+
+              <select {...register("report_to", { required: true })}>
+                {reportTo.length > 0 &&
+                  reportTo.map((reportTo) => (
+                    <option value={reportTo["id"]} key={reportTo["id"]}>
+                      {reportTo["full_name"]}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div>
+              <div>
+                <span>
+                  Title*{" "}
+                  {errors.title && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
+              </div>
+
+              <select {...register("title", { required: true })}>
+                {title.length > 0 &&
+                  title.map((title) => (
+                    <option value={title["id"]} key={title["id"]}>
+                      {title["title_name"]}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div>
+              <div>
+                <span>
+                  Department*{" "}
+                  {errors.department && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
+              </div>
+
+              <select {...register("department", { required: true })}>
+                {title.length > 0 &&
+                  title.map((department) => (
+                    <option value={department["id"]} key={department["id"]}>
+                      {department["dept_name"]}
+                    </option>
+                  ))}
+              </select>
+            </div>
           </div>
           <hr />
           <h2>Payment Detail</h2>

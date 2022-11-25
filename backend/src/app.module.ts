@@ -9,6 +9,7 @@ import { config as Config } from 'dotenv';
 import { DepartmentModule } from './department/department.module';
 import { AppService } from './app.service';
 import { TitleModule } from './title/title.module';
+import { TeamModule } from './team/team.module';
 Config();
 
 @Module({
@@ -24,6 +25,7 @@ Config();
     UserModule,
     DepartmentModule,
     TitleModule,
+    TeamModule,
   ],
   controllers: [AppController],
   providers: [AppService],

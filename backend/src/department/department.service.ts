@@ -248,6 +248,11 @@ export class DepartmentService {
     }
   }
 
+  async findAll() {
+    const res = await this.knex.select('id', 'dept_name').from('department');
+    return res;
+  }
+
   async findCSuite() {
     try {
       const cSuiteTitles = await this.knex.raw(
@@ -280,6 +285,7 @@ export class DepartmentService {
     }
   }
 
+<<<<<<< HEAD
   async createTeam(createTeamDto: CreateTeamDto) {
     try {
       const deptID = await this.knex('department')
@@ -308,6 +314,8 @@ export class DepartmentService {
   }
 
 
+=======
+>>>>>>> 045483a483088d3dd912a6f90f7c25230a01ddc9
   findOne(id: number) {
     return `This action returns a #${id} department`;
   }
