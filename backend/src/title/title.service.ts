@@ -2,7 +2,6 @@ import { HttpException, Injectable, HttpStatus } from '@nestjs/common';
 import { CreateTitleDto } from './dto/create-title.dto';
 import { UpdateTitleDto } from './dto/update-title.dto';
 import { InjectKnex, Knex } from 'nestjs-knex';
-import { identity } from 'rxjs';
 
 @Injectable()
 export class TitleService {

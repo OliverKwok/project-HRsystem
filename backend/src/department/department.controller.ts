@@ -15,19 +15,26 @@ import { UpdateDepartmentDto } from './dto/update-department.dto';
 export class DepartmentController {
   constructor(private readonly departmentService: DepartmentService) {}
 
+  @Get('orgchart')
+  getOrgChart() {
+    return this.departmentService.getOrgChart();
+  }
+
+  @Get('findcsuite')
+  findCSuite() {
+    return this.departmentService.findCSuite();
+  }
+
   @Post('add')
-  create(@Body() createDepartmentDto: CreateDepartmentDto) {
-    return this.departmentService.create(createDepartmentDto);
+  createDept(@Body() createDepartmentDto: CreateDepartmentDto) {
+    console.log('init add dep con');
+    console.log(createDepartmentDto);
+    return this.departmentService.createDept(createDepartmentDto);
   }
 
   @Get('all')
   findAll() {
     return this.departmentService.findAll();
-  }
-
-  @Get('orgchart')
-  getOrgChart() {
-    return this.departmentService.getOrgChart();
   }
 
   @Get(':id')
