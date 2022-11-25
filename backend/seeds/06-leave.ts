@@ -72,9 +72,9 @@ export async function seed(knex: Knex): Promise<void> {
     employee_id: '18',
     leave_type: '1',
     start_date: '2022-12-08',
-    start_date_period: 'secnod_half',
+    start_date_period: 'second_half',
     end_date: '2022-12-08',
-    end_date_period: 'secnod_half',
+    end_date_period: 'second_half',
     status: 'approved',
   });
   await seedRow('leave_application', {

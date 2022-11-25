@@ -14,45 +14,120 @@ interface state {
   borderColor: string;
 }
 export default function Calendar() {
-  // const [weekendsVisible, setWeekendsVisible] = useState(true);
-  // const [currentEvents, setCurrentEvents] = useState([]);
   const [initialEvent, setInitialEvent] = useState<state[]>([
     { id: "", title: "", start: "", backgroundColor: "", borderColor: "" },
   ]);
-  // const [test, setTest] = useState("");
 
   useEffect(() => {
-    async function checkDayShowCalendar() {
+    async function checkBirthdayShowCalendar() {
       const requestOptions = {
         method: "Get",
       };
 
       const res = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/user/dayShowCalendar`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/birthdayShowCalendar`,
         requestOptions
       );
       const response = await res.json();
 
       let i = 1;
       for (let item of response) {
-        let orginalBirthday = moment(item["start"]).format("YYYY-MM-DD");
-        let birthdayShown =
-          moment(new Date()).format("YYYY") + orginalBirthday.substring(4);
-
-        item["id"] = i.toString();
-        item["start"] = birthdayShown;
+        item["id"] = "birthday" + i.toString();
+        item["start"] = changeBirthdayDateFormat(item["start"]);
         item["title"] = "Birthday: " + item["title"];
         item["backgroundColor"] = "#0EB3B3";
         item["borderColor"] = "#0EB3B3";
         i++;
       }
-
-      console.log(initialEvent);
-      console.log(response);
-      setInitialEvent(response);
+      return response;
+      // setInitialEvent(response);
     }
+    async function checkLeaveShowCalendar() {
+      const requestOptions = {
+        method: "Get",
+      };
+
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/leaveShowCalendar`,
+        requestOptions
+      );
+      const response = await res.json();
+
+      let i = 1;
+      for (let item of response) {
+        if (
+          // full day one day
+          item["start_date"] == item["end_date"] &&
+          item["start_date_period"] == "full_day" &&
+          item["end_date_period"] == "full_day"
+        ) {
+          item["start"] = item["start"];
+          item["end"] = item["end"];
+        } else if (
+          // full day more than one day
+          item["start_date"] != item["end_date"] &&
+          item["start_date_period"] == "full_day" &&
+          item["end_date_period"] == "full_day"
+        ) {
+          item["start"] = item["start"];
+          item["end"] = item["end"];
+        }
+        if (
+          // one morning
+          item["start_date"] == item["end_date"] &&
+          item["start_date_period"] == "first_half" &&
+          item["end_date_period"] == "first_half"
+        ) {
+          item["start"] = item["start"] + "T09:00:00";
+          item["end"] = item["end"] + "T13:00:00";
+        } else if (
+          // one afternoon
+          item["start_date"] == item["end_date"] &&
+          item["start_date_period"] == "second_half" &&
+          item["end_date_period"] == "second_half"
+        ) {
+          item["start"] = item["start"] + "T14:00:00";
+          item["end"] = item["end"] + "T18:00:00";
+        } else if (
+          // more than one day with afternoon start
+          item["start_date"] != item["end_date"] &&
+          item["start_date_period"] == "full_day" &&
+          item["end_date_period"] == "full_day"
+        ) {
+          item["start"] = item["start"] + "T14:00:00";
+          item["end"] = item["end"];
+        } else if (
+          // more than one day with morning end
+          item["start_date"] != item["end_date"] &&
+          item["start_date_period"] == "full_day" &&
+          item["end_date_period"] == "full_day"
+        ) {
+          item["start"] = item["start"];
+          item["end"] = item["end"] + "T13:00:00";
+        }
+
+        item["id"] = "leave" + i.toString();
+        item["title"] = item["type"] + ": " + item["title"];
+        item["backgroundColor"] = "#42adf5";
+        item["borderColor"] = "#42adf5";
+        i++;
+      }
+      // console.log(response);
+      return response;
+    }
+
+    function changeBirthdayDateFormat(date: string) {
+      return moment(new Date()).format("YYYY") + date.substring(4);
+    }
+    // function changeDateFormat(date: string) {
+    //   return moment(date).format("YYYY-MM-DD");
+    // }
     async function main() {
-      await checkDayShowCalendar();
+      let array1 = await checkBirthdayShowCalendar();
+      let array2 = await checkLeaveShowCalendar();
+      console.log(array2);
+      let show = [...array1, ...array2];
+      setInitialEvent(show);
     }
     main();
   }, []);
@@ -69,6 +144,7 @@ export default function Calendar() {
               right: "dayGridMonth",
             }}
             initialView="dayGridMonth"
+            // nextDayThreshold="09:00:00"
             editable={false} // disable drag and drop
             weekends={false}
             selectable={true}
