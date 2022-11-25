@@ -57,24 +57,27 @@ export default function Calendar() {
       for (let item of response) {
         if (
           // full day one day
-          item["start_date"] == item["end_date"] &&
+          item["start"] == item["end"] &&
           item["start_date_period"] == "full_day" &&
           item["end_date_period"] == "full_day"
         ) {
+          console.log("full day");
           item["start"] = item["start"];
           item["end"] = item["end"];
         } else if (
           // full day more than one day
-          item["start_date"] != item["end_date"] &&
+          item["start"] != item["end"] &&
           item["start_date_period"] == "full_day" &&
           item["end_date_period"] == "full_day"
         ) {
           item["start"] = item["start"];
-          item["end"] = item["end"];
-        }
-        if (
+          // item["end"] =
+          //   item["end"].substring(0, 8) +
+          //   (+item["end"].substring(9) + 1).toString();
+          item["end"] = item["end"] + "T23:00:00";
+        } else if (
           // one morning
-          item["start_date"] == item["end_date"] &&
+          item["start"] == item["end"] &&
           item["start_date_period"] == "first_half" &&
           item["end_date_period"] == "first_half"
         ) {
@@ -82,29 +85,30 @@ export default function Calendar() {
           item["end"] = item["end"] + "T13:00:00";
         } else if (
           // one afternoon
-          item["start_date"] == item["end_date"] &&
+          item["start"] == item["end"] &&
           item["start_date_period"] == "second_half" &&
           item["end_date_period"] == "second_half"
         ) {
           item["start"] = item["start"] + "T14:00:00";
           item["end"] = item["end"] + "T18:00:00";
-        } else if (
-          // more than one day with afternoon start
-          item["start_date"] != item["end_date"] &&
-          item["start_date_period"] == "full_day" &&
-          item["end_date_period"] == "full_day"
-        ) {
-          item["start"] = item["start"] + "T14:00:00";
-          item["end"] = item["end"];
-        } else if (
-          // more than one day with morning end
-          item["start_date"] != item["end_date"] &&
-          item["start_date_period"] == "full_day" &&
-          item["end_date_period"] == "full_day"
-        ) {
-          item["start"] = item["start"];
-          item["end"] = item["end"] + "T13:00:00";
         }
+        // else if (
+        //   // more than one day with afternoon start
+        //   item["start_date"] != item["end_date"] &&
+        //   item["start_date_period"] == "full_day" &&
+        //   item["end_date_period"] == "full_day"
+        // ) {
+        //   item["start"] = item["start"] + "T14:00:00";
+        //   item["end"] = item["end"];
+        // } else if (
+        //   // more than one day with morning end
+        //   item["start_date"] != item["end_date"] &&
+        //   item["start_date_period"] == "full_day" &&
+        //   item["end_date_period"] == "first_day"
+        // ) {
+        //   item["start"] = item["start"];
+        //   item["end"] = item["end"] + "T13:00:00";
+        // }
 
         item["id"] = "leave" + i.toString();
         item["title"] = item["type"] + ": " + item["title"];
@@ -144,7 +148,7 @@ export default function Calendar() {
               right: "dayGridMonth",
             }}
             initialView="dayGridMonth"
-            // nextDayThreshold="09:00:00"
+            nextDayThreshold="09:00:00"
             editable={false} // disable drag and drop
             weekends={false}
             selectable={true}
