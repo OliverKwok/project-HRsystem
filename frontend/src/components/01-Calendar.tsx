@@ -71,9 +71,6 @@ export default function Calendar() {
           item["end_date_period"] == "full_day"
         ) {
           item["start"] = item["start"];
-          // item["end"] =
-          //   item["end"].substring(0, 8) +
-          //   (+item["end"].substring(9) + 1).toString();
           item["end"] = item["end"] + "T23:00:00";
         } else if (
           // one morning
@@ -82,7 +79,7 @@ export default function Calendar() {
           item["end_date_period"] == "first_half"
         ) {
           item["start"] = item["start"] + "T09:00:00";
-          item["end"] = item["end"] + "T13:00:00";
+          item["end"] = item["end"] + "T14:00:00";
         } else if (
           // one afternoon
           item["start"] == item["end"] &&
@@ -91,24 +88,25 @@ export default function Calendar() {
         ) {
           item["start"] = item["start"] + "T14:00:00";
           item["end"] = item["end"] + "T18:00:00";
+        } else if (
+          // more than one day with afternoon start
+          item["start"] != item["end"] &&
+          item["start_date_period"] == "second_half" &&
+          item["end_date_period"] == "full_day"
+        ) {
+          item["start"] = item["start"] + "T14:00:00";
+          item["end"] = item["end"] + "T23:00:00";
+        } else if (
+          // more than one day with morning end
+          item["start"] != item["end"] &&
+          item["start_date_period"] == "full_day" &&
+          item["end_date_period"] == "first_half"
+        ) {
+          item["start"] = item["start"] + "T09:00:00";
+          item["end"] = item["end"] + "T14:00:00";
+          // specified for half day end
+          item["title"] = item["title"] + " (2pm end)";
         }
-        // else if (
-        //   // more than one day with afternoon start
-        //   item["start_date"] != item["end_date"] &&
-        //   item["start_date_period"] == "full_day" &&
-        //   item["end_date_period"] == "full_day"
-        // ) {
-        //   item["start"] = item["start"] + "T14:00:00";
-        //   item["end"] = item["end"];
-        // } else if (
-        //   // more than one day with morning end
-        //   item["start_date"] != item["end_date"] &&
-        //   item["start_date_period"] == "full_day" &&
-        //   item["end_date_period"] == "first_day"
-        // ) {
-        //   item["start"] = item["start"];
-        //   item["end"] = item["end"] + "T13:00:00";
-        // }
 
         item["id"] = "leave" + i.toString();
         item["title"] = item["type"] + ": " + item["title"];

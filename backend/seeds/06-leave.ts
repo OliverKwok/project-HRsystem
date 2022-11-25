@@ -86,4 +86,22 @@ export async function seed(knex: Knex): Promise<void> {
     end_date_period: 'full_day',
     status: 'approved',
   });
+  await seedRow('leave_application', {
+    employee_id: '20',
+    leave_type: '1',
+    start_date: '2023-01-03',
+    start_date_period: 'second_half',
+    end_date: '2023-01-04',
+    end_date_period: 'full_day',
+    status: 'approved',
+  });
+  await seedRow('leave_application', {
+    employee_id: '21',
+    leave_type: '1',
+    start_date: '2023-01-05',
+    start_date_period: 'full_day',
+    end_date: '2023-01-06',
+    end_date_period: 'first_half',
+    status: 'approved',
+  });
 }
