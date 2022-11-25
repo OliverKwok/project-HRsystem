@@ -39,6 +39,9 @@ type FormState = {
   // length_of_service: string;
   notice_period: number;
   report_to: string;
+  title: string;
+  department: string;
+  team: string;
 
   al_leave_entitled_peryear: number;
   // AL_leave_taken: string;
@@ -100,6 +103,9 @@ export default function Employee() {
       // length_of_service: "",
       notice_period: 30,
       report_to: "",
+      title: "",
+      department: "",
+      team: "",
 
       al_leave_entitled_peryear: 0,
 
@@ -163,6 +169,30 @@ export default function Employee() {
       setReportTo(reportToFetch);
     }
     fetchReportTo();
+  }, []);
+
+  // check title list
+  useEffect(() => {
+    async function fetchTitle() {
+      let response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/title/all`
+      );
+      let titleFetch = await response.json();
+      setTitle(titleFetch);
+    }
+    fetchTitle();
+  }, []);
+
+  // check department list
+  useEffect(() => {
+    async function fetchDept() {
+      let response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/department/all`
+      );
+      let deptFetch = await response.json();
+      setDepartment(deptFetch);
+    }
+    fetchDept();
   }, []);
 
   // monitor every step
@@ -524,6 +554,7 @@ export default function Employee() {
                 <option value="other">Other</option>
               </select>
             </div>
+
             <div>
               <div>
                 <span>Job Nature</span>
@@ -537,6 +568,7 @@ export default function Employee() {
                 <option value="other">Other</option>
               </select>
             </div>
+
             <div>
               <div>
                 <span>Notice Period* (Days)</span>
@@ -551,23 +583,64 @@ export default function Employee() {
 
               <input type="text" {...register("al_leave_entitled_peryear")} />
             </div>
-          </div>
-          <div>
-            <div>
-              <span>
-                Report to*{" "}
-                {errors.report_to && (
-                  <span style={{ color: "red" }}>[Required]</span>
-                )}
-              </span>
-            </div>
 
-            <select {...register("report_to", { required: true })}>
-              {reportTo.length > 0 &&
-                reportTo.map((reportTo) => (
-                  <option value={reportTo["id"]}>{reportTo["title"]}</option>
-                ))}
-            </select>
+            <div>
+              <div>
+                <span>
+                  Report to*{" "}
+                  {errors.report_to && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
+              </div>
+
+              <select {...register("report_to", { required: true })}>
+                {reportTo.length > 0 &&
+                  reportTo.map((reportTo) => (
+                    <option value={reportTo["id"]} key={reportTo["id"]}>
+                      {reportTo["full_name"]}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div>
+              <div>
+                <span>
+                  Title*{" "}
+                  {errors.title && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
+              </div>
+
+              <select {...register("title", { required: true })}>
+                {title.length > 0 &&
+                  title.map((title) => (
+                    <option value={title["id"]} key={title["id"]}>
+                      {title["title_name"]}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div>
+              <div>
+                <span>
+                  Department*{" "}
+                  {errors.department && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
+              </div>
+
+              <select {...register("department", { required: true })}>
+                {title.length > 0 &&
+                  title.map((department) => (
+                    <option value={department["id"]} key={department["id"]}>
+                      {department["dept_name"]}
+                    </option>
+                  ))}
+              </select>
+            </div>
           </div>
           <hr />
           <h2>Payment Detail</h2>

@@ -198,8 +198,9 @@ export class DepartmentService {
     }
   }
 
-  findAll() {
-    return `This action returns all department`;
+  async findAll() {
+    const res = await this.knex.select('dept_name').from('department');
+    return res;
   }
 
   findOne(id: number) {

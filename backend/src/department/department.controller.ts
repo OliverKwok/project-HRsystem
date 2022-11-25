@@ -20,7 +20,7 @@ export class DepartmentController {
     return this.departmentService.create(createDepartmentDto);
   }
 
-  @Get()
+  @Get('all')
   findAll() {
     return this.departmentService.findAll();
   }

@@ -127,6 +127,7 @@ export default function Calendar() {
       let array1 = await checkBirthdayShowCalendar();
       let array2 = await checkLeaveShowCalendar();
       let show = [...array1, ...array2];
+      // console.log(show);
       setInitialEvent(show);
     }
     main();
@@ -158,6 +159,7 @@ export default function Calendar() {
         <div className="calendar-info">
           <div className="calendar-sidebar">
             <h2>All Events ({initialEvent.length})</h2>
+
             <ul>{initialEvent.map(renderSidebarEvent)}</ul>
           </div>
         </div>
