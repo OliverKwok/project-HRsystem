@@ -77,8 +77,14 @@ export default function Calendar() {
             events={initialEvent} // alternatively, use the `events` setting to fetch from a feed
             // eventContent={renderEventContent} // custom render function
           />
+          {/* <div className="calendar-info">{renderInfoBox}</div> */}
         </div>
-        {/* <div className="calendar-info">{this.renderInfoBox()}</div> */}
+        <div className="calendar-info">
+          <div className="calendar-sidebar">
+            <h2>All Events ({initialEvent.length})</h2>
+            <ul>{initialEvent.map(renderSidebarEvent)}</ul>
+          </div>
+        </div>
       </div>
     </>
   );
@@ -115,7 +121,7 @@ export default function Calendar() {
 //     );
 //   }
 
-//   renderInfoBox() {
+//   function renderInfoBox() {
 //     return (
 //       <div className="calendar-sidebar">
 //         <h2>All Events ({this.state.currentEvents.length})</h2>
@@ -127,23 +133,24 @@ export default function Calendar() {
 
 // function renderEventContent(eventInfo: any) {
 //   return (
-//     <>
-//       <div>"sss"</div>
-//     </>
+//   <>
+//   <b>{eventInfo.timeText}</b>
+//   <i>{eventInfo.event.title}</i>
+// </>
 //   );
 // }
 
-// function renderSidebarEvent(event: any) {
-//   return (
-//     <li key={event.id}>
-//       <b>
-//         {formatDate(event.start, {
-//           year: "numeric",
-//           month: "short",
-//           day: "numeric",
-//         })}
-//       </b>
-//       <i> {event.title}</i>
-//     </li>
-//   );
-// }
+function renderSidebarEvent(event: any) {
+  return (
+    <li key={event.id}>
+      <b>
+        {formatDate(event.start, {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}
+      </b>
+      <i> {event.title}</i>
+    </li>
+  );
+}
