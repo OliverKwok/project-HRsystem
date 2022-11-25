@@ -102,10 +102,10 @@ export default function Employee() {
       job_nature: "",
       // length_of_service: "",
       notice_period: 30,
-      report_to: "",
-      title: "",
-      department: "",
-      team: "",
+      report_to: "1",
+      title: "1",
+      department: "1",
+      team: "1",
 
       al_leave_entitled_peryear: 0,
 
@@ -195,6 +195,18 @@ export default function Employee() {
     fetchDept();
   }, []);
 
+  // check department list
+  useEffect(() => {
+    async function fetchTeam() {
+      let response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/team/all`
+      );
+      let teamFetch = await response.json();
+      setTeam(teamFetch);
+    }
+    fetchTeam();
+  }, []);
+
   // monitor every step
   useEffect(() => {
     let sub = watch((data) => {
@@ -221,46 +233,46 @@ export default function Employee() {
     // formData version
     const formData = new FormData();
 
-    formData.append("employeeid", data.employeeid);
-    formData.append("first_name", data.first_name);
-    formData.append("last_name", data.last_name);
-    formData.append("chinese_name", data.chinese_name);
-    formData.append("alias", data.alias);
-    formData.append("hkid", data.hkid);
-    formData.append("passport", data.passport);
-    formData.append("gender", data.gender);
-    formData.append("nationality", data.nationality);
-    formData.append("date_of_birth", JSON.stringify(data.date_of_birth));
+    // formData.append("employeeid", data.employeeid);
+    // formData.append("first_name", data.first_name);
+    // formData.append("last_name", data.last_name);
+    // formData.append("chinese_name", data.chinese_name);
+    // formData.append("alias", data.alias);
+    // formData.append("hkid", data.hkid);
+    // formData.append("passport", data.passport);
+    // formData.append("gender", data.gender);
+    // formData.append("nationality", data.nationality);
+    // formData.append("date_of_birth", JSON.stringify(data.date_of_birth));
     formData.append("profilepic", data.profilepic[0]);
-    formData.append("mobile_countrycode", data.mobile_countrycode);
-    formData.append("mobile_no", data.mobile_no);
-    formData.append("work_phone_no", data.work_phone_no);
-    formData.append("email_personal", data.email_personal);
-    formData.append("email_work", data.email_work);
-    // formData.append("password",data.password);
-    formData.append("highest_education", data.highest_education);
-    formData.append("institution_name", data.institution_name);
-    formData.append("major", data.major);
-    formData.append("last_job_company", data.last_job_company);
-    formData.append("last_job_title", data.last_job_title);
-    formData.append("start_date", JSON.stringify(data.start_date));
-    formData.append("status", data.status);
-    formData.append("job_nature", data.job_nature);
-    formData.append("notice_period", JSON.stringify(data.notice_period));
-    formData.append("report_to", data.report_to);
-    formData.append(
-      "al_leave_entitled_peryear",
-      JSON.stringify(data.al_leave_entitled_peryear)
-    );
-    formData.append("pay_currency", data.pay_currency);
+    // formData.append("mobile_countrycode", data.mobile_countrycode);
+    // formData.append("mobile_no", data.mobile_no);
+    // formData.append("work_phone_no", data.work_phone_no);
+    // formData.append("email_personal", data.email_personal);
+    // formData.append("email_work", data.email_work);
+    // // formData.append("password",data.password);
+    // formData.append("highest_education", data.highest_education);
+    // formData.append("institution_name", data.institution_name);
+    // formData.append("major", data.major);
+    // formData.append("last_job_company", data.last_job_company);
+    // formData.append("last_job_title", data.last_job_title);
+    // formData.append("start_date", JSON.stringify(data.start_date));
+    // formData.append("status", data.status);
+    // formData.append("job_nature", data.job_nature);
+    // formData.append("notice_period", JSON.stringify(data.notice_period));
+    // formData.append("report_to", data.report_to);
+    // formData.append(
+    //   "al_leave_entitled_peryear",
+    //   JSON.stringify(data.al_leave_entitled_peryear)
+    // );
+    // formData.append("pay_currency", data.pay_currency);
     // formData.append("basic_salary", data.basic_salary);
-    formData.append("payment_method", data.payment_method);
-    formData.append("home_address", data.home_address);
-    formData.append("bank_code", data.bank_code);
-    formData.append("bank_name", data.bank_name);
-    formData.append("bank_number", data.bank_number);
-    formData.append("bank_payee", data.bank_payee);
-    formData.append("payment_remark", data.payment_remark);
+    // formData.append("payment_method", data.payment_method);
+    // formData.append("home_address", data.home_address);
+    // formData.append("bank_code", data.bank_code);
+    // formData.append("bank_name", data.bank_name);
+    // formData.append("bank_number", data.bank_number);
+    // formData.append("bank_payee", data.bank_payee);
+    // formData.append("payment_remark", data.payment_remark);
 
     const requestOptions = {
       method: "POST",
@@ -277,8 +289,19 @@ export default function Employee() {
     const jsonData = await res.json();
 
     if (jsonData.newEmployee.rowCount) {
-      alert("inserted into DB");
+      alert("inserted into employee table");
     }
+
+    // const resRole = await fetch(
+    //   `${process.env.REACT_APP_BACKEND_URL}/role/create`,
+    //   requestOptions
+    // );
+    // const jsonDataRole = await res.json();
+
+    // if (jsonDataRole.newRole.rowCount) {
+    //   alert("inserted into role table");
+    // }
+
     checkEmployeeid();
   }
 
@@ -587,25 +610,6 @@ export default function Employee() {
             <div>
               <div>
                 <span>
-                  Report to*{" "}
-                  {errors.report_to && (
-                    <span style={{ color: "red" }}>[Required]</span>
-                  )}
-                </span>
-              </div>
-
-              <select {...register("report_to", { required: true })}>
-                {reportTo.length > 0 &&
-                  reportTo.map((reportTo) => (
-                    <option value={reportTo["id"]} key={reportTo["id"]}>
-                      {reportTo["full_name"]}
-                    </option>
-                  ))}
-              </select>
-            </div>
-            <div>
-              <div>
-                <span>
                   Title*{" "}
                   {errors.title && (
                     <span style={{ color: "red" }}>[Required]</span>
@@ -616,7 +620,7 @@ export default function Employee() {
               <select {...register("title", { required: true })}>
                 {title.length > 0 &&
                   title.map((title) => (
-                    <option value={title["id"]} key={title["id"]}>
+                    <option value={title["id"]} key={"jobTitle" + title["id"]}>
                       {title["title_name"]}
                     </option>
                   ))}
@@ -633,10 +637,54 @@ export default function Employee() {
               </div>
 
               <select {...register("department", { required: true })}>
-                {title.length > 0 &&
-                  title.map((department) => (
-                    <option value={department["id"]} key={department["id"]}>
+                {department.length > 0 &&
+                  department.map((department) => (
+                    <option
+                      value={department["id"]}
+                      key={"department" + department["id"]}
+                    >
                       {department["dept_name"]}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div>
+              <div>
+                <span>
+                  Team*{" "}
+                  {errors.team && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
+              </div>
+
+              <select {...register("team", { required: true })}>
+                {team.length > 0 &&
+                  team.map((team) => (
+                    <option value={team["id"]} key={"team" + team["id"]}>
+                      {team["team_name"]}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div>
+              <div>
+                <span>
+                  Report to*{" "}
+                  {errors.report_to && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
+              </div>
+
+              <select {...register("report_to", { required: true })}>
+                {reportTo.length > 0 &&
+                  reportTo.map((reportTo) => (
+                    <option
+                      value={reportTo["id"]}
+                      key={"report" + reportTo["id"]}
+                    >
+                      {reportTo["full_name"]}
                     </option>
                   ))}
               </select>
