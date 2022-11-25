@@ -59,7 +59,6 @@ export class UserService {
         payment_remark: createUserDto.payment_remark,
       });
 
-      console.log(createUserDto.employeeid);
       const checkid = await this.knex
         .table('employee')
         .select('id')
