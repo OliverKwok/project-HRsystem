@@ -3,6 +3,7 @@ import {
   Injectable,
   HttpStatus,
   ConsoleLogger,
+  MethodNotAllowedException,
 } from '@nestjs/common';
 import { InjectKnex, Knex } from 'nestjs-knex';
 import { CreateDepartmentDto } from './dto/create-department.dto';
@@ -245,11 +246,11 @@ export class DepartmentService {
     }
   }
 
-<<<<<<< HEAD
   async findAll() {
     const res = await this.knex.select('id', 'dept_name').from('department');
     return res;
-=======
+  }
+
   async findCSuite() {
     try {
       const cSuiteTitles = await this.knex.raw(
@@ -267,7 +268,7 @@ export class DepartmentService {
       const managedByNumber = await this.knex('title')
         .select('id')
         // .from('title')
-        .where({"title_name":createDepartmentDto.managed_by });
+        .where({ title_name: createDepartmentDto.managed_by });
       console.log(managedByNumber);
 
       const newDept = await this.knex.table('department').insert({
@@ -280,11 +281,6 @@ export class DepartmentService {
 
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
-  }
-
-  findAll() {
-    return `This action returns all department`;
->>>>>>> 6d35b1c0e42f3c5adcca021b0eadc526bb763fa4
   }
 
   findOne(id: number) {

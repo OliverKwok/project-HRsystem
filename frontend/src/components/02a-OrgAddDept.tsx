@@ -85,7 +85,7 @@ export default function OrgAddDept() {
             </select>
           </div>
 
-          <input type="submit" />
+          <input type="submit" value="Add Department" />
         </div>
       </form>
     </>
