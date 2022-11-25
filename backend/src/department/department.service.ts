@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  Injectable,
+  HttpStatus,
+  ConsoleLogger,
+} from '@nestjs/common';
 import { InjectKnex, Knex } from 'nestjs-knex';
 import { CreateDepartmentDto } from './dto/create-department.dto';
 import { UpdateDepartmentDto } from './dto/update-department.dto';
@@ -237,6 +242,38 @@ export class DepartmentService {
       console.log(error);
 
       return 'not ok';
+    }
+  }
+
+  async findCSuite() {
+    try {
+      const cSuiteTitles = await this.knex.raw(
+        `select title.title_name from title join employee_role on title.id = employee_role.title_id join employee on employee_role.employeeid = employee.id where (employee.report_to = 1 AND employee.id > 1)`,
+      );
+      return cSuiteTitles.rows;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async createDept(createDepartmentDto: CreateDepartmentDto) {
+    console.log(createDepartmentDto.managed_by);
+    try {
+      const managedByNumber = await this.knex('title')
+        .select('id')
+        // .from('title')
+        .where({"title_name":createDepartmentDto.managed_by });
+      console.log(managedByNumber);
+
+      const newDept = await this.knex.table('department').insert({
+        dept_name: createDepartmentDto.dept_name,
+        managed_by: managedByNumber[0].id,
+      });
+      return { newDept };
+    } catch (err) {
+      console.log(err);
+
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
 

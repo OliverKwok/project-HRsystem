@@ -15,7 +15,7 @@ export default function OrgAddTeam() {
   return (
     <section>
          <h3>Add new Team</h3>
-      <form onSubmit={handleSubmit(submitAddTeam)}>
+      <form onSubmit={submitAddTeam}>
         <div className="addTeam">
           <div>
             New Team Name
