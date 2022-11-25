@@ -150,7 +150,7 @@ export async function up(knex: Knex): Promise<void> {
     table.date('start_date');
     table.enu('start_date_period', ['full_day', 'first_half', 'second_half']);
     table.date('end_date');
-    table.enu('end_date_period', ['full_day', 'first_half', 'secnod_half']);
+    table.enu('end_date_period', ['full_day', 'first_half', 'second_half']);
     table.float('number_of_days');
     table.enu('status', [
       'pending',
