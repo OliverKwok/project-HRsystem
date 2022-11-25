@@ -10,11 +10,11 @@ export async function seed(knex: Knex): Promise<void> {
     }
     return row;
   }
-  await seedRow('public_holidays', {
+  await seedRow('event', {
     event_name: 'Annual Dinner',
     date: '2022-12-30',
   });
-  await seedRow('public_holidays', {
+  await seedRow('event', {
     event_name: 'Fire Drill',
     date: '2023-01-09',
   });
