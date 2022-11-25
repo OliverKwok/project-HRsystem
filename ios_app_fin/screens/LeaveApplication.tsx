@@ -59,5 +59,11 @@ export default LeaveApplication;
 const styles = StyleSheet.create({
   inputContainer: {marginHorizontal: 4, marginVertical: 16},
   label: {fontSize: 12, color: GlobalStyles.colors.logoColor, marginBottom: 4},
-  input: {backgroundColor: GlobalStyles.colors.logoColor, padding: 6},
+  input: {
+    backgroundColor: '#cbe7e7',
+    padding: 6,
+    borderRadius: 6,
+    fontSize: 18,
+    width: '80%',
+  },
 });
