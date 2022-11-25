@@ -16,4 +16,14 @@ export class UserController {
   async userCount() {
     return this.userService.userCount();
   }
+
+  @Get('birthdayShowCalendar')
+  async birthdayShowCalendar() {
+    return this.userService.birthdayShowCalendar();
+  }
+
+  @Get('leaveShowCalendar')
+  async leaveShowCalendar() {
+    return this.userService.leaveShowCalendar();
+  }
 }

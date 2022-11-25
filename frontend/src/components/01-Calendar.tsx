@@ -1,113 +1,232 @@
-import React from 'react'
-import FullCalendar, { formatDate } from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-// import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction'
-import { INITIAL_EVENTS, createEventId } from './01-eventSetting'
+import React, { useState, useEffect } from "react";
+import FullCalendar, { formatDate } from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+// import { INITIAL_EVENTS, createEventId } from "./01-eventSetting";
 
-export default class Calendar extends React.Component {
+import moment from "moment";
+moment().format();
 
-  state = {
-    weekendsVisible: true,
-    currentEvents: []
-  }
+interface state {
+  id: string;
+  title: string;
+  start: string;
+  backgroundColor: string;
+  borderColor: string;
+}
+export default function Calendar() {
+  const [initialEvent, setInitialEvent] = useState<state[]>([
+    { id: "", title: "", start: "", backgroundColor: "", borderColor: "" },
+  ]);
 
-  render() {
-    return (
-      <div className='calendar-container'>
+  useEffect(() => {
+    async function checkBirthdayShowCalendar() {
+      const requestOptions = {
+        method: "Get",
+      };
 
-        <div className='calendar-main'>
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/birthdayShowCalendar`,
+        requestOptions
+      );
+      const response = await res.json();
+
+      let i = 1;
+      for (let item of response) {
+        item["id"] = "birthday" + i.toString();
+        item["start"] = changeBirthdayDateFormat(item["start"]);
+        item["title"] = "Birthday: " + item["title"];
+        item["backgroundColor"] = "#0EB3B3";
+        item["borderColor"] = "#0EB3B3";
+        i++;
+      }
+      return response;
+      // setInitialEvent(response);
+    }
+    async function checkLeaveShowCalendar() {
+      const requestOptions = {
+        method: "Get",
+      };
+
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/leaveShowCalendar`,
+        requestOptions
+      );
+      const response = await res.json();
+
+      let i = 1;
+      for (let item of response) {
+        if (
+          // full day one day
+          item["start_date"] == item["end_date"] &&
+          item["start_date_period"] == "full_day" &&
+          item["end_date_period"] == "full_day"
+        ) {
+          item["start"] = item["start"];
+          item["end"] = item["end"];
+        } else if (
+          // full day more than one day
+          item["start_date"] != item["end_date"] &&
+          item["start_date_period"] == "full_day" &&
+          item["end_date_period"] == "full_day"
+        ) {
+          item["start"] = item["start"];
+          item["end"] = item["end"];
+        }
+        if (
+          // one morning
+          item["start_date"] == item["end_date"] &&
+          item["start_date_period"] == "first_half" &&
+          item["end_date_period"] == "first_half"
+        ) {
+          item["start"] = item["start"] + "T09:00:00";
+          item["end"] = item["end"] + "T13:00:00";
+        } else if (
+          // one afternoon
+          item["start_date"] == item["end_date"] &&
+          item["start_date_period"] == "second_half" &&
+          item["end_date_period"] == "second_half"
+        ) {
+          item["start"] = item["start"] + "T14:00:00";
+          item["end"] = item["end"] + "T18:00:00";
+        } else if (
+          // more than one day with afternoon start
+          item["start_date"] != item["end_date"] &&
+          item["start_date_period"] == "full_day" &&
+          item["end_date_period"] == "full_day"
+        ) {
+          item["start"] = item["start"] + "T14:00:00";
+          item["end"] = item["end"];
+        } else if (
+          // more than one day with morning end
+          item["start_date"] != item["end_date"] &&
+          item["start_date_period"] == "full_day" &&
+          item["end_date_period"] == "full_day"
+        ) {
+          item["start"] = item["start"];
+          item["end"] = item["end"] + "T13:00:00";
+        }
+
+        item["id"] = "leave" + i.toString();
+        item["title"] = item["type"] + ": " + item["title"];
+        item["backgroundColor"] = "#42adf5";
+        item["borderColor"] = "#42adf5";
+        i++;
+      }
+      // console.log(response);
+      return response;
+    }
+
+    function changeBirthdayDateFormat(date: string) {
+      return moment(new Date()).format("YYYY") + date.substring(4);
+    }
+    // function changeDateFormat(date: string) {
+    //   return moment(date).format("YYYY-MM-DD");
+    // }
+    async function main() {
+      let array1 = await checkBirthdayShowCalendar();
+      let array2 = await checkLeaveShowCalendar();
+      console.log(array2);
+      let show = [...array1, ...array2];
+      setInitialEvent(show);
+    }
+    main();
+  }, []);
+
+  return (
+    <>
+      <div className="calendar-container">
+        <div className="calendar-main">
           <FullCalendar
-            plugins={[dayGridPlugin, interactionPlugin]}
+            plugins={[dayGridPlugin]}
             headerToolbar={{
-              left: 'prev,next today',
-              center: 'title',
-              right: 'dayGridMonth'
+              left: "prev,next today",
+              center: "title",
+              right: "dayGridMonth",
             }}
-            initialView='dayGridMonth'
-            editable={true}
+            initialView="dayGridMonth"
+            // nextDayThreshold="09:00:00"
+            editable={false} // disable drag and drop
+            weekends={false}
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
-            // weekends={this.state.weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            select={this.handleDateSelect}
-            eventContent={renderEventContent} // custom render function
-            eventClick={this.handleEventClick}
-            eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            /* you can update a remote database when these fire:
-            eventAdd={function(){}}
-            eventChange={function(){}}
-            eventRemove={function(){}}
-            */
+            events={initialEvent} // alternatively, use the `events` setting to fetch from a feed
+            // eventContent={renderEventContent} // custom render function
           />
+          {/* <div className="calendar-info">{renderInfoBox}</div> */}
         </div>
-        <div className='calendar-info'>
-        {this.renderInfoBox()}
+        <div className="calendar-info">
+          <div className="calendar-sidebar">
+            <h2>All Events ({initialEvent.length})</h2>
+            <ul>{initialEvent.map(renderSidebarEvent)}</ul>
+          </div>
         </div>
       </div>
-    )
-  }
-
-  // test 
-
-  renderInfoBox() {
-    return (
-        <div className='calendar-sidebar'>
-          <h2>All Events ({this.state.currentEvents.length})</h2>
-          <ul>
-            {this.state.currentEvents.map(renderSidebarEvent)}
-          </ul>
-        </div>
-    )
-  }
-
-
-  handleDateSelect = (selectInfo: any) => {
-    let title = prompt('Please enter a new title for your event')
-    let calendarApi = selectInfo.view.calendar
-
-    calendarApi.unselect() // clear date selection
-
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      })
-    }
-  }
-
-  handleEventClick = (clickInfo: any) => {
-    // if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove()
-    // }
-  }
-
-  handleEvents = (events: any) => {
-    this.setState({
-      currentEvents: events
-    })
-  }
-
-}
-
-function renderEventContent(eventInfo: any) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
     </>
-  )
+  );
 }
+
+// export class Calendar2 extends React.Component {
+//   state = {
+//     weekendsVisible: true,
+//     currentEvents: [],
+//   };
+
+//   render() {
+//     return (
+//       <div className="calendar-container">
+//         <div className="calendar-main">
+//           <FullCalendar
+//             plugins={[dayGridPlugin]}
+//             headerToolbar={{
+//               left: "prev,next today",
+//               center: "title",
+//               right: "dayGridMonth",
+//             }}
+//             initialView="dayGridMonth"
+//             editable={false} // disable drag and drop
+//             selectable={true}
+//             selectMirror={true}
+//             dayMaxEvents={true}
+//             initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+//             eventContent={renderEventContent} // custom render function
+//           />
+//         </div>
+//         <div className="calendar-info">{this.renderInfoBox()}</div>
+//       </div>
+//     );
+//   }
+
+//   function renderInfoBox() {
+//     return (
+//       <div className="calendar-sidebar">
+//         <h2>All Events ({this.state.currentEvents.length})</h2>
+//         <ul>{this.state.currentEvents.map(renderSidebarEvent)}</ul>
+//       </div>
+//     );
+//   }
+// }
+
+// function renderEventContent(eventInfo: any) {
+//   return (
+//   <>
+//   <b>{eventInfo.timeText}</b>
+//   <i>{eventInfo.event.title}</i>
+// </>
+//   );
+// }
 
 function renderSidebarEvent(event: any) {
   return (
     <li key={event.id}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
+      <b>
+        {formatDate(event.start, {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}
+      </b>
       <i> {event.title}</i>
     </li>
-  )
+  );
 }

@@ -1,25 +1,22 @@
-import { useState, useEffect } from "react";
+import { setUMLActivityDefaults } from "@syncfusion/ej2-react-diagrams";
+import { useState, useEffect, SyntheticEvent } from "react";
 // import Popup from "reactjs-popup";
 // import "reactjs-popup/dist/index.css";
 import "../styles/02a-Popup.css";
 
 export default function PopupAddTitle() {
-// open and close popup
+  // open and close popup
   const [popup, setPopup] = useState(false);
   const openPopup = () => {
     setPopup(!popup);
   };
   const closePopup = () => {
     setPopup(false);
+    setTitle("");
   };
 
-// department dropdown
+  // department dropdown
   let [dept, setDept] = useState([]);
-
-  // let handleDeptDropdown = (e: any) => {
-  //   setDept(e.target.value);
-  //   console.log(e.target.value);
-  // };
 
   const requestOptions = {
     method: "Get",
@@ -31,21 +28,40 @@ export default function PopupAddTitle() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setDept(data);
       });
   }, []);
 
-// submit form to add title
-  async function addTitleHandler(event: any){
+  // submit form to add title
+
+  const [title, setTitle] = useState("");
+  const [department, setDepartment] = useState("Management");
+
+  async function addTitleHandler(event: any) {
     event.preventDefault();
-    const requestOptions ={
-      method:"POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(event.target.value),
-    }
-    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/title/create`, requestOptions);
+    // console.log({
+    //   title_name: title,
+    //   dept: department,
+    // });
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title_name: title,
+        dept: department,
+      }),
+    };
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/title/create`,
+      requestOptions
+    );
     const jsonData = await res.json();
+    console.log(jsonData);
+
+    closePopup();
+    // setTitle("");
   }
 
   return (
@@ -53,6 +69,7 @@ export default function PopupAddTitle() {
       <button className="addtitleBtn" onClick={openPopup}>
         Add New Title
       </button>
+
       {popup && (
         <div className="popupBody">
           <div className="popupHeader">
@@ -63,11 +80,20 @@ export default function PopupAddTitle() {
           </div>
           <form onSubmit={addTitleHandler}>
             <p>
-              Title Name: <input type="text"></input>{" "}
+              Title Name:
+              <input
+                type="text"
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+              ></input>
             </p>
             <p>
               Department:
-              <select>
+              <select
+                onChange={(event: any) => {
+                  setDepartment(event.target.value);
+                }}
+              >
                 {dept.length > 0 &&
                   dept.map((dept) => (
                     <option value={dept["dept_name"]}>
@@ -76,7 +102,7 @@ export default function PopupAddTitle() {
                   ))}
               </select>
             </p>
-            <button type="submit" >Add</button>
+            <button type="submit">Add</button>
           </form>
         </div>
       )}

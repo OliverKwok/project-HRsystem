@@ -10,20 +10,54 @@ export class DepartmentService {
     return 'This action adds a new department';
   }
 
+  async refineData(data: any[]) {
+    data.forEach((element) => {
+      element.data = {
+        name: element.name,
+        avatar: element.profilepic,
+      };
+      delete element['name'];
+      delete element.profilepic;
+    });
+  }
+
+  async editData(data: any[]) {
+    data.forEach((element) => {
+      if (element.employee_id) {
+        element.expanded = true;
+        element.className = 'p-person';
+        element.type = 'person';
+      } else if (element.hasOwnProperty('head_of_dept')) {
+        element.expanded = true;
+        element.className = `department`;
+      } else {
+        // } else if (element.hasOwnProperty('team_id')) {
+        element.expanded = true;
+        element.className = `team`;
+      }
+    });
+  }
+
   async getCEO() {
     let ceo = await this.knex
       .select(
-        this.knex.raw(
-          `concat(employee.first_name, ' ', employee.last_name) as name`,
-        ),
         'employee.id as employee_id',
-        'title_name as title',
+        'title_name as label',
+        this.knex.raw(
+          "json_build_object('name', concat(employee.first_name, ' ', employee.last_name), 'avatar', profilepic) as data",
+        ),
+        // this.knex.raw(
+        //   "case when employee.id is not null then 'person' end type",
+        // ),
+        // this.knex.raw(
+        //   "case when employee.id is not null then 'p-person' end className",
+        // ),
       )
       .from('employee')
       .join('employee_role', 'employee.id', '=', 'employee_role.employeeid')
       .join('title', 'title.id', '=', 'employee_role.title_id')
       .where('title_name', 'CEO');
-    // console.log(ceo);
+    this.editData(ceo);
     return ceo;
   }
 
@@ -34,32 +68,50 @@ export class DepartmentService {
           `concat(employee.first_name, ' ', employee.last_name) as name`,
         ),
         'employee.id as employee_id',
+        'employee.profilepic',
       )
-      .distinct('title_name as title')
+      .distinct('title_name as label')
+      .whereNot('title_name', 'CEO')
       .from('employee')
       .join('employee_role', 'employee.id', '=', 'employee_role.employeeid')
       .join('title', 'title.id', '=', 'employee_role.title_id')
       .join('department', 'department.managed_by', '=', 'employee.id');
-
+    this.editData(chief);
+    this.refineData(chief);
     // console.log(chief);
     return chief;
   }
 
   async getDepartments(managers: number[]) {
     let departments = await this.knex
-      .select('id', 'dept_name', 'managed_by', 'head_of_dept')
-      .from('department');
+      .select(
+        'id',
+        'dept_name as label',
+        'managed_by',
 
+        'head_of_dept',
+      )
+      .from('department');
+    this.editData(departments);
     // console.log({ departments });
     let heads = await this.getHeadOfDept();
     heads.forEach((x) => managers.push(x.employee_id));
     let teams = await this.getTeams(managers);
+
     heads.forEach((head) => {
-      let team = teams.find(
+      let team = teams.filter(
         (team) => team.belonged_to_dept === head.department_id,
       );
-      head['children'] = team ? team.member : [];
+      // TODO add employes
+      // let employeess = await this.getEmployees
+
+      // TODO if no team, show reported-to employees
+      console.log('Before:', head.children);
+
+      if (team.length > 0) head.children = team.concat(head.children);
+      console.log('After:', head.children);
     });
+
     departments.forEach((department) => {
       department['children'] = department.head_of_dept
         ? heads.filter((head) => head.employee_id === department.head_of_dept)
@@ -69,32 +121,45 @@ export class DepartmentService {
   }
 
   async getHeadOfDept() {
-    let head = await this.knex
+    let heads = await this.knex
       .select(
         'department.id as department_id',
         this.knex.raw(
           `concat(employee.first_name, ' ', employee.last_name) as name`,
         ),
         'employee.id as employee_id',
+        'employee.profilepic',
       )
-      .distinct('title_name as title')
+      .distinct('title_name as label')
       .from('employee')
       .join('employee_role', 'employee.id', '=', 'employee_role.employeeid')
       .join('title', 'title.id', '=', 'employee_role.title_id')
       .join('department', 'department.head_of_dept', '=', 'employee.id');
-
     // console.log({ head });
-    return head;
+    let employees = await this.getEmployees();
+    console.dir(employees, { depth: 10 });
+    heads.forEach((head) => {
+      let subordinates = employees.find(
+        (employee) => employee.report_to === head.employee_id,
+      );
+      console.log({ subordinates });
+
+      head.children = subordinates ? subordinates.children : [];
+    });
+    this.editData(heads);
+    this.refineData(heads);
+    return heads;
   }
 
   async getTeams(managers: number[]) {
-    let team = await this.knex
+    let teams = await this.knex
       .select(
         'team.id as team_id',
-        'team_name',
+        'team_name as label',
         'belonged_to_dept',
+        'team_lead',
         this.knex.raw(
-          "json_agg(json_build_object('name', concat(employee.first_name, ' ', employee.last_name), 'title', title_name)) as member",
+          "json_agg(json_build_object('profilepic', employee.profilepic, 'employee_id', employee.id,'name', concat(employee.first_name, ' ', employee.last_name), 'label', title_name)) as children",
         ),
       )
       .from('employee')
@@ -103,9 +168,48 @@ export class DepartmentService {
       .join('team', 'team.id', '=', 'employee_role.team_id')
       .groupBy('team.id')
       .whereNotIn('employee.id', managers);
+    this.editData(teams);
+    teams.forEach((team) => {
+      this.editData(team.children);
+      this.refineData(team.children);
+      let teamLead = team.children.find(
+        (member) => member.employee_id === team.team_lead,
+      );
+      let teamMembers = team.children.filter(
+        (member) => member.employee_id != team.team_lead,
+      );
 
-    console.dir(team, { depth: 5 });
-    return team;
+      if (teamLead) {
+        team.children = [teamLead];
+        teamLead.children = teamMembers;
+      }
+    });
+    console.dir(teams, { depth: 10 });
+    return teams;
+  }
+
+  async getEmployees() {
+    let employees = await this.knex
+      .select(
+        // 'employee.id as employee_id',
+        // 'employee.profilepic',
+        // 'title.title_name as label',
+        'employee.report_to',
+
+        this.knex.raw(
+          "json_agg(json_build_object('profilepic', employee.profilepic, 'employee_id', employee.id,'name', concat(employee.first_name, ' ', employee.last_name), 'label', title_name)) as children",
+        ),
+      )
+      .from('employee')
+      .join('employee_role', 'employee_role.employeeid', '=', 'employee.id')
+      .join('title', 'title.id', '=', 'employee_role.title_id')
+      .groupBy('report_to')
+      .where('team_id', 1);
+    employees.forEach((employee) => {
+      this.editData(employee.children);
+      this.refineData(employee.children);
+    });
+    return employees;
   }
 
   async getOrgChart() {
@@ -128,7 +232,7 @@ export class DepartmentService {
         );
       });
 
-      return result;
+      return [result];
     } catch (error) {
       console.log(error);
 

@@ -37,10 +37,10 @@ type FormState = {
   status: string;
   job_nature: string;
   // length_of_service: string;
-  notice_period: string;
+  notice_period: number;
   report_to: string;
 
-  al_leave_entitled_peryear: string;
+  al_leave_entitled_peryear: number;
   // AL_leave_taken: string;
   // AL_leave_balance: string;
   // sick_leave_taken: string;
@@ -98,10 +98,10 @@ export default function Employee() {
       status: "",
       job_nature: "",
       // length_of_service: "",
-      notice_period: "",
+      notice_period: 30,
       report_to: "",
 
-      al_leave_entitled_peryear: "",
+      al_leave_entitled_peryear: 0,
 
       pay_currency: "",
       basic_salary: "",
@@ -172,10 +172,57 @@ export default function Employee() {
   // submit
   async function submit(data: FormState) {
     console.log("submit form data:", data);
+
+    // formData version
+    const formData = new FormData();
+
+    formData.append("employeeid", data.employeeid);
+    formData.append("first_name", data.first_name);
+    formData.append("last_name", data.last_name);
+    formData.append("chinese_name", data.chinese_name);
+    formData.append("alias", data.alias);
+    formData.append("hkid", data.hkid);
+    formData.append("passport", data.passport);
+    formData.append("gender", data.gender);
+    formData.append("nationality", data.nationality);
+    formData.append("date_of_birth", JSON.stringify(data.date_of_birth));
+    formData.append("profilepic", data.profilepic[0]);
+    formData.append("mobile_countrycode", data.mobile_countrycode);
+    formData.append("mobile_no", data.mobile_no);
+    formData.append("work_phone_no", data.work_phone_no);
+    formData.append("email_personal", data.email_personal);
+    formData.append("email_work", data.email_work);
+    // formData.append("password",data.password);
+    formData.append("highest_education", data.highest_education);
+    formData.append("institution_name", data.institution_name);
+    formData.append("major", data.major);
+    formData.append("last_job_company", data.last_job_company);
+    formData.append("last_job_title", data.last_job_title);
+    formData.append("start_date", JSON.stringify(data.start_date));
+    formData.append("status", data.status);
+    formData.append("job_nature", data.job_nature);
+    formData.append("notice_period", JSON.stringify(data.notice_period));
+    formData.append("report_to", data.report_to);
+    formData.append(
+      "al_leave_entitled_peryear",
+      JSON.stringify(data.al_leave_entitled_peryear)
+    );
+    formData.append("pay_currency", data.pay_currency);
+    // formData.append("basic_salary", data.basic_salary);
+    formData.append("payment_method", data.payment_method);
+    formData.append("home_address", data.home_address);
+    formData.append("bank_code", data.bank_code);
+    formData.append("bank_name", data.bank_name);
+    formData.append("bank_number", data.bank_number);
+    formData.append("bank_payee", data.bank_payee);
+    formData.append("payment_remark", data.payment_remark);
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
+      // headers: { "Content-Type": "multi-type/form-data" },
+      // body: formData,
     };
 
     const res = await fetch(
@@ -492,10 +539,15 @@ export default function Employee() {
           </div>
           <div>
             <div>
-              <span>Report To</span>
+              <span>
+                Report to*{" "}
+                {errors.report_to && (
+                  <span style={{ color: "red" }}>[Required]</span>
+                )}
+              </span>
             </div>
 
-            <input type="text" {...register("report_to")} />
+            <input type="text" {...register("report_to", { required: true })} />
           </div>
           <hr />
           <h2>Payment Detail</h2>
@@ -505,9 +557,7 @@ export default function Employee() {
                 <span>Salary Currency*</span>
               </div>
               <select {...register("pay_currency")}>
-                <option value="HKD" selected>
-                  HKD
-                </option>
+                <option value="HKD">HKD</option>
               </select>
             </div>
             <div>
@@ -517,12 +567,29 @@ export default function Employee() {
 
               <input type="text" {...register("basic_salary")} />
             </div>
-            <div>
+            {/* <div>
               <div>
                 <span>Payment Method</span>
               </div>
 
               <select {...register("payment_method")}>
+                <option value="bank_transfer">Bank Transfer</option>
+                <option value="cheque">Cheque</option>
+                <option value="cash">Cash</option>
+                <option value="other">Other</option>
+              </select>
+            </div> */}
+            <div>
+              <div>
+                <span>
+                  Payment Method*{" "}
+                  {errors.payment_method && (
+                    <span style={{ color: "red" }}>[Required]</span>
+                  )}
+                </span>
+              </div>
+
+              <select {...register("payment_method", { required: true })}>
                 <option value="bank_transfer">Bank Transfer</option>
                 <option value="cheque">Cheque</option>
                 <option value="cash">Cash</option>
