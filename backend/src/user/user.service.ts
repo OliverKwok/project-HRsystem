@@ -83,14 +83,40 @@ export class UserService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
-  async dayShowCalendar() {
+  async birthdayShowCalendar() {
     try {
       const res = await this.knex.raw(
-        `select concat(employee.alias,' ',employee.last_name) as title, date_of_birth as start from employee where date_of_birth is not null`,
+        `select concat(employee.alias,' ',employee.last_name) as title, TO_CHAR(date_of_birth::date, 'yyyy-mm-dd') as start from employee where date_of_birth is not null`,
       );
       const birthdays = res.rows;
 
       return birthdays;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+  async leaveShowCalendar() {
+    try {
+      const res = await this.knex.raw(
+        `select concat(employee.alias,' ',employee.last_name) as title,
+        leave_type.type,
+        leave_application.status,
+        TO_CHAR(leave_application.start_date::date, 'yyyy-mm-dd') as start,
+        TO_CHAR(leave_application.end_date::date, 'yyyy-mm-dd') as end,
+        leave_application.start_date_period,
+        leave_application.end_date_period
+        from leave_application 
+        inner join employee on leave_application.employee_id = employee.id
+        inner join leave_type on leave_application.leave_type = leave_type.id
+        where leave_application.status = 'approved'
+        or leave_application.status = 'pending'  
+        or leave_application.status = 'taken'
+        `,
+      );
+      const leaveDays = res.rows;
+      console.log(leaveDays);
+
+      return leaveDays;
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
