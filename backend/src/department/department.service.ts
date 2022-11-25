@@ -27,9 +27,13 @@ export class DepartmentService {
         element.expanded = true;
         element.className = 'p-person';
         element.type = 'person';
-      } else {
+      } else if (element.hasOwnProperty('head_of_dept')) {
         element.expanded = true;
         element.className = `department`;
+      } else {
+        // } else if (element.hasOwnProperty('team_id')) {
+        element.expanded = true;
+        element.className = `team`;
       }
     });
   }
@@ -105,7 +109,6 @@ export class DepartmentService {
     let head = await this.knex
       .select(
         'department.id as department_id',
-
         this.knex.raw(
           `concat(employee.first_name, ' ', employee.last_name) as name`,
         ),
@@ -117,11 +120,9 @@ export class DepartmentService {
       .join('employee_role', 'employee.id', '=', 'employee_role.employeeid')
       .join('title', 'title.id', '=', 'employee_role.title_id')
       .join('department', 'department.head_of_dept', '=', 'employee.id');
-
     // console.log({ head });
     this.editData(head);
     this.refineData(head);
-
     return head;
   }
 
@@ -146,8 +147,27 @@ export class DepartmentService {
       this.editData(element.children);
       this.refineData(element.children);
     });
-    console.dir(team, { depth: 5 });
+    console.dir(team, { depth: 10 });
     return team;
+  }
+
+  async getEmployees() {
+    let employees = await this.knex
+      .select(
+        'employee.id as employee_id',
+        'employee.profilepic',
+        'title.title_name as label',
+        'employee.report_to',
+        this.knex.raw(
+          "json_agg(json_build_object('profilepic', employee.profilepic, 'employee_id', employee.id,'name', concat(employee.first_name, ' ', employee.last_name), 'label', title_name)) as children",
+        ),
+      )
+      .from('employee')
+      .join('title', 'title.id', '=', 'employee_role.title_id')
+      .groupBy('report_to');
+    this.editData(employees);
+    this.refineData(employees);
+    return employees;
   }
 
   async getOrgChart() {

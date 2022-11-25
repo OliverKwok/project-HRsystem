@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { OrganizationChart } from "primereact/organizationchart";
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
 import "../styles/02a-OrgChart2.css";
-import { MdOutlineRotate90DegreesCcw } from "react-icons/md";
-import { ResultType } from "@remix-run/router/dist/utils";
+import JsPDF from "jspdf";
 
 export default function OrgChart2() {
   const [selection, setSelection] = useState([]);
   const [myData, setMyData] = useState([]);
+  const ref = useRef(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -130,22 +130,41 @@ export default function OrgChart2() {
     return node.label;
   }
 
+  // const ref = useRef(null);
+
+  // useEffect(() => {
+  //   const licenseBanner: any = document.querySelector("div#js-licensing");
+  //   licenseBanner.innerHTML = "";
+  //   licenseBanner.style.display = "none";
+  // }, []);
+
+  const generatePDF = () => {
+    const report = new JsPDF("landscape", "pt", "a3");
+    report.html((document as any).querySelector(".report")).then(() => {
+      report.save("orgchart.pdf");
+    });
+  };
+
   return (
-    <div className="organizationchart-demo">
-      <div className="card">
-        {myData.length > 0 ? (
-          <OrganizationChart
-            value={myData}
-            nodeTemplate={nodeTemplate}
-            selection={selection}
-            selectionMode="multiple"
-            //   onSelectionChange={(event: any) => setSelection(event.data)}
-            className="company"
-          ></OrganizationChart>
-        ) : (
-          <>nothing</>
-        )}
-        {/* <OrganizationChart
+    <>
+      <button onClick={generatePDF} type="button">
+        Export PDF
+      </button>
+      <div className="organizationchart-demo report">
+        <div className="card">
+          {myData.length > 0 ? (
+            <OrganizationChart
+              value={myData}
+              nodeTemplate={nodeTemplate}
+              selection={selection}
+              selectionMode="multiple"
+              //   onSelectionChange={(event: any) => setSelection(event.data)}
+              className="company"
+            ></OrganizationChart>
+          ) : (
+            <>nothing</>
+          )}
+          {/* <OrganizationChart
           value={myData}
           nodeTemplate={nodeTemplate}
           selection={selection}
@@ -153,7 +172,8 @@ export default function OrgChart2() {
           //   onSelectionChange={(event: any) => setSelection(event.data)}
           className="company"
         ></OrganizationChart> */}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
