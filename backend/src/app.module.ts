@@ -10,6 +10,7 @@ import { DepartmentModule } from './department/department.module';
 import { AppService } from './app.service';
 import { TitleModule } from './title/title.module';
 import { TeamModule } from './team/team.module';
+import { RoleModule } from './role/role.module';
 Config();
 
 @Module({
@@ -26,6 +27,7 @@ Config();
     DepartmentModule,
     TitleModule,
     TeamModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

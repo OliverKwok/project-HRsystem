@@ -199,7 +199,7 @@ export class DepartmentService {
   }
 
   async findAll() {
-    const res = await this.knex.select('dept_name').from('department');
+    const res = await this.knex.select('id', 'dept_name').from('department');
     return res;
   }
 

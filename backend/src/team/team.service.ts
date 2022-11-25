@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { InjectKnex, Knex } from 'nestjs-knex';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 
 @Injectable()
 export class TeamService {
+  constructor(@InjectKnex() private readonly knex: Knex) {}
   create(createTeamDto: CreateTeamDto) {
     return 'This action adds a new team';
   }
 
-  findAll() {
-    return `This action returns all team`;
+  async findAll() {
+    const res = await this.knex.select('id', 'team_name').from('team');
+    return res;
   }
 
   findOne(id: number) {

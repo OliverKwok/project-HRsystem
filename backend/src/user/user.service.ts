@@ -12,9 +12,8 @@ import * as bcrypt from 'bcrypt';
 @Injectable({})
 export class UserService {
   constructor(@InjectKnex() private readonly knex: Knex) {}
-
   async createUser(createUserDto: CreateUserDto) {
-    console.log(createUserDto);
+    // console.log(createUserDto);
     try {
       const newEmployee = await this.knex.table('employee').insert({
         employeeid: createUserDto.employeeid,
@@ -58,6 +57,19 @@ export class UserService {
         bank_number: createUserDto.bank_number,
         bank_payee: createUserDto.bank_payee,
         payment_remark: createUserDto.payment_remark,
+      });
+
+      console.log(createUserDto.employeeid);
+      const checkid = await this.knex
+        .table('employee')
+        .select('id')
+        .where({ employeeid: createUserDto.employeeid });
+
+      const newRole = await this.knex.table('employee_role').insert({
+        employeeid: checkid[0].id,
+        department_id: createUserDto.department,
+        team_id: createUserDto.team,
+        title_id: createUserDto.title,
       });
 
       return { newEmployee };
