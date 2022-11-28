@@ -7,9 +7,9 @@ import "../styles/00-LoginForm.css";
 export default function LoginForm() {
   const { handleSubmit, register } = useForm();
   const dispatch = useAppDispatch();
-  const [showLogin, setShowLogin] = useState(false);
+  // const [showLogin, setShowLogin] = useState(false);
 
-  useEffect(() => {}, [showLogin]);
+  // useEffect(() => {}, [showLogin]);
 
   return (
     <div className="login-page-container">

@@ -130,6 +130,10 @@ export default function Employee() {
   const [department, setDepartment] = useState([]);
   const [team, setTeam] = useState([]);
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [workEmail, setWorkEmail] = useState("");
+
   // check lastest employeeid
   async function checkEmployeeid() {
     const requestOptions = {
@@ -305,6 +309,7 @@ export default function Employee() {
     checkEmployeeid();
   }
 
+  // auto calculate the age
   const calAge = (event: any) => {
     const todayDate: any = moment(new Date(), "YYYY-MM-DD");
     const date_of_birth_input = moment(event.target.value, "YYYY-MM-DD");
@@ -312,6 +317,40 @@ export default function Employee() {
     setAge(result);
 
     return result;
+  };
+
+  // auto gen the work email address
+
+  function genWorkEmail(firstNameInput: string, lastNameInput: string) {
+    let firstNameOutput;
+    let lastNameOutput;
+
+    if (firstNameInput != undefined) {
+      firstNameOutput = firstNameInput.replace(" ", ".");
+    }
+
+    if (lastNameInput != undefined) {
+      lastNameOutput = lastNameInput.replace(" ", "");
+    }
+
+    let workEmailGenerated =
+      firstNameOutput + "." + lastNameOutput + "@company.com";
+    setValue("email_work", workEmailGenerated);
+    return workEmailGenerated;
+  }
+
+  const getFirstName = (event: any) => {
+    // setFirstName(event.target.value);
+    setValue("first_name", event.target.value);
+    setWorkEmail(genWorkEmail(event.target.value, getValues("last_name")));
+    return;
+  };
+
+  const getLastName = (event: any) => {
+    // setLastName(event.target.value);
+    setValue("last_name", event.target.value);
+    setWorkEmail(genWorkEmail(getValues("first_name"), event.target.value));
+    return;
   };
 
   return (
@@ -344,6 +383,7 @@ export default function Employee() {
               <input
                 type="text"
                 {...register("first_name", { required: true })}
+                onChange={getFirstName}
               />
             </div>
             <div>
@@ -359,6 +399,7 @@ export default function Employee() {
               <input
                 type="text"
                 {...register("last_name", { required: true })}
+                onChange={getLastName}
               />
             </div>
             <div>
@@ -507,6 +548,8 @@ export default function Employee() {
                   pattern:
                     /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
                 })}
+                value={workEmail}
+                disabled
               />
             </div>
           </div>

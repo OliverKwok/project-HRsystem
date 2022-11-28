@@ -85,7 +85,7 @@ export class UserService {
       .where({ email_work: username })
       .where('employee_role.department_id', '=', '6');
 
-    console.log(checkByWorkEmail);
+    // console.log(checkByWorkEmail);
 
     return {
       username: username,
