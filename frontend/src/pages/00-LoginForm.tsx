@@ -59,7 +59,7 @@ export default function LoginForm() {
             <input placeholder="Enter the username" {...register("username")} />
           </div>
           <div className="row">
-            <label htmlFor="password">Username</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               placeholder="Enter the password"
