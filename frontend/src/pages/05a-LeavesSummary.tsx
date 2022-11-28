@@ -22,24 +22,29 @@ export default function LeavesSummary() {
       operator: FilterOperator.AND,
       constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
     },
-    "country.name": {
-      operator: FilterOperator.AND,
-      constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
-    },
-    representative: { value: null, matchMode: FilterMatchMode.IN },
-    date: {
-      operator: FilterOperator.AND,
-      constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }],
-    },
-    balance: {
+    remainingAL: {
       operator: FilterOperator.AND,
       constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
     },
-    status: {
+    entitledAL: {
       operator: FilterOperator.OR,
       constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
     },
-    activity: { value: null, matchMode: FilterMatchMode.BETWEEN },
+
+    // value: null, matchMode: FilterMatchMode.IN },
+    // date: {
+    //   operator: FilterOperator.AND,
+    //   constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }],
+    // },
+    // balance: {
+    //   operator: FilterOperator.AND,
+    //   constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
+    // },
+    // status: {
+    //   operator: FilterOperator.OR,
+    //   constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
+    // },
+    // activity: { value: null, matchMode: FilterMatchMode.BETWEEN },
   });
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [loading, setLoading] = useState(true);
@@ -405,6 +410,7 @@ export default function LeavesSummary() {
             entitledAL: record.entitledAL,
             remainingAL: record.entitledAL - record.al_leave_taken,
             activity: record.entitledAL - record.al_leave_taken,
+            verified: true,
           };
         });
         setLeaveRecord(fetchData);
@@ -679,10 +685,10 @@ export default function LeavesSummary() {
             responsiveLayout="scroll"
             globalFilterFields={[
               "name",
-              "country.name",
-              "representative.name",
-              "balance",
-              "status",
+              "remainingAL",
+              "entitledAL",
+              // "balance",
+              // "status",
             ]}
             emptyMessage="No leave record found."
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
