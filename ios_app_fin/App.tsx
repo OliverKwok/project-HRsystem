@@ -7,9 +7,9 @@
  *
  * @format
  */
-
-import React from 'react';
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import messaging from '@react-native-firebase/messaging';
+import React, {useEffect} from 'react';
+import {Alert, StatusBar, StyleSheet, Text, View} from 'react-native';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -34,11 +34,38 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   // const navigation = useNavigation();
+  useEffect(() => {
+    async function main() {
+      await reg_token();
+      await reg_event_listener();
+    }
+    main();
+  });
+  async function reg_event_listener() {
+    // foreground
+    messaging().onMessage(async remoteMessage => {
+      console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    // background & quit
+    messaging().setBackgroundMessageHandler(async remoteMessage => {
+      console.log('Message handled in the background!', remoteMessage);
+    });
+  }
+  async function reg_token() {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+      const token = await messaging().getToken();
+      console.log(token);
+      // put token into local storage
+    }
+  }
   return (
-    // <View>
-    //   <Text>Hello World</Text>
-    //   <Ionic name="home" />
-    // </View>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
