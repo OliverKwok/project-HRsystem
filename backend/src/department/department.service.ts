@@ -285,7 +285,6 @@ export class DepartmentService {
     }
   }
 
-<<<<<<< HEAD
   async createTeam(createTeamDto: CreateTeamDto) {
     try {
       const deptID = await this.knex('department')
@@ -304,18 +303,16 @@ export class DepartmentService {
     }
   }
 
-  async findAll() {
-    try {
-      const allDept = await this.knex.raw(`select dept_name from department`);
-      return allDept.rows;
-    } catch (err) {
-      throw new HttpException(err, HttpStatus.BAD_REQUEST);
-    }
-  }
+  // async findAll() {
+  //   try {
+  //     const allDept = await this.knex.raw(`select dept_name from department`);
+  //     return allDept.rows;
+  //   } catch (err) {
+  //     throw new HttpException(err, HttpStatus.BAD_REQUEST);
+  //   }
+  // }
 
 
-=======
->>>>>>> 045483a483088d3dd912a6f90f7c25230a01ddc9
   findOne(id: number) {
     return `This action returns a #${id} department`;
   }
