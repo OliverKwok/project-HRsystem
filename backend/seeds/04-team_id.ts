@@ -12,10 +12,18 @@ export async function seed(knex: Knex): Promise<void> {
     return row;
   }
 
-  await seedRow('team', { team_name: 'NA' });
-  await seedRow('team', { team_name: 'A', team_lead: 9, belonged_to_dept: 5 });
-  await seedRow('team', { team_name: 'B', team_lead: 12, belonged_to_dept: 5 });
-  await seedRow('team', { team_name: 'C' });
-  await seedRow('team', { team_name: 'D' });
-  await seedRow('team', { team_name: 'E' });
+  await seedRow('team', { team_name: 'Not in Team' });
+  await seedRow('team', {
+    team_name: 'Team A',
+    team_lead: 9,
+    belonged_to_dept: 5,
+  });
+  await seedRow('team', {
+    team_name: 'Team B',
+    team_lead: 12,
+    belonged_to_dept: 5,
+  });
+  await seedRow('team', { team_name: 'Team C' });
+  await seedRow('team', { team_name: 'Team D' });
+  await seedRow('team', { team_name: 'Team E' });
 }
