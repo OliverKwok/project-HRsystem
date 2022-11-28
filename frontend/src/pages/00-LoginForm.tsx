@@ -44,10 +44,8 @@ export default function LoginForm() {
                 }
               );
               const profileJson = await profileRes.json();
-              console.log(profileJson);
-              // if (profileJson.username) {
-              //   alert(`welcome back, hello ${profileJson.username}`);
-              // }
+              // console.log(profileJson);
+
               dispatch(login(profileJson, json.access_token));
               localStorage.setItem("token", json.access_token);
             }
