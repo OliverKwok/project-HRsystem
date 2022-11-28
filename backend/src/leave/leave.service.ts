@@ -17,6 +17,7 @@ export class LeaveService {
     try {
       let res = await this.knex
         .select(
+          'id',
           'al_leave_entitled_peryear as entitledAL',
           'al_leave_taken',
           this.knex.raw(
@@ -47,21 +48,24 @@ export class LeaveService {
   }
 
   async updateAL(updateLeaveDto: UpdateLeaveDto) {
+    console.log(updateLeaveDto);
     try {
-      let nameCombined = await this.knex
-        .table('employee')
-        .select(
-          this.knex.raw(
-            `concat(UPPER(employee.last_name), ' ', employee.first_name, ', ', employee.alias) as name`,
-          ),
-        );
       const newAL = await this.knex
-        .table('employee')
-        .insert({
+        .update({
           al_leave_taken: updateLeaveDto.al_leave_taken,
         })
-        .where({ nameCombined: updateLeaveDto.name });
+        .table('employee')
+        .where({ id: updateLeaveDto.id });
       return newAL;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async getTypes() {
+    try {
+      let allTypes = await this.knex.select('type', 'id').from('leave_type');
+      return allTypes;
     } catch (err) {
       console.log(err);
     }

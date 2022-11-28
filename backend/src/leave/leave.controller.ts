@@ -22,7 +22,7 @@ export class LeaveController {
   }
 
   @Get('getemployees')
-  getemployees(){
+  getemployees() {
     return this.leaveService.getEmployees();
   }
 
@@ -30,6 +30,11 @@ export class LeaveController {
   updateAL(@Body() updateLeaveDto: UpdateLeaveDto) {
     console.log(updateLeaveDto);
     return this.leaveService.updateAL(updateLeaveDto);
+  }
+
+  @Get('types')
+  getTypes(){
+    return this.leaveService.getTypes();
   }
 
   // @Patch(':id')
@@ -46,8 +51,6 @@ export class LeaveController {
   // findOne(@Param('id') id: string) {
   //   return this.leaveService.findOne(+id);
   // }
-
-
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {

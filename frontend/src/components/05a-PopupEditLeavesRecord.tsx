@@ -10,7 +10,7 @@ export default function PopupEditLeavesRecord() {
   const [employeeField, setEmployeeField] = useState<string>();
   const [alEntitled, setalEntitled] = useState<number>();
   const [alTaken, setalTaken] = useState<number>();
-
+  const [employeeID, setEmployeeID] = useState<number>();
   //popup open and close
   const openPopup = () => {
     setPopup(!popup);
@@ -62,12 +62,20 @@ export default function PopupEditLeavesRecord() {
           if (data.res[i].name == employeeField) {
             setalEntitled(data.res[i].entitledAL);
             setalTaken(data.res[i].al_leave_taken);
+            setEmployeeID(data.res[i].id);
             return;
           }
         }
       });
   }, [employeeField]);
-  console.log(alTaken, alEntitled);
+  console.log(
+    "AL Taken: ",
+    alTaken,
+    "AL Entitled: ",
+    alEntitled,
+    "Employee ID: ",
+    employeeID
+  );
 
   function subtractAL(event: any) {
     event.preventDefault();
@@ -86,21 +94,32 @@ export default function PopupEditLeavesRecord() {
 
   async function submitEditAL(event: any) {
     event.preventDefault();
-    console.log(alTaken, alEntitled, employeeField);
-  const requestOptions = {
-      method: "POST",
+    console.log(
+      alTaken,
+      typeof alTaken,
+      alEntitled,
+      employeeField,
+      employeeID,
+      typeof employeeID
+    );
+    const requestOptions = {
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        id: employeeID,
         al_leave_taken: alTaken,
-        name: employeeField,
       }),
     };
-    const res = await fetch(
+    console.log(requestOptions);
+    // const res =
+    await fetch(
       `${process.env.REACT_APP_BACKEND_URL}/leave/update_al`,
       requestOptions
-    );
-    const jsonData = await res.json();
-    console.log(jsonData);
+    )
+      .then((response) => response.json)
+      .then((data) => console.log(data));
+    // const jsonData = await res.json();
+    // console.log(jsonData);
   }
 
   return (
