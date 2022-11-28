@@ -258,8 +258,10 @@ export async function up(knex: Knex): Promise<void> {
 
 // knex down
 export async function down(knex: Knex): Promise<void> {
+  await knex.schema.dropTableIfExists('event');
   await knex.schema.dropTableIfExists('notification');
   await knex.schema.dropTableIfExists('termination');
+  await knex.schema.dropTableIfExists('payroll_edit_history');
   await knex.schema.dropTableIfExists('payroll');
   await knex.schema.dropTableIfExists('payroll_dates');
   await knex.schema.dropTableIfExists('attendance');
