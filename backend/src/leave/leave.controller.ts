@@ -26,6 +26,17 @@ export class LeaveController {
     return this.leaveService.getEmployees();
   }
 
+  @Patch('update_al')
+  updateAL(@Body() updateLeaveDto: UpdateLeaveDto) {
+    console.log(updateLeaveDto);
+    return this.leaveService.updateAL(updateLeaveDto);
+  }
+
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateLeaveDto: UpdateLeaveDto) {
+  //   return this.leaveService.update(+id, updateLeaveDto);
+  // }
+
   // @Post()
   // create(@Body() createLeaveDto: CreateLeaveDto) {
   //   return this.leaveService.create(createLeaveDto);
@@ -36,10 +47,7 @@ export class LeaveController {
   //   return this.leaveService.findOne(+id);
   // }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateLeaveDto: UpdateLeaveDto) {
-  //   return this.leaveService.update(+id, updateLeaveDto);
-  // }
+
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {

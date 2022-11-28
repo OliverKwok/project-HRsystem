@@ -96,7 +96,6 @@ export class DepartmentService {
         'id',
         'dept_name as label',
         'managed_by',
-
         'head_of_dept',
       )
       .from('department');

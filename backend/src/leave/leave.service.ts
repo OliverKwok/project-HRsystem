@@ -46,16 +46,33 @@ export class LeaveService {
     }
   }
 
+  async updateAL(updateLeaveDto: UpdateLeaveDto) {
+    try {
+      let nameCombined = await this.knex
+        .table('employee')
+        .select(
+          this.knex.raw(
+            `concat(UPPER(employee.last_name), ' ', employee.first_name, ', ', employee.alias) as name`,
+          ),
+        );
+      const newAL = await this.knex
+        .table('employee')
+        .insert({
+          al_leave_taken: updateLeaveDto.al_leave_taken,
+        })
+        .where({ nameCombined: updateLeaveDto.name });
+      return newAL;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   // create(createLeaveDto: CreateLeaveDto) {
   //   return 'This action adds a new leave';
   // }
 
   // findOne(id: number) {
   //   return `This action returns a #${id} leave`;
-  // }
-
-  // update(id: number, updateLeaveDto: UpdateLeaveDto) {
-  //   return `This action updates a #${id} leave`;
   // }
 
   // remove(id: number) {

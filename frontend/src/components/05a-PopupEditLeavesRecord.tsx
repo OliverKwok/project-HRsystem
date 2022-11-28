@@ -42,7 +42,7 @@ export default function PopupEditLeavesRecord() {
     setEmployeeField(e.value.name);
   };
   console.log(employeeField);
-  
+
   // fetch AL + leave taken of a particular employee
   useEffect(() => {
     const requestOptions = {
@@ -84,6 +84,25 @@ export default function PopupEditLeavesRecord() {
     }
   }
 
+  async function submitEditAL(event: any) {
+    event.preventDefault();
+    console.log(alTaken, alEntitled, employeeField);
+  const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        al_leave_taken: alTaken,
+        name: employeeField,
+      }),
+    };
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/leave/update_al`,
+      requestOptions
+    );
+    const jsonData = await res.json();
+    console.log(jsonData);
+  }
+
   return (
     <div className="btn_div">
       <button className="edittitleBtn" onClick={openPopup}>
@@ -97,7 +116,7 @@ export default function PopupEditLeavesRecord() {
               X
             </h2>
           </div>
-          <form>
+          <form onSubmit={submitEditAL}>
             {/* TODO filter search employee */}
             <Dropdown
               value={employeeField}
