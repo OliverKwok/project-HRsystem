@@ -110,10 +110,6 @@ export class DepartmentService {
       let team = teams.filter(
         (team) => team.belonged_to_dept === head.department_id,
       );
-      // TODO add employes
-      // let employeess = await this.getEmployees
-
-      // TODO if no team, show reported-to employees
       console.log('Before:', head.children);
 
       if (team.length > 0) head.children = team.concat(head.children);
