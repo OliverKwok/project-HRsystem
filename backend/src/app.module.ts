@@ -10,7 +10,7 @@ import { DepartmentModule } from './department/department.module';
 import { AppService } from './app.service';
 import { TitleModule } from './title/title.module';
 import { TeamModule } from './team/team.module';
-import { LeaveModule } from './leave/leave.module';
+
 Config();
 
 @Module({
