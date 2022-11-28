@@ -1,7 +1,6 @@
 import { Knex } from 'knex';
 
 export async function seed(knex: Knex): Promise<void> {
-  
   // check before insert instead of deleting table
   async function seedRow(table: string, rowData: object) {
     let row = await knex(table).select('id').where(rowData).first();
@@ -13,12 +12,12 @@ export async function seed(knex: Knex): Promise<void> {
   }
 
   await seedRow('employee', {
-    employeeID: 'DEMO001',
+    employeeid: 'DEMO001',
     first_name: 'Tse Hin',
     last_name: 'Chan',
     chinese_name: '陳梓軒',
     alias: 'Liam',
-    HKID: 'X522891(9)',
+    hkid: 'X522891(9)',
     gender: 'M',
     nationality: 'China',
     date_of_birth: '24/7/1997',
@@ -52,12 +51,12 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO002',
+    employeeid: 'DEMO002',
     first_name: 'Yu Hin',
     last_name: 'Lee',
     chinese_name: '李宇軒',
     alias: 'Noah',
-    HKID: 'Y672490(4)',
+    hkid: 'Y672490(4)',
     gender: 'M',
     nationality: 'UK',
     date_of_birth: '30/6/1990',
@@ -91,12 +90,12 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO003',
+    employeeid: 'DEMO003',
     first_name: 'Tse Him',
     last_name: 'Cheung',
     chinese_name: '張子謙',
     alias: 'Oliver',
-    HKID: 'Z885789(8)',
+    hkid: 'Z885789(8)',
     gender: 'M',
     nationality: 'HK',
     date_of_birth: '16/6/1996',
@@ -130,12 +129,12 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO004',
+    employeeid: 'DEMO004',
     first_name: 'Lok Him',
     last_name: 'Wong',
     chinese_name: '黃樂軒',
     alias: 'Elijah',
-    HKID: 'X223216(2)',
+    hkid: 'X223216(2)',
     gender: 'M',
     nationality: 'UK',
     date_of_birth: '17/3/1995',
@@ -169,12 +168,12 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO005',
+    employeeid: 'DEMO005',
     first_name: 'Tse Long',
     last_name: 'Ho',
     chinese_name: '何子朗',
     alias: 'James',
-    HKID: 'Y848205(6)',
+    hkid: 'Y848205(6)',
     gender: 'M',
     nationality: 'HK',
     date_of_birth: '14/6/1993',
@@ -208,7 +207,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO006',
+    employeeid: 'DEMO006',
     first_name: 'Ka Lok',
     last_name: 'Chan',
     chinese_name: '陳家樂',
@@ -248,7 +247,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO007',
+    employeeid: 'DEMO007',
     first_name: 'Cheuk Lam',
     last_name: 'Lee',
     chinese_name: '李卓霖',
@@ -288,7 +287,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO008',
+    employeeid: 'DEMO008',
     first_name: 'Tse Hin',
     last_name: 'Cheung',
     chinese_name: '張子軒',
@@ -327,7 +326,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO009',
+    employeeid: 'DEMO009',
     first_name: 'Chun Hei',
     last_name: 'Wong',
     chinese_name: '黃俊熙',
@@ -366,7 +365,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO010',
+    employeeid: 'DEMO010',
     first_name: 'Ho Yin',
     last_name: 'Ho',
     chinese_name: '何浩賢',
@@ -406,7 +405,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO011',
+    employeeid: 'DEMO011',
     first_name: 'Hoi Ching',
     last_name: 'Chan',
     chinese_name: '陳凱晴',
@@ -445,7 +444,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO012',
+    employeeid: 'DEMO012',
     first_name: 'Tse Ching',
     last_name: 'Lee',
     chinese_name: '李芷晴',
@@ -484,7 +483,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO013',
+    employeeid: 'DEMO013',
     first_name: 'Hiu Ching',
     last_name: 'Cheung',
     chinese_name: '張曉晴',
@@ -523,7 +522,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO014',
+    employeeid: 'DEMO014',
     first_name: 'Tse Ching',
     last_name: 'Wong',
     chinese_name: '黃子晴',
@@ -562,7 +561,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO015',
+    employeeid: 'DEMO015',
     first_name: 'Hoi Lam',
     last_name: 'Ho',
     chinese_name: '何凱琳',
@@ -601,7 +600,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO016',
+    employeeid: 'DEMO016',
     first_name: 'Hui Tung',
     last_name: 'Chan',
     chinese_name: '陳曉彤',
@@ -640,7 +639,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO017',
+    employeeid: 'DEMO017',
     first_name: 'Tse Ching',
     last_name: 'Lee',
     chinese_name: '李紫晴',
@@ -680,7 +679,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO018',
+    employeeid: 'DEMO018',
     first_name: 'Ka Yee',
     last_name: 'Cheung',
     chinese_name: '張嘉怡',
@@ -719,7 +718,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO019',
+    employeeid: 'DEMO019',
     first_name: 'Tse Ching',
     last_name: 'Wong',
     chinese_name: '黃梓晴',
@@ -758,7 +757,7 @@ export async function seed(knex: Knex): Promise<void> {
     payment_remark: 'NA',
   });
   await seedRow('employee', {
-    employeeID: 'DEMO020',
+    employeeid: 'DEMO020',
     first_name: 'Lok Yiu',
     last_name: 'Ho',
     chinese_name: '何樂瑤',
@@ -798,98 +797,98 @@ export async function seed(knex: Knex): Promise<void> {
   });
 
   await seedRow('employee_role', {
-    employeeID: 1,
+    employeeid: 1,
     department_id: 1,
     team_id: 6,
     grade_id: 1,
     title_id: 1,
   });
   await seedRow('employee_role', {
-    employeeID: 2,
+    employeeid: 2,
     department_id: 1,
     team_id: 6,
     grade_id: 2,
     title_id: 2,
   });
   await seedRow('employee_role', {
-    employeeID: 3,
+    employeeid: 3,
     department_id: 1,
     team_id: 6,
     grade_id: 2,
     title_id: 3,
   });
   await seedRow('employee_role', {
-    employeeID: 4,
+    employeeid: 4,
     department_id: 4,
     team_id: 1,
     grade_id: 3,
     title_id: 4,
   });
   await seedRow('employee_role', {
-    employeeID: 5,
+    employeeid: 5,
     department_id: 4,
     team_id: 1,
     grade_id: 4,
     title_id: 5,
   });
   await seedRow('employee_role', {
-    employeeID: 6,
+    employeeid: 6,
     department_id: 5,
     team_id: 1,
     grade_id: 4,
     title_id: 6,
   });
   await seedRow('employee_role', {
-    employeeID: 7,
+    employeeid: 7,
     department_id: 9,
     team_id: 1,
     grade_id: 4,
     title_id: 7,
   });
   await seedRow('employee_role', {
-    employeeID: 8,
+    employeeid: 8,
     department_id: 9,
     team_id: 6,
     grade_id: 5,
     title_id: 7,
   });
   await seedRow('employee_role', {
-    employeeID: 9,
+    employeeid: 9,
     department_id: 5,
     team_id: 1,
     grade_id: 5,
     title_id: 9,
   });
   await seedRow('employee_role', {
-    employeeID: 10,
+    employeeid: 10,
     department_id: 9,
     team_id: 1,
     grade_id: 5,
     title_id: 10,
   });
   await seedRow('employee_role', {
-    employeeID: 11,
+    employeeid: 11,
     department_id: 4,
     team_id: 1,
     grade_id: 5,
     title_id: 11,
   });
   await seedRow('employee_role', {
-    employeeID: 12,
+    employeeid: 12,
     department_id: 5,
     team_id: 1,
     grade_id: 5,
     title_id: 12,
   });
   await seedRow('employee_role', {
-    employeeID: 13,
+    employeeid: 13,
     department_id: 9,
     team_id: 1,
     grade_id: 6,
     title_id: 13,
   });
   await seedRow('employee_role', {
-    employeeID: 14,
+    employeeid: 14,
     department_id: 5,
     team_id: 1,
     grade_id: 6,
@@ -903,35 +902,35 @@ export async function seed(knex: Knex): Promise<void> {
     title_id: 15,
   });
   await seedRow('employee_role', {
-    employeeID: 16,
+    employeeid: 16,
     department_id: 4,
     team_id: 1,
     grade_id: 6,
     title_id: 16,
   });
   await seedRow('employee_role', {
-    employeeID: 17,
+    employeeid: 17,
     department_id: 4,
     team_id: 2,
     grade_id: 6,
     title_id: 16,
   });
   await seedRow('employee_role', {
-    employeeID: 18,
+    employeeid: 18,
     department_id: 4,
     team_id: 2,
     grade_id: 6,
     title_id: 16,
   });
   await seedRow('employee_role', {
-    employeeID: 19,
+    employeeid: 19,
     department_id: 5,
     team_id: 1,
     grade_id: 6,
     title_id: 19,
   });
   await seedRow('employee_role', {
-    employeeID: 20,
+    employeeid: 20,
     department_id: 5,
     team_id: 2,
     grade_id: 6,
