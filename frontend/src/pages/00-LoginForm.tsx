@@ -55,11 +55,14 @@ export default function LoginForm() {
           })}
         >
           <div className="row">
-            <label htmlFor="username">Username</label>
-            <input placeholder="Enter the username" {...register("username")} />
+            <label htmlFor="username">Work Email</label>
+            <input
+              placeholder="Enter the work email"
+              {...register("username")}
+            />
           </div>
           <div className="row">
-            <label htmlFor="password">Username</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               placeholder="Enter the password"
