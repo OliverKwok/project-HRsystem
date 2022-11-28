@@ -71,6 +71,17 @@ export class LeaveService {
     }
   }
 
+  async addNewType(createLeaveDto: CreateLeaveDto) {
+    try {
+      const newtype = await this.knex.table('leave_type').insert({
+        type: createLeaveDto.type,
+      });
+      return { newtype };
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   // create(createLeaveDto: CreateLeaveDto) {
   //   return 'This action adds a new leave';
   // }

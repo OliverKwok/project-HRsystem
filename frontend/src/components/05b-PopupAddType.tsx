@@ -12,6 +12,27 @@ export default function PopupAddType() {
     setPopup(false);
   };
 
+  const [newType, setNewType] = useState("");
+
+  async function addType(event: any) {
+    event.preventDefault();
+    console.log(newType);
+     const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: newType,
+      }),
+    };
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/leave/addnewtype`,
+      requestOptions
+    );
+    const jsonData = await res.json();
+    console.log(jsonData);
+    closePopup();
+  }
+
   return (
     <div>
       <button className="addnewtypeBtn" onClick={openPopup}>
@@ -25,12 +46,18 @@ export default function PopupAddType() {
               X
             </h2>
           </div>
-          <form>
+          <form onSubmit={addType}>
             <p>
-              Name: <input type="text"></input>{" "}
+              Name:{" "}
+              <input
+                type="text"
+                value={newType}
+                onChange={(event) => setNewType(event.target.value)}
+              ></input>
+              {newType}
             </p>
 
-            <button type="submit">Add</button>
+            <input type="submit" value="Add new leave type" />
           </form>
         </div>
       )}
