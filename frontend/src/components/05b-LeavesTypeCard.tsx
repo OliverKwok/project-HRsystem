@@ -1,7 +1,6 @@
 import React from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
-import { type } from "os";
 
 interface typeState {
   id: string;

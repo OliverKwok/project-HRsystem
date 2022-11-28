@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import LeavesTypeCard from "../components/05b-LeavesTypeCard";
 import "../styles/05b-LeavesType.css";
 import PopupAddType from "../components/05b-PopupAddType";
+import PopupDeleteType from "../components/05b-PopupDeleteType";
 
 interface typeState {
   id: string;
@@ -13,6 +14,7 @@ interface typeState {
 
 export default function LeavesType() {
   const [leavestype, setLeavesType] = useState([]);
+  const [toggleRefresh, setToggleRefresh] = useState(false);
 
   useEffect(() => {
     const requestOptions = {
@@ -49,7 +51,8 @@ export default function LeavesType() {
 
   return (
     <>
-      <PopupAddType />
+      <PopupAddType setToggleRefresh={setToggleRefresh} />
+      <PopupDeleteType />
       <div className="cards">
         {leavestype.map((type: any, id: any) => (
           <LeavesTypeCard key={id} obj={type} />
