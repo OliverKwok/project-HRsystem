@@ -10,6 +10,7 @@ import {
 import { LeaveService } from './leave.service';
 import { CreateLeaveDto } from './dto/create-leave.dto';
 import { UpdateLeaveDto } from './dto/update-leave.dto';
+import { get } from 'http';
 
 @Controller('leave')
 export class LeaveController {
@@ -18,6 +19,11 @@ export class LeaveController {
   @Get('showall')
   showAll() {
     return this.leaveService.showAll();
+  }
+
+  @Get('getemployees')
+  getemployees(){
+    return this.leaveService.getEmployees();
   }
 
   // @Post()

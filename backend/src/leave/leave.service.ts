@@ -20,17 +20,29 @@ export class LeaveService {
           'al_leave_entitled_peryear as entitledAL',
           'al_leave_taken',
           this.knex.raw(
-            `concat(employee.last_name, ' ', employee.first_name) as name`,
+            `concat(UPPER(employee.last_name), ' ', employee.first_name, ', ', employee.alias) as name`,
           ),
-          // this.knex.raw(
-          //   `"'al_leave_entitled_peryear' - 'al_leave_taken'" as remainingAL`,
-          // ),
         )
         .from('employee');
       return { res };
     } catch (err) {
       console.log(err);
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async getEmployees() {
+    try {
+      let res = await this.knex
+        .select(
+          this.knex.raw(
+            `concat(UPPER(employee.last_name), ' ', employee.first_name, ', ', employee.alias) as name`,
+          ),
+        )
+        .from('employee');
+      return { res };
+    } catch (err) {
+      console.log(err);
     }
   }
 
