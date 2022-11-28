@@ -78,11 +78,22 @@ export class UserService {
   }
 
   async findOne(username: string) {
+    const checkByWorkEmail = await this.knex
+      .table('employee')
+      .select('alias', 'password')
+      .where({ email_work: username });
+
+    console.log(checkByWorkEmail);
+
     return {
-      id: 1,
       username: username,
-      password: await bcrypt.hash('1', 10),
+      password: await bcrypt.hash(checkByWorkEmail[0].password, 10),
     };
+    // return {
+    //   id: 1,
+    //   username: username,
+    //   password: await bcrypt.hash('1', 10),
+    // };
   }
 
   async userCount() {

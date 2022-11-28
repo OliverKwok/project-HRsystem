@@ -29,7 +29,9 @@ export default function LoginForm() {
             );
             const json = await res.json();
             // console.log(json);
-            if (json.statusCode == 401) {
+            if (json.statusCode == 500) {
+              alert("No such user");
+            } else if (json.statusCode == 401) {
               alert("wrong user or password");
             } else {
               const profileRes = await fetch(
@@ -42,10 +44,8 @@ export default function LoginForm() {
                 }
               );
               const profileJson = await profileRes.json();
-              console.log(profileJson);
-              // if (profileJson.username) {
-              //   alert(`welcome back, hello ${profileJson.username}`);
-              // }
+              // console.log(profileJson);
+
               dispatch(login(profileJson, json.access_token));
               localStorage.setItem("token", json.access_token);
             }
