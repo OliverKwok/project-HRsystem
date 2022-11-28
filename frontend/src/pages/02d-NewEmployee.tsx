@@ -917,34 +917,40 @@ export default function Employee() {
             </>
           )}
         </div>
-        <hr />
-        <div>
-          <div>
-            <h3>Profile Pic</h3>
-          </div>
 
-          <input type="file" {...register("profilepic")} />
-          {previewSrc && (
+        {false && (
+          <>
+            <hr />
             <div>
-              <div>Preview:</div>
               <div>
-                <img
-                  src={previewSrc}
-                  alt="Preview"
-                  // height="200px"
-
-                  style={{
-                    borderRadius: "50%",
-                    width: "200px",
-                    height: "200px",
-                    objectFit: "cover",
-                  }}
-                />
+                <h3>Profile Pic</h3>
               </div>
+
+              <input type="file" {...register("profilepic")} />
+              {previewSrc && (
+                <div>
+                  <div>Preview:</div>
+                  <div>
+                    <img
+                      src={previewSrc}
+                      alt="Preview"
+                      // height="200px"
+
+                      style={{
+                        borderRadius: "50%",
+                        width: "200px",
+                        height: "200px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        <hr />
+            <hr />
+          </>
+        )}
+
         <button type="submit">Submit</button>
       </form>
     </div>
