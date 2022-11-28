@@ -70,22 +70,22 @@ export default function LeavesSummary() {
     {
       id: 1000,
       name: "James Butt",
-      country: {
-        name: "Algeria",
-        code: "dz",
-      },
-      company: "Benton, John B Jr",
-      date: "2015-09-13",
-      status: "unqualified",
+      // country: {
+      //   name: "Algeria",
+      //   code: "dz",
+      // },
+      // company: "Benton, John B Jr",
+      // date: "2015-09-13",
+      // status: "unqualified",
       verified: true,
       remainingAL: 2,
       entitledAL: 14,
-      activity: 12,
-      representative: {
-        name: "Ioni Bowcher",
-        image: "ionibowcher.png",
-      },
-      balance: 70663,
+      activity: 2,
+      // representative: {
+      //   name: "Ioni Bowcher",
+      //   image: "ionibowcher.png",
+      // },
+      // balance: 70663,
     },
     {
       id: 1001,
@@ -100,7 +100,7 @@ export default function LeavesSummary() {
       verified: true,
       remainingAL: 0,
       entitledAL: 14,
-      activity: 14,
+      activity: 0          ,
       representative: {
         name: "Amy Elsner",
         image: "amyelsner.png",
@@ -120,7 +120,7 @@ export default function LeavesSummary() {
       verified: false,
       remainingAL: 11,
       entitledAL: 14,
-      activity: 3,
+      activity: 11,
       representative: {
         name: "Asiya Javayant",
         image: "asiyajavayant.png",
@@ -160,7 +160,7 @@ export default function LeavesSummary() {
       verified: true,
       remainingAL: 8,
       entitledAL: 14,
-      activity: 6,
+      activity: 8,
       representative: {
         name: "Asiya Javayant",
         image: "asiyajavayant.png",
@@ -180,7 +180,7 @@ export default function LeavesSummary() {
       verified: false,
       remainingAL: 6,
       entitledAL: 14,
-      activity: 8,
+      activity: 6,
       representative: {
         name: "Ivan Magalhaes",
         image: "ivanmagalhaes.png",
@@ -200,7 +200,7 @@ export default function LeavesSummary() {
       verified: true,
       remainingAL: 5,
       entitledAL: 14,
-      activity: 9,
+      activity: 5,
       representative: {
         name: "Ivan Magalhaes",
         image: "ivanmagalhaes.png",
@@ -220,7 +220,7 @@ export default function LeavesSummary() {
       verified: true,
       remainingAL: 13,
       entitledAL: 14,
-      activity: 1,
+      activity: 13,
       representative: {
         name: "Onyama Limba",
         image: "onyamalimba.png",
@@ -240,7 +240,7 @@ export default function LeavesSummary() {
       verified: true,
       remainingAL: 1,
       entitledAL: 14,
-      activity: 13,
+      activity: 1,
       representative: {
         name: "Ivan Magalhaes",
         image: "ivanmagalhaes.png",
@@ -260,7 +260,7 @@ export default function LeavesSummary() {
       verified: false,
       remainingAL: 11,
       entitledAL: 14,
-      activity: 3,
+      activity: 11,
       representative: {
         name: "Onyama Limba",
         image: "onyamalimba.png",
@@ -280,7 +280,7 @@ export default function LeavesSummary() {
       verified: false,
       remainingAL: 4,
       entitledAL: 14,
-      activity: 10,
+      activity: 4,
       representative: {
         name: "Anna Fali",
         image: "annafali.png",
@@ -300,7 +300,7 @@ export default function LeavesSummary() {
       verified: true,
       remainingAL: 9,
       entitledAL: 14,
-      activity: 5,
+      activity: 9,
       representative: {
         name: "Bernardo Dominic",
         image: "bernardodominic.png",
@@ -320,7 +320,7 @@ export default function LeavesSummary() {
       verified: false,
       remainingAL: 11,
       entitledAL: 14,
-      activity: 3,
+      activity: 11,
       representative: {
         name: "Onyama Limba",
         image: "onyamalimba.png",
@@ -340,7 +340,7 @@ export default function LeavesSummary() {
       verified: false,
       remainingAL: 5,
       entitledAL: 14,
-      activity: 9,
+      activity: 5,
       representative: {
         name: "Amy Elsner",
         image: "amyelsner.png",
@@ -360,7 +360,7 @@ export default function LeavesSummary() {
       verified: true,
       remainingAL: 0,
       entitledAL: 14,
-      activity: 14,
+      activity: 0,
       representative: {
         name: "Asiya Javayant",
         image: "asiyajavayant.png",
@@ -380,7 +380,7 @@ export default function LeavesSummary() {
       verified: false,
       remainingAL: 2,
       entitledAL: 14,
-      activity: 12,
+      activity: 2,
       representative: {
         name: "Anna Fali",
         image: "annafali.png",
