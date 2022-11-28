@@ -30,7 +30,7 @@ export default function LoginForm() {
             const json = await res.json();
             // console.log(json);
             if (json.statusCode == 500) {
-              alert("No such user");
+              alert("No authorization to access the web panel");
             } else if (json.statusCode == 401) {
               alert("wrong user or password");
             } else {
