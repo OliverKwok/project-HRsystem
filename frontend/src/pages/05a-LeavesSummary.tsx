@@ -14,7 +14,7 @@ import "../styles/05a-LeavesSummary.css";
 import PopupEditLeavesRecord from "../components/05a-PopupEditLeavesRecord";
 
 export default function LeavesSummary() {
-  const [customers, setCustomers] = useState([]);
+  const [leaveRecord, setLeaveRecord] = useState([]);
   // const [selectedCustomers, setSelectedCustomers] = useState([]);
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -22,24 +22,29 @@ export default function LeavesSummary() {
       operator: FilterOperator.AND,
       constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
     },
-    "country.name": {
-      operator: FilterOperator.AND,
-      constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
-    },
-    representative: { value: null, matchMode: FilterMatchMode.IN },
-    date: {
-      operator: FilterOperator.AND,
-      constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }],
-    },
-    balance: {
+    remainingAL: {
       operator: FilterOperator.AND,
       constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
     },
-    status: {
+    entitledAL: {
       operator: FilterOperator.OR,
       constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
     },
-    activity: { value: null, matchMode: FilterMatchMode.BETWEEN },
+
+    // value: null, matchMode: FilterMatchMode.IN },
+    // date: {
+    //   operator: FilterOperator.AND,
+    //   constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }],
+    // },
+    // balance: {
+    //   operator: FilterOperator.AND,
+    //   constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
+    // },
+    // status: {
+    //   operator: FilterOperator.OR,
+    //   constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
+    // },
+    // activity: { value: null, matchMode: FilterMatchMode.BETWEEN },
   });
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [loading, setLoading] = useState(true);
@@ -66,333 +71,355 @@ export default function LeavesSummary() {
   //   "proposal",
   // ];
 
-  let data: any = [
-    {
-      id: 1000,
-      name: "James Butt",
-      // country: {
-      //   name: "Algeria",
-      //   code: "dz",
-      // },
-      // company: "Benton, John B Jr",
-      // date: "2015-09-13",
-      // status: "unqualified",
-      verified: true,
-      remainingAL: 2,
-      entitledAL: 14,
-      activity: 2,
-      // representative: {
-      //   name: "Ioni Bowcher",
-      //   image: "ionibowcher.png",
-      // },
-      // balance: 70663,
-    },
-    {
-      id: 1001,
-      name: "Josephine Darakjy",
-      country: {
-        name: "Egypt",
-        code: "eg",
-      },
-      company: "Chanay, Jeffrey A Esq",
-      date: "2019-02-09",
-      status: "proposal",
-      verified: true,
-      remainingAL: 0,
-      entitledAL: 14,
-      activity: 0          ,
-      representative: {
-        name: "Amy Elsner",
-        image: "amyelsner.png",
-      },
-      balance: 82429,
-    },
-    {
-      id: 1002,
-      name: "Art Venere",
-      country: {
-        name: "Panama",
-        code: "pa",
-      },
-      company: "Chemel, James L Cpa",
-      date: "2017-05-13",
-      status: "qualified",
-      verified: false,
-      remainingAL: 11,
-      entitledAL: 14,
-      activity: 11,
-      representative: {
-        name: "Asiya Javayant",
-        image: "asiyajavayant.png",
-      },
-      balance: 28334,
-    },
-    {
-      id: 1003,
-      name: "Lenna Paprocki",
-      country: {
-        name: "Slovenia",
-        code: "si",
-      },
-      company: "Feltz Printing Service",
-      date: "2020-09-15",
-      status: "new",
-      verified: false,
-      remainingAL: 7,
-      entitledAL: 14,
-      activity: 7,
-      representative: {
-        name: "Xuxue Feng",
-        image: "xuxuefeng.png",
-      },
-      balance: 88521,
-    },
-    {
-      id: 1004,
-      name: "Donette Foller",
-      country: {
-        name: "South Africa",
-        code: "za",
-      },
-      company: "Printing Dimensions",
-      date: "2016-05-20",
-      status: "proposal",
-      verified: true,
-      remainingAL: 8,
-      entitledAL: 14,
-      activity: 8,
-      representative: {
-        name: "Asiya Javayant",
-        image: "asiyajavayant.png",
-      },
-      balance: 93905,
-    },
-    {
-      id: 1005,
-      name: "Simona Morasca",
-      country: {
-        name: "Egypt",
-        code: "eg",
-      },
-      company: "Chapman, Ross E Esq",
-      date: "2018-02-16",
-      status: "qualified",
-      verified: false,
-      remainingAL: 6,
-      entitledAL: 14,
-      activity: 6,
-      representative: {
-        name: "Ivan Magalhaes",
-        image: "ivanmagalhaes.png",
-      },
-      balance: 50041,
-    },
-    {
-      id: 1006,
-      name: "Mitsue Tollner",
-      country: {
-        name: "Paraguay",
-        code: "py",
-      },
-      company: "Morlong Associates",
-      date: "2018-02-19",
-      status: "renewal",
-      verified: true,
-      remainingAL: 5,
-      entitledAL: 14,
-      activity: 5,
-      representative: {
-        name: "Ivan Magalhaes",
-        image: "ivanmagalhaes.png",
-      },
-      balance: 58706,
-    },
-    {
-      id: 1007,
-      name: "Leota Dilliard",
-      country: {
-        name: "Serbia",
-        code: "rs",
-      },
-      company: "Commercial Press",
-      date: "2019-08-13",
-      status: "renewal",
-      verified: true,
-      remainingAL: 13,
-      entitledAL: 14,
-      activity: 13,
-      representative: {
-        name: "Onyama Limba",
-        image: "onyamalimba.png",
-      },
-      balance: 26640,
-    },
-    {
-      id: 1008,
-      name: "Sage Wieser",
-      country: {
-        name: "Egypt",
-        code: "eg",
-      },
-      company: "Truhlar And Truhlar Attys",
-      date: "2018-11-21",
-      status: "unqualified",
-      verified: true,
-      remainingAL: 1,
-      entitledAL: 14,
-      activity: 1,
-      representative: {
-        name: "Ivan Magalhaes",
-        image: "ivanmagalhaes.png",
-      },
-      balance: 65369,
-    },
-    {
-      id: 1009,
-      name: "Kris Marrier",
-      country: {
-        name: "Mexico",
-        code: "mx",
-      },
-      company: "King, Christopher A Esq",
-      date: "2015-07-07",
-      status: "proposal",
-      verified: false,
-      remainingAL: 11,
-      entitledAL: 14,
-      activity: 11,
-      representative: {
-        name: "Onyama Limba",
-        image: "onyamalimba.png",
-      },
-      balance: 63451,
-    },
-    {
-      id: 1010,
-      name: "Minna Amigon",
-      country: {
-        name: "Romania",
-        code: "ro",
-      },
-      company: "Dorl, James J Esq",
-      date: "2018-11-07",
-      status: "qualified",
-      verified: false,
-      remainingAL: 4,
-      entitledAL: 14,
-      activity: 4,
-      representative: {
-        name: "Anna Fali",
-        image: "annafali.png",
-      },
-      balance: 71169,
-    },
-    {
-      id: 1011,
-      name: "Abel Maclead",
-      country: {
-        name: "Singapore",
-        code: "sg",
-      },
-      company: "Rangoni Of Florence",
-      date: "2017-03-11",
-      status: "qualified",
-      verified: true,
-      remainingAL: 9,
-      entitledAL: 14,
-      activity: 9,
-      representative: {
-        name: "Bernardo Dominic",
-        image: "bernardodominic.png",
-      },
-      balance: 96842,
-    },
-    {
-      id: 1012,
-      name: "Kiley Caldarera",
-      country: {
-        name: "Serbia",
-        code: "rs",
-      },
-      company: "Feiner Bros",
-      date: "2015-10-20",
-      status: "unqualified",
-      verified: false,
-      remainingAL: 11,
-      entitledAL: 14,
-      activity: 11,
-      representative: {
-        name: "Onyama Limba",
-        image: "onyamalimba.png",
-      },
-      balance: 92734,
-    },
-    {
-      id: 1013,
-      name: "Graciela Ruta",
-      country: {
-        name: "Chile",
-        code: "cl",
-      },
-      company: "Buckley Miller & Wright",
-      date: "2016-07-25",
-      status: "negotiation",
-      verified: false,
-      remainingAL: 5,
-      entitledAL: 14,
-      activity: 5,
-      representative: {
-        name: "Amy Elsner",
-        image: "amyelsner.png",
-      },
-      balance: 45250,
-    },
-    {
-      id: 1014,
-      name: "Cammy Albares",
-      country: {
-        name: "Philippines",
-        code: "ph",
-      },
-      company: "Rousseaux, Michael Esq",
-      date: "2019-06-25",
-      status: "new",
-      verified: true,
-      remainingAL: 0,
-      entitledAL: 14,
-      activity: 0,
-      representative: {
-        name: "Asiya Javayant",
-        image: "asiyajavayant.png",
-      },
-      balance: 30236,
-    },
-    {
-      id: 1015,
-      name: "Mattie Poquette",
-      country: {
-        name: "Venezuela",
-        code: "ve",
-      },
-      company: "Century Communications",
-      date: "2017-12-12",
-      status: "negotiation",
-      verified: false,
-      remainingAL: 2,
-      entitledAL: 14,
-      activity: 2,
-      representative: {
-        name: "Anna Fali",
-        image: "annafali.png",
-      },
-      balance: 64533,
-    },
-  ];
+  // let data: any = [
+  //   {
+  //     id: 1000,
+  //     name: "James Butt",
+  //     // country: {
+  //     //   name: "Algeria",
+  //     //   code: "dz",
+  //     // },
+  //     // company: "Benton, John B Jr",
+  //     // date: "2015-09-13",
+  //     // status: "unqualified",
+  //     verified: true,
+  //     remainingAL: 2,
+  //     entitledAL: 14,
+  //     activity: 2,
+  //     // representative: {
+  //     //   name: "Ioni Bowcher",
+  //     //   image: "ionibowcher.png",
+  //     // },
+  //     // balance: 70663,
+  //   },
+  //   {
+  //     id: 1001,
+  //     name: "Josephine Darakjy",
+  //     country: {
+  //       name: "Egypt",
+  //       code: "eg",
+  //     },
+  //     company: "Chanay, Jeffrey A Esq",
+  //     date: "2019-02-09",
+  //     status: "proposal",
+  //     verified: true,
+  //     remainingAL: 0,
+  //     entitledAL: 14,
+  //     activity: 0,
+  //     representative: {
+  //       name: "Amy Elsner",
+  //       image: "amyelsner.png",
+  //     },
+  //     balance: 82429,
+  //   },
+  //   {
+  //     id: 1002,
+  //     name: "Art Venere",
+  //     country: {
+  //       name: "Panama",
+  //       code: "pa",
+  //     },
+  //     company: "Chemel, James L Cpa",
+  //     date: "2017-05-13",
+  //     status: "qualified",
+  //     verified: false,
+  //     remainingAL: 11,
+  //     entitledAL: 14,
+  //     activity: 11,
+  //     representative: {
+  //       name: "Asiya Javayant",
+  //       image: "asiyajavayant.png",
+  //     },
+  //     balance: 28334,
+  //   },
+  //   {
+  //     id: 1003,
+  //     name: "Lenna Paprocki",
+  //     country: {
+  //       name: "Slovenia",
+  //       code: "si",
+  //     },
+  //     company: "Feltz Printing Service",
+  //     date: "2020-09-15",
+  //     status: "new",
+  //     verified: false,
+  //     remainingAL: 7,
+  //     entitledAL: 14,
+  //     activity: 7,
+  //     representative: {
+  //       name: "Xuxue Feng",
+  //       image: "xuxuefeng.png",
+  //     },
+  //     balance: 88521,
+  //   },
+  //   {
+  //     id: 1004,
+  //     name: "Donette Foller",
+  //     country: {
+  //       name: "South Africa",
+  //       code: "za",
+  //     },
+  //     company: "Printing Dimensions",
+  //     date: "2016-05-20",
+  //     status: "proposal",
+  //     verified: true,
+  //     remainingAL: 8,
+  //     entitledAL: 14,
+  //     activity: 8,
+  //     representative: {
+  //       name: "Asiya Javayant",
+  //       image: "asiyajavayant.png",
+  //     },
+  //     balance: 93905,
+  //   },
+  //   {
+  //     id: 1005,
+  //     name: "Simona Morasca",
+  //     country: {
+  //       name: "Egypt",
+  //       code: "eg",
+  //     },
+  //     company: "Chapman, Ross E Esq",
+  //     date: "2018-02-16",
+  //     status: "qualified",
+  //     verified: false,
+  //     remainingAL: 6,
+  //     entitledAL: 14,
+  //     activity: 6,
+  //     representative: {
+  //       name: "Ivan Magalhaes",
+  //       image: "ivanmagalhaes.png",
+  //     },
+  //     balance: 50041,
+  //   },
+  //   {
+  //     id: 1006,
+  //     name: "Mitsue Tollner",
+  //     country: {
+  //       name: "Paraguay",
+  //       code: "py",
+  //     },
+  //     company: "Morlong Associates",
+  //     date: "2018-02-19",
+  //     status: "renewal",
+  //     verified: true,
+  //     remainingAL: 5,
+  //     entitledAL: 14,
+  //     activity: 5,
+  //     representative: {
+  //       name: "Ivan Magalhaes",
+  //       image: "ivanmagalhaes.png",
+  //     },
+  //     balance: 58706,
+  //   },
+  //   {
+  //     id: 1007,
+  //     name: "Leota Dilliard",
+  //     country: {
+  //       name: "Serbia",
+  //       code: "rs",
+  //     },
+  //     company: "Commercial Press",
+  //     date: "2019-08-13",
+  //     status: "renewal",
+  //     verified: true,
+  //     remainingAL: 13,
+  //     entitledAL: 14,
+  //     activity: 13,
+  //     representative: {
+  //       name: "Onyama Limba",
+  //       image: "onyamalimba.png",
+  //     },
+  //     balance: 26640,
+  //   },
+  //   {
+  //     id: 1008,
+  //     name: "Sage Wieser",
+  //     country: {
+  //       name: "Egypt",
+  //       code: "eg",
+  //     },
+  //     company: "Truhlar And Truhlar Attys",
+  //     date: "2018-11-21",
+  //     status: "unqualified",
+  //     verified: true,
+  //     remainingAL: 1,
+  //     entitledAL: 14,
+  //     activity: 1,
+  //     representative: {
+  //       name: "Ivan Magalhaes",
+  //       image: "ivanmagalhaes.png",
+  //     },
+  //     balance: 65369,
+  //   },
+  //   {
+  //     id: 1009,
+  //     name: "Kris Marrier",
+  //     country: {
+  //       name: "Mexico",
+  //       code: "mx",
+  //     },
+  //     company: "King, Christopher A Esq",
+  //     date: "2015-07-07",
+  //     status: "proposal",
+  //     verified: false,
+  //     remainingAL: 11,
+  //     entitledAL: 14,
+  //     activity: 11,
+  //     representative: {
+  //       name: "Onyama Limba",
+  //       image: "onyamalimba.png",
+  //     },
+  //     balance: 63451,
+  //   },
+  //   {
+  //     id: 1010,
+  //     name: "Minna Amigon",
+  //     country: {
+  //       name: "Romania",
+  //       code: "ro",
+  //     },
+  //     company: "Dorl, James J Esq",
+  //     date: "2018-11-07",
+  //     status: "qualified",
+  //     verified: false,
+  //     remainingAL: 4,
+  //     entitledAL: 14,
+  //     activity: 4,
+  //     representative: {
+  //       name: "Anna Fali",
+  //       image: "annafali.png",
+  //     },
+  //     balance: 71169,
+  //   },
+  //   {
+  //     id: 1011,
+  //     name: "Abel Maclead",
+  //     country: {
+  //       name: "Singapore",
+  //       code: "sg",
+  //     },
+  //     company: "Rangoni Of Florence",
+  //     date: "2017-03-11",
+  //     status: "qualified",
+  //     verified: true,
+  //     remainingAL: 9,
+  //     entitledAL: 14,
+  //     activity: 9,
+  //     representative: {
+  //       name: "Bernardo Dominic",
+  //       image: "bernardodominic.png",
+  //     },
+  //     balance: 96842,
+  //   },
+  //   {
+  //     id: 1012,
+  //     name: "Kiley Caldarera",
+  //     country: {
+  //       name: "Serbia",
+  //       code: "rs",
+  //     },
+  //     company: "Feiner Bros",
+  //     date: "2015-10-20",
+  //     status: "unqualified",
+  //     verified: false,
+  //     remainingAL: 11,
+  //     entitledAL: 14,
+  //     activity: 11,
+  //     representative: {
+  //       name: "Onyama Limba",
+  //       image: "onyamalimba.png",
+  //     },
+  //     balance: 92734,
+  //   },
+  //   {
+  //     id: 1013,
+  //     name: "Graciela Ruta",
+  //     country: {
+  //       name: "Chile",
+  //       code: "cl",
+  //     },
+  //     company: "Buckley Miller & Wright",
+  //     date: "2016-07-25",
+  //     status: "negotiation",
+  //     verified: false,
+  //     remainingAL: 5,
+  //     entitledAL: 14,
+  //     activity: 5,
+  //     representative: {
+  //       name: "Amy Elsner",
+  //       image: "amyelsner.png",
+  //     },
+  //     balance: 45250,
+  //   },
+  //   {
+  //     id: 1014,
+  //     name: "Cammy Albares",
+  //     country: {
+  //       name: "Philippines",
+  //       code: "ph",
+  //     },
+  //     company: "Rousseaux, Michael Esq",
+  //     date: "2019-06-25",
+  //     status: "new",
+  //     verified: true,
+  //     remainingAL: 0,
+  //     entitledAL: 14,
+  //     activity: 0,
+  //     representative: {
+  //       name: "Asiya Javayant",
+  //       image: "asiyajavayant.png",
+  //     },
+  //     balance: 30236,
+  //   },
+  //   {
+  //     id: 1015,
+  //     name: "Mattie Poquette",
+  //     country: {
+  //       name: "Venezuela",
+  //       code: "ve",
+  //     },
+  //     company: "Century Communications",
+  //     date: "2017-12-12",
+  //     status: "negotiation",
+  //     verified: false,
+  //     remainingAL: 2,
+  //     entitledAL: 14,
+  //     activity: 2,
+  //     representative: {
+  //       name: "Anna Fali",
+  //       image: "annafali.png",
+  //     },
+  //     balance: 64533,
+  //   },
+  // ];
 
   useEffect(() => {
-    setCustomers(data);
+    const requestOptions = {
+      method: "Get",
+    };
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/leave/showall`, requestOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data.res);
+        let fetchData = data.res.map((record: any) => {
+          return {
+            name: record.name,
+            entitledAL: record.entitledAL,
+            remainingAL: record.entitledAL - record.al_leave_taken,
+            activity: record.entitledAL - record.al_leave_taken,
+            verified: true,
+          };
+        });
+        setLeaveRecord(fetchData);
+        // setLeaveRecord(data.res);
+      });
     setLoading(false);
   }, []);
+
+  console.log(leaveRecord);
 
   // const getCustomers = (data: any) => {
   //   return [...(data || [])].map((d) => {
@@ -641,7 +668,7 @@ export default function LeavesSummary() {
       <div className="datatable-doc-demo">
         <div className="card">
           <DataTable
-            value={customers}
+            value={leaveRecord}
             paginator
             className="p-datatable-customers"
             header={header}
@@ -658,12 +685,12 @@ export default function LeavesSummary() {
             responsiveLayout="scroll"
             globalFilterFields={[
               "name",
-              "country.name",
-              "representative.name",
-              "balance",
-              "status",
+              "remainingAL",
+              "entitledAL",
+              // "balance",
+              // "status",
             ]}
-            emptyMessage="No customers found."
+            emptyMessage="No leave record found."
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
           >
             <Column

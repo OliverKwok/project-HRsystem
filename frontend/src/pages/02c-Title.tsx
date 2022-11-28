@@ -98,6 +98,8 @@ export default function Title() {
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
+
+// TODO cannot filter capital letter
   const filteredItems = data.filter(
     (item: any) =>
       (item.title && item.title.toLowerCase().includes(filterText)) ||
