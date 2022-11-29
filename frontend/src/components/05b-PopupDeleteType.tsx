@@ -29,33 +29,41 @@ export default function PopupDeleteType() {
         setCurrentLeavesType(data);
       });
     console.log(currentLeavesType);
-  }, [typeid]);
+  }, [deleteType]);
 
   async function deleteTypeHandler(event: any) {
     event.preventDefault();
 
+    // currentLeavesType.forEach((object: any) => {
+    //   for (let key in object) {
+    //     if (object["type"] == deleteType) {
+    //       setTypeID(object["id"]);
+    //     }
+    //   }
+    // });
     for (let i = 0; i < currentLeavesType.length; i++) {
       if (currentLeavesType[i].type == deleteType) {
         setTypeID(currentLeavesType[i].id);
       }
-      console.log(deleteType, typeid);
-
-      const requestOptions = {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: deleteType,
-          id: typeid,
-        }),
-      };
-      await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/leave/deletetype/${typeid}`,
-        requestOptions
-      )
-        .then((response) => response.json())
-        .then((data) => console.log(data));
     }
+    console.log(deleteType, typeid);
+
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: deleteType,
+        id: typeid,
+      }),
+    };
+    await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/leave/deletetype/${typeid}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((data) => console.log(data));
     closePopup();
+    setDeleteType("");
   }
 
   return (
@@ -80,7 +88,7 @@ export default function PopupDeleteType() {
               }}
             >
               {currentLeavesType.length > 0 &&
-                currentLeavesType.map((type: any) => (
+                currentLeavesType.map((type: any, key: number) => (
                   <option value={type["type"]}>{type["type"]}</option>
                 ))}
             </select>
