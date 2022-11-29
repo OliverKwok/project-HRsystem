@@ -86,6 +86,12 @@ export default function Title() {
                 employeeDepartment={employee.dept_name}
               />
             ),
+            // edit: (
+            //   <PopupEditTitle
+            //     employeeTitle={employee.title_name}
+            //     employeeDepartment={employee.dept_name}
+            //   />
+            // ),
           };
         });
         // console.log(fetchData);

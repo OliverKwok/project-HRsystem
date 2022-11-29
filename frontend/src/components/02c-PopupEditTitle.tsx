@@ -14,7 +14,7 @@ export default function PopupEditTitle(props: {
   const closePopup = () => {
     setPopup(false);
   };
-  console.log(props.employeeTitle);
+  // console.log(props.employeeTitle);
 
   return (
     <div>
