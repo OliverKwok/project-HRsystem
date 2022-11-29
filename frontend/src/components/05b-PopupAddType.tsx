@@ -16,7 +16,6 @@ export default function PopupAddType(props: any) {
 
   const [newType, setNewType] = useState("");
 
-
   async function addType(event: any) {
     event.preventDefault();
     // console.log(newType);
@@ -38,7 +37,6 @@ export default function PopupAddType(props: any) {
     setNewType("");
     // window.location.reload();
     props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
-
   }
 
   return (

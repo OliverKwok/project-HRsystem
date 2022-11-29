@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../styles/02a-Popup.css";
 
-export default function PopupDeleteType() {
+export default function PopupDeleteType(props: any) {
   const [popup, setPopup] = useState(false);
   const [currentLeavesType, setCurrentLeavesType] = useState<any>();
   const [deleteType, setDeleteType] = useState("");
@@ -34,18 +34,18 @@ export default function PopupDeleteType() {
   async function deleteTypeHandler(event: any) {
     event.preventDefault();
 
-    // currentLeavesType.forEach((object: any) => {
-    //   for (let key in object) {
-    //     if (object["type"] == deleteType) {
-    //       setTypeID(object["id"]);
-    //     }
-    //   }
-    // });
-    for (let i = 0; i < currentLeavesType.length; i++) {
-      if (currentLeavesType[i].type == deleteType) {
-        setTypeID(currentLeavesType[i].id);
+    currentLeavesType.forEach((object: any) => {
+      for (let key in object) {
+        if (object["type"] == deleteType) {
+          setTypeID(object["id"]);
+        }
       }
-    }
+    });
+    // for (let i = 0; i < currentLeavesType.length; i++) {
+    //   if (currentLeavesType[i].type == deleteType) {
+    //     setTypeID(currentLeavesType[i].id);
+    //   }
+    // }
     console.log(deleteType, typeid);
 
     const requestOptions = {
@@ -64,6 +64,7 @@ export default function PopupDeleteType() {
       .then((data) => console.log(data));
     closePopup();
     setDeleteType("");
+    props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
   }
 
   return (
