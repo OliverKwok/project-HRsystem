@@ -29,7 +29,7 @@ export default function LeavesType() {
         setLeavesType(data);
       });
     console.log(leavestype);
-  }, []);
+  }, [toggleRefresh]);
 
   // const types: typeState[] = [
   //   {
