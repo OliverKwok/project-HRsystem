@@ -4,5 +4,7 @@ export const GlobalStyles = {
     mainColor: '#f1f7f7',
     inputColor: '#c0e5e5',
     backgroundColor: '#eefbfb',
+    backgroundColorDarker: '#cbe7e7',
+    loginInputColor: '#cff0f0',
   },
 };

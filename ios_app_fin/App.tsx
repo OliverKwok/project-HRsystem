@@ -29,6 +29,7 @@ import {
 import {GlobalStyles} from './constants/styles';
 import LeaveApplication from './screens/LeaveApplication';
 import BottomBar from './screens/BottomBar';
+import Login from './screens/Login';
 
 const Stack = createNativeStackNavigator();
 
@@ -72,6 +73,11 @@ const App = () => {
           headerStyle: {backgroundColor: GlobalStyles.colors.logoColor},
           headerTintColor: 'black',
         }}>
+        {/* <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{headerShown: false}}
+        /> */}
         <Stack.Screen
           name="Navigation Bar"
           component={BottomBar}
