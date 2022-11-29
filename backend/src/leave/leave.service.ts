@@ -64,7 +64,11 @@ export class LeaveService {
 
   async getTypes() {
     try {
-      let allTypes = await this.knex.select('type', 'id').from('leave_type');
+      let allTypes = await this.knex
+        .select('type', 'id')
+        .from('leave_type')
+      console.log({ allTypes });
+
       return allTypes;
     } catch (err) {
       console.log(err);
@@ -75,7 +79,7 @@ export class LeaveService {
     try {
       const newtype = await this.knex.table('leave_type').insert({
         type: createLeaveDto.type,
-      });
+      })
       return { newtype };
     } catch (err) {
       console.log(err);
