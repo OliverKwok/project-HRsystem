@@ -7,9 +7,9 @@ import "../styles/00-LoginForm.css";
 export default function LoginForm() {
   const { handleSubmit, register } = useForm();
   const dispatch = useAppDispatch();
-  const [showLogin, setShowLogin] = useState(false);
+  // const [showLogin, setShowLogin] = useState(false);
 
-  useEffect(() => {}, [showLogin]);
+  // useEffect(() => {}, [showLogin]);
 
   return (
     <div className="login-page-container">
@@ -30,7 +30,7 @@ export default function LoginForm() {
             const json = await res.json();
             // console.log(json);
             if (json.statusCode == 500) {
-              alert("No such user");
+              alert("No authorization to access the web panel");
             } else if (json.statusCode == 401) {
               alert("wrong user or password");
             } else {

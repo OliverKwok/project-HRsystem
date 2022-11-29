@@ -80,10 +80,12 @@ export class UserService {
   async findOne(username: string) {
     const checkByWorkEmail = await this.knex
       .table('employee')
-      .select('alias', 'password')
-      .where({ email_work: username });
+      .select('password')
+      .join('employee_role', 'employee.id', '=', 'employee_role.employeeid')
+      .where({ email_work: username })
+      .where('employee_role.department_id', '=', '6');
 
-    console.log(checkByWorkEmail);
+    // console.log(checkByWorkEmail);
 
     return {
       username: username,

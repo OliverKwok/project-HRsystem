@@ -3,14 +3,43 @@ import { useState } from "react";
 // import "reactjs-popup/dist/index.css";
 import "../styles/02a-Popup.css";
 
-export default function PopupAddType() {
+export default function PopupAddType(props: any) {
   const [popup, setPopup] = useState(false);
   const openPopup = () => {
     setPopup(!popup);
   };
+
   const closePopup = () => {
     setPopup(false);
+    setNewType("");
   };
+
+  const [newType, setNewType] = useState("");
+
+
+  async function addType(event: any) {
+    event.preventDefault();
+    // console.log(newType);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: newType,
+      }),
+    };
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/leave/addnewtype`,
+      requestOptions
+    );
+    const jsonData = await res.json();
+    console.log(jsonData);
+
+    closePopup();
+    setNewType("");
+    // window.location.reload();
+    props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
+
+  }
 
   return (
     <div>
@@ -25,12 +54,15 @@ export default function PopupAddType() {
               X
             </h2>
           </div>
-          <form>
-            <p>
-              Name: <input type="text"></input>{" "}
-            </p>
+          <form onSubmit={addType}>
+            <label htmlFor="">Name: </label>
+            <input
+              type="text"
+              value={newType}
+              onChange={(event) => setNewType(event.target.value)}
+            ></input>
 
-            <button type="submit">Add</button>
+            <input type="submit" value="Add new leave type" />
           </form>
         </div>
       )}

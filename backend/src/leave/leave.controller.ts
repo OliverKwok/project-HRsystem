@@ -20,6 +20,37 @@ export class LeaveController {
     return this.leaveService.showAll();
   }
 
+  @Get('getemployees')
+  getemployees() {
+    return this.leaveService.getEmployees();
+  }
+
+  @Patch('update_al')
+  updateAL(@Body() updateLeaveDto: UpdateLeaveDto) {
+    console.log(updateLeaveDto);
+    return this.leaveService.updateAL(updateLeaveDto);
+  }
+
+  @Get('types')
+  getTypes(){
+    return this.leaveService.getTypes();
+  }
+
+  @Post('addnewtype')
+  addNewType(@Body() createLeaveDto: CreateLeaveDto){
+    return this.leaveService.addNewType(createLeaveDto);
+  }
+
+  @Delete('delete')
+  deleteType(@Param('id') id: string) {
+    return this.leaveService.deleteType(+id);
+  }
+
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateLeaveDto: UpdateLeaveDto) {
+  //   return this.leaveService.update(+id, updateLeaveDto);
+  // }
+
   // @Post()
   // create(@Body() createLeaveDto: CreateLeaveDto) {
   //   return this.leaveService.create(createLeaveDto);
@@ -30,13 +61,5 @@ export class LeaveController {
   //   return this.leaveService.findOne(+id);
   // }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateLeaveDto: UpdateLeaveDto) {
-  //   return this.leaveService.update(+id, updateLeaveDto);
-  // }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.leaveService.remove(+id);
-  // }
 }
