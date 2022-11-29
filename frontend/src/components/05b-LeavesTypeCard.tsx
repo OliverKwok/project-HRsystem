@@ -1,12 +1,11 @@
 import React from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
-import { type } from "os";
 
 interface typeState {
   id: string;
   type: string;
-  description: string;
+  // description: string;
 }
 const LeavesTypeCard: React.FC<{ obj: typeState }> = ({ obj }) => {
     const header = (
@@ -36,9 +35,9 @@ const LeavesTypeCard: React.FC<{ obj: typeState }> = ({ obj }) => {
         // footer={footer}
         header={header}
       >
-        <p className="m-0" style={{ lineHeight: "1.5" }}>
+        {/* <p className="m-0" style={{ lineHeight: "1.5" }}>
           {obj.description} 
-        </p>
+        </p> */}
       </Card>
     </div>
   );

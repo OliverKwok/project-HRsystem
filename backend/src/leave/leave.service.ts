@@ -17,6 +17,7 @@ export class LeaveService {
     try {
       let res = await this.knex
         .select(
+          'id',
           'al_leave_entitled_peryear as entitledAL',
           'al_leave_taken',
           this.knex.raw(
@@ -46,16 +47,47 @@ export class LeaveService {
     }
   }
 
+  async updateAL(updateLeaveDto: UpdateLeaveDto) {
+    console.log(updateLeaveDto);
+    try {
+      const newAL = await this.knex
+        .update({
+          al_leave_taken: updateLeaveDto.al_leave_taken,
+        })
+        .table('employee')
+        .where({ id: updateLeaveDto.id });
+      return newAL;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async getTypes() {
+    try {
+      let allTypes = await this.knex.select('type', 'id').from('leave_type');
+      return allTypes;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async addNewType(createLeaveDto: CreateLeaveDto) {
+    try {
+      const newtype = await this.knex.table('leave_type').insert({
+        type: createLeaveDto.type,
+      });
+      return { newtype };
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   // create(createLeaveDto: CreateLeaveDto) {
   //   return 'This action adds a new leave';
   // }
 
   // findOne(id: number) {
   //   return `This action returns a #${id} leave`;
-  // }
-
-  // update(id: number, updateLeaveDto: UpdateLeaveDto) {
-  //   return `This action updates a #${id} leave`;
   // }
 
   // remove(id: number) {

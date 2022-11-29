@@ -6,9 +6,12 @@ import { Dropdown } from "primereact/dropdown";
 
 export default function PopupEditLeavesRecord() {
   const [popup, setPopup] = useState(false);
-  const [name, setName] = useState();
-  const [employeeField, setEmployeeField] = useState<any>(null);
-
+  const [namelist, setNamelist] = useState();
+  const [employeeField, setEmployeeField] = useState<string>();
+  const [alEntitled, setalEntitled] = useState<number>();
+  const [alTaken, setalTaken] = useState<number>();
+  const [employeeID, setEmployeeID] = useState<number>();
+  //popup open and close
   const openPopup = () => {
     setPopup(!popup);
   };
@@ -17,11 +20,11 @@ export default function PopupEditLeavesRecord() {
     setPopup(false);
   };
 
-  const requestOptions = {
-    method: "Get",
-  };
-
+  // fetch employee list in filter + search dropdown
   useEffect(() => {
+    const requestOptions = {
+      method: "Get",
+    };
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/leave/getemployees`,
       requestOptions
@@ -30,27 +33,94 @@ export default function PopupEditLeavesRecord() {
         return response.json();
       })
       .then((data) => {
-        setName(data.res);
+        setNamelist(data.res);
       });
   }, []);
-  console.log(name);
+  // console.log(name);
 
   const onNameChange = (e: any) => {
-    setEmployeeField(e.value);
+    setEmployeeField(e.value.name);
   };
+  console.log(employeeField);
 
-  const countryOptionTemplate = (option: any) => {
-    return (
-      <div className="country-item">
-        <img
-          alt={option.name}
-          src="images/flag/flag_placeholder.png"
-          className={`flag flag-${option.code.toLowerCase()}`}
-        />
-        <div>{option.name}</div>
-      </div>
+  // fetch AL + leave taken of a particular employee
+  useEffect(() => {
+    const requestOptions = {
+      method: "Get",
+    };
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/leave/showall`, requestOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        // console.log(data.res);
+        // console.log(data.length);
+        // console.log(data.res.length);
+        // console.log(data.res[0].name);
+        for (let i = 0; i < data.res.length; i++) {
+          if (data.res[i].name == employeeField) {
+            setalEntitled(data.res[i].entitledAL);
+            setalTaken(data.res[i].al_leave_taken);
+            setEmployeeID(data.res[i].id);
+            return;
+          }
+        }
+      });
+  }, [employeeField]);
+  console.log(
+    "AL Taken: ",
+    alTaken,
+    "AL Entitled: ",
+    alEntitled,
+    "Employee ID: ",
+    employeeID
+  );
+
+  function subtractAL(event: any) {
+    event.preventDefault();
+    if (alTaken !== undefined) {
+      setalTaken(alTaken - 1);
+    }
+    return;
+  }
+
+  function addAL(event: any) {
+    event.preventDefault();
+    if (alTaken !== undefined) {
+      setalTaken(alTaken + 1);
+    }
+  }
+
+  async function submitEditAL(event: any) {
+    event.preventDefault();
+    console.log(
+      alTaken,
+      typeof alTaken,
+      alEntitled,
+      employeeField,
+      employeeID,
+      typeof employeeID
     );
-  };
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: employeeID,
+        al_leave_taken: alTaken,
+      }),
+    };
+    console.log(requestOptions);
+    // const res =
+    await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/leave/update_al`,
+      requestOptions
+    )
+      .then((response) => response.json)
+      .then((data) => console.log(data));
+    // const jsonData = await res.json();
+    // console.log(jsonData);
+  }
 
   return (
     <div className="btn_div">
@@ -65,34 +135,29 @@ export default function PopupEditLeavesRecord() {
               X
             </h2>
           </div>
-          <form>
+          <form onSubmit={submitEditAL}>
             {/* TODO filter search employee */}
-
             <Dropdown
               value={employeeField}
-              options={name}
+              options={namelist}
               onChange={onNameChange}
               optionLabel="name"
               filter
-              showClear
+              // showClear
               filterBy="name"
               placeholder="Select an Employee"
               // itemTemplate={countryOptionTemplate}
             />
-
-            {/*  TODO show entitledAL + leave balance */}
-            {/*  TODO + / - buttons around leave balance */}
-
-            <p>
-              Add leave taken: <input type="text"></input>
-            </p>
-            <p>
-              Edit leaves taken: <input type="text"></input>
-            </p>
-            <p>
-              Cancel approved leaves: <input type="text"></input>
-            </p>
-
+            <br />
+            Employee: {employeeField}
+            <br />
+            AL entitled: {alEntitled}
+            <br />
+            AL taken
+            <button onClick={subtractAL}> - </button>
+            {alTaken}
+            <button onClick={addAL}> + </button>
+            <br />
             <button type="submit">Save</button>
           </form>
         </div>

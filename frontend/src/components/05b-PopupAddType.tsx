@@ -2,15 +2,46 @@ import { useState } from "react";
 // import Popup from "reactjs-popup";
 // import "reactjs-popup/dist/index.css";
 import "../styles/02a-Popup.css";
+import { Route } from "react-router-dom";
+import LeavesType from "../pages/05b-LeavesType";
 
-export default function PopupAddType() {
+export default function PopupAddType(props: any) {
   const [popup, setPopup] = useState(false);
   const openPopup = () => {
     setPopup(!popup);
   };
+
   const closePopup = () => {
     setPopup(false);
+    setNewType("");
   };
+
+  const [newType, setNewType] = useState("");
+
+  async function addType(event: any) {
+    event.preventDefault();
+    console.log(newType);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: newType,
+      }),
+    };
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/leave/addnewtype`,
+      requestOptions
+    );
+    const jsonData = await res.json();
+    console.log(jsonData);
+
+    closePopup();
+    setNewType("");
+    // props.setToggleRefresh((prev: any) => !prev);
+    props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
+    // <Route path="leavestype" element={<LeavesType />}></Route>;
+    // window.location.reload();
+  }
 
   return (
     <div>
@@ -25,12 +56,17 @@ export default function PopupAddType() {
               X
             </h2>
           </div>
-          <form>
+          <form onSubmit={addType}>
             <p>
-              Name: <input type="text"></input>{" "}
+              Name:{" "}
+              <input
+                type="text"
+                value={newType}
+                onChange={(event) => setNewType(event.target.value)}
+              ></input>
             </p>
 
-            <button type="submit">Add</button>
+            <input type="submit" value="Add new leave type" />
           </form>
         </div>
       )}
