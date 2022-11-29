@@ -15,7 +15,7 @@ interface typeState {
 export default function LeavesType() {
   const [leavestype, setLeavesType] = useState([]);
   const [toggleRefresh, setToggleRefresh] = useState(false);
-  const [siblingTransfer, setSiblingTransfer] = useState(false);
+
 
   useEffect(() => {
     const requestOptions = {
@@ -53,7 +53,10 @@ export default function LeavesType() {
   return (
     <>
       <PopupAddType setToggleRefresh={setToggleRefresh} />
-      <PopupDeleteType setToggleRefresh={setToggleRefresh} />
+      <PopupDeleteType
+        setToggleRefresh={setToggleRefresh}
+
+      />
       <div className="cards">
         {leavestype.map((type: any, id: any) => (
           <LeavesTypeCard key={id} obj={type} />
