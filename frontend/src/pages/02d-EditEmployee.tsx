@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import moment from "moment";
+// import { useParams } from "react-router-dom";
 moment().format();
 
 type FormState = {
@@ -60,7 +61,69 @@ type FormState = {
   payment_remark: string;
 };
 
-export default function Employee() {
+// const defaultFetch = {
+//   employeeid: "",
+//   first_name: "",
+//   last_name: "",
+//   chinese_name: "",
+//   alias: "",
+//   hkid: "",
+//   passport: "",
+//   gender: "",
+//   nationality: "",
+//   date_of_birth: new Date(),
+//   age: 0,
+
+//   mobile_countrycode: "",
+//   mobile_no: "",
+//   work_phone_no: "",
+//   email_personal: "",
+//   email_work: "",
+//   // password: "",
+
+//   highest_education: "",
+//   institution_name: "",
+//   major: "",
+//   last_job_company: "",
+//   last_job_title: "",
+
+//   start_date: "",
+//   have_probation: "",
+//   pass_probation: "",
+//   status: "",
+//   job_nature: "",
+//   // length_of_service: "",
+//   notice_period: 30,
+//   report_to: "1",
+//   title: "1",
+//   department: "1",
+//   team: "1",
+
+//   al_leave_entitled_peryear: 0,
+
+//   pay_currency: "",
+//   basic_salary: "",
+//   payment_method: "",
+//   home_address: "",
+//   bank_code: "",
+//   bank_name: "",
+//   bank_number: "",
+//   bank_payee: "",
+//   payment_remark: "",
+// };
+
+export default function Employee(props: any) {
+  async function getEmployeeInfo() {
+    let response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/user/getAllInfo/${props.editID}`
+    );
+    let json = await response.json();
+    console.log(json[0]);
+    return json[0];
+  }
+
+  getEmployeeInfo();
+
   const {
     register,
     handleSubmit,
@@ -951,7 +1014,7 @@ export default function Employee() {
           </>
         )}
 
-        <button type="submit">Add</button>
+        <button type="submit">Edit</button>
       </form>
     </div>
   );
