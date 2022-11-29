@@ -59,7 +59,7 @@ function App() {
         }
       );
       const profileJson = await profileRes.json();
-      // console.log(profileJson);
+      console.log(profileJson);
       dispatch(login(profileJson, token));
       localStorage.setItem("token", token);
       // setUsername(profileJson.username);
@@ -120,7 +120,7 @@ function App() {
                 </NavLink>
                 <NavLink className="sub-item" to={"employee"}>
                   <div>
-                    <MdOutlinePeopleAlt /> <span>new employee</span>
+                    <MdOutlinePeopleAlt /> <span>Employee Info</span>
                   </div>
                 </NavLink>
                 <NavLink className="sub-item" to={"statusupdate"}>

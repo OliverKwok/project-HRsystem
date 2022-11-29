@@ -7,12 +7,21 @@ export function authReducer(
 ) {
   switch (action.type) {
     case "@@auth/LOGIN":
-      return {
-        ...state,
-        user: action.user,
-        token: action.token,
-        isAuthenticated: action.token ? true : null,
-      };
+      if (action.token) {
+        return {
+          ...state,
+          user: action.user,
+          token: action.token,
+          isAuthenticated: true,
+        };
+      } else {
+        return {
+          ...state,
+          user: null,
+          token: null,
+          isAuthenticated: false,
+        };
+      }
     case "@@auth/LOGOUT":
       localStorage.removeItem("token");
       return {
