@@ -29,7 +29,7 @@ export default function PopupDeleteType(props: any) {
         setCurrentLeavesType(data);
       });
     console.log(currentLeavesType);
-  }, [deleteType]);
+  }, [deleteType, props.toggleRefresh]);
 
   async function deleteTypeHandler(event: any) {
     event.preventDefault();
