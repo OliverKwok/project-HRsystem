@@ -9,6 +9,20 @@ export default function Title() {
   // table columns
   const columns = [
     {
+      name: "Employee Photo",
+      selector: (row: any) => row.photo,
+    },
+    {
+      name: "Employee ID",
+      selector: (row: any) => row.employeeid,
+      sortable: true,
+    },
+    {
+      name: "Employee",
+      selector: (row: any) => row.employee,
+      sortable: true,
+    },
+    {
       name: "Title",
       selector: (row: any) => row.title,
       sortable: true,
@@ -30,15 +44,7 @@ export default function Title() {
       selector: (row: any) => row.nature,
       sortable: true,
     },
-    {
-      name: "Employee",
-      selector: (row: any) => row.employee,
-      sortable: true,
-    },
-    {
-      name: "Employee Photo",
-      selector: (row: any) => row.photo,
-    },
+
     {
       name: "Edit",
       selector: (row: any) => row.edit,
@@ -61,11 +67,12 @@ export default function Title() {
         let fetchData = data.map((employee: any) => {
           return {
             id: employee.id,
+            employeeid: employee.employeeid,
             title: employee.title_name,
             department: employee.dept_name,
             team: employee.team_name,
             nature: employee.job_nature,
-            employee: employee.last_name + ", " + employee.first_name,
+            employee: employee.alias + " " + employee.last_name,
             photo: (
               <img
                 className="title_employee_photo"
@@ -98,15 +105,15 @@ export default function Title() {
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
-
-// TODO cannot filter capital letter
+  // TODO cannot filter capital letter
   const filteredItems = data.filter(
     (item: any) =>
-      (item.title && item.title.toLowerCase().includes(filterText)) ||
+      (item.employeeid && item.employeeid.toLowerCase().includes(filterText)) ||
       (item.employee && item.employee.toLowerCase().includes(filterText)) ||
+      (item.title && item.title.toLowerCase().includes(filterText)) ||
       (item.department && item.department.toLowerCase().includes(filterText)) ||
-      (item.nature && item.nature.toLowerCase().includes(filterText)) ||
-      (item.grade && item.grade.toLowerCase().includes(filterText))
+      (item.team && item.team.toLowerCase().includes(filterText)) ||
+      (item.nature && item.nature.toLowerCase().includes(filterText))
   );
   // const filteredItems = data.filter(
   //   (item) =>

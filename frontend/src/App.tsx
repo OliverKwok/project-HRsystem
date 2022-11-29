@@ -115,7 +115,7 @@ function App() {
                 </NavLink> */}
                 <NavLink className="sub-item" to={"title"}>
                   <div>
-                    <MdOutlineSubtitles /> <span>title</span>
+                    <MdOutlineSubtitles /> <span>Staff List</span>
                   </div>
                 </NavLink>
                 <NavLink className="sub-item" to={"employee"}>
