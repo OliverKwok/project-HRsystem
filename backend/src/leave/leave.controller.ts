@@ -41,6 +41,11 @@ export class LeaveController {
     return this.leaveService.addNewType(createLeaveDto);
   }
 
+  @Delete('delete')
+  deleteType(@Param('id') id: string) {
+    return this.leaveService.deleteType(+id);
+  }
+
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateLeaveDto: UpdateLeaveDto) {
   //   return this.leaveService.update(+id, updateLeaveDto);
@@ -56,8 +61,5 @@ export class LeaveController {
   //   return this.leaveService.findOne(+id);
   // }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.leaveService.remove(+id);
-  // }
+
 }
