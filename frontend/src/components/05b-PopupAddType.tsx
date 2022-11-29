@@ -19,9 +19,7 @@ export default function PopupAddType(props: any) {
 
   async function addType(event: any) {
     event.preventDefault();
-    console.log("this", event.target);
-
-    console.log(newType);
+    // console.log(newType);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

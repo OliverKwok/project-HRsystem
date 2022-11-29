@@ -47,8 +47,9 @@ function BottomBar() {
         tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: GlobalStyles.colors.mainColor,
       })}>
-      <Tab.Screen name="Leave" component={Leave} />
       <Tab.Screen name="Attendance" component={Attendance} />
+      <Tab.Screen name="Leave" component={Leave} />
+
       <Tab.Screen name="Salary" component={Salary} />
       <Tab.Screen name="Notification" component={Notification} />
     </Tab.Navigator>

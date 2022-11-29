@@ -7,31 +7,16 @@ import {
   Button,
   Pressable,
 } from 'react-native';
+import {Config} from 'react-native-config';
 import {useNavigation} from '@react-navigation/native';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import IconButton from '../components/IconButton';
 import {GlobalStyles} from '../constants/styles';
 import DatePicker from 'react-native-date-picker';
 import RNPickerSelect from 'react-native-picker-select';
-// import DropDownPicker from 'react-native-dropdown-picker';
-
-// const [inputTextColor, setInputTextColor] = useState('#97AEB0');
 
 function LeaveApplication({navigation}: any) {
-  // navigation.setOptions({
-  //   headerTintColor: 'black',
-  //   headerRight: (tintColor: any) => (
-  //     <IconButton
-  //       icon="close"
-  //       size={24}
-  //       color={tintColor}
-  //       onPress={() => {
-  //         navigation.goBack();
-  //       }}
-  //     />
-  //   ),
-  // });
-
+  //Check the input for leave application
   function checkLeaveApplicationInput() {
     // console.log(
     //   'yo',
@@ -39,13 +24,23 @@ function LeaveApplication({navigation}: any) {
     //     new Date(formObject.startDate).getTime()) /
     //     (1000 * 3600 * 24),
     // );
+    // console.log(
+    //   'fuck',
+    //   (new Date(formObject.startDate).getTime() - new Date().getTime()) /
+    //     (1000 * 3600 * 24),
+    // );
+
     if (
       (new Date(formObject.endDate).getTime() -
         new Date(formObject.startDate).getTime()) /
         (1000 * 3600 * 24) <
-      0
+        0 ||
+      (new Date(formObject.startDate).getTime() - new Date().getTime()) /
+        (1000 * 3600 * 24) <
+        3
     ) {
       setShowInvalidDate(true);
+      setShowApply(false);
       // setShowInputNotFilled(false);
       // setShowSubmitSucceeded(false);
       // setShowInputReminder(false);
@@ -53,27 +48,6 @@ function LeaveApplication({navigation}: any) {
     } else {
       setShowInvalidDate(false);
     }
-
-    // if (
-    //   new Date(formObject.endDate).getTime() ==
-    //     new Date(formObject.startDate).getTime() &&
-    //   formObject.startDateDuration == 'second_half' &&
-    //   formObject.endDateDuration == 'first_half'
-    // ) {
-    //   setShowInvalidDate(true);
-    //   // setShowInputNotFilled(false);
-    //   // setShowSubmitSucceeded(false);
-    //   // setShowInputReminder(false);
-    // } else if (
-    //   new Date(formObject.endDate).getTime() ==
-    //     new Date(formObject.startDate).getTime() &&
-    //   formObject.startDateDuration == 'second_half' &&
-    //   formObject.endDateDuration == 'first_half'
-    // ) {
-    //   setShowInvalidDate(true);
-    // } else {
-    //   setShowInvalidDate(false);
-    // }
     if (
       formObject.employeeID == '' ||
       formObject.leaveType == '' ||
@@ -81,12 +55,15 @@ function LeaveApplication({navigation}: any) {
       formObject.startDateDuration == '' ||
       formObject.endDate == 'Please select a end date' ||
       formObject.endDateDuration == '' ||
-      formObject.workingDays == 0
+      formObject.workingDays == 0 ||
+      !formObject.workingDays
     ) {
       // setShowInvalidDate(false);
       setShowInputNotFilled(true);
       // setShowSubmitSucceeded(false);
       setShowInputReminder(false);
+      setShowApply(false);
+      return;
     } else {
       setShowInputReminder(false);
       setShowInputNotFilled(false);
@@ -101,7 +78,21 @@ function LeaveApplication({navigation}: any) {
     // }
   }
 
-  function submitHandler() {
+  async function submitHandler() {
+    const requestOptions = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(formObject),
+      // headers: { "Content-Type": "multi-type/form-data" },
+      // body: formData,
+    };
+    const res = await fetch(
+      `${Config.REACT_APP_BACKEND_URL}/ios-app/leaveApplication`,
+      requestOptions,
+    );
+    const jsonData = await res.json();
+    console.log(jsonData);
+
     console.log('You are going to submit');
     setShowSubmitSucceeded(true);
     setTimeout(() => {
@@ -109,6 +100,7 @@ function LeaveApplication({navigation}: any) {
     }, 1000);
   }
 
+  //一大堆useState and useEffect
   const [formObject, setFormObject] = useState({
     employeeID: '',
     leaveType: '',
@@ -119,13 +111,6 @@ function LeaveApplication({navigation}: any) {
     workingDays: 0,
   });
   console.log(formObject);
-  console.log(
-    'yo',
-    (new Date(formObject.endDate).getTime() -
-      new Date(formObject.startDate).getTime()) /
-      (1000 * 3600 * 24),
-  );
-  // console.log(new Date(formObject.startDate));
   const [inputTextColor1, setInputTextColor1] = useState('#97AEB0');
   const [inputTextColor2, setInputTextColor2] = useState('#97AEB0');
   const [openPicker1, setOpenPicker1] = useState(false);
@@ -135,14 +120,34 @@ function LeaveApplication({navigation}: any) {
   const [showSubmitSucceeded, setShowSubmitSucceeded] = useState(false);
   const [showInputNotFilled, setShowInputNotFilled] = useState(false);
   const [showApply, setShowApply] = useState(false);
+  const [leaveType, setLeaveType] = useState([] as any);
 
   useEffect(() => {
+    // fetch the leave type
+    async function fetchLeaveType() {
+      try {
+        const options = {method: 'GET'};
+        let res = await fetch(
+          `${Config.REACT_APP_BACKEND_URL}/ios-app/leaveType`,
+          options,
+        );
+        let leave = await res.json();
+        leave = leave['res'];
+
+        setLeaveType(leave);
+      } catch {
+        console.log('fetch fail');
+      }
+    }
+    fetchLeaveType();
+    // console.log(leaveType);
+
+    //Check the input of the applcation
     if (formObject.startDate === 'Please select a start date') {
       return;
     }
     checkLeaveApplicationInput();
   }, [formObject]);
-  // const checkFunction = checkLeaveApplicationInput;
 
   return (
     <View style={styles.container}>
@@ -214,11 +219,14 @@ function LeaveApplication({navigation}: any) {
               setFormObject({...formObject, leaveType: value});
               checkLeaveApplicationInput();
             }}
-            items={[
-              {label: 'Annual Leave', value: 'Annual Leave'},
-              {label: 'Sick Leave', value: 'Sick Leave'},
-              {label: 'Maternity Leave', value: 'Maternity Leave'},
-            ]}
+            items={leaveType.map((data: any) => {
+              return {label: data.type, value: data.id};
+            })}
+            // items={[
+            //   {label: 'Annual Leave', value: 'Annual Leave'},
+            //   {label: 'Sick Leave', value: 'Sick Leave'},
+            //   {label: 'Maternity Leave', value: 'Maternity Leave'},
+            // ]}
             style={styles}
           />
         </View>
@@ -424,7 +432,7 @@ const styles = StyleSheet.create({
   },
 
   inputIOS: {
-    backgroundColor: '#cbe7e7',
+    backgroundColor: GlobalStyles.colors.inputColor,
     padding: 8,
     borderRadius: 30,
     fontSize: 18,

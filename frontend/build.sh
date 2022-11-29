@@ -1,0 +1,1 @@
+docker run -it --rm -v $(pwd):/app node:lts /app/build2.sh
