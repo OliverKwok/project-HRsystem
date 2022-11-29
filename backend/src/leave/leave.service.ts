@@ -85,13 +85,17 @@ export class LeaveService {
     }
   }
 
-  async deleteType(deleteLeaveDto: DeleteLeaveDto) {
-
-      // try{
-      //   const deletetype = await this.knex.table('leave_type')
-      //   .delete('type')
-      //   .where({type: })
-      // }
+  async deleteType(id: string) {
+    let typeid = parseInt(id);
+    try {
+      let deletetype = await this.knex
+        .table('leave_type')
+        .del(['id', 'type'])
+        .where({ id: typeid });
+      return deletetype;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // create(createLeaveDto: CreateLeaveDto) {

@@ -5,7 +5,7 @@ export default function PopupDeleteType() {
   const [popup, setPopup] = useState(false);
   const [currentLeavesType, setCurrentLeavesType] = useState<any>();
   const [deleteType, setDeleteType] = useState("");
-  const [typeid, setTypeID] = useState();
+  const [typeid, setTypeID] = useState<number>();
 
   const openPopup = () => {
     setPopup(!popup);
@@ -29,16 +29,16 @@ export default function PopupDeleteType() {
         setCurrentLeavesType(data);
       });
     console.log(currentLeavesType);
-  }, []);
+  }, [typeid]);
 
   async function deleteTypeHandler(event: any) {
     event.preventDefault();
-    console.log(deleteType);
 
-    for (let i = 0; i < currentLeavesType[0].length; i++) {
+    for (let i = 0; i < currentLeavesType.length; i++) {
       if (currentLeavesType[i].type == deleteType) {
         setTypeID(currentLeavesType[i].id);
       }
+      console.log(deleteType, typeid);
 
       const requestOptions = {
         method: "DELETE",
@@ -48,13 +48,14 @@ export default function PopupDeleteType() {
           id: typeid,
         }),
       };
-      const res = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/leave/deletetype`,
+      await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/leave/deletetype/${typeid}`,
         requestOptions
-      );
-      const jsonData = await res.json();
-      console.log(jsonData);
+      )
+        .then((response) => response.json())
+        .then((data) => console.log(data));
     }
+    closePopup();
   }
 
   return (

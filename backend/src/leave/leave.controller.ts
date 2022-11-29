@@ -33,18 +33,18 @@ export class LeaveController {
   }
 
   @Get('types')
-  getTypes(){
+  getTypes() {
     return this.leaveService.getTypes();
   }
 
   @Post('addnewtype')
-  addNewType(@Body() createLeaveDto: CreateLeaveDto){
+  addNewType(@Body() createLeaveDto: CreateLeaveDto) {
     return this.leaveService.addNewType(createLeaveDto);
   }
 
-  @Delete('deletetype')
-  deleteType(@Body() deleteLeaveDto: DeleteLeaveDto) {
-    return this.leaveService.deleteType(deleteLeaveDto);
+  @Delete('deletetype/:id')
+  deleteType(@Param('id') id:string) {
+    return this.leaveService.deleteType(`${id}`);
   }
 
   // @Patch(':id')
@@ -61,6 +61,4 @@ export class LeaveController {
   // findOne(@Param('id') id: string) {
   //   return this.leaveService.findOne(+id);
   // }
-
-
 }
