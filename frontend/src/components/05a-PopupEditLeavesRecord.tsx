@@ -94,14 +94,14 @@ export default function PopupEditLeavesRecord() {
 
   async function submitEditAL(event: any) {
     event.preventDefault();
-    console.log(
-      alTaken,
-      typeof alTaken,
-      alEntitled,
-      employeeField,
-      employeeID,
-      typeof employeeID
-    );
+    // console.log(
+    //   alTaken,
+    //   typeof alTaken,
+    //   alEntitled,
+    //   employeeField,
+    //   employeeID,
+    //   typeof employeeID
+    // );
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },

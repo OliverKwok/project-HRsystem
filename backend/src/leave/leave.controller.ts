@@ -10,6 +10,7 @@ import {
 import { LeaveService } from './leave.service';
 import { CreateLeaveDto } from './dto/create-leave.dto';
 import { UpdateLeaveDto } from './dto/update-leave.dto';
+import { DeleteLeaveDto } from './dto/delete-leave.dto';
 
 @Controller('leave')
 export class LeaveController {
@@ -41,9 +42,9 @@ export class LeaveController {
     return this.leaveService.addNewType(createLeaveDto);
   }
 
-  @Delete('delete')
-  deleteType(@Param('id') id: string) {
-    return this.leaveService.deleteType(+id);
+  @Delete('deletetype')
+  deleteType(@Body() deleteLeaveDto: DeleteLeaveDto) {
+    return this.leaveService.deleteType(deleteLeaveDto);
   }
 
   // @Patch(':id')

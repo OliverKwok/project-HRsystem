@@ -40,7 +40,7 @@ function Leave({navigation}: any) {
   // const [showNoRecord, setShowNoRecord] = React.useState(false);
 
   useEffect(() => {
-    let userID = 12;
+    let userID = 6;
 
     // Fetch all the leave application record
     async function fetchLeaveRecord() {

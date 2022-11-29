@@ -3,8 +3,10 @@ import "../styles/02a-Popup.css";
 
 export default function PopupDeleteType() {
   const [popup, setPopup] = useState(false);
-  const [currentLeavesType, setCurrentLeavesType] = useState([]);
+  const [currentLeavesType, setCurrentLeavesType] = useState<any>();
   const [deleteType, setDeleteType] = useState("");
+  const [typeid, setTypeID] = useState();
+
   const openPopup = () => {
     setPopup(!popup);
   };
@@ -33,21 +35,26 @@ export default function PopupDeleteType() {
     event.preventDefault();
     console.log(deleteType);
 
-    const requestOptions = {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: deleteType,
+    for (let i = 0; i < currentLeavesType[0].length; i++) {
+      if (currentLeavesType[i].type == deleteType) {
+        setTypeID(currentLeavesType[i].id);
+      }
 
-      }),
-    };
-    const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/leave/delete`,
-      requestOptions
-    );
-    const jsonData = await res.json();
-    console.log(jsonData);
-
+      const requestOptions = {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: deleteType,
+          id: typeid,
+        }),
+      };
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/leave/deletetype`,
+        requestOptions
+      );
+      const jsonData = await res.json();
+      console.log(jsonData);
+    }
   }
 
   return (
@@ -64,8 +71,8 @@ export default function PopupDeleteType() {
             </h2>
           </div>
           <form onSubmit={deleteTypeHandler}>
-           Leave type to delete:
- <select
+            Leave type to delete:
+            <select
               onChange={(event: any) => {
                 setDeleteType(event.target.value);
                 console.log(event.target.value);
@@ -73,9 +80,7 @@ export default function PopupDeleteType() {
             >
               {currentLeavesType.length > 0 &&
                 currentLeavesType.map((type: any) => (
-                  <option value={type["type"]}>
-                    {type["type"]}
-                  </option>
+                  <option value={type["type"]}>{type["type"]}</option>
                 ))}
             </select>
             {/* <input
