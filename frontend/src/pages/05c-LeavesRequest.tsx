@@ -1,4 +1,4 @@
-import { R } from "chart.js/dist/chunks/helpers.core";
+// import { R } from "chart.js/dist/chunks/helpers.core";
 import React, { useState } from "react";
 
 export default function LeavesRequest() {

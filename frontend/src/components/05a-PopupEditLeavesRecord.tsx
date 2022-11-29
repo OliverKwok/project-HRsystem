@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "../styles/02a-Popup.css";
 import { Dropdown } from "primereact/dropdown";
 
-export default function PopupEditLeavesRecord() {
+export default function PopupEditLeavesRecord(props: any) {
   const [popup, setPopup] = useState(false);
   const [namelist, setNamelist] = useState();
   const [employeeField, setEmployeeField] = useState<string>();
@@ -94,14 +94,14 @@ export default function PopupEditLeavesRecord() {
 
   async function submitEditAL(event: any) {
     event.preventDefault();
-    console.log(
-      alTaken,
-      typeof alTaken,
-      alEntitled,
-      employeeField,
-      employeeID,
-      typeof employeeID
-    );
+    // console.log(
+    //   alTaken,
+    //   typeof alTaken,
+    //   alEntitled,
+    //   employeeField,
+    //   employeeID,
+    //   typeof employeeID
+    // );
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -120,6 +120,12 @@ export default function PopupEditLeavesRecord() {
       .then((data) => console.log(data));
     // const jsonData = await res.json();
     // console.log(jsonData);
+    closePopup();
+    // setalEntitled(0);
+    // setalTaken(0);
+    // setEmployeeID(0);
+    // setEmployeeField("");
+    props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
   }
 
   return (

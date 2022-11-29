@@ -5,6 +5,8 @@ import "../styles/02a-Popup.css";
 
 export default function PopupAddType(props: any) {
   const [popup, setPopup] = useState(false);
+  const [newType, setNewType] = useState("");
+
   const openPopup = () => {
     setPopup(!popup);
   };
@@ -13,9 +15,6 @@ export default function PopupAddType(props: any) {
     setPopup(false);
     setNewType("");
   };
-
-  const [newType, setNewType] = useState("");
-
 
   async function addType(event: any) {
     event.preventDefault();
@@ -38,7 +37,6 @@ export default function PopupAddType(props: any) {
     setNewType("");
     // window.location.reload();
     props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
-
   }
 
   return (

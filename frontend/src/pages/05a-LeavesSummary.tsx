@@ -15,6 +15,7 @@ import PopupEditLeavesRecord from "../components/05a-PopupEditLeavesRecord";
 
 export default function LeavesSummary() {
   const [leaveRecord, setLeaveRecord] = useState([]);
+  const [toggleRefresh, setToggleRefresh] = useState(false);
   // const [selectedCustomers, setSelectedCustomers] = useState([]);
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -417,7 +418,7 @@ export default function LeavesSummary() {
         // setLeaveRecord(data.res);
       });
     setLoading(false);
-  }, []);
+  }, [toggleRefresh]);
 
   console.log(leaveRecord);
 
@@ -663,7 +664,7 @@ export default function LeavesSummary() {
     <>
       <div className="leaveSummaryHeader">
         <h3>Leaves Summary</h3>
-        <PopupEditLeavesRecord />
+        <PopupEditLeavesRecord setToggleRefresh={setToggleRefresh} />
       </div>
       <div className="datatable-doc-demo">
         <div className="card">

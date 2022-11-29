@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { CreateLeaveDto } from './dto/create-leave.dto';
 import { UpdateLeaveDto } from './dto/update-leave.dto';
+import { DeleteLeaveDto } from './dto/delete-leave.dto';
 
 @Injectable()
 export class LeaveService {
@@ -84,7 +85,18 @@ export class LeaveService {
     }
   }
 
-  async deleteType(id) {}
+  async deleteType(id: string) {
+    let typeid = parseInt(id);
+    try {
+      let deletetype = await this.knex
+        .table('leave_type')
+        .del(['id', 'type'])
+        .where({ id: typeid });
+      return deletetype;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   // create(createLeaveDto: CreateLeaveDto) {
   //   return 'This action adds a new leave';
