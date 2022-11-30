@@ -4,8 +4,11 @@ import Filter from "../components/02c-Filter";
 import PopupAddTitle from "../components/02c-PopupAddTitle";
 import PopupEditTitle from "../components/02c-PopupEditTitle";
 import "../styles/02c-title.css";
+import EditEmployee from "./02d-EditEmployee";
 
 export default function Title() {
+  const [showList, setShowList] = useState(true);
+  const [passID, setPassID] = useState("");
   // table columns
   const columns = [
     {
@@ -81,10 +84,16 @@ export default function Title() {
               />
             ),
             edit: (
-              <PopupEditTitle
-                employeeTitle={employee.title_name}
-                employeeDepartment={employee.dept_name}
-              />
+              <button
+                onClick={() => {
+                  console.log(employee.id);
+                  setShowList(false);
+                  setPassID(employee.id);
+                  // <EditEmployee  />;
+                }}
+              >
+                Edit
+              </button>
             ),
             // edit: (
             //   <PopupEditTitle
@@ -146,20 +155,28 @@ export default function Title() {
   //rendering
 
   return (
-    <div>
-      <PopupAddTitle />
-      {data.length > 0 && (
-        <DataTable
-          title="Titles"
-          columns={columns}
-          data={filteredItems}
-          striped
-          pagination
-          paginationComponentOptions={paginationComponentOptions}
-          subHeader
-          subHeaderComponent={subHeaderComponent}
-        />
+    <>
+      {showList ? (
+        <div>
+          <PopupAddTitle />
+          {data.length > 0 && (
+            <DataTable
+              title="Titles"
+              columns={columns}
+              data={filteredItems}
+              striped
+              pagination
+              paginationComponentOptions={paginationComponentOptions}
+              subHeader
+              subHeaderComponent={subHeaderComponent}
+            />
+          )}
+        </div>
+      ) : (
+        <EditEmployee editID={passID} />
       )}
-    </div>
+
+      {!showList && <button onClick={() => setShowList(true)}>Cancel</button>}
+    </>
   );
 }

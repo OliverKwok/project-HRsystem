@@ -77,6 +77,31 @@ export class UserService {
     }
   }
 
+  async getAllInfo(id) {
+    try {
+      const infoFromEmployee = await this.knex
+        .table('employee')
+        .select()
+        .where({ id: id });
+
+      // const checkid = await this.knex
+      //   .table('employee')
+      //   .select('id')
+      //   .where({ employeeid: createUserDto.employeeid });
+
+      // const newRole = await this.knex.table('employee_role').insert({
+      //   employeeid: checkid[0].id,
+      //   department_id: createUserDto.department,
+      //   team_id: createUserDto.team,
+      //   title_id: createUserDto.title,
+      // });
+
+      return infoFromEmployee;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
   async findOne(username: string) {
     const checkByWorkEmail = await this.knex
       .table('employee')
@@ -111,7 +136,7 @@ export class UserService {
   async userReportTo() {
     try {
       const res = await this.knex.raw(
-        `select id, concat(employee.first_name,' ',employee.last_name,', ',employee.alias) as full_name from employee
+        `select id, concat(employee.alias,' ',employee.last_name,', ',employee.first_name) as full_name from employee
         where
         employee.status = 'probation'
         or employee.status = 'perm'

@@ -17,6 +17,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import Dashboard from "./pages/01-Dashboard";
 import Organization from "./pages/02a-Organization";
 import Employee from "./pages/02d-NewEmployee";
+import EditEmployee from "./pages/02d-EditEmployee";
 // import Grade from "./pages/02b-Grade";
 import Title from "./pages/02c-Title";
 import StatusUpdate from "./pages/02e-StatusUpdate";
@@ -60,7 +61,7 @@ function App() {
         }
       );
       const profileJson = await profileRes.json();
-      console.log(profileJson);
+      // console.log(profileJson);
       dispatch(login(profileJson, token));
       localStorage.setItem("token", token);
       // setUsername(profileJson.username);
@@ -244,6 +245,7 @@ function App() {
                 {/* <Route path="grade" element={<Grade />}></Route> */}
                 <Route path="title" element={<Title />}></Route>
                 <Route path="employee" element={<Employee />}></Route>
+                <Route path="editEmployee" element={<EditEmployee />}></Route>
                 <Route path="statusUpdate" element={<StatusUpdate />}></Route>
                 <Route path="attendance" element={<Attendance />}></Route>
                 <Route path="paySummary2" element={<PaySummary2 />}></Route>
@@ -262,7 +264,7 @@ function App() {
                 <Route path="datainsights" element={<DataInsights />}></Route>
                 <Route path="notifications" element={<Notifications />}></Route>
                 <Route path="login" element={<LoginForm />}></Route>
-                {/* <Route path="calendar" element={<Calendar />}></Route> */}
+                {/* <Route path="editEmployee/:id" children={<EditEmployee />} /> */}
               </Routes>
             </div>
           </div>
