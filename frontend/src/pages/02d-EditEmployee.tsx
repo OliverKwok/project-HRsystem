@@ -61,57 +61,6 @@ type FormState = {
   payment_remark: string;
 };
 
-// const defaultFetch = {
-//   employeeid: "",
-//   first_name: "",
-//   last_name: "",
-//   chinese_name: "",
-//   alias: "",
-//   hkid: "",
-//   passport: "",
-//   gender: "",
-//   nationality: "",
-//   date_of_birth: new Date(),
-//   age: 0,
-
-//   mobile_countrycode: "",
-//   mobile_no: "",
-//   work_phone_no: "",
-//   email_personal: "",
-//   email_work: "",
-//   // password: "",
-
-//   highest_education: "",
-//   institution_name: "",
-//   major: "",
-//   last_job_company: "",
-//   last_job_title: "",
-
-//   start_date: "",
-//   have_probation: "",
-//   pass_probation: "",
-//   status: "",
-//   job_nature: "",
-//   // length_of_service: "",
-//   notice_period: 30,
-//   report_to: "1",
-//   title: "1",
-//   department: "1",
-//   team: "1",
-
-//   al_leave_entitled_peryear: 0,
-
-//   pay_currency: "",
-//   basic_salary: "",
-//   payment_method: "",
-//   home_address: "",
-//   bank_code: "",
-//   bank_name: "",
-//   bank_number: "",
-//   bank_payee: "",
-//   payment_remark: "",
-// };
-
 export default function Employee(props: any) {
   const {
     register,
@@ -126,26 +75,26 @@ export default function Employee(props: any) {
       first_name: props.editFirstName,
       last_name: props.editLastName,
       chinese_name: props.editChineseName,
-      alias: "",
-      hkid: "",
-      passport: "",
-      gender: "",
-      nationality: "",
-      date_of_birth: new Date(),
-      age: 0,
+      alias: props.editAlias,
+      hkid: props.editHkid,
+      passport: props.editPassport,
+      gender: props.editGender,
+      nationality: props.editNationality,
+      date_of_birth: props.editDateOfBirth, // not work
+      age: 0, // need think
 
-      mobile_countrycode: "",
-      mobile_no: "",
-      work_phone_no: "",
-      email_personal: "",
-      email_work: "",
+      mobile_countrycode: props.editMobileCountryCode,
+      mobile_no: props.editMobileNo,
+      work_phone_no: props.editWorkPhoneNo,
+      email_personal: props.editEmailPersonal,
+      email_work: props.editEmailWork,
       // password: "",
 
-      highest_education: "",
-      institution_name: "",
-      major: "",
-      last_job_company: "",
-      last_job_title: "",
+      highest_education: props.editHighestEducation,
+      institution_name: props.editInstitutionName,
+      major: props.editMajor,
+      last_job_company: props.editLastJobCompany,
+      last_job_title: props.editLastJobTitle,
 
       start_date: "",
       have_probation: "",
@@ -161,15 +110,15 @@ export default function Employee(props: any) {
 
       al_leave_entitled_peryear: 0,
 
-      pay_currency: "",
-      basic_salary: "",
-      payment_method: "",
-      home_address: "",
-      bank_code: "",
-      bank_name: "",
-      bank_number: "",
-      bank_payee: "",
-      payment_remark: "",
+      pay_currency: props.editPayCurrency,
+      basic_salary: props.editBasicSalary,
+      payment_method: props.editPaymentMethod,
+      home_address: props.editHomeAddress,
+      bank_code: props.editBankCode,
+      bank_name: props.editBankName,
+      bank_number: props.editBankNumber,
+      bank_payee: props.editBankPayee,
+      payment_remark: props.editPaymentRemark,
     },
   });
 
@@ -578,7 +527,7 @@ export default function Employee(props: any) {
                   </div>
 
                   <select {...register("nationality")}>
-                    <option value="Hong Kong">Hong Kong</option>
+                    <option value="HK">Hong Kong</option>
                     <option value="China">China</option>
                     <option value="UK">UK</option>
                     <option value="Other">Other</option>

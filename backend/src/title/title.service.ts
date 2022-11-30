@@ -20,8 +20,35 @@ export class TitleService {
         employee.hkid,
         employee.passport,
         employee.gender,
+        employee.nationality,
+        employee.date_of_birth,
         employee.job_nature,
-        employee.profilepic
+        employee.profilepic,
+
+        employee.mobile_countrycode,
+        employee.mobile_no,
+        employee.work_phone_no,
+        employee.email_personal,
+        employee.email_work,
+
+        employee.highest_education,
+        employee.institution_name,
+        employee.major,
+        employee.last_job_company,
+        employee.last_job_title,
+
+        employee.pay_currency,
+        employee.basic_salary,
+        employee.payment_method,
+        employee.home_address,
+        employee.bank_code,
+        employee.bank_name,
+        employee.bank_number,
+        employee.bank_payee,
+        employee.payment_remark
+
+
+
       from employee_role 
       join employee on employee_role.employeeid = employee.id 
       join title on employee_role.title_id = title.id

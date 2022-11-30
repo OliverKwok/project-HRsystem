@@ -526,7 +526,7 @@ export default function Employee() {
                   </div>
 
                   <select {...register("nationality")}>
-                    <option value="Hong Kong">Hong Kong</option>
+                    <option value="HK">Hong Kong</option>
                     <option value="China">China</option>
                     <option value="UK">UK</option>
                     <option value="Other">Other</option>

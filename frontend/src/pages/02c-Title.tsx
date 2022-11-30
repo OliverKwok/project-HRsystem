@@ -13,6 +13,34 @@ export default function Title() {
   const [passFirstName, setPassFirstName] = useState("");
   const [passLastName, setPassLastName] = useState("");
   const [passChineseName, setPassChineseName] = useState("");
+  const [passAlias, setPassAlias] = useState("");
+  const [passHkid, setPassHkid] = useState("");
+  const [passPassport, setPassPassport] = useState("");
+  const [passGender, setPassGender] = useState("");
+  const [passNationality, setPassNationality] = useState("");
+  const [passDateOfBirth, setPassDateOfBirth] = useState("");
+
+  const [passMobileCountryCode, setPassMobileCountryCode] = useState("");
+  const [passMobileNo, setPassMobileNo] = useState("");
+  const [passWorkPhoneNo, setPassWorkPhoneNo] = useState("");
+  const [passEmailPersonal, setPassEmailPersonal] = useState("");
+  const [passEmailWork, setPassEmailWork] = useState("");
+
+  const [passHighestEducation, setPassHighestEducation] = useState("");
+  const [passInstitutionName, setPassInstitutionName] = useState("");
+  const [passMajor, setPassMajor] = useState("");
+  const [passLastJobCompany, setPassLastJobCompany] = useState("");
+  const [passLastJobTitle, setPassLastJobTitle] = useState("");
+
+  const [passPayCurrency, setPassPayCurrency] = useState("");
+  const [passBasicSalary, setPassBasicSalary] = useState("");
+  const [passPaymentMethod, setPassPaymentMethod] = useState("");
+  const [passHomeAddress, setPassHomeAddress] = useState("");
+  const [passBankCode, setPassBankCode] = useState("");
+  const [passBankName, setPassBankName] = useState("");
+  const [passBankNumber, setPassBankNumber] = useState("");
+  const [passBankPayee, setPassBankPayee] = useState("");
+  const [passPaymentRemark, setPassPaymentRemark] = useState("");
 
   // table columns
   const columns = [
@@ -83,6 +111,31 @@ export default function Title() {
             hkid: employee.hkid,
             passport: employee.passport,
             gender: employee.gender,
+            nationality: employee.nationality,
+            date_of_birth: employee.date_of_birth,
+
+            mobile_countrycode: employee.mobile_countrycode,
+            mobile_no: employee.mobile_no,
+            work_phone_no: employee.work_phone_no,
+            email_personal: employee.email_personal,
+            email_work: employee.email_work,
+
+            highest_education: employee.highest_education,
+            institution_name: employee.institution_name,
+            major: employee.major,
+            last_job_company: employee.last_job_company,
+            last_job_title: employee.last_job_title,
+
+            pay_currency: employee.pay_currency,
+            basic_salary: employee.basic_salary,
+            payment_method: employee.payment_method,
+            home_address: employee.home_address,
+            bank_code: employee.bank_code,
+            bank_name: employee.bank_name,
+            bank_number: employee.bank_number,
+            bank_payee: employee.bank_payee,
+            payment_remark: employee.payment_remark,
+
             title: employee.title_name,
             department: employee.dept_name,
             team: employee.team_name,
@@ -104,6 +157,34 @@ export default function Title() {
                   setPassFirstName(employee.first_name);
                   setPassLastName(employee.last_name);
                   setPassChineseName(employee.chinese_name);
+                  setPassAlias(employee.alias);
+                  setPassHkid(employee.hkid);
+                  setPassPassport(employee.passport);
+                  setPassGender(employee.gender);
+                  setPassNationality(employee.nationality);
+                  setPassDateOfBirth(employee.date_of_birth);
+                  //
+                  setPassMobileCountryCode(employee.mobile_countrycode);
+                  setPassMobileNo(employee.mobile_no);
+                  setPassWorkPhoneNo(employee.work_phone_no);
+                  setPassEmailPersonal(employee.email_personal);
+                  setPassEmailWork(employee.email_work);
+                  //
+                  setPassHighestEducation(employee.highest_education);
+                  setPassInstitutionName(employee.institution_name);
+                  setPassMajor(employee.major);
+                  setPassLastJobCompany(employee.last_job_company);
+                  setPassLastJobTitle(employee.last_job_title);
+                  //
+                  setPassPayCurrency(employee.pay_currency);
+                  setPassBasicSalary(employee.basic_salary);
+                  setPassPaymentMethod(employee.payment_method);
+                  setPassHomeAddress(employee.home_address);
+                  setPassBankCode(employee.bank_code);
+                  setPassBankName(employee.bank_name);
+                  setPassBankNumber(employee.bank_number);
+                  setPassBankPayee(employee.bank_payee);
+                  setPassPaymentRemark(employee.payment_remark);
                 }}
               >
                 Edit
@@ -193,6 +274,34 @@ export default function Title() {
           editFirstName={passFirstName}
           editLastName={passLastName}
           editChineseName={passChineseName}
+          editAlias={passAlias}
+          editHkid={passHkid}
+          editPassport={passPassport}
+          editGender={passGender}
+          editNationality={passNationality}
+          editDateOfBirth={passDateOfBirth}
+          //
+          editMobileCountryCode={passMobileCountryCode}
+          editMobileNo={passMobileNo}
+          editWorkPhoneNo={passWorkPhoneNo}
+          editEmailPersonal={passEmailPersonal}
+          editEmailWork={passEmailWork}
+          //
+          editHighestEducation={passHighestEducation}
+          editInstitutionName={passInstitutionName}
+          editMajor={passMajor}
+          editLastJobCompany={passLastJobCompany}
+          editLastJobTitle={passLastJobTitle}
+          //
+          editPayCurrency={passPayCurrency}
+          editBasicSalary={passBasicSalary}
+          editPaymentMethod={passPaymentMethod}
+          editHomeAddress={passHomeAddress}
+          editBankCode={passBankCode}
+          editBankName={passBankName}
+          editBankNumber={passBankNumber}
+          editBankPayee={passBankPayee}
+          editPaymentRemark={passPaymentRemark}
         />
       )}
 
