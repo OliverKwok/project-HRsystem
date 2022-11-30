@@ -10,12 +10,12 @@ export async function seed(knex: Knex): Promise<void> {
     }
     return row;
   }
+  await seedRow('event', { event_name: 'Annual Dinner', date: '2022-12-30' });
+  await seedRow('event', { event_name: 'Fire Drill', date: '2023-01-09' });
+  await seedRow('event', { event_name: 'Road Show', date: '2022-12-09' });
+  await seedRow('event', { event_name: 'Team Building', date: '2022-12-12' });
   await seedRow('event', {
-    event_name: 'Annual Dinner',
-    date: '2022-12-30',
-  });
-  await seedRow('event', {
-    event_name: 'Fire Drill',
-    date: '2023-01-09',
+    event_name: 'Team Lunch (Manager)',
+    date: '2022-12-13',
   });
 }
