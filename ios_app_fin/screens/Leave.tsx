@@ -19,6 +19,8 @@ import {PickerSelect} from '../components/PickerSelect';
 import LeaveApplication from './LeaveApplication';
 import {GlobalStyles} from '../constants/styles';
 import LeaveRecord from '../components/LeaveRecord';
+import {useSelector} from 'react-redux';
+import {AuthState} from '../redux/auth/state';
 
 // import {ScrollView} from 'react-native-gesture-handler';
 
@@ -32,6 +34,7 @@ const wait = (timeout: any) => {
 };
 
 function Leave({navigation}: any) {
+  const userId = useSelector((state: AuthState) => state.auth.user.id);
   // const navigation = useNavigation();
   const [text, onChangeText] = React.useState('');
   const [number, onChangeNumber] = React.useState(null);
@@ -39,30 +42,37 @@ function Leave({navigation}: any) {
   const [showNoRecord, setShowNoRecord] = React.useState(true);
   // const [showNoRecord, setShowNoRecord] = React.useState(false);
 
-  useEffect(() => {
-    let userID = 6;
+  let userID = userId;
+  async function fetchLeaveRecord() {
+    try {
+      const options = {method: 'GET'};
+      let res = await fetch(
+        `${Config.REACT_APP_BACKEND_URL}/ios-app/leaveRecord/${userID}`,
+        options,
+      );
 
-    // Fetch all the leave application record
-    async function fetchLeaveRecord() {
-      try {
-        const options = {method: 'GET'};
-        let res = await fetch(
-          `${Config.REACT_APP_BACKEND_URL}/ios-app/leaveRecord/${userID}`,
-          options,
-        );
+      let leave = await res.json();
 
-        let leave = await res.json();
+      leave = leave['res'];
 
-        leave = leave['res'];
+      let leaveSorted = leave.sort((a: any, b: any) => {
+        if (a.id < b.id) {
+          return 1;
+        }
+        return -1;
+      });
 
-        setLeaveRecord(leave);
-      } catch {
-        console.log('fetch fail');
-      }
+      setLeaveRecord(leaveSorted);
+    } catch {
+      console.log('fetch fail');
     }
+  }
+
+  useEffect(() => {
+    // Fetch all the leave application record
     fetchLeaveRecord();
-  }, []);
-  console.log(leaveRecord);
+  }, [setLeaveRecord]);
+  // console.log(leaveRecord);
 
   // navigate to application form
   function leavePressHandler() {
@@ -71,9 +81,21 @@ function Leave({navigation}: any) {
 
   // scroll down and refresh
   const [refreshing, setRefreshing] = React.useState(false);
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
+    // fetchLeaveRecord().then(() => setRefreshing(false));
+
+    const refetchLeaveRecord = new Promise(async (resolve, reject) => {
+      await fetchLeaveRecord();
+      resolve('');
+    });
+
+    refetchLeaveRecord
+      .then(async () => {
+        await wait(2000);
+      })
+      .then(() => setRefreshing(false));
+    // wait(2000).then(() => setRefreshing(false));
   }, []);
 
   return (

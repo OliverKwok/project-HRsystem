@@ -8,7 +8,7 @@
  * @format
  */
 import messaging from '@react-native-firebase/messaging';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, StatusBar, StyleSheet, Text, View} from 'react-native';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -18,6 +18,7 @@ import {NavigationContainer, StackActions} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   Colors,
@@ -30,18 +31,21 @@ import {GlobalStyles} from './constants/styles';
 import LeaveApplication from './screens/LeaveApplication';
 import BottomBar from './screens/BottomBar';
 import Login from './screens/Login';
+import {Provider, useSelector} from 'react-redux';
+import {store, useAppDispatch, useAppSelector} from './store';
+import {login, logout} from './redux/auth/actions';
+import Config from 'react-native-config';
+import {AuthState} from './redux/auth/state';
 
 const Stack = createNativeStackNavigator();
 
-const App = () => {
-  // const navigation = useNavigation();
-  useEffect(() => {
-    async function main() {
-      await reg_token();
-      await reg_event_listener();
-    }
-    main();
-  });
+function App() {
+  const dispatch = useAppDispatch();
+  const [jwtToken, setJwtToken] = useState<string | null>(null);
+  const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
+
+  // console.log(isAuthenticated, 'hihi');
+
   async function reg_event_listener() {
     // foreground
     messaging().onMessage(async remoteMessage => {
@@ -53,6 +57,7 @@ const App = () => {
       console.log('Message handled in the background!', remoteMessage);
     });
   }
+
   async function reg_token() {
     const authStatus = await messaging().requestPermission();
     const enabled =
@@ -60,12 +65,67 @@ const App = () => {
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
     if (enabled) {
-      console.log('Authorization status:', authStatus);
+      // console.log('Authorization status:', authStatus);
       const token = await messaging().getToken();
-      console.log(token);
+      // console.log(token);
       // put token into local storage
     }
   }
+
+  useEffect(() => {
+    // const getToken = async () => {
+    //   const token: any = await AsyncStorage.getItem('token');
+    //   console.log('The token is', token);
+
+    //   // setJwtToken(token);
+    // };
+
+    // getToken().then();
+    AsyncStorage.getItem('token').then(token => {
+      console.log('first token', token);
+
+      async function checkLogin() {
+        if (!!token) return;
+        const profileRes = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/profile`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        const profileJson = await profileRes.json();
+        // console.log(profileJson);
+        dispatch(login(profileJson, token!));
+        AsyncStorage.setItem('token', token!);
+        // setUsername(profileJson.username);
+        if (jwtToken == undefined) {
+          dispatch(logout());
+        } else if (jwtToken) {
+          await checkLogin();
+        }
+      }
+    });
+    // .then(() => {
+    //   setJwtToken(token => {
+    //     console.log(token);
+    //     return token;
+    //   });
+    // });
+
+    async function main() {
+      // if (jwtToken == undefined) {
+      //   dispatch(logout());
+      // } else if (jwtToken) {
+      //   await checkLogin();
+      // }
+      await reg_token();
+      await reg_event_listener();
+    }
+    main();
+  }, [dispatch]);
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -73,29 +133,34 @@ const App = () => {
           headerStyle: {backgroundColor: GlobalStyles.colors.logoColor},
           headerTintColor: 'black',
         }}>
-        {/* <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{headerShown: false}}
-        /> */}
-        <Stack.Screen
-          name="Navigation Bar"
-          component={BottomBar}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="LeaveApplication"
-          component={LeaveApplication}
-          options={{
-            title: 'Leave Application',
-            presentation: 'modal',
-          }}
-        />
+        {isAuthenticated ? (
+          <>
+            <Stack.Screen
+              name="Navigation Bar"
+              component={BottomBar}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="LeaveApplication"
+              component={LeaveApplication}
+              options={{
+                title: 'Leave Application',
+                presentation: 'modal',
+              }}
+            />
+          </>
+        ) : (
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{headerShown: false}}
+          />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
-};
+}
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({});
 
 export default App;

@@ -12,6 +12,8 @@ import {
   RefreshControl,
 } from 'react-native';
 import React from 'react';
+import {useSelector} from 'react-redux';
+import {AuthState} from '../redux/auth/state';
 
 const wait = (timeout: any) => {
   return new Promise(resolve => {
@@ -21,10 +23,13 @@ const wait = (timeout: any) => {
 
 function Attendance() {
   const today = new Date().toISOString().split('T')[0];
+  const userId = useSelector((state: AuthState) => state.auth.user.id);
 
   const [selectedDate, setSelectedDate] = useState(
     new Date().toISOString().split('T')[0],
   );
+
+  // console.log({userId});
 
   //   console.log(selectedDate);
 
