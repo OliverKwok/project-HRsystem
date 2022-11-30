@@ -29,7 +29,7 @@ import Leaves from "./pages/05-Leaves";
 import LeavesSummary from "./pages/05a-LeavesSummary";
 import LeavesType from "./pages/05b-LeavesType";
 // import LeavesSetting from "./pages/05c-LeavesSetting";
-import LeavesRequest from "./pages/05c-LeavesRequest";
+// import LeavesRequest from "./pages/05c-LeavesRequest";
 import LeavesRequest2 from "./pages/05c-LeavesRequest2";
 import Offboarding from "./pages/06-Offboarding";
 import DataInsights from "./pages/07-DataInsights";
@@ -187,14 +187,14 @@ function App() {
                     <TbReportSearch /> <span>leaves type</span>
                   </div>
                 </NavLink>
-                <NavLink className="sub-item" to={"leavesRequest"}>
+                {/* <NavLink className="sub-item" to={"leavesRequest"}>
                   <div>
                     <MdOutlineSubtitles /> <span>requests</span>
                   </div>
-                </NavLink>
+                </NavLink> */}
                 <NavLink className="sub-item" to={"leavesRequest2"}>
                   <div>
-                    <MdOutlineSubtitles /> <span>requests2</span>
+                    <MdOutlineSubtitles /> <span>requests</span>
                   </div>
                 </NavLink>
               </>
@@ -255,7 +255,7 @@ function App() {
                 <Route path="leavessummary" element={<LeavesSummary />}></Route>
                 <Route path="leavestype" element={<LeavesType />}></Route>
                 {/* <Route path="leavessetting" element={<LeavesSetting />}></Route> */}
-                <Route path="leavesrequest" element={<LeavesRequest />}></Route>
+                {/* <Route path="leavesrequest" element={<LeavesRequest />}></Route> */}
                 <Route
                   path="leavesrequest2"
                   element={<LeavesRequest2 />}

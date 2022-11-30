@@ -96,7 +96,7 @@ export class LeaveService {
     }
   }
 
-  async application() {
+  async pendingApplication() {
     try {
       let applications = await this.knex
         .select(
@@ -113,6 +113,7 @@ export class LeaveService {
           'leave_application.end_date',
           'leave_application.end_date_period',
           'leave_application.number_of_days',
+          'leave_application.status',
         )
         .from('leave_application')
         .join('employee', 'leave_application.employee_id', '=', 'employee.id')
@@ -121,7 +122,42 @@ export class LeaveService {
           'leave_application.leave_type',
           '=',
           'leave_type.id',
-        );
+        )
+        .where({ 'leave_application.status': 'pending' });
+      return applications;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async nonPendingApplication() {
+    try {
+      let applications = await this.knex
+        .select(
+          this.knex.raw(
+            `concat(UPPER(employee.last_name), ' ', employee.first_name, ', ', employee.alias) as employee_name`,
+          ),
+          'employee.id as employee_id',
+          'employee.employeeid as employee_work_id',
+          'leave_application.created_at',
+          'leave_type.type as leavetype',
+          'leave_type.id as leavetype_id',
+          'leave_application.start_date',
+          'leave_application.start_date_period',
+          'leave_application.end_date',
+          'leave_application.end_date_period',
+          'leave_application.number_of_days',
+          'leave_application.status',
+        )
+        .from('leave_application')
+        .join('employee', 'leave_application.employee_id', '=', 'employee.id')
+        .join(
+          'leave_type',
+          'leave_application.leave_type',
+          '=',
+          'leave_type.id',
+        )
+        .whereNot({ 'leave_application.status': 'pending' });
       return applications;
     } catch (err) {
       console.log(err);

@@ -58,7 +58,6 @@ export default function StatusUpdate() {
         </SplitterPanel>
         <SplitterPanel className="flex align-items-center justify-content-center">
           <div className="space"></div>
-  
       Status Update
       <StatusUpdateForm />
         </SplitterPanel>

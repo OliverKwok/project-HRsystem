@@ -47,9 +47,14 @@ export class LeaveController {
     return this.leaveService.deleteType(`${typeid}`);
   }
 
-  @Get('application')
-  application(){
-    return this.leaveService.application();
+  @Get('pending_application')
+  pendingApplication() {
+    return this.leaveService.pendingApplication();
+  }
+
+  @Get('nonpending_application')
+  nonPendingApplication() {
+    return this.leaveService.nonPendingApplication();
   }
 
   // @Patch(':id')
