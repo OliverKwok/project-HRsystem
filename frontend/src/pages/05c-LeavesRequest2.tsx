@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { classNames } from "primereact/utils";
@@ -9,6 +9,7 @@ import "../styles/05c-LeaveRequests.css";
 export default function LeavesRequest2() {
   const [applicationData, setApplicationData] = useState([]);
   const [nonPending, setNonPending] = useState([]);
+  const [actionOnPending, setActionOnPending] = useState(false);
 
   useEffect(() => {
     const requestOptions = {
@@ -23,8 +24,10 @@ export default function LeavesRequest2() {
       })
       .then((data) => {
         let fetchData = data.map((app: any) => {
-          console.log(typeof app.start_date);
+          console.log(app.application_id);
+
           return {
+            application_id: app.appication_id,
             status: app.status,
             employee: app.employee_name,
             leavetype: app.leavetype,
@@ -34,7 +37,14 @@ export default function LeavesRequest2() {
             end_date_period: app.end_date_period,
             number_of_days: app.number_of_days,
             applied_date: Moment(app.created_at).format("DD-MM-YYYY"),
-            action_approve: <button>Approve</button>,
+            action_approve: (
+              <button
+                id={`appId-${app.application_id}`}
+                onClick={approveAction}
+              >
+                Approve
+              </button>
+            ),
             action_reject: <button>Reject</button>,
             action_cancel: <button>Cancel</button>,
             action_taken: <button>Marked as Taken</button>,
@@ -42,7 +52,32 @@ export default function LeavesRequest2() {
         });
         setApplicationData(fetchData);
       });
-  }, []);
+  }, [actionOnPending]);
+
+  async function approveAction(event: any) {
+    event.preventDefault();
+    let id = event.target.id.replace("appId-", "");
+    console.log({ id });
+
+    // console.log(app.application_id);
+    // console.log()
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        application_id: id,
+      }),
+    };
+
+    await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/leave/update_status`,
+      requestOptions
+    )
+      .then((response) => response.json)
+      .then((data) => console.log(data));
+
+    setActionOnPending(!actionOnPending);
+  }
 
   useEffect(() => {
     const requestOptions = {
@@ -58,6 +93,7 @@ export default function LeavesRequest2() {
       .then((data) => {
         let fetchNonPendingData = data.map((app: any) => {
           return {
+            application_id: app.appication_id,
             employee: app.employee_name,
             leavetype: app.leavetype,
             start_date: Moment(app.start_date).format("DD-MM-YYYY"),
@@ -73,7 +109,7 @@ export default function LeavesRequest2() {
         });
         setNonPending(fetchNonPendingData);
       });
-  }, []);
+  }, [actionOnPending]);
 
   const statusColors = (rowData: any) => {
     const statusClassName = classNames({
@@ -111,7 +147,6 @@ export default function LeavesRequest2() {
             <Column field="action_cancel" header="" />
             <Column field="action_taken" header="" />
           </DataTable>
-
           <hr />
         </SplitterPanel>
 
