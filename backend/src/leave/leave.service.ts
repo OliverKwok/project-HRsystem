@@ -9,6 +9,7 @@ import {
 import { CreateLeaveDto } from './dto/create-leave.dto';
 import { UpdateLeaveDto } from './dto/update-leave.dto';
 import { DeleteLeaveDto } from './dto/delete-leave.dto';
+import { UpdateStatusDto } from './dto/update-status.dto';
 
 @Injectable()
 export class LeaveService {
@@ -114,6 +115,7 @@ export class LeaveService {
           'leave_application.end_date_period',
           'leave_application.number_of_days',
           'leave_application.status',
+          'leave_application.id as application_id',
         )
         .from('leave_application')
         .join('employee', 'leave_application.employee_id', '=', 'employee.id')
@@ -148,6 +150,7 @@ export class LeaveService {
           'leave_application.end_date_period',
           'leave_application.number_of_days',
           'leave_application.status',
+          'leave_application.id as application_id',
         )
         .from('leave_application')
         .join('employee', 'leave_application.employee_id', '=', 'employee.id')
@@ -161,6 +164,20 @@ export class LeaveService {
       return applications;
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async update_status(updateStatusDto: UpdateStatusDto) {
+    console.log(updateStatusDto);
+    try {
+      const statusApproved = await this.knex
+        .table('leave_application')
+        .update({ status: updateStatusDto.action })
+        .where({ id: updateStatusDto.application_id });
+      return statusApproved;
+    } catch (err) {
+      console.log(err);
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
 
