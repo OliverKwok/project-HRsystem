@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 // import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import moment from "moment";
@@ -113,17 +113,6 @@ type FormState = {
 // };
 
 export default function Employee(props: any) {
-  async function getEmployeeInfo() {
-    let response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/user/getAllInfo/${props.editID}`
-    );
-    let json = await response.json();
-    console.log(json[0]);
-    return json[0];
-  }
-
-  getEmployeeInfo();
-
   const {
     register,
     handleSubmit,
@@ -133,10 +122,10 @@ export default function Employee(props: any) {
     formState: { errors },
   } = useForm<FormState>({
     defaultValues: {
-      employeeid: "",
-      first_name: "",
-      last_name: "",
-      chinese_name: "",
+      employeeid: props.editEmployeeid,
+      first_name: props.editFirstName,
+      last_name: props.editLastName,
+      chinese_name: props.editChineseName,
       alias: "",
       hkid: "",
       passport: "",
@@ -185,7 +174,7 @@ export default function Employee(props: any) {
   });
 
   const [age, setAge] = useState("0");
-  const [employeeid, setEmployeeid] = useState("");
+  // const [employeeid, setEmployeeid] = useState("");
   const profilepic = watch("profilepic");
   const [previewSrc, setpreviewSrc] = useState("");
   const [reportTo, setReportTo] = useState([]);
@@ -241,33 +230,33 @@ export default function Employee(props: any) {
   }
 
   // check lastest employeeid
-  async function checkEmployeeid() {
-    const requestOptions = {
-      method: "Get",
-    };
+  // async function checkEmployeeid() {
+  //   const requestOptions = {
+  //     method: "Get",
+  //   };
 
-    const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/user/count`,
-      requestOptions
-    );
-    const jsonData = await res.json();
-    let newEmployeeid = "DEMO";
-    if (jsonData.maxid < 10) {
-      newEmployeeid = newEmployeeid + "00" + (jsonData.maxid + 1);
-    } else if (jsonData.maxid < 100) {
-      newEmployeeid = newEmployeeid + "0" + (jsonData.maxid + 1);
-    } else if (jsonData.maxid < 1000) {
-      newEmployeeid = newEmployeeid + (jsonData.maxid + 1);
-    } else {
-      throw new Error();
-    }
-    setEmployeeid(newEmployeeid);
-    setValue("employeeid", newEmployeeid);
-  }
+  //   const res = await fetch(
+  //     `${process.env.REACT_APP_BACKEND_URL}/user/count`,
+  //     requestOptions
+  //   );
+  //   const jsonData = await res.json();
+  //   let newEmployeeid = "DEMO";
+  //   if (jsonData.maxid < 10) {
+  //     newEmployeeid = newEmployeeid + "00" + (jsonData.maxid + 1);
+  //   } else if (jsonData.maxid < 100) {
+  //     newEmployeeid = newEmployeeid + "0" + (jsonData.maxid + 1);
+  //   } else if (jsonData.maxid < 1000) {
+  //     newEmployeeid = newEmployeeid + (jsonData.maxid + 1);
+  //   } else {
+  //     throw new Error();
+  //   }
+  //   setEmployeeid(newEmployeeid);
+  //   setValue("employeeid", newEmployeeid);
+  // }
 
-  useEffect(() => {
-    checkEmployeeid();
-  }, []);
+  // useEffect(() => {
+  //   checkEmployeeid();
+  // }, []);
 
   // check report to employee list
   useEffect(() => {
@@ -412,7 +401,7 @@ export default function Employee(props: any) {
     //   alert("inserted into role table");
     // }
 
-    checkEmployeeid();
+    // checkEmployeeid();
   }
 
   // auto calculate the age
@@ -491,7 +480,7 @@ export default function Employee(props: any) {
                     <span>Employee ID*</span>
                   </div>
                   <input
-                    value={employeeid}
+                    // value={employeeid}
                     type="text"
                     {...register("employeeid")}
                     disabled

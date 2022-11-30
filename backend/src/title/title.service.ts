@@ -11,10 +11,17 @@ export class TitleService {
     try {
       const allTitles = await this.knex.raw(
         `select title.title_name, department.dept_name, team.team_name,
-      employee.job_nature, employee.first_name, employee.last_name, employee.profilepic,
-      employee.id,
-      employee.alias,
-      employee.employeeid
+        employee.id,
+        employee.employeeid,
+        employee.first_name,
+        employee.last_name,
+        employee.chinese_name,
+        employee.alias,
+        employee.hkid,
+        employee.passport,
+        employee.gender,
+        employee.job_nature,
+        employee.profilepic
       from employee_role 
       join employee on employee_role.employeeid = employee.id 
       join title on employee_role.title_id = title.id

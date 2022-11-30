@@ -84,19 +84,7 @@ export class UserService {
         .select()
         .where({ id: id });
 
-      // const checkid = await this.knex
-      //   .table('employee')
-      //   .select('id')
-      //   .where({ employeeid: createUserDto.employeeid });
-
-      // const newRole = await this.knex.table('employee_role').insert({
-      //   employeeid: checkid[0].id,
-      //   department_id: createUserDto.department,
-      //   team_id: createUserDto.team,
-      //   title_id: createUserDto.title,
-      // });
-
-      return infoFromEmployee;
+      return infoFromEmployee[0];
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }

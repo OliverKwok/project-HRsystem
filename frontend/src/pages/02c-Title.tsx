@@ -8,7 +8,12 @@ import EditEmployee from "./02d-EditEmployee";
 
 export default function Title() {
   const [showList, setShowList] = useState(true);
-  const [passID, setPassID] = useState("");
+  const [passId, setPassId] = useState("");
+  const [passEmployeeid, setPassEmployeeid] = useState("");
+  const [passFirstName, setPassFirstName] = useState("");
+  const [passLastName, setPassLastName] = useState("");
+  const [passChineseName, setPassChineseName] = useState("");
+
   // table columns
   const columns = [
     {
@@ -71,6 +76,13 @@ export default function Title() {
           return {
             id: employee.id,
             employeeid: employee.employeeid,
+            first_name: employee.first_name,
+            last_name: employee.last_name,
+            chinese_name: employee.chinese_name,
+            alias: employee.alias,
+            hkid: employee.hkid,
+            passport: employee.passport,
+            gender: employee.gender,
             title: employee.title_name,
             department: employee.dept_name,
             team: employee.team_name,
@@ -86,10 +98,12 @@ export default function Title() {
             edit: (
               <button
                 onClick={() => {
-                  console.log(employee.id);
                   setShowList(false);
-                  setPassID(employee.id);
-                  // <EditEmployee  />;
+                  setPassId(employee.id);
+                  setPassEmployeeid(employee.employeeid);
+                  setPassFirstName(employee.first_name);
+                  setPassLastName(employee.last_name);
+                  setPassChineseName(employee.chinese_name);
                 }}
               >
                 Edit
@@ -173,7 +187,13 @@ export default function Title() {
           )}
         </div>
       ) : (
-        <EditEmployee editID={passID} />
+        <EditEmployee
+          editId={passId}
+          editEmployeeid={passEmployeeid}
+          editFirstName={passFirstName}
+          editLastName={passLastName}
+          editChineseName={passChineseName}
+        />
       )}
 
       {!showList && <button onClick={() => setShowList(true)}>Cancel</button>}
