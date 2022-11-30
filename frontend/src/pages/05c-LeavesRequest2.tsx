@@ -82,6 +82,7 @@ export default function LeavesRequest2() {
       rejected: rowData.status === "rejected",
       cancelled: rowData.status === "cancelled",
       taken: rowData.status === "taken",
+      onleave: rowData.status === "onleave",
     });
     return <div className={statusClassName}>{rowData.status}</div>;
   };
@@ -140,7 +141,7 @@ export default function LeavesRequest2() {
   );
 }
 
-//TODO change status color
+//DONE - TODO change status color
 //DONE - TODO date format
 //DONE - TODO split table for pending and non-pending status
 // TODO button functions
