@@ -172,7 +172,7 @@ export class LeaveService {
     try {
       const statusApproved = await this.knex
         .table('leave_application')
-        .update({ status: 'approved' })
+        .update({ status: updateStatusDto.action })
         .where({ id: updateStatusDto.application_id });
       return statusApproved;
     } catch (err) {

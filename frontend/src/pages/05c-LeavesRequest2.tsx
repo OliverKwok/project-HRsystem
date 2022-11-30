@@ -40,32 +40,58 @@ export default function LeavesRequest2() {
             action_approve: (
               <button
                 id={`appId-${app.application_id}`}
-                onClick={approveAction}
+                name="approved"
+                onClick={pendingAction}
               >
                 Approve
               </button>
             ),
-            action_reject: <button>Reject</button>,
-            action_cancel: <button>Cancel</button>,
-            action_taken: <button>Marked as Taken</button>,
+            action_reject: (
+              <button
+                id={`appId-${app.application_id}`}
+                name="rejected"
+                onClick={pendingAction}
+              >
+                Reject
+              </button>
+            ),
+            action_cancel: (
+              <button
+                id={`appId-${app.application_id}`}
+                name="cancelled"
+                onClick={pendingAction}
+              >
+                Cancel
+              </button>
+            ),
+            action_taken: (
+              <button
+                id={`appId-${app.application_id}`}
+                name="taken"
+                onClick={pendingAction}
+              >
+                Mark as Taken
+              </button>
+            ),
           };
         });
         setApplicationData(fetchData);
       });
   }, [actionOnPending]);
 
-  async function approveAction(event: any) {
+  async function pendingAction(event: any) {
     event.preventDefault();
     let id = event.target.id.replace("appId-", "");
     console.log({ id });
+    let name = event.target.name;
+    console.log(name);
 
-    // console.log(app.application_id);
-    // console.log()
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         application_id: id,
+        action: name,
       }),
     };
 
@@ -154,7 +180,7 @@ export default function LeavesRequest2() {
           <DataTable
             value={nonPending}
             resizableColumns
-            columnResizeMode="fit"
+            columnResizeMode="expand"
             className="datatable"
           >
             <Column field="status" header="Status" body={statusColors} />
