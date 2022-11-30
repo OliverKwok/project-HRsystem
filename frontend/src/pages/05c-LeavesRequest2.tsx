@@ -118,20 +118,52 @@ export default function LeavesRequest2() {
       })
       .then((data) => {
         let fetchNonPendingData = data.map((app: any) => {
-          return {
-            application_id: app.appication_id,
-            employee: app.employee_name,
-            leavetype: app.leavetype,
-            start_date: Moment(app.start_date).format("DD-MM-YYYY"),
-            start_date_period: app.start_date_period,
-            end_date: Moment(app.end_date).format("DD-MM-YYYY"),
-            end_date_period: app.end_date_period,
-            number_of_days: app.number_of_days,
-            applied_date: Moment(app.created_at).format("DD-MM-YYYY"),
-            status: app.status,
-            action_undo: <button>Back to Pending</button>,
-            action_cancel: <button>Cancel</button>,
-          };
+          if (app.status == "approved") {
+            return {
+              application_id: app.appication_id,
+              employee: app.employee_name,
+              leavetype: app.leavetype,
+              start_date: Moment(app.start_date).format("DD-MM-YYYY"),
+              start_date_period: app.start_date_period,
+              end_date: Moment(app.end_date).format("DD-MM-YYYY"),
+              end_date_period: app.end_date_period,
+              number_of_days: app.number_of_days,
+              applied_date: Moment(app.created_at).format("DD-MM-YYYY"),
+              status: app.status,
+              action_undo: (
+                <button
+                  id={`appId-${app.application_id}`}
+                  name="pending"
+                  onClick={pendingAction}
+                >
+                  Back to Pending
+                </button>
+              ),
+              action_cancel: <button>Cancel Application</button>,
+            };
+          } else {
+            return {
+              application_id: app.appication_id,
+              employee: app.employee_name,
+              leavetype: app.leavetype,
+              start_date: Moment(app.start_date).format("DD-MM-YYYY"),
+              start_date_period: app.start_date_period,
+              end_date: Moment(app.end_date).format("DD-MM-YYYY"),
+              end_date_period: app.end_date_period,
+              number_of_days: app.number_of_days,
+              applied_date: Moment(app.created_at).format("DD-MM-YYYY"),
+              status: app.status,
+              action_undo: (
+                <button
+                  id={`appId-${app.application_id}`}
+                  name="pending"
+                  onClick={pendingAction}
+                >
+                  Back to Pending
+                </button>
+              ),
+            };
+          }
         });
         setNonPending(fetchNonPendingData);
       });
