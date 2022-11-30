@@ -5,5 +5,5 @@ export class DeleteLeaveDto {
   type: string;
 
   @MinLength(0)
-  id: number;
+  id: any;
 }

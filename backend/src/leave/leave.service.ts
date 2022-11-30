@@ -67,7 +67,6 @@ export class LeaveService {
     try {
       let allTypes = await this.knex.select('type', 'id').from('leave_type');
       console.log({ allTypes });
-
       return allTypes;
     } catch (err) {
       console.log(err);
@@ -85,14 +84,45 @@ export class LeaveService {
     }
   }
 
-  async deleteType(id: string) {
-    let typeid = parseInt(id);
+  async deleteType(typeid: string) {
     try {
       let deletetype = await this.knex
         .table('leave_type')
-        .del(['id', 'type'])
+        .del(['type'])
         .where({ id: typeid });
       return deletetype;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async application() {
+    try {
+      let applications = await this.knex
+        .select(
+          this.knex.raw(
+            `concat(UPPER(employee.last_name), ' ', employee.first_name, ', ', employee.alias) as employee_name`,
+          ),
+          'employee.id as employee_id',
+          'employee.employeeid as employee_work_id',
+          'leave_application.created_at',
+          'leave_type.type as leavetype',
+          'leave_type.id as leavetype_id',
+          'leave_application.start_date',
+          'leave_application.start_date_period',
+          'leave_application.end_date',
+          'leave_application.end_date_period',
+          'leave_application.number_of_days',
+        )
+        .from('leave_application')
+        .join('employee', 'leave_application.employee_id', '=', 'employee.id')
+        .join(
+          'leave_type',
+          'leave_application.leave_type',
+          '=',
+          'leave_type.id',
+        );
+      return applications;
     } catch (err) {
       console.log(err);
     }

@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 
@@ -15,38 +15,78 @@ let data = [
   { brand: "Fiat", year: 2013, color: "Red", vin: "245t2s" },
 ];
 
-const init = (initialState: any) => initialState;
+// const init = (initialState: any) => initialState;
 
-const reducer = (state: any, action: any) => {
-  switch (action.type) {
-    case "dataLoaded":
-      return { ...state, results: action.payload, loading: false };
-    default:
-      throw new Error();
-  }
-};
+// const reducer = (state: any, action: any) => {
+//   switch (action.type) {
+//     case "dataLoaded":
+//       return { ...state, results: action.payload, loading: false };
+//     default:
+//       throw new Error();
+//   }
+// };
 
 export default function LeavesRequest2() {
-  const initialState = {
-    results: [],
-    loading: true,
-  };
-  const [state, dispatch] = useReducer(reducer, initialState, init);
-  const { results, loading } = state;
-
   useEffect(() => {
-    // if (loading) {
-    dispatch({ type: "dataLoaded", payload: data });
-    // }
-  }, [loading]);
+    const requestOptions = {
+      method: "Get",
+    };
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/leave/application`,
+      requestOptions
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        let fetchData = data.map((app: any) => {
+          return {
+            employee: app.employee_name,
+            leavetype: app.leavetype,
+            start_date: app.start_date,
+            start_date_period: app.start_date_period,
+            end_date: app.end_date,
+            end_date_period: app.end_date_period,
+            number_of_days: app.number_of_days,
+            applied_date: app.created_at,
+            action_approve: <button>Approve</button>,
+            action_reject: <button>Reject</button>,
+            action_cancel: <button>Cancel</button>,
+          };
+        });
+
+        setApplicationData(fetchData);
+      });
+  }, []);
+
+  // const initialState = {
+  //   results: [],
+  //   loading: true,
+  // };
+  // const [state, dispatch] = useReducer(reducer, initialState, init);
+  // const { results, loading } = state;
+  const [applicationData, setApplicationData] = useState([]);
+
+  // useEffect(() => {
+  //   // if (loading) {
+  //   dispatch({ type: "dataLoaded", payload: data });
+  //   // }
+  // }, [loading]);
 
   return (
     <div>
-      <DataTable value={results}>
-        <Column field="vin" header="Vin" />
-        <Column field="year" header="Year" />
-        <Column field="brand" header="Brand" />
-        <Column field="color" header="Color" />
+      <DataTable value={applicationData}>
+        <Column field="employee" header="Employee" />
+        <Column field="leavetype" header="Leave Type" />
+        <Column field="start_date" header="Start Date" />
+        <Column field="start_date_period" header="Start Date Period" />
+        <Column field="end_date" header="End Date" />
+        <Column field="end_date_period" header="End Date Period" />
+        <Column field="number_of_days" header="No. of Days" />
+        <Column field="applied_date" header="Applied Date" />
+        <Column field="action_approve" header="Action" />
+        <Column field="action_reject" header="" />
+        <Column field="action_cancel" header="" />
       </DataTable>
     </div>
   );

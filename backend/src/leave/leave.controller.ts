@@ -42,9 +42,14 @@ export class LeaveController {
     return this.leaveService.addNewType(createLeaveDto);
   }
 
-  @Delete('deletetype/:id')
-  deleteType(@Param('id') id:string) {
-    return this.leaveService.deleteType(`${id}`);
+  @Delete('deletetype/:typeid')
+  deleteType(@Param('typeid') typeid: string) {
+    return this.leaveService.deleteType(`${typeid}`);
+  }
+
+  @Get('application')
+  application(){
+    return this.leaveService.application();
   }
 
   // @Patch(':id')
