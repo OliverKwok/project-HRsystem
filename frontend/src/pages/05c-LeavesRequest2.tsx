@@ -1,33 +1,10 @@
 import React, { useReducer, useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { classNames } from "primereact/utils";
 import { Splitter, SplitterPanel } from "primereact/splitter";
 import Moment from "moment";
-// moment().format();
-
-// let data = [
-//   { brand: "VW", year: 2012, color: "Orange", vin: "dsad231ff" },
-//   { brand: "Audi", year: 2011, color: "Black", vin: "gwregre345" },
-//   { brand: "Renault", year: 2005, color: "Gray", vin: "h354htr" },
-//   { brand: "BMW", year: 2003, color: "Blue", vin: "j6w54qgh" },
-//   { brand: "Mercedes", year: 1995, color: "Orange", vin: "hrtwy34" },
-//   { brand: "Volvo", year: 2005, color: "Black", vin: "jejtyj" },
-//   { brand: "Honda", year: 2012, color: "Yellow", vin: "g43gr" },
-//   { brand: "Jaguar", year: 2013, color: "Orange", vin: "greg34" },
-//   { brand: "Ford", year: 2000, color: "Black", vin: "h54hw5" },
-//   { brand: "Fiat", year: 2013, color: "Red", vin: "245t2s" },
-// ];
-
-// const init = (initialState: any) => initialState;
-
-// const reducer = (state: any, action: any) => {
-//   switch (action.type) {
-//     case "dataLoaded":
-//       return { ...state, results: action.payload, loading: false };
-//     default:
-//       throw new Error();
-//   }
-// };
+import "../styles/05c-LeaveRequests.css";
 
 export default function LeavesRequest2() {
   const [applicationData, setApplicationData] = useState([]);
@@ -98,18 +75,16 @@ export default function LeavesRequest2() {
       });
   }, []);
 
-  // const initialState = {
-  //   results: [],
-  //   loading: true,
-  // };
-  // const [state, dispatch] = useReducer(reducer, initialState, init);
-  // const { results, loading } = state;
-
-  // useEffect(() => {
-  //   // if (loading) {
-  //   dispatch({ type: "dataLoaded", payload: data });
-  //   // }
-  // }, [loading]);
+  const statusColors = (rowData: any) => {
+    const statusClassName = classNames({
+      pending: rowData.status === "pending",
+      approved: rowData.status === "approved",
+      rejected: rowData.status === "rejected",
+      cancelled: rowData.status === "cancelled",
+      taken: rowData.status === "taken",
+    });
+    return <div className={statusClassName}>{rowData.status}</div>;
+  };
 
   return (
     <>
@@ -119,14 +94,15 @@ export default function LeavesRequest2() {
             value={applicationData}
             resizableColumns
             columnResizeMode="fit"
+            className="datatable"
           >
-            <Column field="status" header="Status" />
+            <Column field="status" header="Status" body={statusColors} />
             <Column field="employee" header="Employee" />
             <Column field="leavetype" header="Leave Type" />
             <Column field="start_date" header="Start Date" />
-            <Column field="start_date_period" header="Start Date Period" />
+            <Column field="start_date_period" header="Period" />
             <Column field="end_date" header="End Date" />
-            <Column field="end_date_period" header="End Date Period" />
+            <Column field="end_date_period" header="Period" />
             <Column field="number_of_days" header="No. of Days" />
             <Column field="applied_date" header="Applied Date" />
             <Column field="action_approve" header="Action" />
@@ -139,14 +115,19 @@ export default function LeavesRequest2() {
         </SplitterPanel>
 
         <SplitterPanel className="flex align-items-center justify-content-center">
-          <DataTable value={nonPending} resizableColumns columnResizeMode="fit">
-            <Column field="status" header="Status" />
+          <DataTable
+            value={nonPending}
+            resizableColumns
+            columnResizeMode="fit"
+            className="datatable"
+          >
+            <Column field="status" header="Status" body={statusColors} />
             <Column field="employee" header="Employee" />
             <Column field="leavetype" header="Leave Type" />
             <Column field="start_date" header="Start Date" />
-            <Column field="start_date_period" header="Start Date Period" />
+            <Column field="start_date_period" header="Period" />
             <Column field="end_date" header="End Date" />
-            <Column field="end_date_period" header="End Date Period" />
+            <Column field="end_date_period" header="Period" />
             <Column field="number_of_days" header="No. of Days" />
             <Column field="applied_date" header="Applied Date" />
             <Column field="action_undo" header="Action" />
@@ -160,5 +141,6 @@ export default function LeavesRequest2() {
 }
 
 //TODO change status color
-//TODO date format
+//DONE - TODO date format
 //DONE - TODO split table for pending and non-pending status
+// TODO button functions
