@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import Filter from "../components/02c-Filter";
-import PopupAddTitle from "../components/02c-PopupAddTitle";
-import PopupEditTitle from "../components/02c-PopupEditTitle";
+// import PopupAddTitle from "../components/02c-PopupAddTitle";
+// import PopupEditTitle from "../components/02c-PopupEditTitle";
 import "../styles/02c-title.css";
 import EditEmployee from "./02d-EditEmployee";
 
@@ -293,10 +293,9 @@ export default function Title() {
     <>
       {showList ? (
         <div>
-          <PopupAddTitle />
+          {/* <PopupAddTitle /> */}
           {data.length > 0 && (
             <DataTable
-              title="Titles"
               columns={columns}
               data={filteredItems}
               striped

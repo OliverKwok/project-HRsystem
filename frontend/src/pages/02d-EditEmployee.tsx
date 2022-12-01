@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import moment from "moment";
@@ -81,7 +81,7 @@ export default function Employee(props: any) {
       gender: props.editGender,
       nationality: props.editNationality,
       date_of_birth: moment(props.editDateOfBirth).format("YYYY-MM-DD"),
-      age: 0, // TODO make calulation
+      // age: 0,
 
       mobile_countrycode: props.editMobileCountryCode,
       mobile_no: props.editMobileNo,
@@ -290,14 +290,14 @@ export default function Employee(props: any) {
       // headers: { "Content-Type": "multi-type/form-data" },
       // body: formData,
     };
-
+    console.log(JSON.stringify(data));
     const res = await fetch(
       `${process.env.REACT_APP_BACKEND_URL}/user/update`,
       requestOptions
     );
     const jsonData = await res.json();
 
-    if (jsonData.newEmployee.rowCount) {
+    if (jsonData.updateEmployee) {
       alert("updated in the employee table");
     }
   }
@@ -319,11 +319,11 @@ export default function Employee(props: any) {
     let lastNameOutput;
 
     if (firstNameInput != undefined) {
-      firstNameOutput = firstNameInput.replace(" ", ".");
+      firstNameOutput = firstNameInput.toLowerCase().replace(" ", ".");
     }
 
     if (lastNameInput != undefined) {
-      lastNameOutput = lastNameInput.replace(" ", "");
+      lastNameOutput = lastNameInput.toLowerCase().replace(" ", "");
     }
 
     let workEmailGenerated =
@@ -495,7 +495,7 @@ export default function Employee(props: any) {
                   />
                 </div>
 
-                <div>
+                {/* <div>
                   <div>
                     <span>Age</span>
                   </div>
@@ -506,7 +506,7 @@ export default function Employee(props: any) {
                     {...register("age")}
                     disabled
                   />
-                </div>
+                </div> */}
               </div>
               <hr />
             </>
@@ -868,7 +868,7 @@ export default function Employee(props: any) {
           )}
         </div>
 
-        {false && (
+        {/* {false && (
           <>
             <hr />
             <div>
@@ -899,9 +899,9 @@ export default function Employee(props: any) {
             </div>
             <hr />
           </>
-        )}
+        )} */}
 
-        <button type="submit">Edit</button>
+        <button type="submit">Submit Amendment</button>
       </form>
     </div>
   );
