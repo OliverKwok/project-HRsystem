@@ -62,6 +62,8 @@ type FormState = {
 };
 
 export default function Employee(props: any) {
+  console.log(props.editDateOfBirth);
+
   const {
     register,
     handleSubmit,
@@ -80,8 +82,8 @@ export default function Employee(props: any) {
       passport: props.editPassport,
       gender: props.editGender,
       nationality: props.editNationality,
-      date_of_birth: props.editDateOfBirth, // not work
-      age: 0, // need think
+      date_of_birth: props.editDateOfBirth.toString().substring(0, 10),
+      age: 0, // TODO make calulation
 
       mobile_countrycode: props.editMobileCountryCode,
       mobile_no: props.editMobileNo,
@@ -96,19 +98,19 @@ export default function Employee(props: any) {
       last_job_company: props.editLastJobCompany,
       last_job_title: props.editLastJobTitle,
 
-      start_date: "",
-      have_probation: "",
-      pass_probation: "",
-      status: "",
-      job_nature: "",
+      start_date: props.editStartDate.toString().substring(0, 10),
+      // have_probation: "",
+      // pass_probation: "",
+      status: props.editStatus,
+      job_nature: props.editJobNature,
       // length_of_service: "",
-      notice_period: 30,
-      report_to: "1",
-      title: "1",
-      department: "1",
-      team: "1",
+      notice_period: props.editNoticePeriod,
+      report_to: props.editReportTo,
+      department: props.editDepartmentId,
+      team: props.editTeamId,
+      title: props.editTitleId,
 
-      al_leave_entitled_peryear: 0,
+      al_leave_entitled_peryear: props.editAlLeaveEntitledPeryear,
 
       pay_currency: props.editPayCurrency,
       basic_salary: props.editBasicSalary,

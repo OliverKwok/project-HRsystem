@@ -32,6 +32,19 @@ export default function Title() {
   const [passLastJobCompany, setPassLastJobCompany] = useState("");
   const [passLastJobTitle, setPassLastJobTitle] = useState("");
 
+  const [passStartDate, setPassStartDate] = useState("");
+  const [passStatus, setPassStatus] = useState("");
+  const [passJobNature, setPassJobNature] = useState("");
+  const [passNoticePeriod, setPassNoticePeriod] = useState("");
+
+  const [passReportTo, setPassReportTo] = useState("");
+  const [passDepartmentId, setPassDepartmentId] = useState("");
+  const [passTeamId, setPassTeamId] = useState("");
+  const [passTitleId, setPassTitleId] = useState("");
+
+  const [passAlLeaveEntitledPeryear, setPassAlLeaveEntitledPeryear] =
+    useState("");
+
   const [passPayCurrency, setPassPayCurrency] = useState("");
   const [passBasicSalary, setPassBasicSalary] = useState("");
   const [passPaymentMethod, setPassPaymentMethod] = useState("");
@@ -136,6 +149,18 @@ export default function Title() {
             bank_payee: employee.bank_payee,
             payment_remark: employee.payment_remark,
 
+            start_date: employee.start_date,
+            status: employee.status,
+            job_nature: employee.job_nature,
+            notice_period: employee.notice_period,
+
+            report_to: employee.report_to,
+            department_id: employee.department_id,
+            team_id: employee.team_id,
+            title_id: employee.title_id,
+
+            al_leave_entitled_peryear: employee.al_leave_entitled_peryear,
+
             title: employee.title_name,
             department: employee.dept_name,
             team: employee.team_name,
@@ -175,6 +200,21 @@ export default function Title() {
                   setPassMajor(employee.major);
                   setPassLastJobCompany(employee.last_job_company);
                   setPassLastJobTitle(employee.last_job_title);
+                  //
+                  setPassStartDate(employee.start_date);
+                  setPassStatus(employee.status);
+                  setPassJobNature(employee.job_nature);
+                  setPassNoticePeriod(employee.notice_period);
+                  //
+                  setPassReportTo(employee.report_to);
+                  setPassDepartmentId(employee.department_id);
+                  setPassTeamId(employee.team_id);
+                  setPassTitleId(employee.title_id);
+                  //
+                  setPassAlLeaveEntitledPeryear(
+                    employee.al_leave_entitled_peryear
+                  );
+
                   //
                   setPassPayCurrency(employee.pay_currency);
                   setPassBasicSalary(employee.basic_salary);
@@ -292,6 +332,18 @@ export default function Title() {
           editMajor={passMajor}
           editLastJobCompany={passLastJobCompany}
           editLastJobTitle={passLastJobTitle}
+          //
+          editStartDate={passStartDate}
+          editStatus={passStatus}
+          editJobNature={passJobNature}
+          editNoticePeriod={passNoticePeriod}
+          //
+          editReportTo={passReportTo}
+          editDepartmentId={passDepartmentId}
+          editTeamId={passTeamId}
+          editTitleId={passTitleId}
+          //
+          editAlLeaveEntitledPeryear={passAlLeaveEntitledPeryear}
           //
           editPayCurrency={passPayCurrency}
           editBasicSalary={passBasicSalary}
