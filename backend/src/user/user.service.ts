@@ -78,63 +78,57 @@ export class UserService {
   }
   async updateUser(createUserDto: CreateUserDto) {
     try {
-      const newEmployee = await this.knex.table('employee').insert({
-        employeeid: createUserDto.employeeid,
-        first_name: createUserDto.first_name,
-        last_name: createUserDto.last_name,
-        chinese_name: createUserDto.chinese_name,
-        alias: createUserDto.alias,
-        hkid: createUserDto.hkid,
-        passport: createUserDto.passport,
-        gender: createUserDto.gender,
-        nationality: createUserDto.nationality,
-        date_of_birth: createUserDto.date_of_birth,
-        // change to date format when use formData
-        // profilepic: createUserDto.profilepic,
-        mobile_countrycode: createUserDto.mobile_countrycode,
-        mobile_no: createUserDto.mobile_no,
-        work_phone_no: createUserDto.work_phone_no,
-        email_personal: createUserDto.email_personal,
-        email_work: createUserDto.email_work,
-        // password: createUserDto.password,
-        highest_education: createUserDto.highest_education,
-        institution_name: createUserDto.institution_name,
-        major: createUserDto.major,
-        last_job_company: createUserDto.last_job_company,
-        last_job_title: createUserDto.last_job_title,
-        start_date: createUserDto.start_date,
-        // change to date format when use formData
-        // status: createUserDto.status,
-        // job_nature: createUserDto.job_nature,
-        notice_period: createUserDto.notice_period,
-        // change to number format when use formData
-        report_to: createUserDto.report_to,
-        al_leave_entitled_peryear: createUserDto.al_leave_entitled_peryear,
-        // change to number format when use formData
-        pay_currency: createUserDto.pay_currency,
-        basic_salary: createUserDto.basic_salary,
-        payment_method: createUserDto.payment_method,
-        home_address: createUserDto.home_address,
-        bank_code: createUserDto.bank_code,
-        bank_name: createUserDto.bank_name,
-        bank_number: createUserDto.bank_number,
-        bank_payee: createUserDto.bank_payee,
-        payment_remark: createUserDto.payment_remark,
-      });
+      console.log('come to update');
+      // const newEmployee = await this.knex.table('employee').insert({
+      //   employeeid: createUserDto.employeeid,
+      //   first_name: createUserDto.first_name,
+      //   last_name: createUserDto.last_name,
+      //   chinese_name: createUserDto.chinese_name,
+      //   alias: createUserDto.alias,
+      //   hkid: createUserDto.hkid,
+      //   passport: createUserDto.passport,
+      //   gender: createUserDto.gender,
+      //   nationality: createUserDto.nationality,
+      //   date_of_birth: createUserDto.date_of_birth,
+      //   mobile_countrycode: createUserDto.mobile_countrycode,
+      //   mobile_no: createUserDto.mobile_no,
+      //   work_phone_no: createUserDto.work_phone_no,
+      //   email_personal: createUserDto.email_personal,
+      //   email_work: createUserDto.email_work,
+      //   highest_education: createUserDto.highest_education,
+      //   institution_name: createUserDto.institution_name,
+      //   major: createUserDto.major,
+      //   last_job_company: createUserDto.last_job_company,
+      //   last_job_title: createUserDto.last_job_title,
+      //   start_date: createUserDto.start_date,
+      //   notice_period: createUserDto.notice_period,
+      //   report_to: createUserDto.report_to,
+      //   al_leave_entitled_peryear: createUserDto.al_leave_entitled_peryear,
+      //   pay_currency: createUserDto.pay_currency,
+      //   basic_salary: createUserDto.basic_salary,
+      //   payment_method: createUserDto.payment_method,
+      //   home_address: createUserDto.home_address,
+      //   bank_code: createUserDto.bank_code,
+      //   bank_name: createUserDto.bank_name,
+      //   bank_number: createUserDto.bank_number,
+      //   bank_payee: createUserDto.bank_payee,
+      //   payment_remark: createUserDto.payment_remark,
+      // });
 
-      const checkid = await this.knex
-        .table('employee')
-        .select('id')
-        .where({ employeeid: createUserDto.employeeid });
+      // const checkid = await this.knex
+      //   .table('employee')
+      //   .select('id')
+      //   .where({ employeeid: createUserDto.employeeid });
 
-      const newRole = await this.knex.table('employee_role').insert({
-        employeeid: checkid[0].id,
-        department_id: createUserDto.department,
-        team_id: createUserDto.team,
-        title_id: createUserDto.title,
-      });
+      // const newRole = await this.knex.table('employee_role').insert({
+      //   employeeid: checkid[0].id,
+      //   department_id: createUserDto.department,
+      //   team_id: createUserDto.team,
+      //   title_id: createUserDto.title,
+      // });
 
-      return { newEmployee };
+      // return { newEmployee };
+      return { updateEmployee: 'update' };
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }

@@ -284,7 +284,7 @@ export default function Employee(props: any) {
     // formData.append("profilepic", data.profilepic[0]);
 
     const requestOptions = {
-      method: "POST",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
       // headers: { "Content-Type": "multi-type/form-data" },

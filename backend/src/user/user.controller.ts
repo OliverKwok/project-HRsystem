@@ -1,4 +1,12 @@
-import { Body, Controller, Post, Get, Request, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Request,
+  Param,
+  Patch,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/user.dto';
 
@@ -12,9 +20,9 @@ export class UserController {
     return this.userService.createUser(createUserDto);
   }
 
-  @Post('update')
+  @Patch('update')
   updateUser(@Body() createUserDto: CreateUserDto) {
-    // console.log(Body());
+    console.log(Body());
     return this.userService.updateUser(createUserDto);
   }
 
