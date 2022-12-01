@@ -8,8 +8,14 @@ export class UserController {
 
   @Post('create')
   createUser(@Body() createUserDto: CreateUserDto) {
-    console.log(Body());
+    // console.log(Body());
     return this.userService.createUser(createUserDto);
+  }
+
+  @Post('update')
+  updateUser(@Body() createUserDto: CreateUserDto) {
+    // console.log(Body());
+    return this.userService.updateUser(createUserDto);
   }
 
   @Get('getAllInfo/:id')
