@@ -203,10 +203,10 @@ export class UpdateUserDto {
   @MinLength(0)
   payment_remark: string;
   //
-  // @MinLength(0)
-  // department: string;
-  // @MinLength(0)
-  // team: string;
-  // @MinLength(0)
-  // title: string;
+  @MinLength(0)
+  department: string;
+  @MinLength(0)
+  team: string;
+  @MinLength(0)
+  title: string;
 }

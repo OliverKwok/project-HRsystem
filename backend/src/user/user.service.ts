@@ -126,12 +126,15 @@ export class UserService {
           payment_remark: updateUserDto.payment_remark,
         });
 
-      // const newRole = await this.knex.table('employee_role').insert({
-      //   employeeid: checkid[0].id,
-      //   department_id: updateUserDto.department,
-      //   team_id: updateUserDto.team,
-      //   title_id: updateUserDto.title,
-      // });
+      const updateRole = await this.knex
+        .table('employee_role')
+        .where({ id: checkid[0]['id'] })
+        .update({
+          employeeid: checkid[0].id,
+          department_id: updateUserDto.department,
+          team_id: updateUserDto.team,
+          title_id: updateUserDto.title,
+        });
 
       return { updateEmployee };
     } catch (err) {
