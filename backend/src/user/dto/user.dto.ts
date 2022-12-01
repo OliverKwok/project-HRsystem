@@ -82,7 +82,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   notice_period: number;
 
-  @MinLength(0)
+  @IsNotEmpty()
   report_to: number;
 
   @IsNotEmpty()
@@ -116,11 +116,11 @@ export class CreateUserDto {
   payment_remark: string;
 
   //////////////
-  @MinLength(0)
+  @IsNotEmpty()
   department: string;
-  @MinLength(0)
+  @IsNotEmpty()
   team: string;
-  @MinLength(0)
+  @IsNotEmpty()
   title: string;
 }
 
@@ -180,7 +180,7 @@ export class UpdateUserDto {
   job_nature: string;
   @IsNotEmpty()
   notice_period: number;
-  @MinLength(0)
+  @IsNotEmpty()
   report_to: number;
   @IsNotEmpty()
   al_leave_entitled_peryear: number;
@@ -203,10 +203,10 @@ export class UpdateUserDto {
   @MinLength(0)
   payment_remark: string;
   //
-  @MinLength(0)
+  @IsNotEmpty()
   department: string;
-  @MinLength(0)
+  @IsNotEmpty()
   team: string;
-  @MinLength(0)
+  @IsNotEmpty()
   title: string;
 }
