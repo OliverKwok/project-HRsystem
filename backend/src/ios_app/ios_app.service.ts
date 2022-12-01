@@ -57,6 +57,23 @@ export class IosAppService {
     return { res };
   }
 
+  async cancelLeave(updateIosAppDto: UpdateIosAppDto) {
+    console.log(updateIosAppDto);
+
+    try {
+      let res = await this.knex
+        .update({
+          status: 'cancelled',
+        })
+        .table('leave_application')
+        .where({
+          id: updateIosAppDto.id,
+        });
+      return { res };
+    } catch (err) {
+      console.log(err);
+    }
+  }
   // create(createIosAppDto: CreateIosAppDto) {
   //   return 'This action adds a new iosApp';
   // }

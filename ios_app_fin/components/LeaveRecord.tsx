@@ -9,6 +9,7 @@ import {
   ScrollView,
   RefreshControl,
 } from 'react-native';
+import Config from 'react-native-config';
 import {GlobalStyles} from '../constants/styles';
 import Leave from '../screens/Leave';
 import BottomPopup from './BottomPopup';
@@ -42,10 +43,31 @@ interface leaveRecordType {
 function LeaveRecord({data}: {data: leaveRecordType}) {
   const [showCancel, setShowCancel] = useState(false);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
+  const [applicationID, setApplicationID] = useState<number>(0);
 
-  function leaveCancelHandler() {
-    console.log('you are going to cancel this application');
-    setShowCancelPopup(true);
+  useEffect(() => {
+    setApplicationID(data.id);
+  }, [data]);
+
+  async function leaveCancelHandler() {
+    console.log('you are going to cancel this application', data.id);
+
+    const requestOptions = {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        id: data.id,
+      }),
+    };
+
+    let res = await fetch(
+      `${Config.REACT_APP_BACKEND_URL}/ios-app/cancelLeave`,
+      requestOptions,
+    );
+    let result = await res.json();
+    console.log(result);
+
+    // setShowCancelPopup(true);
   }
 
   const close = () => {

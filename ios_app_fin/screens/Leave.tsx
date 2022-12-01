@@ -52,6 +52,7 @@ function Leave({navigation}: any) {
       );
 
       let leave = await res.json();
+      console.log(leave);
 
       leave = leave['res'];
 
@@ -72,7 +73,6 @@ function Leave({navigation}: any) {
     // Fetch all the leave application record
     fetchLeaveRecord();
   }, [setLeaveRecord]);
-  // console.log(leaveRecord);
 
   // navigate to application form
   function leavePressHandler() {
@@ -93,6 +93,8 @@ function Leave({navigation}: any) {
     refetchLeaveRecord
       .then(async () => {
         await wait(2000);
+
+        // console.log('loading...');
       })
       .then(() => setRefreshing(false));
     // wait(2000).then(() => setRefreshing(false));
@@ -126,12 +128,6 @@ function Leave({navigation}: any) {
               return <LeaveRecord data={leaveDate} key={index} />;
             })
           )}
-          {/* {leaveRecord.map(leaveDate => {
-            return <LeaveRecord data={leaveDate} key={leaveDate['id']} />;
-          })}
-
-          {showNoRecord ? (
-          ) : null} */}
         </View>
       </ScrollView>
     </View>

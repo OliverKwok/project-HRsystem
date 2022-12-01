@@ -72,51 +72,37 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    // const getToken = async () => {
-    //   const token: any = await AsyncStorage.getItem('token');
-    //   console.log('The token is', token);
+  async function checkLogin(token: string) {
+    console.log({token});
 
-    //   // setJwtToken(token);
-    // };
-
-    // getToken().then();
-    AsyncStorage.getItem('token').then(token => {
-      console.log('first token', token);
-
-      async function checkLogin() {
-        if (!!token) return;
-        const profileRes = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/profile`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-        const profileJson = await profileRes.json();
-        // console.log(profileJson);
-        dispatch(login(profileJson, token!));
-        AsyncStorage.setItem('token', token!);
-        // setUsername(profileJson.username);
-        if (jwtToken == undefined) {
-          dispatch(logout());
-        } else if (jwtToken) {
-          await checkLogin();
-        }
-      }
+    if (!token) return;
+    const profileRes = await fetch(`${Config.REACT_APP_BACKEND_URL}/profile`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     });
-    // .then(() => {
-    //   setJwtToken(token => {
-    //     console.log(token);
-    //     return token;
-    //   });
-    // });
-
+    const profileJson = await profileRes.json();
+    console.log({profileJson});
+    dispatch(login(profileJson, token!));
+    AsyncStorage.setItem('token', token!);
+    // setUsername(profileJson.username);
+  }
+  useEffect(() => {
     async function main() {
+      let token = await AsyncStorage.getItem('token');
+      console.log({token});
+
+      setJwtToken(token);
+      // console.log(jwtToken);
+
       // if (jwtToken == undefined) {
       //   dispatch(logout());
+      if (token == undefined) {
+        dispatch(logout());
+      } else if (token) {
+        await checkLogin(token);
+      }
       // } else if (jwtToken) {
       //   await checkLogin();
       // }
@@ -124,7 +110,8 @@ function App() {
       await reg_event_listener();
     }
     main();
-  }, [dispatch]);
+    console.log('is Authenticated?', isAuthenticated);
+  }, []);
 
   return (
     <NavigationContainer>
