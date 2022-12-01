@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,6 +11,17 @@ import {
 } from 'react-native';
 import {GlobalStyles} from '../constants/styles';
 import Leave from '../screens/Leave';
+import BottomPopup from './BottomPopup';
+const popupList: any = [
+  {
+    id: 0,
+    name: 'Yes, I confirm',
+  },
+  {
+    id: 1,
+    name: 'No',
+  },
+];
 
 interface leaveRecordType {
   id: number;
@@ -29,6 +40,19 @@ interface leaveRecordType {
 }
 
 function LeaveRecord({data}: {data: leaveRecordType}) {
+  const [showCancel, setShowCancel] = useState(false);
+  const [showCancelPopup, setShowCancelPopup] = useState(false);
+
+  function leaveCancelHandler() {
+    console.log('you are going to cancel this application');
+    setShowCancelPopup(true);
+  }
+
+  const close = () => {
+    console.log('bye');
+    setShowCancelPopup(false);
+  };
+
   return (
     <View style={styles.LeaveBigContainer}>
       <View style={styles.leaveItemContainer}>
@@ -88,7 +112,32 @@ function LeaveRecord({data}: {data: leaveRecordType}) {
               : ''}
           </Text>
         </View>
+
+        {data.status == 'pending' ? (
+          <View style={styles.buttonContainerBig}>
+            <Pressable
+              onPress={leaveCancelHandler}
+              style={({pressed}) =>
+                pressed ? styles.pressed : styles.ButtonContainer
+              }>
+              <View>
+                <Text style={{fontSize: 20}}>Cancel</Text>
+              </View>
+            </Pressable>
+          </View>
+        ) : null}
       </View>
+
+      {/* {showCancelPopup && ( */}
+      {/* <BottomPopup
+        show={showCancelPopup}
+        title="Cancel Confirmation"
+        animationType={'slide'}
+        closePopup={close}
+        data={popupList}
+        haveOutsideTouch={true}
+      /> */}
+      {/* )} */}
     </View>
   );
 }
@@ -118,5 +167,36 @@ const styles = StyleSheet.create({
   },
   leaveText: {
     fontSize: 18,
+  },
+
+  buttonContainerBig: {
+    // borderWidth: 1,
+    height: '15%',
+    alignItems: 'center',
+  },
+
+  pressed: {
+    opacity: 0.6,
+    transform: [{scaleX: 1.1}, {scaleY: 1.1}],
+    borderWidth: 1,
+    width: '30%',
+    height: '70%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: '#CD2C25',
+    marginTop: 10,
+  },
+
+  ButtonContainer: {
+    opacity: 0.6,
+    borderWidth: 1,
+    width: '30%',
+    height: '70%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: '#E67067',
+    marginTop: 10,
   },
 });

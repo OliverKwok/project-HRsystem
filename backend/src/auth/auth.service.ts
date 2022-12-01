@@ -20,10 +20,23 @@ export class AuthService {
     return null;
   }
 
+  async validateIOSUser(username: string, pass: string): Promise<any> {
+    const user = await this.userService.findIOSUser(username);
+
+    if (user && (await bcrypt.compare(pass, user.password))) {
+      const { password, ...result } = user;
+      return result;
+    }
+    return null;
+  }
+
   async login(user: any) {
     const payload = { username: user.username, sub: user.id };
+    console.log({ payload });
+
     // console.log(this.jwtService.sign(payload));
     return {
+      id: user.id,
       access_token: this.jwtService.sign(payload),
     };
   }

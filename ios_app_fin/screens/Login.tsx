@@ -1,10 +1,64 @@
-import React from 'react';
-import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Alert,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {GlobalStyles} from '../constants/styles';
 import LinearGradient from 'react-native-linear-gradient';
+import {useAppDispatch} from '../store';
+import {login} from '../redux/auth/actions';
+import Config from 'react-native-config';
+import {useSelector} from 'react-redux';
 
-function Login() {
-  function loginHandler() {}
+function Login({navigation}: any) {
+  const dispatch = useAppDispatch();
+  // const james = useSelector(state => state);
+  const [loginObject, setLoginObject] = useState({
+    username: 'tse.ching.wong@company.com',
+    password: '1',
+  });
+
+  // console.log(loginObject);
+
+  async function loginHandler() {
+    const res = await fetch(`${Config.REACT_APP_BACKEND_URL}/auth/login_ios`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginObject),
+    });
+    const json = await res.json();
+    console.log(json);
+
+    if (json.statusCode == 500) {
+      Alert.alert('No authorization to access the mobile app');
+    } else if (json.statusCode == 401) {
+      Alert.alert('Wrong username or password');
+    } else {
+      Alert.alert('Login successfully');
+      const profileRes = await fetch(
+        `${Config.REACT_APP_BACKEND_URL}/profile`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${json.access_token}`,
+          },
+        },
+      );
+      const profileJson = await profileRes.json();
+      console.log({profileJson});
+
+      dispatch(login(profileJson, json.access_token));
+      await AsyncStorage.setItem('token', json.access_token);
+      navigation.navigate('Navigation Bar');
+    }
+  }
 
   return (
     <LinearGradient
@@ -17,22 +71,24 @@ function Login() {
         <View style={styles.inputItemContainer}>
           <Text style={styles.label}>Employee ID</Text>
           <TextInput
+            // value="tse.ching.chan@company.com"
             style={styles.input}
             placeholder="Please type your employee id"
             onChangeText={text => {
-              // setFormObject({...formObject, employeeID: text});
+              setLoginObject({...loginObject, username: text});
               // checkLeaveApplicationInput();
             }}
+            autoCapitalize="none"
           />
         </View>
         <View style={styles.inputItemContainer}>
           <Text style={styles.label}>Password</Text>
           <TextInput
+            // value="1"
             style={styles.input}
             placeholder="Please type your password"
             onChangeText={text => {
-              // setFormObject({...formObject, employeeID: text});
-              // checkLeaveApplicationInput();
+              setLoginObject({...loginObject, password: text});
             }}
           />
         </View>

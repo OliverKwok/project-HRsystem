@@ -53,6 +53,7 @@
     "jspdf": "^2.5.1",
     "moment": "^2.29.4",
     "moment-jalaali": "^0.9.6",
+    "moment-timezone": "^0.5.39",
     "npm": "^9.1.2",
     "primeicons": "^6.0.1",
     "primereact": "^8.7.2",

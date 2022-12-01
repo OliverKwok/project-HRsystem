@@ -48,7 +48,8 @@ export default function LeavesRequest() {
       ActionCancel: <button>Cancel</button>,
     },
   ];
-  const [rows, setRows] = useState(data);
+
+  // const [rowData, setRowData] = useState(data);
 
   const Row = (props: any) => {
     const {
@@ -64,7 +65,9 @@ export default function LeavesRequest() {
     } = props;
     return (
       <tr>
-        <td>{Employee}</td>
+        {/* define what goes to each column */}
+   
+        <td>{Employee}</td> 
         <td>{LeaveType}</td>
         <td>{AppliedDate}</td>
         <td>{FromDate}</td>
@@ -103,7 +106,7 @@ export default function LeavesRequest() {
 
   return (
     <>
-      <Table data={rows} />
+      <Table data={data} />
     </>
   );
 }

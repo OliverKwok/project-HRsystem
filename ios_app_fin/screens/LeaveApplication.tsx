@@ -14,8 +14,13 @@ import IconButton from '../components/IconButton';
 import {GlobalStyles} from '../constants/styles';
 import DatePicker from 'react-native-date-picker';
 import RNPickerSelect from 'react-native-picker-select';
+import {useSelector} from 'react-redux';
+import {AuthState} from '../redux/auth/state';
 
 function LeaveApplication({navigation}: any) {
+  const userId = useSelector((state: AuthState) => state.auth.user.id);
+  console.log(userId);
+
   //Check the input for leave application
   function checkLeaveApplicationInput() {
     // console.log(
@@ -49,7 +54,7 @@ function LeaveApplication({navigation}: any) {
       setShowInvalidDate(false);
     }
     if (
-      formObject.employeeID == '' ||
+      // formObject.employeeID == '' ||
       formObject.leaveType == '' ||
       formObject.startDate == 'Please select a start date' ||
       formObject.startDateDuration == '' ||
@@ -102,7 +107,7 @@ function LeaveApplication({navigation}: any) {
 
   //一大堆useState and useEffect
   const [formObject, setFormObject] = useState({
-    employeeID: '',
+    employeeID: userId,
     leaveType: '',
     startDate: 'Please select a start date',
     startDateDuration: '',
@@ -197,11 +202,12 @@ function LeaveApplication({navigation}: any) {
         <Text style={styles.label}>Employee ID</Text>
         <TextInput
           style={styles.input}
+          value={userId.toString()}
           placeholder="Please type your employee id"
-          onChangeText={text => {
-            setFormObject({...formObject, employeeID: text});
-            checkLeaveApplicationInput();
-          }}
+          // onChangeText={text => {
+          //   setFormObject({...formObject, employeeID: text});
+          //   checkLeaveApplicationInput();
+          // }}
         />
       </View>
 

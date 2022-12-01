@@ -11,6 +11,7 @@ import { LeaveService } from './leave.service';
 import { CreateLeaveDto } from './dto/create-leave.dto';
 import { UpdateLeaveDto } from './dto/update-leave.dto';
 import { DeleteLeaveDto } from './dto/delete-leave.dto';
+import { UpdateStatusDto } from './dto/update-status.dto';
 
 @Controller('leave')
 export class LeaveController {
@@ -42,15 +43,26 @@ export class LeaveController {
     return this.leaveService.addNewType(createLeaveDto);
   }
 
-  @Delete('deletetype/:id')
-  deleteType(@Param('id') id:string) {
-    return this.leaveService.deleteType(`${id}`);
+  @Delete('deletetype/:typeid')
+  deleteType(@Param('typeid') typeid: string) {
+    return this.leaveService.deleteType(`${typeid}`);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateLeaveDto: UpdateLeaveDto) {
-  //   return this.leaveService.update(+id, updateLeaveDto);
-  // }
+  @Get('pending_application')
+  pendingApplication() {
+    return this.leaveService.pendingApplication();
+  }
+
+  @Get('nonpending_application')
+  nonPendingApplication() {
+    return this.leaveService.nonPendingApplication();
+  }
+
+  @Patch('update_status')
+  update_status(@Body() updateStatusDto: UpdateStatusDto) {
+    console.log(updateStatusDto);
+    return this.leaveService.update_status(updateStatusDto);
+  }
 
   // @Post()
   // create(@Body() createLeaveDto: CreateLeaveDto) {

@@ -45,6 +45,11 @@ export class IosAppController {
 
     return await this.iosAppService.createLeaveApplication(data);
   }
+
+  @Patch()
+  async cancelLeaveApplication() {
+    return await this.iosAppService;
+  }
   // @Post()
   // create(@Body() createIosAppDto: CreateIosAppDto) {
   //   return this.iosAppService.create(createIosAppDto);

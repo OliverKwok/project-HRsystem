@@ -29,7 +29,7 @@ export default function PopupDeleteType(props: any) {
         setCurrentLeavesType(data);
       });
     console.log(currentLeavesType);
-  }, [deleteType, props.toggleRefresh]);
+  }, [deleteType, props.toggleRefreshDelete]);
 
   async function deleteTypeHandler(event: any) {
     event.preventDefault();
@@ -64,7 +64,9 @@ export default function PopupDeleteType(props: any) {
       .then((data) => console.log(data));
     closePopup();
     setDeleteType("");
-    props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
+    props.setToggleRefreshDelete(
+      (toggleRefreshDelete: any) => !toggleRefreshDelete
+    );
   }
 
   return (

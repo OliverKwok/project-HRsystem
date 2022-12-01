@@ -17,6 +17,8 @@ export default function LoginForm() {
         <div id="headerTitle">Easy HR Solutions</div>
         <form
           onSubmit={handleSubmit(async (data) => {
+            console.log(data);
+
             const res = await fetch(
               `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
               {

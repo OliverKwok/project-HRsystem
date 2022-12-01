@@ -93,7 +93,7 @@ export class UserService {
   async findOne(username: string) {
     const checkByWorkEmail = await this.knex
       .table('employee')
-      .select('password')
+      .select('password', 'employee.id')
       .join('employee_role', 'employee.id', '=', 'employee_role.employeeid')
       .where({ email_work: username })
       .where('employee_role.department_id', '=', '6');
@@ -101,6 +101,29 @@ export class UserService {
     // console.log(checkByWorkEmail);
 
     return {
+      id: checkByWorkEmail[0].id,
+      username: username,
+      password: await bcrypt.hash(checkByWorkEmail[0].password, 10),
+    };
+    // return {
+    //   id: 1,
+    //   username: username,
+    //   password: await bcrypt.hash('1', 10),
+    // };
+  }
+
+  async findIOSUser(username: string) {
+    const checkByWorkEmail = await this.knex
+      .table('employee')
+      .select('password', 'employee.id')
+      .join('employee_role', 'employee.id', '=', 'employee_role.employeeid')
+      .where({ email_work: username });
+    // .where('employee_role.department_id', '=', '6');
+
+    // console.log(checkByWorkEmail);
+
+    return {
+      id: checkByWorkEmail[0].id,
       username: username,
       password: await bcrypt.hash(checkByWorkEmail[0].password, 10),
     };
