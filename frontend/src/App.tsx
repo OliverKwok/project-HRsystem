@@ -118,12 +118,12 @@ function App() {
                 </NavLink> */}
                 <NavLink className="sub-item" to={"title"}>
                   <div>
-                    <MdOutlineSubtitles /> <span>Staff List</span>
+                    <MdOutlineSubtitles /> <span>staff list</span>
                   </div>
                 </NavLink>
                 <NavLink className="sub-item" to={"employee"}>
                   <div>
-                    <MdOutlinePeopleAlt /> <span>Employee Info</span>
+                    <MdOutlinePeopleAlt /> <span>new employee</span>
                   </div>
                 </NavLink>
                 <NavLink className="sub-item" to={"statusupdate"}>
@@ -264,7 +264,7 @@ function App() {
                 <Route path="offboarding" element={<Offboarding />}></Route>
                 <Route path="datainsights" element={<DataInsights />}></Route>
                 <Route path="notifications" element={<Notifications />}></Route>
-                <Route path="login" element={<LoginForm />}></Route>
+                {/* <Route path="login" element={<LoginForm />}></Route> */}
                 {/* <Route path="editEmployee/:id" children={<EditEmployee />} /> */}
               </Routes>
             </div>

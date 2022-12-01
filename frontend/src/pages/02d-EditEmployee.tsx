@@ -15,7 +15,7 @@ type FormState = {
   passport: string;
   gender: string;
   nationality: string;
-  date_of_birth: Date;
+  date_of_birth: string;
   age: number;
   profilepic: FileList;
 
@@ -62,8 +62,6 @@ type FormState = {
 };
 
 export default function Employee(props: any) {
-  console.log(props.editDateOfBirth);
-
   const {
     register,
     handleSubmit,
@@ -82,7 +80,7 @@ export default function Employee(props: any) {
       passport: props.editPassport,
       gender: props.editGender,
       nationality: props.editNationality,
-      date_of_birth: props.editDateOfBirth.toString().substring(0, 10),
+      date_of_birth: moment(props.editDateOfBirth).format("YYYY-MM-DD"),
       age: 0, // TODO make calulation
 
       mobile_countrycode: props.editMobileCountryCode,
@@ -98,7 +96,7 @@ export default function Employee(props: any) {
       last_job_company: props.editLastJobCompany,
       last_job_title: props.editLastJobTitle,
 
-      start_date: props.editStartDate.toString().substring(0, 10),
+      start_date: moment(props.editStartDate).format("YYYY-MM-DD"),
       // have_probation: "",
       // pass_probation: "",
       status: props.editStatus,
