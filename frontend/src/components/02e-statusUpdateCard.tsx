@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import "../styles/06-statusChangeCard.css";
+import "../styles/02e-statusUpdateCard.css";
 
-export default function StatusChangeCard(props: any) {
-  
-   const containerStyles: any = {
+export default function StatusUpdateCard(props: any) {
+
+  const containerStyles: any = {
     height: 30,
     width: "90%",
     backgroundColor: "#e0e0de",
@@ -27,27 +27,37 @@ export default function StatusChangeCard(props: any) {
   };
 
   const statusColor: any = {
-  backgroundColor: props.barColor,
-  }
-  
-  
+    backgroundColor: props.barColor,
+  };
+
   return (
-    <div className="statusCard">
-      <h2 className="status" style={statusColor}>{props.status}</h2>
+    
+    <div className="statusUpdateCard">
+      <h2 className="status" style={statusColor}>
+        {props.status}
+      </h2>
+
       <div>
+        <h3 className="endDate">{props.endDate}</h3>
+        <h2 className="daysLeft">{props.daysLeft}</h2>
         <img
           className="profilepic"
           src="https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw"
         ></img>
         <h3 className="person">{props.person}</h3>
         <br />
-        <h3 className="position">{props.position}</h3>
+        <h2 className="position">{props.position}</h2>
       </div>
-   <div style={containerStyles}>
-      <div style={fillerStyles}>
-        <span style={labelStyles}>{`${props.completed}%`}</span>
-      </div>
-    </div>
+      {props.status === "End of Probation" && (
+        <button className="handleButton" >
+          Pass or Extend?
+        </button>
+      )}
+      {props.status === "End of Contract" && (
+        <button className="handleButton" >
+          End, Extend or Convert?
+        </button>
+      )}
     </div>
   );
 }

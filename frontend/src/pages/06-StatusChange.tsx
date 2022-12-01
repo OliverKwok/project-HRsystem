@@ -1,5 +1,5 @@
 import React from "react";
-import StatusChangeCard from "../components/06-statusChangeCard";
+import StatusChangeCard from "../components/02e-statusUpdateCard";
 
 interface statusCard {
   id: string;
@@ -12,7 +12,6 @@ interface statusCard {
 }
 
 export default function StatusChange() {
-
   const statuses: statusCard[] = [
     {
       id: "01",

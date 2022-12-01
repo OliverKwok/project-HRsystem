@@ -21,6 +21,7 @@ import EditEmployee from "./pages/02d-EditEmployee";
 // import Grade from "./pages/02b-Grade";
 import Title from "./pages/02c-Title";
 import StatusUpdate from "./pages/02e-StatusUpdate";
+// import StatusUpdate2 from "./pages/02e-StatusUpdate2";
 import Attendance from "./pages/03-Attendance";
 import PaySummary2 from "./pages/04a-PaySummary2";
 import PayExport from "./pages/04b-PayExport";
@@ -131,6 +132,11 @@ function App() {
                     <MdOutlinePeopleAlt /> <span>status update</span>
                   </div>
                 </NavLink>
+                {/* <NavLink className="sub-item" to={"statusupdate2"}>
+                  <div>
+                    <MdOutlinePeopleAlt /> <span>status update2</span>
+                  </div>
+                </NavLink> */}
               </>
             )}
 
@@ -248,6 +254,7 @@ function App() {
                 <Route path="employee" element={<Employee />}></Route>
                 <Route path="editEmployee" element={<EditEmployee />}></Route>
                 <Route path="statusUpdate" element={<StatusUpdate />}></Route>
+                {/* <Route path="statusUpdate2" element={<StatusUpdate2 />}></Route> */}
                 <Route path="attendance" element={<Attendance />}></Route>
                 <Route path="paySummary2" element={<PaySummary2 />}></Route>
                 <Route path="payExport" element={<PayExport />}></Route>
