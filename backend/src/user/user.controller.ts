@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/user.dto';
+import { UpdateUserDto } from './dto/user.dto';
 
 @Controller('user')
 export class UserController {
@@ -21,9 +22,9 @@ export class UserController {
   }
 
   @Patch('update')
-  updateUser(@Body() createUserDto: CreateUserDto) {
+  updateUser(@Body() updateUserDto: UpdateUserDto) {
     console.log(Body());
-    return this.userService.updateUser(createUserDto);
+    return this.userService.updateUser(updateUserDto);
   }
 
   @Get('getAllInfo/:id')

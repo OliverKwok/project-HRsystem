@@ -6,7 +6,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectKnex, Knex } from 'nestjs-knex';
-import { CreateUserDto } from './dto/user.dto';
+import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable({})
@@ -41,8 +41,8 @@ export class UserService {
         last_job_title: createUserDto.last_job_title,
         start_date: createUserDto.start_date,
         // change to date format when use formData
-        // status: createUserDto.status,
-        // job_nature: createUserDto.job_nature,
+        status: createUserDto.status,
+        job_nature: createUserDto.job_nature,
         notice_period: createUserDto.notice_period,
         // change to number format when use formData
         report_to: createUserDto.report_to,
@@ -76,59 +76,64 @@ export class UserService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
-  async updateUser(createUserDto: CreateUserDto) {
+  async updateUser(updateUserDto: UpdateUserDto) {
     try {
-      console.log('come to update');
-      // const newEmployee = await this.knex.table('employee').insert({
-      //   employeeid: createUserDto.employeeid,
-      //   first_name: createUserDto.first_name,
-      //   last_name: createUserDto.last_name,
-      //   chinese_name: createUserDto.chinese_name,
-      //   alias: createUserDto.alias,
-      //   hkid: createUserDto.hkid,
-      //   passport: createUserDto.passport,
-      //   gender: createUserDto.gender,
-      //   nationality: createUserDto.nationality,
-      //   date_of_birth: createUserDto.date_of_birth,
-      //   mobile_countrycode: createUserDto.mobile_countrycode,
-      //   mobile_no: createUserDto.mobile_no,
-      //   work_phone_no: createUserDto.work_phone_no,
-      //   email_personal: createUserDto.email_personal,
-      //   email_work: createUserDto.email_work,
-      //   highest_education: createUserDto.highest_education,
-      //   institution_name: createUserDto.institution_name,
-      //   major: createUserDto.major,
-      //   last_job_company: createUserDto.last_job_company,
-      //   last_job_title: createUserDto.last_job_title,
-      //   start_date: createUserDto.start_date,
-      //   notice_period: createUserDto.notice_period,
-      //   report_to: createUserDto.report_to,
-      //   al_leave_entitled_peryear: createUserDto.al_leave_entitled_peryear,
-      //   pay_currency: createUserDto.pay_currency,
-      //   basic_salary: createUserDto.basic_salary,
-      //   payment_method: createUserDto.payment_method,
-      //   home_address: createUserDto.home_address,
-      //   bank_code: createUserDto.bank_code,
-      //   bank_name: createUserDto.bank_name,
-      //   bank_number: createUserDto.bank_number,
-      //   bank_payee: createUserDto.bank_payee,
-      //   payment_remark: createUserDto.payment_remark,
-      // });
+      const checkid = await this.knex
+        .table('employee')
+        .select('id')
+        .where({ employeeid: updateUserDto.employeeid });
 
-      // const checkid = await this.knex
-      //   .table('employee')
-      //   .select('id')
-      //   .where({ employeeid: createUserDto.employeeid });
+      console.log(checkid[0]['id']);
+
+      const updateEmployee = await this.knex
+        .table('employee')
+        .where({ id: checkid[0]['id'] })
+        .update({
+          employeeid: updateUserDto.employeeid,
+          first_name: updateUserDto.first_name,
+          last_name: updateUserDto.last_name,
+          chinese_name: updateUserDto.chinese_name,
+          alias: updateUserDto.alias,
+          hkid: updateUserDto.hkid,
+          passport: updateUserDto.passport,
+          gender: updateUserDto.gender,
+          nationality: updateUserDto.nationality,
+          date_of_birth: updateUserDto.date_of_birth,
+          mobile_countrycode: updateUserDto.mobile_countrycode,
+          mobile_no: updateUserDto.mobile_no,
+          work_phone_no: updateUserDto.work_phone_no,
+          email_personal: updateUserDto.email_personal,
+          email_work: updateUserDto.email_work,
+          highest_education: updateUserDto.highest_education,
+          institution_name: updateUserDto.institution_name,
+          major: updateUserDto.major,
+          last_job_company: updateUserDto.last_job_company,
+          last_job_title: updateUserDto.last_job_title,
+          start_date: updateUserDto.start_date,
+          status: updateUserDto.status,
+          job_nature: updateUserDto.job_nature,
+          notice_period: updateUserDto.notice_period,
+          report_to: updateUserDto.report_to,
+          al_leave_entitled_peryear: updateUserDto.al_leave_entitled_peryear,
+          pay_currency: updateUserDto.pay_currency,
+          basic_salary: updateUserDto.basic_salary,
+          payment_method: updateUserDto.payment_method,
+          home_address: updateUserDto.home_address,
+          bank_code: updateUserDto.bank_code,
+          bank_name: updateUserDto.bank_name,
+          bank_number: updateUserDto.bank_number,
+          bank_payee: updateUserDto.bank_payee,
+          payment_remark: updateUserDto.payment_remark,
+        });
 
       // const newRole = await this.knex.table('employee_role').insert({
       //   employeeid: checkid[0].id,
-      //   department_id: createUserDto.department,
-      //   team_id: createUserDto.team,
-      //   title_id: createUserDto.title,
+      //   department_id: updateUserDto.department,
+      //   team_id: updateUserDto.team,
+      //   title_id: updateUserDto.title,
       // });
 
-      // return { newEmployee };
-      return { updateEmployee: 'update' };
+      return { updateEmployee };
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
