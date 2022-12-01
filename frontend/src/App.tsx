@@ -50,6 +50,7 @@ function App() {
     const token = localStorage.getItem("token");
     async function checkLogin() {
       if (token == null) return;
+
       const profileRes = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/profile`,
         {
@@ -60,7 +61,7 @@ function App() {
         }
       );
       const profileJson = await profileRes.json();
-      // console.log(profileJson);
+      console.log(profileJson);
       dispatch(login(profileJson, token));
       localStorage.setItem("token", token);
       // setUsername(profileJson.username);
