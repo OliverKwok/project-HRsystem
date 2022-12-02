@@ -43,6 +43,8 @@ export async function up(knex: Knex): Promise<void> {
       'retired',
       'other',
     ]);
+    table.date('contract_end_date');
+    table.date('probation_end_date');
     table.enu('job_nature', [
       'full_time',
       'part_time',
