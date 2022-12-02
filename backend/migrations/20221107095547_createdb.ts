@@ -217,8 +217,9 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('year');
     table.integer('month');
     table.integer('employeeid').references('employee.id');
-    table.string('category');
-    table.string('updated_value');
+    table.float('ot_pay');
+    table.float('bonus');
+    table.float('nopay_leave');
     table.timestamp('updated_datetime');
 
     table.boolean('isApproved');

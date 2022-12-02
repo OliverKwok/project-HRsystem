@@ -16,7 +16,7 @@ let data = [
     ot_pay: 100,
     bonus: 1,
     nopay_leave: -2,
-    mpf: -3,
+    // mpf: -3,
   },
   {
     id: "2",
@@ -26,7 +26,7 @@ let data = [
     ot_pay: 100,
     bonus: 4,
     nopay_leave: -5,
-    mpf: -6,
+    // mpf: -6,
   },
 ];
 
@@ -45,7 +45,7 @@ export default function PaySummary() {
     { field: "ot_pay", header: "OT Pay" },
     { field: "bonus", header: "Bonus" },
     { field: "nopay_leave", header: "No Pay Leave" },
-    { field: "mpf", header: "MPF" },
+    // { field: "mpf", header: "MPF" },
   ];
 
   const statuses = [
@@ -147,7 +147,7 @@ export default function PaySummary() {
     else if (options.field === "ot_pay") return priceEditor(options);
     else if (options.field === "bonus") return priceEditor(options);
     else if (options.field === "nopay_leave") return priceEditor(options);
-    else if (options.field === "mpf") return priceEditor(options);
+    // else if (options.field === "mpf") return priceEditor(options);
     return textEditor(options);
   };
 
@@ -254,12 +254,12 @@ export default function PaySummary() {
     }).format(rowData.nopay_leave);
   };
 
-  const mpfBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(rowData.mpf);
-  };
+  // const mpfBodyTemplate = (rowData: any) => {
+  //   return new Intl.NumberFormat("en-US", {
+  //     style: "currency",
+  //     currency: "USD",
+  //   }).format(rowData.mpf);
+  // };
 
   return (
     <div className="datatable-editing-demo">
@@ -319,14 +319,14 @@ export default function PaySummary() {
             editor={(options) => priceEditor(options)}
             style={{ width: "10%" }}
           ></Column>
-
+{/* 
           <Column
             field="mpf"
             header="MPF"
             body={mpfBodyTemplate}
             editor={(options) => priceEditor(options)}
             style={{ width: "20%" }}
-          ></Column>
+          ></Column> */}
 
           <Column
             rowEditor

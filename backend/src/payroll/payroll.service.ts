@@ -17,15 +17,51 @@ export class PayrollService {
   async editHistoryCreate(createPayrollEditDto: CreatePayrollEditDto) {
     // console.log(createPayrollEditDto);
     try {
-      const newPayrollEditRecord = await this.knex
+      const checkid = await this.knex
         .table('payroll_edit_history')
-        .insert({
+        .select('id', 'ot_pay', 'bonus', 'nopay_leave')
+        .where({
           year: createPayrollEditDto.year,
-          month: createPayrollEditDto.month,
+          month: createPayrollEditDto.year,
           employeeid: createPayrollEditDto.employeeid,
-          category: createPayrollEditDto.category,
-          updated_value: createPayrollEditDto.updated_value,
         });
+
+      let newPayrollEditRecord = {};
+
+      if (createPayrollEditDto.category == 'ot_pay') {
+        newPayrollEditRecord = await this.knex
+          .table('payroll_edit_history')
+          .insert({
+            year: createPayrollEditDto.year,
+            month: createPayrollEditDto.month,
+            employeeid: createPayrollEditDto.employeeid,
+            ot_pay: createPayrollEditDto.updated_value,
+          });
+      } else if (createPayrollEditDto.category == 'bonus') {
+        newPayrollEditRecord = await this.knex
+          .table('payroll_edit_history')
+          .insert({
+            year: createPayrollEditDto.year,
+            month: createPayrollEditDto.month,
+            employeeid: createPayrollEditDto.employeeid,
+            bonus: createPayrollEditDto.updated_value,
+          });
+      } else if (createPayrollEditDto.category == 'nopay_leave') {
+        newPayrollEditRecord = await this.knex
+          .table('payroll_edit_history')
+          .insert({
+            year: createPayrollEditDto.year,
+            month: createPayrollEditDto.month,
+            employeeid: createPayrollEditDto.employeeid,
+            nopay_leave: createPayrollEditDto.updated_value,
+          });
+      }
+
+      // const newPayrollEditRecord = await this.knex
+      //   .raw(`"insert into payroll_edit_history
+      // (year, month, employeeid)
+      // values (${createPayrollEditDto.year},${createPayrollEditDto.month},
+      // ${createPayrollEditDto.employeeid})`);
 
       return { newPayrollEditRecord };
     } catch (err) {
@@ -37,8 +73,30 @@ export class PayrollService {
   //   return { result: 'monthly record added' };
   // }
 
-  findAll() {
-    return `This action returns all payroll`;
+  async findAll() {
+    try {
+      const allPayroll = await this.knex
+        .select(
+          'employee.id',
+          'employee.employeeid',
+          'employee.basic_salary',
+          this.knex.raw(
+            "concat(employee.last_name, ' ', employee.last_name,",
+            ',employee.alias)',
+          ),
+          'payroll_edit_history',
+        )
+        .from('employee')
+        .join(
+          'payroll_edit_history',
+          'employee.id',
+          '=',
+          'payroll_edit_history.employeeid',
+        );
+      return allPayroll;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
   }
 
   findOne(id: number) {
