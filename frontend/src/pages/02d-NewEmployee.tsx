@@ -32,9 +32,11 @@ type FormState = {
   last_job_title: string;
 
   start_date: string;
-  have_probation: string;
-  pass_probation: string;
+  // have_probation: string;
+  // pass_probation: string;
   status: string;
+  contract_end_date: string;
+  probation_end_date: string;
   job_nature: string;
   // length_of_service: string;
   notice_period: number;
@@ -96,9 +98,11 @@ export default function Employee() {
       last_job_title: "",
 
       start_date: "",
-      have_probation: "",
-      pass_probation: "",
+      // have_probation: "",
+      // pass_probation: "",
       status: "",
+      contract_end_date: "Invalid date",
+      probation_end_date: "Invalid date",
       job_nature: "",
       // length_of_service: "",
       notice_period: 30,
@@ -109,7 +113,7 @@ export default function Employee() {
 
       al_leave_entitled_peryear: 0,
 
-      pay_currency: "",
+      pay_currency: "HKD",
       basic_salary: "",
       payment_method: "",
       home_address: "",
@@ -649,7 +653,7 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Job Status</span>
+                    <span>Job Status*</span>
                   </div>
 
                   <select {...register("status")}>
@@ -665,7 +669,23 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Job Nature</span>
+                    <span>Contract End Date*</span>
+                  </div>
+
+                  <input type="date" {...register("contract_end_date")} />
+                </div>
+
+                <div>
+                  <div>
+                    <span>Probation End Date*</span>
+                  </div>
+
+                  <input type="date" {...register("probation_end_date")} />
+                </div>
+
+                <div>
+                  <div>
+                    <span>Job Nature*</span>
                   </div>
 
                   <select {...register("job_nature")}>

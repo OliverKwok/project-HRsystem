@@ -13,6 +13,7 @@ import { LeaveModule } from './leave/leave.module';
 import { IosAppModule } from './ios_app/ios_app.module';
 import { PayrollModule } from './payroll/payroll.module';
 import { StatusupdateModule } from './statusupdate/statusupdate.module';
+import { AttendanceModule } from './attendance/attendance.module';
 
 Config();
 
@@ -33,6 +34,7 @@ Config();
     IosAppModule,
     PayrollModule,
     StatusupdateModule,
+    AttendanceModule,
   ],
   controllers: [AppController],
   providers: [AppService],

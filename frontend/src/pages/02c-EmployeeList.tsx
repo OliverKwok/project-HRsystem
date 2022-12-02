@@ -54,6 +54,8 @@ export default function Title() {
   const [passBankNumber, setPassBankNumber] = useState("");
   const [passBankPayee, setPassBankPayee] = useState("");
   const [passPaymentRemark, setPassPaymentRemark] = useState("");
+
+  // get eid from status update page
   const [eid, setEid] = useState<string | null>(null);
 
   // table columns
@@ -292,9 +294,8 @@ export default function Title() {
   useEffect(() => {
     console.log("loop forever", eid);
     if (eid !== null) {
-      //showTab4();
       setShowList(false);
-      window.localStorage.removeItem("eid");
+      // window.localStorage.removeItem("eid");
     }
   }, [eid]);
 
