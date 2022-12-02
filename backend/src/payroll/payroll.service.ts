@@ -22,39 +22,79 @@ export class PayrollService {
         .select('id', 'ot_pay', 'bonus', 'nopay_leave')
         .where({
           year: createPayrollEditDto.year,
-          month: createPayrollEditDto.year,
+          month: createPayrollEditDto.month,
           employeeid: createPayrollEditDto.employeeid,
         });
+      // console.log(checkid.length);
 
       let newPayrollEditRecord = {};
 
       if (createPayrollEditDto.category == 'ot_pay') {
-        newPayrollEditRecord = await this.knex
-          .table('payroll_edit_history')
-          .insert({
-            year: createPayrollEditDto.year,
-            month: createPayrollEditDto.month,
-            employeeid: createPayrollEditDto.employeeid,
-            ot_pay: createPayrollEditDto.updated_value,
-          });
+        if (checkid.length > 0) {
+          newPayrollEditRecord = await this.knex
+            .table('payroll_edit_history')
+            .update({
+              ot_pay: createPayrollEditDto.updated_value,
+            })
+            .where({
+              year: createPayrollEditDto.year,
+              month: createPayrollEditDto.month,
+              employeeid: createPayrollEditDto.employeeid,
+            });
+        } else {
+          newPayrollEditRecord = await this.knex
+            .table('payroll_edit_history')
+            .insert({
+              year: createPayrollEditDto.year,
+              month: createPayrollEditDto.month,
+              employeeid: createPayrollEditDto.employeeid,
+              ot_pay: createPayrollEditDto.updated_value,
+            });
+        }
       } else if (createPayrollEditDto.category == 'bonus') {
-        newPayrollEditRecord = await this.knex
-          .table('payroll_edit_history')
-          .insert({
-            year: createPayrollEditDto.year,
-            month: createPayrollEditDto.month,
-            employeeid: createPayrollEditDto.employeeid,
-            bonus: createPayrollEditDto.updated_value,
-          });
+        if (checkid.length > 0) {
+          newPayrollEditRecord = await this.knex
+            .table('payroll_edit_history')
+            .update({
+              bonus: createPayrollEditDto.updated_value,
+            })
+            .where({
+              year: createPayrollEditDto.year,
+              month: createPayrollEditDto.month,
+              employeeid: createPayrollEditDto.employeeid,
+            });
+        } else {
+          newPayrollEditRecord = await this.knex
+            .table('payroll_edit_history')
+            .insert({
+              year: createPayrollEditDto.year,
+              month: createPayrollEditDto.month,
+              employeeid: createPayrollEditDto.employeeid,
+              bonus: createPayrollEditDto.updated_value,
+            });
+        }
       } else if (createPayrollEditDto.category == 'nopay_leave') {
-        newPayrollEditRecord = await this.knex
-          .table('payroll_edit_history')
-          .insert({
-            year: createPayrollEditDto.year,
-            month: createPayrollEditDto.month,
-            employeeid: createPayrollEditDto.employeeid,
-            nopay_leave: createPayrollEditDto.updated_value,
-          });
+        if (checkid.length > 0) {
+          newPayrollEditRecord = await this.knex
+            .table('payroll_edit_history')
+            .update({
+              nopay_leave: createPayrollEditDto.updated_value,
+            })
+            .where({
+              year: createPayrollEditDto.year,
+              month: createPayrollEditDto.month,
+              employeeid: createPayrollEditDto.employeeid,
+            });
+        } else {
+          newPayrollEditRecord = await this.knex
+            .table('payroll_edit_history')
+            .insert({
+              year: createPayrollEditDto.year,
+              month: createPayrollEditDto.month,
+              employeeid: createPayrollEditDto.employeeid,
+              nopay_leave: createPayrollEditDto.updated_value,
+            });
+        }
       }
 
       // const newPayrollEditRecord = await this.knex
@@ -77,17 +117,18 @@ export class PayrollService {
     try {
       const allPayroll = await this.knex
         .select(
+          this.knex.raw(
+            `concat(employee.last_name, ' ', employee.first_name,', ',employee.alias) as name`,
+          ),
           'employee.id',
           'employee.employeeid',
           'employee.basic_salary',
-          this.knex.raw(
-            "concat(employee.last_name, ' ', employee.last_name,",
-            ',employee.alias)',
-          ),
-          'payroll_edit_history',
+          'payroll_edit_history.ot_pay',
+          'payroll_edit_history.bonus',
+          'payroll_edit_history.nopay_leave',
         )
         .from('employee')
-        .join(
+        .leftJoin(
           'payroll_edit_history',
           'employee.id',
           '=',
