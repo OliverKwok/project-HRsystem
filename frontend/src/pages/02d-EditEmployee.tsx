@@ -33,9 +33,11 @@ type FormState = {
   last_job_title: string;
 
   start_date: string;
-  have_probation: string;
-  pass_probation: string;
+  // have_probation: string;
+  // pass_probation: string;
   status: string;
+  contract_end_date: string;
+  probation_end_date: string;
   job_nature: string;
   // length_of_service: string;
   notice_period: number;
@@ -100,6 +102,8 @@ export default function Employee(props: any) {
       // have_probation: "",
       // pass_probation: "",
       status: props.editStatus,
+      //       contract_end_date: props.editStatus;
+      // probation_end_date: props.editStatus;
       job_nature: props.editJobNature,
       // length_of_service: "",
       notice_period: props.editNoticePeriod,
@@ -276,8 +280,6 @@ export default function Employee(props: any) {
     }
   }, [profilepic]);
 
-
-
   // submit
   async function submit(data: FormState) {
     console.log("submit form data:", data);
@@ -349,12 +351,11 @@ export default function Employee(props: any) {
     return;
   };
 
-
-// auto-fill after redirect from status update page
+  // auto-fill after redirect from status update page
   useEffect(() => {
     if (eid != null) {
     }
-  }, [eid]);                                   
+  }, [eid]);
 
   return (
     <div className="page-container">

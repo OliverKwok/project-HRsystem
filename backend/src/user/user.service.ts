@@ -42,6 +42,8 @@ export class UserService {
         start_date: createUserDto.start_date,
         // change to date format when use formData
         status: createUserDto.status,
+        contract_end_date: createUserDto.contract_end_date,
+        probation_end_date: createUserDto.probation_end_date,
         job_nature: createUserDto.job_nature,
         notice_period: createUserDto.notice_period,
         // change to number format when use formData
