@@ -35,31 +35,11 @@ export default function StatusUpdateCard(props: any) {
     statusColor = { backgroundColor: "#fbffa0" };
   }
 
-  // const statusColor: any = {
-  //   backgroundColor: props.barColor,
-  // };
-
   const navigate = useNavigate();
 
   async function redirect() {
     console.log("click");
     window.localStorage.setItem("eid", props.id);
-    // console.log(props.id);
-    // const requestOptions = {
-    //   method: "PATCH",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     id: props.id,
-    //   }),
-    // };
-    // console.log(requestOptions);
-    // await fetch(
-    //   `${process.env.REACT_APP_BACKEND_URL}/user/updateStatusID`,
-    //   requestOptions
-    // )
-    //   .then((response) => response.json)
-    //   .then((data) => console.log(data));
-
     navigate("/employeeList");
   }
 

@@ -58,8 +58,8 @@ export class UserController {
     return this.userService.getUpdateStatus();
   }
 
-  @Post('checkEID')
-  async checkEID(@Body() checkEIDDto: CheckEIDDto){
-    return this.userService.checkEID(checkEIDDto);
+  @Get('checkEID/:eid')
+ checkEID(@Param('eid') eid:number){
+    return this.userService.checkEID(eid);
   }
 }

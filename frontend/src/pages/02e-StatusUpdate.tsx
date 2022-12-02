@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import StatusUpdateCard from "../components/02e-statusUpdateCard";
 import { Carousel } from "primereact/carousel";
 import "../styles/06-Carousel.css";
+import Moment from "moment";
 
 // interface statusCard {
 //   id: string;
@@ -37,6 +38,15 @@ export default function StatusUpdate() {
 
         let fetchData = data.map((each: any) => {
           setEID(each.id);
+
+          let lastday = Moment(
+            each.probation_end_date || each.contract_end_date
+          ).format("YYYY-MM-DD");
+          console.log(lastday);
+
+          let today = Moment(new Date()).format("YYYY-MM-DD");
+          console.log(today);
+
           return {
             id: each.id,
             status:
@@ -46,8 +56,8 @@ export default function StatusUpdate() {
             profilepic: each.profilepic,
             person: each.employee_name,
             position: each.title_name,
-            endDate: "2022-12-31",
-            daysLeft: "20",
+            endDate: lastday,
+            daysLeft: Moment(lastday).diff(today, "days"),
             // barColor: "",
             // bgcolor: "#6a1b9a",
           };

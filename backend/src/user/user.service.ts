@@ -318,6 +318,8 @@ export class UserService {
           'title.title_name',
           'employee.status',
           'employee.profilepic',
+          'employee.contract_end_date',
+          'employee.probation_end_date',
         )
         .from('employee_role')
         .join('employee', 'employee_role.employeeid', '=', 'employee.id')
@@ -331,13 +333,13 @@ export class UserService {
     }
   }
 
-  async checkEID(checkEIDDto: CheckEIDDto) {
+  async checkEID(eid: number) {
     try {
-      const EID = await this.knex
+      const EidEmployeeDetails = await this.knex
         .select('*')
         .from('employee')
-        .where({ id: checkEIDDto.id });
-      return EID;
+        .where({ id: eid });
+      return EidEmployeeDetails;
     } catch (err) {
       console.log(err);
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
