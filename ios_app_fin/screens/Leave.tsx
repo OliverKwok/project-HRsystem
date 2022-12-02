@@ -52,7 +52,6 @@ function Leave({navigation}: any) {
       );
 
       let leave = await res.json();
-      console.log(leave);
 
       leave = leave['res'];
 
@@ -72,11 +71,13 @@ function Leave({navigation}: any) {
   useEffect(() => {
     // Fetch all the leave application record
     fetchLeaveRecord();
-  }, [setLeaveRecord]);
+  }, []);
 
   // navigate to application form
   function leavePressHandler() {
-    navigation.navigate('LeaveApplication');
+    navigation.navigate('LeaveApplication', {
+      fetchLeaveRecord: fetchLeaveRecord,
+    });
   }
 
   // scroll down and refresh
@@ -125,7 +126,13 @@ function Leave({navigation}: any) {
             </View>
           ) : (
             leaveRecord.map((leaveDate, index) => {
-              return <LeaveRecord data={leaveDate} key={index} />;
+              return (
+                <LeaveRecord
+                  data={leaveDate}
+                  key={index}
+                  fetchLeaveRecord={fetchLeaveRecord}
+                />
+              );
             })
           )}
         </View>
@@ -157,9 +164,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#c1e6e6',
     marginTop: 10,
+    marginBottom: 20,
   },
 
   scrollViewContainer: {
+    // borderWidth: 1,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
@@ -177,6 +186,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
+    marginTop: 10,
+    marginBottom: 20,
   },
 
   noRecordContainer: {

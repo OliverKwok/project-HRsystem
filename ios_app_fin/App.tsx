@@ -73,7 +73,7 @@ function App() {
   }
 
   async function checkLogin(token: string) {
-    console.log({token});
+    // console.log({token});
 
     if (!token) return;
     const profileRes = await fetch(`${Config.REACT_APP_BACKEND_URL}/profile`, {
@@ -83,34 +83,29 @@ function App() {
       },
     });
     const profileJson = await profileRes.json();
-    console.log({profileJson});
+    // console.log({profileJson});
     dispatch(login(profileJson, token!));
     AsyncStorage.setItem('token', token!);
     // setUsername(profileJson.username);
   }
+
   useEffect(() => {
     async function main() {
       let token = await AsyncStorage.getItem('token');
-      console.log({token});
+      // console.log({token});
 
       setJwtToken(token);
-      // console.log(jwtToken);
 
-      // if (jwtToken == undefined) {
-      //   dispatch(logout());
       if (token == undefined) {
         dispatch(logout());
       } else if (token) {
         await checkLogin(token);
       }
-      // } else if (jwtToken) {
-      //   await checkLogin();
-      // }
+
       await reg_token();
       await reg_event_listener();
     }
     main();
-    console.log('is Authenticated?', isAuthenticated);
   }, []);
 
   return (

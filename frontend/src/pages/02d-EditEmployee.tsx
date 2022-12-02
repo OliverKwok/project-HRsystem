@@ -134,6 +134,7 @@ export default function Employee(props: any) {
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
   const [workEmail, setWorkEmail] = useState("");
+  const [eid, setEid] = useState<string | null>(null);
 
   // tab show
   const [show1, setShow1] = useState(true);
@@ -215,6 +216,7 @@ export default function Employee(props: any) {
       );
       let reportToFetch = await response.json();
       setReportTo(reportToFetch);
+      setEid(window.localStorage.getItem("eid"));
     }
     fetchReportTo();
   }, []);
@@ -274,6 +276,11 @@ export default function Employee(props: any) {
     }
   }, [profilepic]);
 
+  useEffect(() => {
+    if (eid != null) {
+    }
+  }, [eid]);
+
   // submit
   async function submit(data: FormState) {
     console.log("submit form data:", data);
@@ -308,7 +315,6 @@ export default function Employee(props: any) {
     const date_of_birth_input = moment(event.target.value, "YYYY-MM-DD");
     let result = todayDate.diff(date_of_birth_input, "years");
     setAge(result);
-
     return result;
   };
 

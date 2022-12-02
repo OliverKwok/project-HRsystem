@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../styles/06-statusChangeCard.css";
 
-export default function StatusChangeCard(props: any) {
+export default function OffboardingCard(props: any) {
   
    const containerStyles: any = {
     height: 30,

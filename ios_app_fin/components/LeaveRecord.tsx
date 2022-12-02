@@ -8,21 +8,12 @@ import {
   Pressable,
   ScrollView,
   RefreshControl,
+  Modal,
 } from 'react-native';
 import Config from 'react-native-config';
 import {GlobalStyles} from '../constants/styles';
 import Leave from '../screens/Leave';
-import BottomPopup from './BottomPopup';
-const popupList: any = [
-  {
-    id: 0,
-    name: 'Yes, I confirm',
-  },
-  {
-    id: 1,
-    name: 'No',
-  },
-];
+import SimpleModal from './SimpleModal';
 
 interface leaveRecordType {
   id: number;
@@ -40,18 +31,27 @@ interface leaveRecordType {
   type: string;
 }
 
-function LeaveRecord({data}: {data: leaveRecordType}) {
+function LeaveRecord({
+  data,
+  fetchLeaveRecord,
+}: {
+  data: leaveRecordType;
+  fetchLeaveRecord: () => Promise<void>;
+}) {
   const [showCancel, setShowCancel] = useState(false);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
   const [applicationID, setApplicationID] = useState<number>(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const changeModalVisible = (bool: boolean) => {
+    setIsModalVisible(bool);
+  };
 
   useEffect(() => {
     setApplicationID(data.id);
   }, [data]);
 
   async function leaveCancelHandler() {
-    console.log('you are going to cancel this application', data.id);
-
     const requestOptions = {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
@@ -67,13 +67,8 @@ function LeaveRecord({data}: {data: leaveRecordType}) {
     let result = await res.json();
     console.log(result);
 
-    // setShowCancelPopup(true);
+    fetchLeaveRecord();
   }
-
-  const close = () => {
-    console.log('bye');
-    setShowCancelPopup(false);
-  };
 
   return (
     <View style={styles.LeaveBigContainer}>
@@ -138,13 +133,32 @@ function LeaveRecord({data}: {data: leaveRecordType}) {
         {data.status == 'pending' ? (
           <View style={styles.buttonContainerBig}>
             <Pressable
-              onPress={leaveCancelHandler}
+              onPress={() => {
+                console.log(
+                  'you are going to cancel this application',
+                  data.id,
+                );
+                changeModalVisible(true);
+              }}
               style={({pressed}) =>
                 pressed ? styles.pressed : styles.ButtonContainer
               }>
               <View>
                 <Text style={{fontSize: 20}}>Cancel</Text>
               </View>
+              <Modal
+                transparent={true}
+                animationType="fade"
+                visible={isModalVisible}
+                // nRequestClose={() => {
+                //   changeModalVisible(false);
+                // }}
+              >
+                <SimpleModal
+                  changeModalVisible={changeModalVisible}
+                  leaveCancelHandler={leaveCancelHandler}
+                />
+              </Modal>
             </Pressable>
           </View>
         ) : null}

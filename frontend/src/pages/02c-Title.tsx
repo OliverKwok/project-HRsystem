@@ -54,6 +54,7 @@ export default function Title() {
   const [passBankNumber, setPassBankNumber] = useState("");
   const [passBankPayee, setPassBankPayee] = useState("");
   const [passPaymentRemark, setPassPaymentRemark] = useState("");
+  const [eid, setEid] = useState<string | null>(null);
 
   // table columns
   const columns = [
@@ -240,6 +241,7 @@ export default function Title() {
         });
         // console.log(fetchData);
         setData(fetchData);
+        setEid(window.localStorage.getItem("eid"));
       });
   }, []);
 
@@ -286,6 +288,15 @@ export default function Title() {
       />
     );
   }, [filterText, resetPaginationToggle]);
+
+  useEffect(() => {
+    console.log("loop forever", eid);
+    if (eid !== null) {
+      //showTab4();
+      setShowList(false);
+      window.localStorage.removeItem("eid");
+    }
+  }, [eid]);
 
   //rendering
 

@@ -74,6 +74,28 @@ export class IosAppService {
       console.log(err);
     }
   }
+
+  async getEvent() {
+    try {
+      let res = await this.knex.select('*').from('event');
+      return { res };
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async getAttendance(userId: number) {
+    try {
+      let res = await this.knex
+        .select('*')
+        .from('attendance')
+        .where('employee', userId);
+      return { res };
+    } catch (err) {
+      return err;
+    }
+  }
+
   // create(createIosAppDto: CreateIosAppDto) {
   //   return 'This action adds a new iosApp';
   // }
