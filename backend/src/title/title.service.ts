@@ -39,6 +39,8 @@ export class TitleService {
 
         employee.start_date,
         employee.status,
+        employee.contract_end_date,
+        employee.probation_end_date,
         employee.job_nature,
         employee.notice_period,
 
