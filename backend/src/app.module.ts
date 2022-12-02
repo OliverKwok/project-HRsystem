@@ -12,6 +12,7 @@ import { TeamModule } from './team/team.module';
 import { LeaveModule } from './leave/leave.module';
 import { IosAppModule } from './ios_app/ios_app.module';
 import { StatusupdateModule } from './statusupdate/statusupdate.module';
+import { AttendanceModule } from './attendance/attendance.module';
 
 Config();
 
@@ -31,6 +32,7 @@ Config();
     LeaveModule,
     IosAppModule,
     StatusupdateModule,
+    AttendanceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
