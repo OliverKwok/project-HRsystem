@@ -34,8 +34,6 @@ export default function Title() {
 
   const [passStartDate, setPassStartDate] = useState("");
   const [passStatus, setPassStatus] = useState("");
-  const [passContractEndDate, setPassContractEndDate] = useState("");
-  const [passProbationEndDate, setPassProbationEndDate] = useState("");
   const [passJobNature, setPassJobNature] = useState("");
   const [passNoticePeriod, setPassNoticePeriod] = useState("");
 
@@ -56,6 +54,8 @@ export default function Title() {
   const [passBankNumber, setPassBankNumber] = useState("");
   const [passBankPayee, setPassBankPayee] = useState("");
   const [passPaymentRemark, setPassPaymentRemark] = useState("");
+
+  // get eid from status update page
   const [eid, setEid] = useState<string | null>(null);
 
   // table columns
@@ -154,8 +154,6 @@ export default function Title() {
 
             start_date: employee.start_date,
             status: employee.status,
-            contract_end_date: employee.contract_end_date,
-            probation_end_date: employee.probation_end_date,
             job_nature: employee.job_nature,
             notice_period: employee.notice_period,
 
@@ -208,8 +206,6 @@ export default function Title() {
                   //
                   setPassStartDate(employee.start_date);
                   setPassStatus(employee.status);
-                  setPassContractEndDate(employee.contract_end_date);
-                  setPassProbationEndDate(employee.probation_end_date);
                   setPassJobNature(employee.job_nature);
                   setPassNoticePeriod(employee.notice_period);
                   //
@@ -298,9 +294,8 @@ export default function Title() {
   useEffect(() => {
     console.log("loop forever", eid);
     if (eid !== null) {
-      //showTab4();
       setShowList(false);
-      window.localStorage.removeItem("eid");
+      // window.localStorage.removeItem("eid");
     }
   }, [eid]);
 
@@ -351,8 +346,6 @@ export default function Title() {
           //
           editStartDate={passStartDate}
           editStatus={passStatus}
-          editContractEndDate={passContractEndDate}
-          editProbationEndDate={passProbationEndDate}
           editJobNature={passJobNature}
           editNoticePeriod={passNoticePeriod}
           //
