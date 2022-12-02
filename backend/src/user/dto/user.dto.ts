@@ -76,11 +76,10 @@ export class CreateUserDto {
   @MinLength(0)
   status: string;
 
-  @IsNotEmpty()
-  contract_end_date: Date;
-
-  @IsNotEmpty()
-  probation_end_date: Date;
+  @MinLength(0)
+  contract_end_date: string;
+  @MinLength(0)
+  probation_end_date: string;
 
   @MinLength(0)
   job_nature: string;
@@ -182,6 +181,10 @@ export class UpdateUserDto {
   start_date: Date;
   @MinLength(0)
   status: string;
+  @MinLength(0)
+  contract_end_date: string;
+  @MinLength(0)
+  probation_end_date: string;
   @MinLength(0)
   job_nature: string;
   @IsNotEmpty()

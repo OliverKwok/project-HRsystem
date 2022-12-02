@@ -42,8 +42,6 @@ export class UserService {
         start_date: createUserDto.start_date,
         // change to date format when use formData
         status: createUserDto.status,
-        contract_end_date: createUserDto.contract_end_date,
-        probation_end_date: createUserDto.probation_end_date,
         job_nature: createUserDto.job_nature,
         notice_period: createUserDto.notice_period,
         // change to number format when use formData
@@ -66,6 +64,29 @@ export class UserService {
         .select('id')
         .where({ employeeid: createUserDto.employeeid });
 
+      if (createUserDto.contract_end_date != 'Invalid date') {
+        const createContractEndDate = await this.knex
+          .table('employee')
+          .where({ id: checkid[0]['id'] })
+          .update({
+            contract_end_date: createUserDto.contract_end_date,
+          });
+      }
+
+      if (createUserDto.probation_end_date != 'Invalid date') {
+        const createProbationEndDate = await this.knex
+          .table('employee')
+          .where({ id: checkid[0]['id'] })
+          .update({
+            probation_end_date: createUserDto.probation_end_date,
+          });
+      }
+
+      // const checkid = await this.knex
+      //   .table('employee')
+      //   .select('id')
+      //   .where({ employeeid: createUserDto.employeeid });
+
       const newRole = await this.knex.table('employee_role').insert({
         employeeid: checkid[0].id,
         department_id: createUserDto.department,
@@ -79,13 +100,12 @@ export class UserService {
     }
   }
   async updateUser(updateUserDto: UpdateUserDto) {
+    // console.log(updateUserDto);
     try {
       const checkid = await this.knex
         .table('employee')
         .select('id')
         .where({ employeeid: updateUserDto.employeeid });
-
-      console.log(checkid[0]['id']);
 
       const updateEmployee = await this.knex
         .table('employee')
@@ -127,6 +147,24 @@ export class UserService {
           bank_payee: updateUserDto.bank_payee,
           payment_remark: updateUserDto.payment_remark,
         });
+
+      if (updateUserDto.contract_end_date != 'Invalid date') {
+        const updateContractEndDate = await this.knex
+          .table('employee')
+          .where({ id: checkid[0]['id'] })
+          .update({
+            contract_end_date: updateUserDto.contract_end_date,
+          });
+      }
+
+      if (updateUserDto.probation_end_date != 'Invalid date') {
+        const updateProbationEndDate = await this.knex
+          .table('employee')
+          .where({ id: checkid[0]['id'] })
+          .update({
+            probation_end_date: updateUserDto.probation_end_date,
+          });
+      }
 
       const updateRole = await this.knex
         .table('employee_role')

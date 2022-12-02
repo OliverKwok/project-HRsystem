@@ -102,8 +102,10 @@ export default function Employee(props: any) {
       // have_probation: "",
       // pass_probation: "",
       status: props.editStatus,
-      //       contract_end_date: props.editStatus;
-      // probation_end_date: props.editStatus;
+      contract_end_date: moment(props.editContractEndDate).format("YYYY-MM-DD"),
+      probation_end_date: moment(props.editProbationEndDate).format(
+        "YYYY-MM-DD"
+      ),
       job_nature: props.editJobNature,
       // length_of_service: "",
       notice_period: props.editNoticePeriod,
@@ -182,35 +184,6 @@ export default function Employee(props: any) {
     setShow4(false);
     setShow5(true);
   }
-
-  // check lastest employeeid
-  // async function checkEmployeeid() {
-  //   const requestOptions = {
-  //     method: "Get",
-  //   };
-
-  //   const res = await fetch(
-  //     `${process.env.REACT_APP_BACKEND_URL}/user/count`,
-  //     requestOptions
-  //   );
-  //   const jsonData = await res.json();
-  //   let newEmployeeid = "DEMO";
-  //   if (jsonData.maxid < 10) {
-  //     newEmployeeid = newEmployeeid + "00" + (jsonData.maxid + 1);
-  //   } else if (jsonData.maxid < 100) {
-  //     newEmployeeid = newEmployeeid + "0" + (jsonData.maxid + 1);
-  //   } else if (jsonData.maxid < 1000) {
-  //     newEmployeeid = newEmployeeid + (jsonData.maxid + 1);
-  //   } else {
-  //     throw new Error();
-  //   }
-  //   setEmployeeid(newEmployeeid);
-  //   setValue("employeeid", newEmployeeid);
-  // }
-
-  // useEffect(() => {
-  //   checkEmployeeid();
-  // }, []);
 
   // check report to employee list
   useEffect(() => {
@@ -296,7 +269,7 @@ export default function Employee(props: any) {
       // headers: { "Content-Type": "multi-type/form-data" },
       // body: formData,
     };
-    console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
     const res = await fetch(
       `${process.env.REACT_APP_BACKEND_URL}/user/update`,
       requestOptions
@@ -665,7 +638,23 @@ export default function Employee(props: any) {
 
                 <div>
                   <div>
-                    <span>Job Nature</span>
+                    <span>Contract End Date*</span>
+                  </div>
+
+                  <input type="date" {...register("contract_end_date")} />
+                </div>
+
+                <div>
+                  <div>
+                    <span>Probation End Date*</span>
+                  </div>
+
+                  <input type="date" {...register("probation_end_date")} />
+                </div>
+
+                <div>
+                  <div>
+                    <span>Job Nature*</span>
                   </div>
 
                   <select {...register("job_nature")}>
