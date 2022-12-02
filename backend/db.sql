@@ -1,4 +1,5 @@
 -- create database hrsystem; 
 -- create role hradmin with password '123' superuser;
 -- alter role hradmin with login;
--- TRUNCATE employee, title, department, team, employee_role, leave_type, leave_application, public_holidays, event, attendance CASCADE;
+--
+-- TRUNCATE employee, title, department, team, employee_role, leave_type, leave_application, public_holidays, event, attendance, payroll, payroll_edit_history CASCADE;

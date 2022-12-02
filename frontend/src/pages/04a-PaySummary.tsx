@@ -13,18 +13,20 @@ let data = [
     employeeid: "DEMO001",
     name: "Peter Chan",
     basic_salary: 20000,
+    ot_pay: 100,
     bonus: 1,
-    deduction: -2,
-    mpf: -3,
+    nopay_leave: -2,
+    // mpf: -3,
   },
   {
     id: "2",
     employeeid: "DEMO002",
     name: "John Wong",
     basic_salary: 10000,
+    ot_pay: 100,
     bonus: 4,
-    deduction: -5,
-    mpf: -6,
+    nopay_leave: -5,
+    // mpf: -6,
   },
 ];
 
@@ -40,9 +42,10 @@ export default function PaySummary() {
     { field: "employeeid", header: "Employee ID" },
     { field: "name", header: "Name" },
     { field: "basic_salary", header: "Basic Salary" },
+    { field: "ot_pay", header: "OT Pay" },
     { field: "bonus", header: "Bonus" },
-    { field: "deduction", header: "Deduction" },
-    { field: "mpf", header: "MPF" },
+    { field: "nopay_leave", header: "No Pay Leave" },
+    // { field: "mpf", header: "MPF" },
   ];
 
   const statuses = [
@@ -141,9 +144,10 @@ export default function PaySummary() {
 
   const cellEditor = (options: any) => {
     if (options.field === "basic_salary") return priceEditor(options);
+    else if (options.field === "ot_pay") return priceEditor(options);
     else if (options.field === "bonus") return priceEditor(options);
-    else if (options.field === "deduction") return priceEditor(options);
-    else if (options.field === "mpf") return priceEditor(options);
+    else if (options.field === "nopay_leave") return priceEditor(options);
+    // else if (options.field === "mpf") return priceEditor(options);
     return textEditor(options);
   };
 
@@ -181,13 +185,41 @@ export default function PaySummary() {
 
   const priceEditor = (options: any) => {
     return (
-      <InputNumber
-        value={options.value}
-        onValueChange={(e) => options.editorCallback(e.value)}
-        mode="currency"
-        currency="USD"
-        locale="en-US"
-      />
+      <>
+        {/* {console.log(options)} */}
+        <InputNumber
+          value={options.value}
+          onValueChange={(e) => {
+            options.editorCallback(e.value);
+
+            const requestOptions = {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                year: 2022,
+                month: 12,
+                employeeid: options.rowData.id,
+                category: options.field,
+                updated_value: e.value,
+              }),
+            };
+            console.log(requestOptions);
+            fetch(
+              `${process.env.REACT_APP_BACKEND_URL}/payroll/editHistoryCreate`,
+              requestOptions
+            )
+              .then((response) => {
+                return response.json();
+              })
+              .then((data) => {
+                console.log(data);
+              });
+          }}
+          mode="currency"
+          currency="USD"
+          locale="en-US"
+        />
+      </>
     );
   };
 
@@ -202,6 +234,12 @@ export default function PaySummary() {
     }).format(rowData.basic_salary);
   };
 
+  const otPayBodyTemplate = (rowData: any) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(rowData.ot_pay);
+  };
   const bonusBodyTemplate = (rowData: any) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -209,19 +247,19 @@ export default function PaySummary() {
     }).format(rowData.bonus);
   };
 
-  const deductionBodyTemplate = (rowData: any) => {
+  const noPayLeaveBodyTemplate = (rowData: any) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
-    }).format(rowData.deduction);
+    }).format(rowData.nopay_leave);
   };
 
-  const mpfBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(rowData.mpf);
-  };
+  // const mpfBodyTemplate = (rowData: any) => {
+  //   return new Intl.NumberFormat("en-US", {
+  //     style: "currency",
+  //     currency: "USD",
+  //   }).format(rowData.mpf);
+  // };
 
   return (
     <div className="datatable-editing-demo">
@@ -258,30 +296,37 @@ export default function PaySummary() {
             header="Basic Salary"
             body={basicSalaryBodyTemplate}
             editor={(options) => priceEditor(options)}
-            style={{ width: "20%" }}
+            style={{ width: "10%" }}
+          ></Column>
+          <Column
+            field="ot_pay"
+            header="OT Pay"
+            body={otPayBodyTemplate}
+            editor={(options) => priceEditor(options)}
+            style={{ width: "10%" }}
           ></Column>
           <Column
             field="bonus"
             header="Bonus"
             body={bonusBodyTemplate}
             editor={(options) => priceEditor(options)}
-            style={{ width: "20%" }}
+            style={{ width: "10%" }}
           ></Column>
           <Column
-            field="deduction"
-            header="Deduction"
-            body={deductionBodyTemplate}
+            field="nopay_leave"
+            header="No Pay Leave"
+            body={noPayLeaveBodyTemplate}
             editor={(options) => priceEditor(options)}
-            style={{ width: "20%" }}
+            style={{ width: "10%" }}
           ></Column>
-
+          {/* 
           <Column
             field="mpf"
             header="MPF"
             body={mpfBodyTemplate}
             editor={(options) => priceEditor(options)}
             style={{ width: "20%" }}
-          ></Column>
+          ></Column> */}
 
           <Column
             rowEditor

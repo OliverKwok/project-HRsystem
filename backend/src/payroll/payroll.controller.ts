@@ -1,16 +1,30 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { PayrollService } from './payroll.service';
 import { CreatePayrollDto } from './dto/create-payroll.dto';
+import { CreatePayrollEditDto } from './dto/create-payroll-edit.dto';
 import { UpdatePayrollDto } from './dto/update-payroll.dto';
 
 @Controller('payroll')
 export class PayrollController {
   constructor(private readonly payrollService: PayrollService) {}
 
-  @Post()
-  create(@Body() createPayrollDto: CreatePayrollDto) {
-    return this.payrollService.create(createPayrollDto);
+  @Post('editHistoryCreate')
+  editHistoryCreate(@Body() createPayrollEditDto: CreatePayrollEditDto) {
+    return this.payrollService.editHistoryCreate(createPayrollEditDto);
   }
+
+  // @Post('create')
+  // create(@Body() createPayrollDto: CreatePayrollDto) {
+  //   return this.payrollService.create(createPayrollDto);
+  // }
 
   @Get()
   findAll() {

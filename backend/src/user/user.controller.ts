@@ -59,7 +59,7 @@ export class UserController {
   }
 
   @Get('checkEID/:eid')
- checkEID(@Param('eid') eid:number){
+ checkEID(@Param('eid') eid:string){
     return this.userService.checkEID(eid);
   }
 }

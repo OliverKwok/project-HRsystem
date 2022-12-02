@@ -77,6 +77,7 @@ export async function up(knex: Knex): Promise<void> {
     table.float('sick_leave_balance');
     // system permission
     // table.integer('permission').references('permission.id');
+    table.string('firebase_token');
   });
   await knex.schema.createTable('title', (table) => {
     table.increments('id');
@@ -204,18 +205,24 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('employee').references('employee.id');
     table.float('salary');
     table.float('ot_pay');
-    table.float('nopay_leave_deduction');
-    table.float('mpf_employer');
+    table.float('bonus');
+    table.float('nopay_leave');
     table.float('mpf_employee');
+
+    table.float('mpf_employer');
     table.float('total');
   });
 
   await knex.schema.createTable('payroll_edit_history', (table) => {
     table.increments('id');
-    table.integer('record').references('payroll.id');
-    table.string('original_value');
-    table.string('updated_value');
+    table.integer('year');
+    table.integer('month');
+    table.integer('employeeid').references('employee.id');
+    table.float('ot_pay');
+    table.float('bonus');
+    table.float('nopay_leave');
     table.timestamp('updated_datetime');
+
     table.boolean('isApproved');
   });
 
