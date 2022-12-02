@@ -1,4 +1,4 @@
-import StatusChangeCard from "../components/06-statusChangeCard";
+import OffboardingCard from "../components/06-OffboardingCard";
 import { Carousel } from "primereact/carousel";
 import { Splitter, SplitterPanel } from "primereact/splitter";
 import "../styles/06-Carousel.css";
@@ -99,7 +99,7 @@ export default function StatusChange() {
           <div className="card">
             <Carousel
               value={statuses}
-              itemTemplate={StatusChangeCard}
+              itemTemplate={OffboardingCard}
               numVisible={5}
               numScroll={1}
               responsiveOptions={responsiveOptions}

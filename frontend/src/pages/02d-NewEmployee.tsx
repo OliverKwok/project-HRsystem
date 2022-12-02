@@ -278,7 +278,7 @@ export default function Employee() {
     console.log("submit form data:", data);
 
     // formData version
-    const formData = new FormData();
+    // const formData = new FormData();
 
     // formData.append("employeeid", data.employeeid);
     // formData.append("first_name", data.first_name);
@@ -290,7 +290,7 @@ export default function Employee() {
     // formData.append("gender", data.gender);
     // formData.append("nationality", data.nationality);
     // formData.append("date_of_birth", JSON.stringify(data.date_of_birth));
-    formData.append("profilepic", data.profilepic[0]);
+    // formData.append("profilepic", data.profilepic[0]);
     // formData.append("mobile_countrycode", data.mobile_countrycode);
     // formData.append("mobile_no", data.mobile_no);
     // formData.append("work_phone_no", data.work_phone_no);

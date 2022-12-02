@@ -37,6 +37,18 @@ export class TitleService {
         employee.last_job_company,
         employee.last_job_title,
 
+        employee.start_date,
+        employee.status,
+        employee.job_nature,
+        employee.notice_period,
+
+        employee.report_to,
+        employee_role.department_id,
+        employee_role.team_id,
+        employee_role.title_id,
+
+        employee.al_leave_entitled_peryear,
+
         employee.pay_currency,
         employee.basic_salary,
         employee.payment_method,
