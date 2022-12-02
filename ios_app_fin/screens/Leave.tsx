@@ -52,7 +52,6 @@ function Leave({navigation}: any) {
       );
 
       let leave = await res.json();
-      console.log(leave);
 
       leave = leave['res'];
 
