@@ -19,7 +19,7 @@ import Organization from "./pages/02a-Organization";
 import Employee from "./pages/02d-NewEmployee";
 import EditEmployee from "./pages/02d-EditEmployee";
 // import Grade from "./pages/02b-Grade";
-import Title from "./pages/02c-Title";
+import Title from "./pages/02c-EmployeeList";
 import StatusUpdate from "./pages/02e-StatusUpdate";
 // import StatusUpdate2 from "./pages/02e-StatusUpdate2";
 import Attendance from "./pages/03-Attendance";

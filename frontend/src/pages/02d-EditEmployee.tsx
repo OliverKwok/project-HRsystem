@@ -276,10 +276,7 @@ export default function Employee(props: any) {
     }
   }, [profilepic]);
 
-  useEffect(() => {
-    if (eid != null) {
-    }
-  }, [eid]);
+
 
   // submit
   async function submit(data: FormState) {
@@ -351,6 +348,13 @@ export default function Employee(props: any) {
     setWorkEmail(genWorkEmail(getValues("first_name"), event.target.value));
     return;
   };
+
+
+// auto-fill after redirect from status update page
+  useEffect(() => {
+    if (eid != null) {
+    }
+  }, [eid]);                                   
 
   return (
     <div className="page-container">
