@@ -264,6 +264,43 @@ export class UserService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+
+  async getUpdateStatus() {
+    try {
+      const allStatus = await this.knex
+        .select(
+          // '*',
+          'employee.id',
+          this.knex.raw(
+            `concat(UPPER(employee.last_name), ' ', employee.first_name, ', ', employee.alias) as employee_name`,
+          ),
+          'title.title_name',
+          'employee.status',
+          'employee.profilepic',
+        )
+        .from('employee_role')
+        .join('employee', 'employee_role.employeeid', '=', 'employee.id')
+        .join('title', 'employee_role.title_id', '=', 'title.id')
+        .where({ 'employee.status': 'probation' })
+        .orWhere({ 'employee.status': 'contract' });
+      return allStatus;
+    } catch (err) {
+      console.log(err);
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  // async getEID(){
+  //   try{
+  //     const EID = await this.knex
+  //       .table('employee')
+  //       .select()
+  //       .where({ id: id });
+
+  //   } catch (err) {
+  //     console.log(err);
+  //     throw new HttpException(err, HttpStatus.BAD_REQUEST);
+  //   }
 }
 
 // upload file code

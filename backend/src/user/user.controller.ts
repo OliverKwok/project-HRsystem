@@ -51,4 +51,15 @@ export class UserController {
   async leaveShowCalendar() {
     return this.userService.leaveShowCalendar();
   }
+
+  @Get('getUpdateStatus')
+  async getUpdateStatus(){
+    return this.userService.getUpdateStatus();
+  }
+
+
+  // @Post('updateStatusID')
+  // async checkEID(@Body() checkEIDDto: CheckEIDDto){
+  //   return this.userService.getEID(checkEIDDto);
+  // }
 }

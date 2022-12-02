@@ -4,6 +4,7 @@ import StatusUpdateCard from "../components/02e-statusUpdateCard";
 import { Carousel } from "primereact/carousel";
 // import { Splitter, SplitterPanel } from "primereact/splitter";
 import "../styles/06-Carousel.css";
+import { stringify } from "querystring";
 
 interface statusCard {
   id: string;
@@ -19,6 +20,45 @@ interface statusCard {
 }
 
 export default function StatusUpdate() {
+  const [status, setStatus] = useState();
+  const [eid, setEID] = useState();
+
+  useEffect(() => {
+    const requestOptions = {
+      method: "Get",
+    };
+
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/user/getUpdateStatus`,
+      requestOptions
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+
+        let fetchData = data.map((each: any) => {
+          setEID(each.id);
+          return {
+            id: each.id,
+            status:
+              "End of " +
+              each.status.charAt(0).toUpperCase() +
+              each.status.slice(1),
+            profilepic: each.profilepic,
+            person: each.employee_name,
+            position: each.title_name,
+            endDate: "2022-12-31",
+            daysLeft: "20",
+            // barColor: "",
+            // bgcolor: "#6a1b9a",
+          };
+        });
+        setStatus(fetchData);
+      });
+  }, []);
+
   const statuses: statusCard[] = [
     {
       id: "01",
@@ -57,7 +97,7 @@ export default function StatusUpdate() {
   return (
     <>
       <Carousel
-        value={statuses}
+        value={status}
         itemTemplate={StatusUpdateCard}
         numVisible={5}
         numScroll={1}
