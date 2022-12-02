@@ -113,9 +113,7 @@ const Attendance = () => {
                 minDate={dayjs("2018-01-01")}
                 maxDate={dayjs("2023-06-01")}
                 value={value}
-                onChange={(newValue) => {
-                  setValue(newValue);
-                }}
+                onChange={(newValue) => setValue(newValue)}
                 renderInput={(params) => (
                   <TextField {...params} helperText={null} />
                 )}
