@@ -76,6 +76,7 @@ export default function LeavesRequest2() {
           };
         });
         setApplicationData(fetchData);
+        // console.log(applicationData);
       });
   }, [actionOnPending]);
 

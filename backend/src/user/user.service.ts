@@ -333,13 +333,29 @@ export class UserService {
     }
   }
 
-  async checkEID(eid: number) {
+  async checkEID(eid: string) {
+    console.log(eid, typeof eid);
+    let parsedEID = parseInt(eid);
+    console.log(parsedEID, typeof parsedEID);
     try {
-      const EidEmployeeDetails = await this.knex
-        .select('*')
-        .from('employee')
-        .where({ id: eid });
-      return EidEmployeeDetails;
+      if (!isNaN(parsedEID)) {
+        const EidEmployeeDetails = await this.knex
+          .select('*')
+          .from('employee_role')
+          .join('employee', 'employee_role.employeeid', '=', 'employee.id')
+          .join('title', 'employee_role.title_id', '=', 'title.id')
+          .join(
+            'department',
+            'employee_role.department_id',
+            '=',
+            'department.id',
+          )
+          .join('team', 'employee_role.team_id', '=', 'team.id')
+          .where({ 'employee.id': parsedEID });
+        return EidEmployeeDetails[0];
+      } else {
+        return;
+      }
     } catch (err) {
       console.log(err);
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
