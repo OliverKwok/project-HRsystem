@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/02e-statusUpdateCard.css";
 
 export default function StatusUpdateCard(props: any) {
-
   const containerStyles: any = {
     height: 30,
     width: "90%",
@@ -30,8 +30,15 @@ export default function StatusUpdateCard(props: any) {
     backgroundColor: props.barColor,
   };
 
+  const navigate = useNavigate();
+
+  function redirect() {
+    console.log("click");
+    window.localStorage.setItem("eid", "01");
+    navigate("/title");
+  }
+
   return (
-    
     <div className="statusUpdateCard">
       <h2 className="status" style={statusColor}>
         {props.status}
@@ -49,12 +56,12 @@ export default function StatusUpdateCard(props: any) {
         <h2 className="position">{props.position}</h2>
       </div>
       {props.status === "End of Probation" && (
-        <button className="handleButton" >
+        <button className="handleButton" onClick={redirect}>
           Pass or Extend?
         </button>
       )}
       {props.status === "End of Contract" && (
-        <button className="handleButton" >
+        <button className="handleButton" onClick={redirect}>
           End, Extend or Convert?
         </button>
       )}
