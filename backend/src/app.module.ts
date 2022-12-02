@@ -11,6 +11,7 @@ import { TitleModule } from './title/title.module';
 import { TeamModule } from './team/team.module';
 import { LeaveModule } from './leave/leave.module';
 import { IosAppModule } from './ios_app/ios_app.module';
+import { PayrollModule } from './payroll/payroll.module';
 import { StatusupdateModule } from './statusupdate/statusupdate.module';
 import { AttendanceModule } from './attendance/attendance.module';
 
@@ -31,6 +32,7 @@ Config();
     TeamModule,
     LeaveModule,
     IosAppModule,
+    PayrollModule,
     StatusupdateModule,
     AttendanceModule,
   ],

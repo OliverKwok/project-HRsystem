@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import moment from "moment";
@@ -33,9 +33,11 @@ type FormState = {
   last_job_title: string;
 
   start_date: string;
-  have_probation: string;
-  pass_probation: string;
+  // have_probation: string;
+  // pass_probation: string;
   status: string;
+  contract_end_date: string;
+  probation_end_date: string;
   job_nature: string;
   // length_of_service: string;
   notice_period: number;
@@ -81,7 +83,7 @@ export default function Employee(props: any) {
       gender: props.editGender,
       nationality: props.editNationality,
       date_of_birth: moment(props.editDateOfBirth).format("YYYY-MM-DD"),
-      age: 0, // TODO make calulation
+      // age: 0,
 
       mobile_countrycode: props.editMobileCountryCode,
       mobile_no: props.editMobileNo,
@@ -100,6 +102,10 @@ export default function Employee(props: any) {
       // have_probation: "",
       // pass_probation: "",
       status: props.editStatus,
+      contract_end_date: moment(props.editContractEndDate).format("YYYY-MM-DD"),
+      probation_end_date: moment(props.editProbationEndDate).format(
+        "YYYY-MM-DD"
+      ),
       job_nature: props.editJobNature,
       // length_of_service: "",
       notice_period: props.editNoticePeriod,
@@ -134,6 +140,9 @@ export default function Employee(props: any) {
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
   const [workEmail, setWorkEmail] = useState("");
+
+  // get EID passed from update status button --> title table
+  const [eid, setEid] = useState<string | null>(null);
 
   // tab show
   const [show1, setShow1] = useState(true);
@@ -177,35 +186,6 @@ export default function Employee(props: any) {
     setShow4(false);
     setShow5(true);
   }
-
-  // check lastest employeeid
-  // async function checkEmployeeid() {
-  //   const requestOptions = {
-  //     method: "Get",
-  //   };
-
-  //   const res = await fetch(
-  //     `${process.env.REACT_APP_BACKEND_URL}/user/count`,
-  //     requestOptions
-  //   );
-  //   const jsonData = await res.json();
-  //   let newEmployeeid = "DEMO";
-  //   if (jsonData.maxid < 10) {
-  //     newEmployeeid = newEmployeeid + "00" + (jsonData.maxid + 1);
-  //   } else if (jsonData.maxid < 100) {
-  //     newEmployeeid = newEmployeeid + "0" + (jsonData.maxid + 1);
-  //   } else if (jsonData.maxid < 1000) {
-  //     newEmployeeid = newEmployeeid + (jsonData.maxid + 1);
-  //   } else {
-  //     throw new Error();
-  //   }
-  //   setEmployeeid(newEmployeeid);
-  //   setValue("employeeid", newEmployeeid);
-  // }
-
-  // useEffect(() => {
-  //   checkEmployeeid();
-  // }, []);
 
   // check report to employee list
   useEffect(() => {
@@ -290,14 +270,14 @@ export default function Employee(props: any) {
       // headers: { "Content-Type": "multi-type/form-data" },
       // body: formData,
     };
-
+    // console.log(JSON.stringify(data));
     const res = await fetch(
       `${process.env.REACT_APP_BACKEND_URL}/user/update`,
       requestOptions
     );
     const jsonData = await res.json();
 
-    if (jsonData.newEmployee.rowCount) {
+    if (jsonData.updateEmployee) {
       alert("updated in the employee table");
     }
   }
@@ -308,7 +288,6 @@ export default function Employee(props: any) {
     const date_of_birth_input = moment(event.target.value, "YYYY-MM-DD");
     let result = todayDate.diff(date_of_birth_input, "years");
     setAge(result);
-
     return result;
   };
 
@@ -319,11 +298,11 @@ export default function Employee(props: any) {
     let lastNameOutput;
 
     if (firstNameInput != undefined) {
-      firstNameOutput = firstNameInput.replace(" ", ".");
+      firstNameOutput = firstNameInput.toLowerCase().replace(" ", ".");
     }
 
     if (lastNameInput != undefined) {
-      lastNameOutput = lastNameInput.replace(" ", "");
+      lastNameOutput = lastNameInput.toLowerCase().replace(" ", "");
     }
 
     let workEmailGenerated =
@@ -345,6 +324,32 @@ export default function Employee(props: any) {
     setWorkEmail(genWorkEmail(getValues("first_name"), event.target.value));
     return;
   };
+
+  // auto-fill after redirect from status update page
+  useEffect(() => {
+    setEid(window.localStorage.getItem("eid"));
+    if (eid !== null) {
+      console.log("EID passed to form");
+
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: props.id,
+        }),
+      };
+      console.log(requestOptions);
+      fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/checkEID`,
+        requestOptions
+      )
+        .then((response) => response.json)
+        .then((data) => console.log(data));
+    } else {
+      console.log("noEID found");
+    }
+    window.localStorage.removeItem("eid");
+  }, [eid]);
 
   return (
     <div className="page-container">
@@ -495,7 +500,7 @@ export default function Employee(props: any) {
                   />
                 </div>
 
-                <div>
+                {/* <div>
                   <div>
                     <span>Age</span>
                   </div>
@@ -506,7 +511,7 @@ export default function Employee(props: any) {
                     {...register("age")}
                     disabled
                   />
-                </div>
+                </div> */}
               </div>
               <hr />
             </>
@@ -654,7 +659,23 @@ export default function Employee(props: any) {
 
                 <div>
                   <div>
-                    <span>Job Nature</span>
+                    <span>Contract End Date*</span>
+                  </div>
+
+                  <input type="date" {...register("contract_end_date")} />
+                </div>
+
+                <div>
+                  <div>
+                    <span>Probation End Date*</span>
+                  </div>
+
+                  <input type="date" {...register("probation_end_date")} />
+                </div>
+
+                <div>
+                  <div>
+                    <span>Job Nature*</span>
                   </div>
 
                   <select {...register("job_nature")}>
@@ -868,7 +889,7 @@ export default function Employee(props: any) {
           )}
         </div>
 
-        {false && (
+        {/* {false && (
           <>
             <hr />
             <div>
@@ -899,9 +920,9 @@ export default function Employee(props: any) {
             </div>
             <hr />
           </>
-        )}
+        )} */}
 
-        <button type="submit">Edit</button>
+        <button type="submit">Submit Amendment</button>
       </form>
     </div>
   );

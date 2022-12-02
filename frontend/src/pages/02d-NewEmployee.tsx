@@ -32,9 +32,11 @@ type FormState = {
   last_job_title: string;
 
   start_date: string;
-  have_probation: string;
-  pass_probation: string;
+  // have_probation: string;
+  // pass_probation: string;
   status: string;
+  contract_end_date: string;
+  probation_end_date: string;
   job_nature: string;
   // length_of_service: string;
   notice_period: number;
@@ -96,9 +98,11 @@ export default function Employee() {
       last_job_title: "",
 
       start_date: "",
-      have_probation: "",
-      pass_probation: "",
+      // have_probation: "",
+      // pass_probation: "",
       status: "",
+      contract_end_date: "Invalid date",
+      probation_end_date: "Invalid date",
       job_nature: "",
       // length_of_service: "",
       notice_period: 30,
@@ -109,7 +113,7 @@ export default function Employee() {
 
       al_leave_entitled_peryear: 0,
 
-      pay_currency: "",
+      pay_currency: "HKD",
       basic_salary: "",
       payment_method: "",
       home_address: "",
@@ -280,46 +284,7 @@ export default function Employee() {
     // formData version
     // const formData = new FormData();
 
-    // formData.append("employeeid", data.employeeid);
-    // formData.append("first_name", data.first_name);
-    // formData.append("last_name", data.last_name);
-    // formData.append("chinese_name", data.chinese_name);
-    // formData.append("alias", data.alias);
-    // formData.append("hkid", data.hkid);
-    // formData.append("passport", data.passport);
-    // formData.append("gender", data.gender);
-    // formData.append("nationality", data.nationality);
-    // formData.append("date_of_birth", JSON.stringify(data.date_of_birth));
     // formData.append("profilepic", data.profilepic[0]);
-    // formData.append("mobile_countrycode", data.mobile_countrycode);
-    // formData.append("mobile_no", data.mobile_no);
-    // formData.append("work_phone_no", data.work_phone_no);
-    // formData.append("email_personal", data.email_personal);
-    // formData.append("email_work", data.email_work);
-    // // formData.append("password",data.password);
-    // formData.append("highest_education", data.highest_education);
-    // formData.append("institution_name", data.institution_name);
-    // formData.append("major", data.major);
-    // formData.append("last_job_company", data.last_job_company);
-    // formData.append("last_job_title", data.last_job_title);
-    // formData.append("start_date", JSON.stringify(data.start_date));
-    // formData.append("status", data.status);
-    // formData.append("job_nature", data.job_nature);
-    // formData.append("notice_period", JSON.stringify(data.notice_period));
-    // formData.append("report_to", data.report_to);
-    // formData.append(
-    //   "al_leave_entitled_peryear",
-    //   JSON.stringify(data.al_leave_entitled_peryear)
-    // );
-    // formData.append("pay_currency", data.pay_currency);
-    // formData.append("basic_salary", data.basic_salary);
-    // formData.append("payment_method", data.payment_method);
-    // formData.append("home_address", data.home_address);
-    // formData.append("bank_code", data.bank_code);
-    // formData.append("bank_name", data.bank_name);
-    // formData.append("bank_number", data.bank_number);
-    // formData.append("bank_payee", data.bank_payee);
-    // formData.append("payment_remark", data.payment_remark);
 
     const requestOptions = {
       method: "POST",
@@ -369,11 +334,11 @@ export default function Employee() {
     let lastNameOutput;
 
     if (firstNameInput != undefined) {
-      firstNameOutput = firstNameInput.replace(" ", ".");
+      firstNameOutput = firstNameInput.toLowerCase().replace(" ", ".");
     }
 
     if (lastNameInput != undefined) {
-      lastNameOutput = lastNameInput.replace(" ", "");
+      lastNameOutput = lastNameInput.toLowerCase().replace(" ", "");
     }
 
     let workEmailGenerated =
@@ -688,7 +653,7 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Job Status</span>
+                    <span>Job Status*</span>
                   </div>
 
                   <select {...register("status")}>
@@ -704,7 +669,23 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Job Nature</span>
+                    <span>Contract End Date*</span>
+                  </div>
+
+                  <input type="date" {...register("contract_end_date")} />
+                </div>
+
+                <div>
+                  <div>
+                    <span>Probation End Date*</span>
+                  </div>
+
+                  <input type="date" {...register("probation_end_date")} />
+                </div>
+
+                <div>
+                  <div>
+                    <span>Job Nature*</span>
                   </div>
 
                   <select {...register("job_nature")}>

@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { InjectKnex, Knex } from 'nestjs-knex';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import { CheckEIDDto } from './dto/checkEID.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable({})
@@ -64,6 +65,29 @@ export class UserService {
         .select('id')
         .where({ employeeid: createUserDto.employeeid });
 
+      if (createUserDto.contract_end_date != 'Invalid date') {
+        const createContractEndDate = await this.knex
+          .table('employee')
+          .where({ id: checkid[0]['id'] })
+          .update({
+            contract_end_date: createUserDto.contract_end_date,
+          });
+      }
+
+      if (createUserDto.probation_end_date != 'Invalid date') {
+        const createProbationEndDate = await this.knex
+          .table('employee')
+          .where({ id: checkid[0]['id'] })
+          .update({
+            probation_end_date: createUserDto.probation_end_date,
+          });
+      }
+
+      // const checkid = await this.knex
+      //   .table('employee')
+      //   .select('id')
+      //   .where({ employeeid: createUserDto.employeeid });
+
       const newRole = await this.knex.table('employee_role').insert({
         employeeid: checkid[0].id,
         department_id: createUserDto.department,
@@ -77,13 +101,12 @@ export class UserService {
     }
   }
   async updateUser(updateUserDto: UpdateUserDto) {
+    // console.log(updateUserDto);
     try {
       const checkid = await this.knex
         .table('employee')
         .select('id')
         .where({ employeeid: updateUserDto.employeeid });
-
-      console.log(checkid[0]['id']);
 
       const updateEmployee = await this.knex
         .table('employee')
@@ -125,6 +148,24 @@ export class UserService {
           bank_payee: updateUserDto.bank_payee,
           payment_remark: updateUserDto.payment_remark,
         });
+
+      if (updateUserDto.contract_end_date != 'Invalid date') {
+        const updateContractEndDate = await this.knex
+          .table('employee')
+          .where({ id: checkid[0]['id'] })
+          .update({
+            contract_end_date: updateUserDto.contract_end_date,
+          });
+      }
+
+      if (updateUserDto.probation_end_date != 'Invalid date') {
+        const updateProbationEndDate = await this.knex
+          .table('employee')
+          .where({ id: checkid[0]['id'] })
+          .update({
+            probation_end_date: updateUserDto.probation_end_date,
+          });
+      }
 
       const updateRole = await this.knex
         .table('employee_role')
@@ -264,8 +305,45 @@ export class UserService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
-}
 
+  async getUpdateStatus() {
+    try {
+      const allStatus = await this.knex
+        .select(
+          // '*',
+          'employee.id',
+          this.knex.raw(
+            `concat(UPPER(employee.last_name), ' ', employee.first_name, ', ', employee.alias) as employee_name`,
+          ),
+          'title.title_name',
+          'employee.status',
+          'employee.profilepic',
+        )
+        .from('employee_role')
+        .join('employee', 'employee_role.employeeid', '=', 'employee.id')
+        .join('title', 'employee_role.title_id', '=', 'title.id')
+        .where({ 'employee.status': 'probation' })
+        .orWhere({ 'employee.status': 'contract' });
+      return allStatus;
+    } catch (err) {
+      console.log(err);
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async checkEID(checkEIDDto: CheckEIDDto) {
+    try {
+      const EID = await this.knex
+        .select('*')
+        .from('employee')
+        .where({ id: checkEIDDto.id });
+      return EID;
+    } catch (err) {
+      console.log(err);
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+}
 // upload file code
 // signup(@UploadedFile() file, @Body() body) {
 //   console.log(file);
