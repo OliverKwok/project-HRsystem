@@ -77,6 +77,7 @@ export async function up(knex: Knex): Promise<void> {
     table.float('sick_leave_balance');
     // system permission
     // table.integer('permission').references('permission.id');
+    table.string('firebase_token');
   });
   await knex.schema.createTable('title', (table) => {
     table.increments('id');

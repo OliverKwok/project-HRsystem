@@ -319,7 +319,7 @@ export default function PaySummary() {
             editor={(options) => priceEditor(options)}
             style={{ width: "10%" }}
           ></Column>
-{/* 
+          {/* 
           <Column
             field="mpf"
             header="MPF"
