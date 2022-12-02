@@ -50,6 +50,11 @@ services:
       - "443:443"
     volumes:
       - ./docker/nginx/default:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/fullchain.pem:/etc/letsencrypt/live/www.easy-hr.solutions/fullchain.pem
+      - ./docker/nginx/privkey.pem:/etc/letsencrypt/live/www.easy-hr.solutions/privkey.pem
+      - ./docker/nginx/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
+      - ./docker/nginx/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
+
     depends_on:
       - frontend
 
