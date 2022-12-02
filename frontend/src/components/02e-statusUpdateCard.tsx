@@ -28,7 +28,6 @@ export default function StatusUpdateCard(props: any) {
   //   fontWeight: "bold",
   // };
 
-
   let statusColor: any = "";
   if (props.status === "End of Contract") {
     statusColor = { backgroundColor: "#cca0ff" };
@@ -46,21 +45,20 @@ export default function StatusUpdateCard(props: any) {
     console.log("click");
     window.localStorage.setItem("eid", props.id);
     // console.log(props.id);
-    const requestOptions = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: props.id,
-      }),
-    };
-    console.log(requestOptions);
-    // const res =
-    await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/user/updateStatusID`,
-      requestOptions
-    )
-      .then((response) => response.json)
-      .then((data) => console.log(data));
+    // const requestOptions = {
+    //   method: "PATCH",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     id: props.id,
+    //   }),
+    // };
+    // console.log(requestOptions);
+    // await fetch(
+    //   `${process.env.REACT_APP_BACKEND_URL}/user/updateStatusID`,
+    //   requestOptions
+    // )
+    //   .then((response) => response.json)
+    //   .then((data) => console.log(data));
 
     navigate("/employeeList");
   }

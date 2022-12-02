@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { InjectKnex, Knex } from 'nestjs-knex';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import { CheckEIDDto } from './dto/checkEID.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable({})
@@ -290,19 +291,19 @@ export class UserService {
     }
   }
 
-  // async getEID(){
-  //   try{
-  //     const EID = await this.knex
-  //       .table('employee')
-  //       .select()
-  //       .where({ id: id });
-
-  //   } catch (err) {
-  //     console.log(err);
-  //     throw new HttpException(err, HttpStatus.BAD_REQUEST);
-  //   }
+  async checkEID(checkEIDDto: CheckEIDDto) {
+    try {
+      const EID = await this.knex
+        .select('*')
+        .from('employee')
+        .where({ id: checkEIDDto.id });
+      return EID;
+    } catch (err) {
+      console.log(err);
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
 }
-
 // upload file code
 // signup(@UploadedFile() file, @Body() body) {
 //   console.log(file);

@@ -10,6 +10,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/user.dto';
 import { UpdateUserDto } from './dto/user.dto';
+import { CheckEIDDto } from './dto/checkEID.dto';
 
 @Controller('user')
 export class UserController {
@@ -57,9 +58,8 @@ export class UserController {
     return this.userService.getUpdateStatus();
   }
 
-
-  // @Post('updateStatusID')
-  // async checkEID(@Body() checkEIDDto: CheckEIDDto){
-  //   return this.userService.getEID(checkEIDDto);
-  // }
+  @Post('checkEID')
+  async checkEID(@Body() checkEIDDto: CheckEIDDto){
+    return this.userService.checkEID(checkEIDDto);
+  }
 }

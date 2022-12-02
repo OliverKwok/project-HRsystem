@@ -134,6 +134,8 @@ export default function Employee(props: any) {
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
   const [workEmail, setWorkEmail] = useState("");
+
+  // get EID passed from update status button --> title table
   const [eid, setEid] = useState<string | null>(null);
 
   // tab show
@@ -216,7 +218,6 @@ export default function Employee(props: any) {
       );
       let reportToFetch = await response.json();
       setReportTo(reportToFetch);
-      setEid(window.localStorage.getItem("eid"));
     }
     fetchReportTo();
   }, []);
@@ -275,8 +276,6 @@ export default function Employee(props: any) {
       reader.readAsDataURL(profilepic[0]);
     }
   }, [profilepic]);
-
-
 
   // submit
   async function submit(data: FormState) {
@@ -349,12 +348,31 @@ export default function Employee(props: any) {
     return;
   };
 
-
-// auto-fill after redirect from status update page
+  // auto-fill after redirect from status update page
   useEffect(() => {
-    if (eid != null) {
+    setEid(window.localStorage.getItem("eid"));
+    if (eid !== null) {
+      console.log("EID passed to form");
+
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: props.id,
+        }),
+      };
+      console.log(requestOptions);
+      fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/checkEID`,
+        requestOptions
+      )
+        .then((response) => response.json)
+        .then((data) => console.log(data));
+    } else {
+      console.log("noEID found");
     }
-  }, [eid]);                                   
+    window.localStorage.removeItem("eid");
+  }, [eid]);
 
   return (
     <div className="page-container">
