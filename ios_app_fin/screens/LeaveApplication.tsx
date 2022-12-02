@@ -6,6 +6,8 @@ import {
   View,
   Button,
   Pressable,
+  // YellowBox,
+  LogBox,
 } from 'react-native';
 import {Config} from 'react-native-config';
 import {useNavigation} from '@react-navigation/native';
@@ -17,9 +19,18 @@ import RNPickerSelect from 'react-native-picker-select';
 import {useSelector} from 'react-redux';
 import {AuthState} from '../redux/auth/state';
 
-function LeaveApplication({navigation}: any) {
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
+// YellowBox.ignoreWarnings([
+//   'Non-serializable values were found in the navigation state',
+// ]);
+
+function LeaveApplication({navigation, route}: any) {
+  const {fetchLeaveRecord} = route.params;
+
   const userId = useSelector((state: AuthState) => state.auth.user.id);
-  console.log(userId);
+  // console.log(userId);
 
   //Check the input for leave application
   function checkLeaveApplicationInput() {
@@ -100,6 +111,7 @@ function LeaveApplication({navigation}: any) {
 
     console.log('You are going to submit');
     setShowSubmitSucceeded(true);
+    fetchLeaveRecord();
     setTimeout(() => {
       navigation.goBack();
     }, 1000);

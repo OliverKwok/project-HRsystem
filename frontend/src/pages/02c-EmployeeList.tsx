@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import Filter from "../components/02c-Filter";
-import PopupAddTitle from "../components/02c-PopupAddTitle";
-import PopupEditTitle from "../components/02c-PopupEditTitle";
+// import PopupAddTitle from "../components/02c-PopupAddTitle";
+// import PopupEditTitle from "../components/02c-PopupEditTitle";
 import "../styles/02c-title.css";
 import EditEmployee from "./02d-EditEmployee";
 
@@ -54,6 +54,7 @@ export default function Title() {
   const [passBankNumber, setPassBankNumber] = useState("");
   const [passBankPayee, setPassBankPayee] = useState("");
   const [passPaymentRemark, setPassPaymentRemark] = useState("");
+  const [eid, setEid] = useState<string | null>(null);
 
   // table columns
   const columns = [
@@ -240,6 +241,7 @@ export default function Title() {
         });
         // console.log(fetchData);
         setData(fetchData);
+        setEid(window.localStorage.getItem("eid"));
       });
   }, []);
 
@@ -287,16 +289,24 @@ export default function Title() {
     );
   }, [filterText, resetPaginationToggle]);
 
+  useEffect(() => {
+    console.log("loop forever", eid);
+    if (eid !== null) {
+      //showTab4();
+      setShowList(false);
+      window.localStorage.removeItem("eid");
+    }
+  }, [eid]);
+
   //rendering
 
   return (
     <>
       {showList ? (
         <div>
-          <PopupAddTitle />
+          {/* <PopupAddTitle /> */}
           {data.length > 0 && (
             <DataTable
-              title="Titles"
               columns={columns}
               data={filteredItems}
               striped
@@ -354,6 +364,8 @@ export default function Title() {
           editBankNumber={passBankNumber}
           editBankPayee={passBankPayee}
           editPaymentRemark={passPaymentRemark}
+          //
+          // editShowList={showList}
         />
       )}
 

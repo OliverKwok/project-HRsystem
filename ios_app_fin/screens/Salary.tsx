@@ -19,24 +19,6 @@ function Salary() {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
-  async function checkEmployeeid() {
-    try {
-      const requestOptions = {
-        method: 'Get',
-      };
-      console.log(Config);
-      console.log(Config.REACT_APP_BACKEND_URL);
-
-      const res = await fetch(
-        `${Config.REACT_APP_BACKEND_URL}/user/count`,
-        requestOptions,
-      );
-      const jsonData = await res.json();
-      console.log(jsonData);
-    } catch (error) {
-      console.log('Fetch fail');
-    }
-  }
   return (
     <View style={styles.pageContainer}>
       <ScrollView
@@ -45,7 +27,6 @@ function Salary() {
         }
         style={{width: '100%', flex: 1}}>
         <Payslip />
-        <Button title="Try fetch" onPress={checkEmployeeid} />
       </ScrollView>
     </View>
   );

@@ -11,6 +11,8 @@ import { TitleModule } from './title/title.module';
 import { TeamModule } from './team/team.module';
 import { LeaveModule } from './leave/leave.module';
 import { IosAppModule } from './ios_app/ios_app.module';
+import { PayrollModule } from './payroll/payroll.module';
+import { StatusupdateModule } from './statusupdate/statusupdate.module';
 
 Config();
 
@@ -29,6 +31,8 @@ Config();
     TeamModule,
     LeaveModule,
     IosAppModule,
+    PayrollModule,
+    StatusupdateModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -19,10 +19,11 @@ import Organization from "./pages/02a-Organization";
 import Employee from "./pages/02d-NewEmployee";
 import EditEmployee from "./pages/02d-EditEmployee";
 // import Grade from "./pages/02b-Grade";
-import Title from "./pages/02c-Title";
+import EmployeeList from "./pages/02c-EmployeeList";
 import StatusUpdate from "./pages/02e-StatusUpdate";
+// import StatusUpdate2 from "./pages/02e-StatusUpdate2";
 import Attendance from "./pages/03-Attendance";
-import PaySummary2 from "./pages/04a-PaySummary2";
+import PaySummary from "./pages/04a-PaySummary";
 import PayExport from "./pages/04b-PayExport";
 import PaySetting from "./pages/04c-PaySetting";
 import Leaves from "./pages/05-Leaves";
@@ -116,14 +117,14 @@ function App() {
                     <TbReportSearch /> <span>grade</span>
                   </div>
                 </NavLink> */}
-                <NavLink className="sub-item" to={"title"}>
+                <NavLink className="sub-item" to={"employeeList"}>
                   <div>
-                    <MdOutlineSubtitles /> <span>Staff List</span>
+                    <MdOutlineSubtitles /> <span>employee list</span>
                   </div>
                 </NavLink>
                 <NavLink className="sub-item" to={"employee"}>
                   <div>
-                    <MdOutlinePeopleAlt /> <span>Employee Info</span>
+                    <MdOutlinePeopleAlt /> <span>new employee</span>
                   </div>
                 </NavLink>
                 <NavLink className="sub-item" to={"statusupdate"}>
@@ -131,6 +132,11 @@ function App() {
                     <MdOutlinePeopleAlt /> <span>status update</span>
                   </div>
                 </NavLink>
+                {/* <NavLink className="sub-item" to={"statusupdate2"}>
+                  <div>
+                    <MdOutlinePeopleAlt /> <span>status update2</span>
+                  </div>
+                </NavLink> */}
               </>
             )}
 
@@ -144,7 +150,7 @@ function App() {
 
             {sideBarItemShow2 && (
               <>
-                <NavLink className="sub-item" to={"paySummary2"}>
+                <NavLink className="sub-item" to={"paySummary"}>
                   <div>
                     <SlOrganization /> <span>summary</span>
                   </div>
@@ -244,12 +250,13 @@ function App() {
                 <Route path="dashboard" element={<Dashboard />}></Route>
                 <Route path="organization" element={<Organization />}></Route>
                 {/* <Route path="grade" element={<Grade />}></Route> */}
-                <Route path="title" element={<Title />}></Route>
+                <Route path="employeeList" element={<EmployeeList />}></Route>
                 <Route path="employee" element={<Employee />}></Route>
                 <Route path="editEmployee" element={<EditEmployee />}></Route>
                 <Route path="statusUpdate" element={<StatusUpdate />}></Route>
+                {/* <Route path="statusUpdate2" element={<StatusUpdate2 />}></Route> */}
                 <Route path="attendance" element={<Attendance />}></Route>
-                <Route path="paySummary2" element={<PaySummary2 />}></Route>
+                <Route path="paySummary" element={<PaySummary />}></Route>
                 <Route path="payExport" element={<PayExport />}></Route>
                 <Route path="paySetting" element={<PaySetting />}></Route>
                 <Route path="leaves" element={<Leaves />}></Route>
@@ -264,7 +271,7 @@ function App() {
                 <Route path="offboarding" element={<Offboarding />}></Route>
                 <Route path="datainsights" element={<DataInsights />}></Route>
                 <Route path="notifications" element={<Notifications />}></Route>
-                <Route path="login" element={<LoginForm />}></Route>
+                {/* <Route path="login" element={<LoginForm />}></Route> */}
                 {/* <Route path="editEmployee/:id" children={<EditEmployee />} /> */}
               </Routes>
             </div>

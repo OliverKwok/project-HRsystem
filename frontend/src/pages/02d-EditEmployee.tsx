@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import moment from "moment";
@@ -15,7 +15,7 @@ type FormState = {
   passport: string;
   gender: string;
   nationality: string;
-  date_of_birth: Date;
+  date_of_birth: string;
   age: number;
   profilepic: FileList;
 
@@ -62,8 +62,6 @@ type FormState = {
 };
 
 export default function Employee(props: any) {
-  console.log(props.editDateOfBirth);
-
   const {
     register,
     handleSubmit,
@@ -82,8 +80,8 @@ export default function Employee(props: any) {
       passport: props.editPassport,
       gender: props.editGender,
       nationality: props.editNationality,
-      date_of_birth: props.editDateOfBirth.toString().substring(0, 10),
-      age: 0, // TODO make calulation
+      date_of_birth: moment(props.editDateOfBirth).format("YYYY-MM-DD"),
+      // age: 0,
 
       mobile_countrycode: props.editMobileCountryCode,
       mobile_no: props.editMobileNo,
@@ -98,7 +96,7 @@ export default function Employee(props: any) {
       last_job_company: props.editLastJobCompany,
       last_job_title: props.editLastJobTitle,
 
-      start_date: props.editStartDate.toString().substring(0, 10),
+      start_date: moment(props.editStartDate).format("YYYY-MM-DD"),
       // have_probation: "",
       // pass_probation: "",
       status: props.editStatus,
@@ -136,6 +134,7 @@ export default function Employee(props: any) {
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
   const [workEmail, setWorkEmail] = useState("");
+  const [eid, setEid] = useState<string | null>(null);
 
   // tab show
   const [show1, setShow1] = useState(true);
@@ -217,6 +216,7 @@ export default function Employee(props: any) {
       );
       let reportToFetch = await response.json();
       setReportTo(reportToFetch);
+      setEid(window.localStorage.getItem("eid"));
     }
     fetchReportTo();
   }, []);
@@ -276,83 +276,34 @@ export default function Employee(props: any) {
     }
   }, [profilepic]);
 
+
+
   // submit
   async function submit(data: FormState) {
     console.log("submit form data:", data);
 
     // formData version
-    const formData = new FormData();
+    // const formData = new FormData();
 
-    // formData.append("employeeid", data.employeeid);
-    // formData.append("first_name", data.first_name);
-    // formData.append("last_name", data.last_name);
-    // formData.append("chinese_name", data.chinese_name);
-    // formData.append("alias", data.alias);
-    // formData.append("hkid", data.hkid);
-    // formData.append("passport", data.passport);
-    // formData.append("gender", data.gender);
-    // formData.append("nationality", data.nationality);
-    // formData.append("date_of_birth", JSON.stringify(data.date_of_birth));
-    formData.append("profilepic", data.profilepic[0]);
-    // formData.append("mobile_countrycode", data.mobile_countrycode);
-    // formData.append("mobile_no", data.mobile_no);
-    // formData.append("work_phone_no", data.work_phone_no);
-    // formData.append("email_personal", data.email_personal);
-    // formData.append("email_work", data.email_work);
-    // // formData.append("password",data.password);
-    // formData.append("highest_education", data.highest_education);
-    // formData.append("institution_name", data.institution_name);
-    // formData.append("major", data.major);
-    // formData.append("last_job_company", data.last_job_company);
-    // formData.append("last_job_title", data.last_job_title);
-    // formData.append("start_date", JSON.stringify(data.start_date));
-    // formData.append("status", data.status);
-    // formData.append("job_nature", data.job_nature);
-    // formData.append("notice_period", JSON.stringify(data.notice_period));
-    // formData.append("report_to", data.report_to);
-    // formData.append(
-    //   "al_leave_entitled_peryear",
-    //   JSON.stringify(data.al_leave_entitled_peryear)
-    // );
-    // formData.append("pay_currency", data.pay_currency);
-    // formData.append("basic_salary", data.basic_salary);
-    // formData.append("payment_method", data.payment_method);
-    // formData.append("home_address", data.home_address);
-    // formData.append("bank_code", data.bank_code);
-    // formData.append("bank_name", data.bank_name);
-    // formData.append("bank_number", data.bank_number);
-    // formData.append("bank_payee", data.bank_payee);
-    // formData.append("payment_remark", data.payment_remark);
+    // formData.append("profilepic", data.profilepic[0]);
 
     const requestOptions = {
-      method: "POST",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
       // headers: { "Content-Type": "multi-type/form-data" },
       // body: formData,
     };
-
+    console.log(JSON.stringify(data));
     const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/user/create`,
+      `${process.env.REACT_APP_BACKEND_URL}/user/update`,
       requestOptions
     );
     const jsonData = await res.json();
 
-    if (jsonData.newEmployee.rowCount) {
-      alert("inserted into employee table");
+    if (jsonData.updateEmployee) {
+      alert("updated in the employee table");
     }
-
-    // const resRole = await fetch(
-    //   `${process.env.REACT_APP_BACKEND_URL}/role/create`,
-    //   requestOptions
-    // );
-    // const jsonDataRole = await res.json();
-
-    // if (jsonDataRole.newRole.rowCount) {
-    //   alert("inserted into role table");
-    // }
-
-    // checkEmployeeid();
   }
 
   // auto calculate the age
@@ -361,7 +312,6 @@ export default function Employee(props: any) {
     const date_of_birth_input = moment(event.target.value, "YYYY-MM-DD");
     let result = todayDate.diff(date_of_birth_input, "years");
     setAge(result);
-
     return result;
   };
 
@@ -372,11 +322,11 @@ export default function Employee(props: any) {
     let lastNameOutput;
 
     if (firstNameInput != undefined) {
-      firstNameOutput = firstNameInput.replace(" ", ".");
+      firstNameOutput = firstNameInput.toLowerCase().replace(" ", ".");
     }
 
     if (lastNameInput != undefined) {
-      lastNameOutput = lastNameInput.replace(" ", "");
+      lastNameOutput = lastNameInput.toLowerCase().replace(" ", "");
     }
 
     let workEmailGenerated =
@@ -398,6 +348,13 @@ export default function Employee(props: any) {
     setWorkEmail(genWorkEmail(getValues("first_name"), event.target.value));
     return;
   };
+
+
+// auto-fill after redirect from status update page
+  useEffect(() => {
+    if (eid != null) {
+    }
+  }, [eid]);                                   
 
   return (
     <div className="page-container">
@@ -548,7 +505,7 @@ export default function Employee(props: any) {
                   />
                 </div>
 
-                <div>
+                {/* <div>
                   <div>
                     <span>Age</span>
                   </div>
@@ -559,7 +516,7 @@ export default function Employee(props: any) {
                     {...register("age")}
                     disabled
                   />
-                </div>
+                </div> */}
               </div>
               <hr />
             </>
@@ -921,7 +878,7 @@ export default function Employee(props: any) {
           )}
         </div>
 
-        {false && (
+        {/* {false && (
           <>
             <hr />
             <div>
@@ -952,9 +909,9 @@ export default function Employee(props: any) {
             </div>
             <hr />
           </>
-        )}
+        )} */}
 
-        <button type="submit">Edit</button>
+        <button type="submit">Submit Amendment</button>
       </form>
     </div>
   );

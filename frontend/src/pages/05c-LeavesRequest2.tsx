@@ -139,7 +139,15 @@ export default function LeavesRequest2() {
                   Back to Pending
                 </button>
               ),
-              action_cancel: <button>Cancel Application</button>,
+              action_cancel: (
+                <button
+                  id={`appId-${app.application_id}`}
+                  name="pending"
+                  onClick={pendingAction}
+                >
+                  Cancel Application
+                </button>
+              ),
             };
           } else {
             return {
@@ -233,8 +241,3 @@ export default function LeavesRequest2() {
     </>
   );
 }
-
-//DONE - TODO change status color
-//DONE - TODO date format
-//DONE - TODO split table for pending and non-pending status
-// TODO button functions
