@@ -13,7 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		54BE1D69988565B95873C2FF /* Pods_ios_app1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C418DB94061809FF6CC214C /* Pods_ios_app1.framework */; };
 		5B440D4309D19D64C9CE244E /* Pods_ios_app1_ios_app1Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E231842D959ACD18AB7BFB7E /* Pods_ios_app1_ios_app1Tests.framework */; };
-		6F36613D2930D59500B1800D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F36613C2930D59500B1800D /* GoogleService-Info.plist */; };
+		6F36614129389CEA00B1800D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F36614029389CEA00B1800D /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +41,7 @@
 		5709B34CF0A7D63546082F79 /* Pods-ios_app1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_app1.release.xcconfig"; path = "Target Support Files/Pods-ios_app1/Pods-ios_app1.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-ios_app1-ios_app1Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_app1-ios_app1Tests.debug.xcconfig"; path = "Target Support Files/Pods-ios_app1-ios_app1Tests/Pods-ios_app1-ios_app1Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		6C418DB94061809FF6CC214C /* Pods_ios_app1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_app1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F36613C2930D59500B1800D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../ios/ios_app1/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6F36614029389CEA00B1800D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6F7900BF2930CB3D0056ACF6 /* ios_app1.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ios_app1.entitlements; path = ios_app1/ios_app1.entitlements; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ios_app1/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-ios_app1-ios_app1Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_app1-ios_app1Tests.release.xcconfig"; path = "Target Support Files/Pods-ios_app1-ios_app1Tests/Pods-ios_app1-ios_app1Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		13B07FAE1A68108700A75B9A /* ios_app1 */ = {
 			isa = PBXGroup;
 			children = (
-				6F36613C2930D59500B1800D /* GoogleService-Info.plist */,
+				6F36614029389CEA00B1800D /* GoogleService-Info.plist */,
 				6F7900BF2930CB3D0056ACF6 /* ios_app1.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -250,7 +250,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				6F36613D2930D59500B1800D /* GoogleService-Info.plist in Resources */,
+				6F36614129389CEA00B1800D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,11 +512,14 @@
 				DEVELOPMENT_TEAM = 79GACPXQYP;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ios_app1/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Easy HR Solutions";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -540,11 +543,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 79GACPXQYP;
 				INFOPLIST_FILE = ios_app1/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Easy HR Solutions";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

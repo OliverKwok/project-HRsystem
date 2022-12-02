@@ -52,6 +52,16 @@ export class IosAppController {
 
     return await this.iosAppService.cancelLeave(updateIosAppDto);
   }
+
+  @Get('getEvent')
+  async getEvent() {
+    return await this.iosAppService.getEvent();
+  }
+
+  @Get('getAttendance/:userId')
+  async getAttendance(@Param('userId') userId: string) {
+    return await this.iosAppService.getAttendance(+userId);
+  }
   // @Post()
   // create(@Body() createIosAppDto: CreateIosAppDto) {
   //   return this.iosAppService.create(createIosAppDto);

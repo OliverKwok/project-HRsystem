@@ -40,7 +40,13 @@ interface leaveRecordType {
   type: string;
 }
 
-function LeaveRecord({data}: {data: leaveRecordType}) {
+function LeaveRecord({
+  data,
+  fetchLeaveRecord,
+}: {
+  data: leaveRecordType;
+  fetchLeaveRecord: () => Promise<void>;
+}) {
   const [showCancel, setShowCancel] = useState(false);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
   const [applicationID, setApplicationID] = useState<number>(0);
@@ -50,7 +56,7 @@ function LeaveRecord({data}: {data: leaveRecordType}) {
   }, [data]);
 
   async function leaveCancelHandler() {
-    console.log('you are going to cancel this application', data.id);
+    // console.log('you are going to cancel this application', data.id);
 
     const requestOptions = {
       method: 'PATCH',
@@ -65,8 +71,9 @@ function LeaveRecord({data}: {data: leaveRecordType}) {
       requestOptions,
     );
     let result = await res.json();
-    console.log(result);
+    // console.log(result);
 
+    fetchLeaveRecord();
     // setShowCancelPopup(true);
   }
 

@@ -11,6 +11,7 @@ import Attendance from './Attendance';
 import Leave from './Leave';
 import Notification from './Notification';
 import Salary from './Salary';
+import Setting from './Setting';
 
 function BottomBar() {
   const Tab = createBottomTabNavigator();
@@ -36,7 +37,7 @@ function BottomBar() {
               ? 'notifications-circle'
               : 'notifications-circle-outline';
             size = focused ? size + 8 : size;
-          } else if (route.name === 'Setting') {
+          } else if (route.name === 'Settings') {
             iconName = focused ? 'settings' : 'settings-outline';
             size = focused ? size + 8 : size;
           }
@@ -53,6 +54,7 @@ function BottomBar() {
 
       <Tab.Screen name="Salary" component={Salary} />
       <Tab.Screen name="Notification" component={Notification} />
+      <Tab.Screen name="Settings" component={Setting} />
     </Tab.Navigator>
   );
 }
