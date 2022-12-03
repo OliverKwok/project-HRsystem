@@ -19,8 +19,8 @@ function Login({navigation}: any) {
   const dispatch = useAppDispatch();
   // const james = useSelector(state => state);
   const [loginObject, setLoginObject] = useState({
-    username: 'tse.ching.wong@company.com',
-    password: '1',
+    username: '',
+    password: '',
   });
 
   // console.log(loginObject);
@@ -79,6 +79,7 @@ function Login({navigation}: any) {
               // checkLeaveApplicationInput();
             }}
             autoCapitalize="none"
+            autoCorrect={false}
           />
         </View>
         <View style={styles.inputItemContainer}>

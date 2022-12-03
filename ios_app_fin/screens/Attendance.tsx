@@ -17,6 +17,7 @@ import {AuthState} from '../redux/auth/state';
 import Config from 'react-native-config';
 import EventItem from '../components/EventItem';
 import AttendanceRecord from '../components/AttendanceRecord';
+import AttendanceDate from '../components/AttendanceDate';
 
 interface itemType {
   id: number;
@@ -126,7 +127,7 @@ function Attendance() {
       console.log('fetch fail');
     }
   }
-  console.log(holidaysName);
+  // console.log(holidaysName);
 
   let pHolidays_obj = pHolidays.map(data => {
     return {[data]: {marked: true, dotColor: 'red', activeOpacity: 0}};
@@ -191,13 +192,7 @@ function Attendance() {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }>
           <View style={styles.dateContainer}>
-            <Text
-              style={{
-                fontSize: 30,
-                fontWeight: 'bold',
-              }}>
-              {selectedDate}
-            </Text>
+            <AttendanceDate selectedDate={selectedDate} data={holidaysName} />
           </View>
           <View style={styles.activityBigContainer}>
             <View style={styles.eventContainer}>
@@ -244,7 +239,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 70,
+    // height: 70,
     // flex: 1,
     // borderWidth: 1,
   },

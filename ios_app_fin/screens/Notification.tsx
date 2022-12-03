@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
+import Config from 'react-native-config';
 import NotificationItem from '../components/NotificationItem';
 import {GlobalStyles} from '../constants/styles';
 
@@ -11,10 +12,33 @@ const wait = (timeout: any) => {
 
 function Notification() {
   const [refreshing, setRefreshing] = React.useState(false);
+  const [notifications, setNotifications] = React.useState([]);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
+  }, []);
+
+  async function getNotifications() {
+    try {
+      const options = {method: 'GET'};
+      let res = await fetch(
+        `${Config.REACT_APP_BACKEND_URL}/ios-app/getNotification`,
+        options,
+      );
+
+      let notifications = await res.json();
+      notifications = notifications['res'];
+
+      setNotifications(notifications);
+    } catch {
+      console.log('fetch fail');
+    }
+  }
+  // console.log(notifications);
+
+  useEffect(() => {
+    getNotifications();
   }, []);
 
   return (
@@ -24,7 +48,9 @@ function Notification() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         style={{width: '100%', flex: 1}}>
-        <NotificationItem />
+        {notifications.map((notifItem, index) => {
+          return <NotificationItem key={index} data={notifItem} />;
+        })}
       </ScrollView>
     </View>
   );

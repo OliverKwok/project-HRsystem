@@ -2,25 +2,33 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {GlobalStyles} from '../constants/styles';
 
-function NotificationItem() {
+interface notifType {
+  id: number;
+  date: null;
+  time: null;
+  title: string;
+  message: string;
+  message_type: string;
+  recipient: string;
+  created_at: string;
+}
+
+function NotificationItem({data}: {data: notifType}) {
+  // console.log(data);
+
   return (
     <View style={styles.pageContainer}>
       <View style={styles.monthContainer}>
-        <View style={styles.salaryDetailContainer}>
-          <Text style={styles.salaryText}>YYYY/MM : </Text>
-          <Text style={styles.salaryText}>2022/11</Text>
+        <View style={styles.notifDetailContainer}>
+          <Text style={styles.notifTitle}>{data.title}</Text>
         </View>
-        <View style={styles.salaryDetailContainer}>
-          <Text style={styles.salaryText}>Salary : </Text>
-          <Text style={styles.salaryText}>dsafads</Text>
+        <View style={styles.notifDetailContainer}>
+          <Text style={styles.notifText}>{data.message}</Text>
         </View>
-        <View style={styles.salaryDetailContainer}>
-          <Text style={styles.salaryText}>MPF contributed by employee :</Text>
-          <Text style={styles.salaryText}></Text>
-        </View>
-        <View style={styles.salaryDetailContainer}>
-          <Text style={styles.salaryText}>Final amount : </Text>
-          <Text style={styles.salaryText}></Text>
+        <View style={styles.createTimeContainer}>
+          <Text style={styles.timeText}>
+            {new Date(data.created_at).toLocaleString()}
+          </Text>
         </View>
       </View>
     </View>
@@ -38,12 +46,29 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: GlobalStyles.colors.backgroundColorDarker,
     borderRadius: 10,
+    justifyContent: 'center',
   },
-  salaryDetailContainer: {
+  notifDetailContainer: {
     flexDirection: 'row',
-    margin: 2,
+    marginTop: 10,
   },
-  salaryText: {
+
+  notifTitle: {
+    fontSize: 24,
+    width: '100%',
+    fontWeight: 'bold',
+  },
+  notifText: {
     fontSize: 18,
+  },
+
+  createTimeContainer: {
+    width: '100%',
+    marginBottom: -5,
+    marginTop: 10,
+    alignItems: 'flex-end',
+  },
+  timeText: {
+    fontSize: 13,
   },
 });
