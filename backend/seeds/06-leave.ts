@@ -12,7 +12,10 @@ export async function seed(knex: Knex): Promise<void> {
   }
   await seedRow('leave_type', { type: 'Annual Leave' });
   await seedRow('leave_type', { type: 'Sick Leave' });
+  await seedRow('leave_type', { type: 'Covid Leave' });
   await seedRow('leave_type', { type: 'Maternity Leave' });
+  await seedRow('leave_type', { type: 'No Pay Leave' });
+  await seedRow('leave_type', { type: 'Work From Home' });
 
   await seedRow('leave_application', {
     employee_id: 1,
