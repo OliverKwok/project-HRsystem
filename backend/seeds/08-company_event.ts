@@ -86,5 +86,6 @@ export async function seed(knex: Knex): Promise<void> {
   await seedRow('event', {
     event_name: 'Team Lunch (Manager)',
     date: '2022-12-13',
+    detail: '12pm - 2pm',
   });
 }
