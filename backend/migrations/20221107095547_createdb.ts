@@ -247,6 +247,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id');
     table.date('date');
     table.time('time');
+    table.string('title');
     table.string('message');
     table.enu('message_type', [
       'payslip',
@@ -254,7 +255,8 @@ export async function up(knex: Knex): Promise<void> {
       'company',
       'other',
     ]);
-    table.integer('recipient').references('employee.id');
+    table.string('recipient');
+    table.timestamp('created_at', { precision: 6 }).defaultTo(knex.fn.now(6));
   });
 
   await knex.schema.createTable('event', (table) => {

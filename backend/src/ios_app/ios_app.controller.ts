@@ -62,6 +62,16 @@ export class IosAppController {
   async getAttendance(@Param('userId') userId: string) {
     return await this.iosAppService.getAttendance(+userId);
   }
+
+  @Get('getPHolidays/')
+  async getPHolidays() {
+    return await this.iosAppService.getPHolidays();
+  }
+
+  @Get('getHolidaysName/')
+  async getHolidaysName() {
+    return await this.iosAppService.getHolidaysName();
+  }
   // @Post()
   // create(@Body() createIosAppDto: CreateIosAppDto) {
   //   return this.iosAppService.create(createIosAppDto);

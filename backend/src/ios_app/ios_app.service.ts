@@ -96,6 +96,46 @@ export class IosAppService {
     }
   }
 
+  async getPHolidays() {
+    try {
+      let res = await this.knex.select('*').from('public_holidays');
+
+      res = res.map((data) => {
+        return this.dateFormatter(data.date);
+      });
+      return { res };
+    } catch (err) {
+      return err;
+    }
+  }
+
+  // async getHolidaysName() {
+  //   try {
+  //     let res = await this.knex.select('*').from('public_holidays');
+
+  //     res = res.map((data) => {
+  //       return {this.dateFormatter(data.date):"1"}
+  //     });
+  //     return { res };
+  //   } catch (err) {
+  //     return err;
+  //   }
+  // }
+
+  dateFormatter(dateString: string) {
+    // Create a date object from a date string
+    var date = new Date(dateString);
+
+    // Get year, month, and day part from the date
+    var year = date.toLocaleString('default', { year: 'numeric' });
+    var month = date.toLocaleString('default', { month: '2-digit' });
+    var day = date.toLocaleString('default', { day: '2-digit' });
+
+    // Generate yyyy-mm-dd date string
+    var formattedDate = year + '-' + month + '-' + day;
+    return formattedDate;
+  }
+
   // create(createIosAppDto: CreateIosAppDto) {
   //   return 'This action adds a new iosApp';
   // }
