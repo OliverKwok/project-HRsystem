@@ -11,23 +11,38 @@ export async function seed(knex: Knex): Promise<void> {
     return row;
   }
   await seedRow('notification', {
-    create_at: '2022-12-01 09:00:00-00',
-    title: 'Nov 2022 salary',
+    title: 'Come to join our fitness class',
+    message:
+      'The new fitness classes has been launched, welcome to check the time table and join the fitness classes',
+    message_type: 'other',
+    recipient: 'all',
+  });
+  await seedRow('notification', {
+    title: 'Come to join the Python Seminar',
+    message:
+      'Timetable for Python seminar has been launched, everyone is welcome and invited to join it',
+    message_type: 'other',
+    recipient: 'all',
+  });
+  await seedRow('notification', {
+    title: 'Come to join the TensorFlow Seminar',
+    message:
+      'Timetable for TensorFlow seminar has been launched, everyone is welcome and invited to join it',
+    message_type: 'other',
+    recipient: 'all',
+  });
+  await seedRow('notification', {
+    title: 'Annual Dinner 2022',
+    message:
+      'Time for annual dinner is comfirmed to be held on December 30th, 7pm. The theme of the annual dinner is Masquerade, everyone is welcome and invited to join. Enjoy!',
+    message_type: 'company',
+    recipient: 'all',
+  });
+  await seedRow('notification', {
+    title: 'Nov 2022 Payslip',
     message:
       'The salary of Nov 2022 is paid. If you have any questions, please contact the HR department.',
     message_type: 'payslip',
-  });
-  await seedRow('notification', {
-    create_at: '2022-12-02 09:00:00-00',
-    title: 'Annual Dinner 2022',
-    message: 'The theme of the annual dinner is Masquerade. Enjoy!',
-    message_type: 'company',
-  });
-  await seedRow('notification', {
-    create_at: '2022-12-03 09:00:00-00',
-    title: 'Leave Approved',
-    message: 'Your leave application (2022-12-29) is approved.',
-    message_type: 'leaveAppStatus',
-    recipient: '21',
+    recipient: 'all',
   });
 }

@@ -51,6 +51,8 @@ function Attendance() {
     new Date().toISOString().split('T')[0],
   );
   const [attendanceRecord, setAttendanceRecord] = useState([]);
+  const [pHolidays, setPHolidays] = useState([]);
+  const [holidaysName, setHolidaysName] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -91,9 +93,54 @@ function Attendance() {
     }
   }
 
+  async function getPublicHolidays() {
+    try {
+      const options = {method: 'GET'};
+      let res = await fetch(
+        `${Config.REACT_APP_BACKEND_URL}/ios-app/getPHolidays`,
+        options,
+      );
+
+      let publicHolidays = await res.json();
+      publicHolidays = publicHolidays['res'];
+
+      setPHolidays(publicHolidays);
+    } catch {
+      console.log('fetch fail');
+    }
+  }
+
+  async function getHolidaysName() {
+    try {
+      const options = {method: 'GET'};
+      let res = await fetch(
+        `${Config.REACT_APP_BACKEND_URL}/ios-app/getHolidaysName`,
+        options,
+      );
+
+      let holidaysName = await res.json();
+      holidaysName = holidaysName['res'];
+
+      setHolidaysName(holidaysName);
+    } catch {
+      console.log('fetch fail');
+    }
+  }
+  console.log(holidaysName);
+
+  let pHolidays_obj = pHolidays.map(data => {
+    return {[data]: {marked: true, dotColor: 'red', activeOpacity: 0}};
+  });
+
+  let pHolidays_obj2 = pHolidays_obj.reduce((final, iter): any => {
+    return Object.assign(final, iter);
+  }, {});
+
   useEffect(() => {
     getCompanyEvent();
     getAttendance();
+    getPublicHolidays();
+    getHolidaysName();
   }, []);
   // console.log(attendanceRecord);
 
@@ -122,8 +169,6 @@ function Attendance() {
     return dateFormatter(data.date) == selectedDate;
   })[0];
 
-  // console.log(selectedAttendance);
-
   return (
     <View style={styles.pageBigContainer}>
       <Calendar
@@ -136,9 +181,7 @@ function Attendance() {
           //   console.log("selected day", day.dateString);
           setSelectedDate(day.dateString);
         }}
-
-        //   markedDates={selectedDate.selection.day:{
-        //     selected: true}}
+        markedDates={pHolidays_obj2}
       />
 
       <View style={styles.bottomPartContainer}>
