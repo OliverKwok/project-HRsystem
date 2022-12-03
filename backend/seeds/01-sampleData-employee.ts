@@ -48,6 +48,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '381-133443-792',
     bank_payee: 'Chan Tse Hin',
     payment_remark: 'NA',
+    al_leave_taken: '10',
   });
   await seedRow('employee', {
     employeeid: 'DEMO002',
@@ -87,6 +88,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '165-678784-803',
     bank_payee: 'Lee Yu Hin',
     payment_remark: 'NA',
+    al_leave_taken: '13',
   });
   await seedRow('employee', {
     employeeid: 'DEMO003',
@@ -126,6 +128,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '487-532513-528',
     bank_payee: 'Cheung Tse Him',
     payment_remark: 'NA',
+    al_leave_taken: '7',
   });
   await seedRow('employee', {
     employeeid: 'DEMO004',
@@ -165,6 +168,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '602-665770-246',
     bank_payee: 'Wong Lok Him',
     payment_remark: 'NA',
+    al_leave_taken: '2',
   });
   await seedRow('employee', {
     employeeid: 'DEMO005',
@@ -204,6 +208,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '106-694690-758',
     bank_payee: 'Ho Tse Long',
     payment_remark: 'NA',
+    al_leave_taken: '5',
   });
   await seedRow('employee', {
     employeeid: 'DEMO006',
@@ -244,6 +249,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '378-220494-809',
     bank_payee: 'Chan Ka Lok',
     payment_remark: 'NA',
+    al_leave_taken: '6',
   });
   await seedRow('employee', {
     employeeid: 'DEMO007',
@@ -284,6 +290,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '586-695232-132',
     bank_payee: 'Lee Cheuk Lam',
     payment_remark: 'NA',
+    al_leave_taken: '7',
   });
   await seedRow('employee', {
     employeeid: 'DEMO008',
@@ -323,6 +330,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '390-469227-726',
     bank_payee: 'Cheung Tse Hin',
     payment_remark: 'NA',
+    al_leave_taken: '4',
   });
   await seedRow('employee', {
     employeeid: 'DEMO009',
@@ -362,6 +370,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '182-722587-169',
     bank_payee: 'Wong Chun Hei',
     payment_remark: 'NA',
+    al_leave_taken: '6',
   });
   await seedRow('employee', {
     employeeid: 'DEMO010',
@@ -402,6 +411,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '808-914629-797',
     bank_payee: 'Ho Ho Yin',
     payment_remark: 'NA',
+    al_leave_taken: '8',
   });
   await seedRow('employee', {
     employeeid: 'DEMO011',
@@ -441,6 +451,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '100-887364-402',
     bank_payee: 'Chan Hoi Ching',
     payment_remark: 'NA',
+    al_leave_taken: '2',
   });
   await seedRow('employee', {
     employeeid: 'DEMO012',
@@ -480,6 +491,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '204-735459-437',
     bank_payee: 'Lee Tse Ching',
     payment_remark: 'NA',
+    al_leave_taken: '8',
   });
   await seedRow('employee', {
     employeeid: 'DEMO013',
@@ -519,6 +531,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '152-560128-168',
     bank_payee: 'Cheung Hiu Ching',
     payment_remark: 'NA',
+    al_leave_taken: '2',
   });
   await seedRow('employee', {
     employeeid: 'DEMO014',
@@ -558,6 +571,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '555-815215-634',
     bank_payee: 'Wong Tse Ching',
     payment_remark: 'NA',
+    al_leave_taken: '3',
   });
   await seedRow('employee', {
     employeeid: 'DEMO015',
@@ -597,6 +611,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '482-201590-990',
     bank_payee: 'Ho Hoi Lam',
     payment_remark: 'NA',
+    al_leave_taken: '1',
   });
   await seedRow('employee', {
     employeeid: 'DEMO016',
@@ -637,6 +652,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '665-436413-561',
     bank_payee: 'Chan Hui Tung',
     payment_remark: 'NA',
+    al_leave_taken: '0',
   });
   await seedRow('employee', {
     employeeid: 'DEMO017',
@@ -678,6 +694,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '193-267727-528',
     bank_payee: 'Lee Tse Ching',
     payment_remark: 'NA',
+    al_leave_taken: '0',
   });
   await seedRow('employee', {
     employeeid: 'DEMO018',
@@ -717,6 +734,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '511-247963-269',
     bank_payee: 'Cheung Ka Yee',
     payment_remark: 'NA',
+    al_leave_taken: '0',
   });
   await seedRow('employee', {
     employeeid: 'DEMO019',
@@ -756,6 +774,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '870-892802-209',
     bank_payee: 'Wong Tse Ching',
     payment_remark: 'NA',
+    al_leave_taken: '0',
   });
   await seedRow('employee', {
     employeeid: 'DEMO020',
@@ -796,6 +815,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '900-532220-643',
     bank_payee: 'Ho Lok Yiu',
     payment_remark: 'NA',
+    al_leave_taken: '6',
   });
   await seedRow('employee', {
     employeeid: 'DEMO021',
@@ -835,6 +855,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '524-512303-516',
     bank_payee: 'Chan Tse Ching',
     payment_remark: 'NA',
+    al_leave_taken: '3',
   });
   await seedRow('employee', {
     employeeid: 'DEMO022',
@@ -874,6 +895,7 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '612-513213-521',
     bank_payee: 'Lee Yu Tung',
     payment_remark: 'NA',
+    al_leave_taken: '8',
   });
   await seedRow('employee', {
     employeeid: 'DEMO023',
@@ -913,5 +935,6 @@ export async function seed(knex: Knex): Promise<void> {
     bank_number: '212-231424-324',
     bank_payee: 'Cheung Tse Ki',
     payment_remark: 'NA',
+    al_leave_taken: '2',
   });
 }
