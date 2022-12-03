@@ -114,7 +114,6 @@ function Attendance() {
   // console.log(dateFormatter(companyEvent[6]['date']));
   // console.log(companyEvent[6]['date']);
   // console.log(dateFormatter(companyEvent[6]['date']));
-
   let selectedEvent = companyEvent.filter((data: any) => {
     return dateFormatter(data.date) == selectedDate;
   });
@@ -187,11 +186,13 @@ const styles = StyleSheet.create({
   bottomPartContainer: {
     marginTop: 10,
     flex: 1,
+    height: 10000,
     // borderWidth: 3,
   },
 
   ScrollViewContainer: {
     flex: 1,
+    height: 1000,
     // borderWidth: 1,
     // margin: 10,
   },
@@ -200,12 +201,12 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '30%',
+    height: 70,
     // flex: 1,
     // borderWidth: 1,
   },
 
-  activityBigContainer: {height: '100%'},
+  activityBigContainer: {flex: 1},
 
   eventContainer: {
     borderWidth: 1,
