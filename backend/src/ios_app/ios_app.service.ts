@@ -109,18 +109,25 @@ export class IosAppService {
     }
   }
 
-  // async getHolidaysName() {
-  //   try {
-  //     let res = await this.knex.select('*').from('public_holidays');
+  async getHolidaysName() {
+    try {
+      let res = await this.knex.select('*').from('public_holidays');
 
-  //     res = res.map((data) => {
-  //       return {this.dateFormatter(data.date):"1"}
-  //     });
-  //     return { res };
-  //   } catch (err) {
-  //     return err;
-  //   }
-  // }
+      return { res };
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async getNotifications() {
+    try {
+      let res = await this.knex.select('*').from('notification');
+
+      return { res };
+    } catch (err) {
+      return err;
+    }
+  }
 
   dateFormatter(dateString: string) {
     // Create a date object from a date string

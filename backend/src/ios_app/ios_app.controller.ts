@@ -72,6 +72,12 @@ export class IosAppController {
   async getHolidaysName() {
     return await this.iosAppService.getHolidaysName();
   }
+
+  @Get('getNotification/')
+  async getNotifications() {
+    return await this.iosAppService.getNotifications();
+  }
+
   // @Post()
   // create(@Body() createIosAppDto: CreateIosAppDto) {
   //   return this.iosAppService.create(createIosAppDto);

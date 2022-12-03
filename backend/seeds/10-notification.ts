@@ -11,21 +11,21 @@ export async function seed(knex: Knex): Promise<void> {
     return row;
   }
   await seedRow('notification', {
-    title: 'Come to join our fitness class',
+    title: 'Join our fitness class!',
     message:
       'The new fitness classes has been launched, welcome to check the time table and join the fitness classes',
     message_type: 'other',
     recipient: 'all',
   });
   await seedRow('notification', {
-    title: 'Come to join the Python Seminar',
+    title: 'Join our Python Seminar!',
     message:
       'Timetable for Python seminar has been launched, everyone is welcome and invited to join it',
     message_type: 'other',
     recipient: 'all',
   });
   await seedRow('notification', {
-    title: 'Come to join the TensorFlow Seminar',
+    title: 'Join our TensorFlow Seminar!',
     message:
       'Timetable for TensorFlow seminar has been launched, everyone is welcome and invited to join it',
     message_type: 'other',
