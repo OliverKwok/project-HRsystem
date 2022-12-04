@@ -168,8 +168,41 @@ export class PayrollService {
   // }
 
   async findOneMonth(year: number, month: number) {
+    console.log(year);
+    console.log(month);
     try {
-      let OneMonthPayroll = await this.knex
+      let OneMonthPayroll_A = await this.knex.raw(`
+        select concat(employee.last_name, ' ', employee.first_name,', ',employee.alias) as name,
+        employee.id,
+        employee.employeeid,
+        employee.basic_salary,
+        payroll_edit_history.ot_pay,
+        payroll_edit_history.bonus,
+        payroll_edit_history.nopay_leave,
+        payroll_edit_history.mpf_employee,
+        payroll_edit_history.total
+        from employee
+        left join payroll_edit_history on employee.id = payroll_edit_history.employeeid
+        where payroll_edit_history.year = ${year} and payroll_edit_history.month = ${month}
+        ORDER BY employee.id
+        `);
+
+      let OneMonthPayroll_A_id_list_DB = await this.knex.raw(`
+        select employee.id
+        from employee
+        left join payroll_edit_history on employee.id = payroll_edit_history.employeeid
+        where payroll_edit_history.year = ${year} and payroll_edit_history.month = ${month}
+        ORDER BY employee.id
+        `);
+
+      console.log(OneMonthPayroll_A_id_list_DB.rows);
+
+      let OneMonthPayroll_A_id_list = [];
+      OneMonthPayroll_A_id_list_DB.rows.forEach((item) => {
+        OneMonthPayroll_A_id_list.push(item.id);
+      });
+
+      let OneMonthPayroll_B = await this.knex
         .select(
           this.knex.raw(
             `concat(employee.last_name, ' ', employee.first_name,', ',employee.alias) as name`,
@@ -177,20 +210,48 @@ export class PayrollService {
           'employee.id',
           'employee.employeeid',
           'employee.basic_salary',
-          'payroll_edit_history.ot_pay',
-          'payroll_edit_history.bonus',
-          'payroll_edit_history.nopay_leave',
-          'payroll_edit_history.mpf_employee',
-          'payroll_edit_history.total',
         )
+        .where((builder) => builder.whereNotIn('id', OneMonthPayroll_A_id_list))
         .from('employee')
-        .leftJoin(
-          'payroll_edit_history',
-          'employee.id',
-          '=',
-          'payroll_edit_history.employeeid',
-        )
-        .orderBy('id');
+        .orderBy('employee.id');
+
+      console.log(OneMonthPayroll_B);
+
+      OneMonthPayroll_B.forEach((item) => {
+        item.ot_pay = null;
+        item.bonus = null;
+        item.nopay_leave = null;
+        item.mpf_employee = null;
+        item.total = null;
+      });
+
+      let OneMonthPayroll = [...OneMonthPayroll_A.rows, ...OneMonthPayroll_B];
+      // let OneMonthPayroll = await this.knex
+      //   .select(
+      //     this.knex.raw(
+      //       `concat(employee.last_name, ' ', employee.first_name,', ',employee.alias) as name`,
+      //     ),
+      //     'employee.id',
+      //     'employee.employeeid',
+      //     'employee.basic_salary',
+      //     'payroll_edit_history.ot_pay',
+      //     'payroll_edit_history.bonus',
+      //     'payroll_edit_history.nopay_leave',
+      //     'payroll_edit_history.mpf_employee',
+      //     'payroll_edit_history.total',
+      //   )
+      //   .where({
+      //     year: year,
+      //     month: month,
+      //   })
+      //   .from('employee')
+      //   .leftJoin(
+      //     'payroll_edit_history',
+      //     'employee.id',
+      //     '=',
+      //     'payroll_edit_history.employeeid',
+      //   )
+      //   .orderBy('employee.id');
 
       OneMonthPayroll.forEach((item) => {
         let ot_pay_calulate = 0;
