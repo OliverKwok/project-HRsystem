@@ -20,11 +20,13 @@
       color: black;
     }
   }
+  position: fixed;
+  z-index: 100;
   background: var(--sidebar-bg-color);
   display: flex;
   padding: 30px;
   flex-direction: column;
-  width: 300px;
+  min-width: 300px;
   // box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 6px;
   // box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
   box-shadow: inset -7px 0 9px -7px rgba(0, 0, 0, 0.4);

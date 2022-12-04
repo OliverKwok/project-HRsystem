@@ -77,6 +77,7 @@ function App() {
 
   const SideBarStyle = {
     minWidth: "300px",
+    minHeight: "100vh",
     margin: "0px",
     paddingLeft: "20px",
     paddingRight: "20px",
