@@ -181,6 +181,7 @@ export async function up(knex: Knex): Promise<void> {
     table.timestamp('time_checkedin');
     table.timestamp('time_checkedout');
     table.string('status');
+  });
 
   // payroll
   await knex.schema.createTable('payroll_dates', (table) => {
