@@ -265,11 +265,28 @@ export default function Employee(props: any) {
         });
 
       console.log("EID passed to form + fetch data");
+      showTab4();
       window.localStorage.removeItem("eid");
     } else {
       console.log("noEID found");
     }
   }, [eid]);
+
+  // form show probation end date if job status is probation
+  // form show contract end date if job status is contract
+
+  const [probationEndDate, setProbationEndDate] = useState(false);
+  const [contractEndDate, setContractEndDate] = useState(false);
+
+  function handleProbationEndDate() {
+    setProbationEndDate(true);
+    setContractEndDate(false);
+  }
+
+  function handleContractEndDate() {
+    setContractEndDate(true);
+    setProbationEndDate(false);
+  }
 
   const [age, setAge] = useState("0");
   // const [employeeid, setEmployeeid] = useState("");
@@ -761,32 +778,40 @@ export default function Employee(props: any) {
                     </div>
 
                     <select {...register("status")}>
-                      <option value="probation">Probation</option>
+                      <option
+                        value="probation"
+                        onChange={handleProbationEndDate}
+                      >
+                        Probation
+                      </option>
                       <option value="perm">Permanent</option>
-                      <option value="contract">Contract</option>
+                      <option value="contract" onChange={handleContractEndDate}>
+                        Contract
+                      </option>
                       <option value="terminated">Terminated</option>
                       <option value="resigned">Resigned</option>
                       <option value="retired">Retired</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
-
-                  <div>
+                  {/* {contractEndDate && ( */}
                     <div>
-                      <span>Contract End Date*</span>
+                      <div>
+                        <span>Contract End Date*</span>
+                      </div>
+
+                      <input type="date" {...register("contract_end_date")} />
                     </div>
-
-                    <input type="date" {...register("contract_end_date")} />
-                  </div>
-
-                  <div>
+                  {/* )}
+                  {probationEndDate && ( */}
                     <div>
-                      <span>Probation End Date*</span>
+                      <div>
+                        <span>Probation End Date*</span>
+                      </div>
+
+                      <input type="date" {...register("probation_end_date")} />
                     </div>
-
-                    <input type="date" {...register("probation_end_date")} />
-                  </div>
-
+                  {/* )} */}
                   <div>
                     <div>
                       <span>Job Nature*</span>
