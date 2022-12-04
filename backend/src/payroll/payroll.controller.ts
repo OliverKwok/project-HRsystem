@@ -26,9 +26,14 @@ export class PayrollController {
   //   return this.payrollService.create(createPayrollDto);
   // }
 
-  @Get()
-  findAll() {
-    return this.payrollService.findAll();
+  // @Get()
+  // findAll() {
+  //   return this.payrollService.findAll();
+  // }
+
+  @Get('/:year/:month')
+  findOneMonth(@Param('year') year: number, @Param('month') month: number) {
+    return this.payrollService.findOneMonth(year, month);
   }
 
   @Get(':id')

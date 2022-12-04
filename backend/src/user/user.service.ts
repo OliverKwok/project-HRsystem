@@ -253,7 +253,7 @@ export class UserService {
   async userReportTo() {
     try {
       const res = await this.knex.raw(
-        `select id, concat(employee.alias,' ',employee.last_name,', ',employee.first_name) as full_name from employee
+        `select id, concat(employee.last_name,' ',employee.first_name,', ',employee.alias) as full_name from employee
         where
         employee.status = 'probation'
         or employee.status = 'perm'

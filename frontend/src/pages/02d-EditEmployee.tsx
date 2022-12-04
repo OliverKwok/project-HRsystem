@@ -180,70 +180,113 @@ export default function Employee(props: any) {
         .then((data: any) => {
           console.log(data);
           console.log(data.first_name);
+          setPassId(data.id);
+          setPassEmployeeid(data.employeeid);
+          setValue("employeeid", data.employeeid);
           setPassFirstName(data.first_name);
           setValue("first_name", data.first_name);
+          setPassLastName(data.last_name);
+          setValue("last_name", data.last_name);
+          setPassChineseName(data.chinese_name);
+          setValue("chinese_name", data.chinese_name);
+          setPassAlias(data.alias);
+          setValue("alias", data.alias);
+          setPassHkid(data.hkid);
+          setValue("hkid", data.hkid);
+          setPassPassport(data.passport);
+          setValue("passport", data.passport);
+          setPassGender(data.gender);
+          setValue("gender", data.gender);
+          setPassNationality(data.nationality);
+          setValue("nationality", data.nationality);
+          setPassDateOfBirth(data.date_of_birth);
+          setValue(
+            "date_of_birth",
+            moment(data.date_of_birth).format("YYYY-MM-DD")
+          );
+          setPassMobileCountryCode(data.mobile_countrycode);
+          setValue("mobile_countrycode", data.mobile_countrycode);
+          setPassMobileNo(data.mobile_no);
+          setValue("mobile_no", data.mobile_no);
+          setPassWorkPhoneNo(data.work_phone_no);
+          setValue("work_phone_no", data.work_phone_no);
+          setPassEmailPersonal(data.email_personal);
+          setValue("email_personal", data.email_personal);
+          setPassEmailWork(data.email_work);
+          setValue("email_work", data.email_work);
+          setPassEmailWork(data.email_work);
+          setValue("email_work", data.email_work);
+          setPassHighestEducation(data.highest_education);
+          setValue("highest_education", data.highest_education);
+          setPassInstitutionName(data.instutition_name);
+          setValue("institution_name", data.institution_name);
+          setPassMajor(data.major);
+          setValue("major", data.major);
+          setPassLastJobCompany(data.last_job_company);
+          setValue("last_job_company", data.last_job_company);
+          setPassLastJobTitle(data.last_job_title);
+          setValue("last_job_title", data.last_job_title);
+          setPassStartDate("data.start_date");
+          setValue("start_date", moment(data.start_date).format("YYYY-MM-DD"));
+          setPassStatus(data.status);
+          setValue("status", data.status);
+          setPassJobNature(data.job_nature);
+          setValue("job_nature", data.job_nature);
+          setPassNoticePeriod(data.notice_period);
+          setValue("notice_period", data.notice_period);
+          setPassReportTo(data.report_to);
+          setValue("report_to", data.report_to);
+          setPassDepartmentId(data.department_id);
+          setValue("department", data.department_id);
+          setPassTeamId(data.team_id);
+          setValue("team", data.team_id);
+          setPassTitleId(data.title_id);
+          setValue("title", data.title_id);
+          setPassAlLeaveEntitledPeryear(data.al_leave_entitled_peryear);
+          setValue("al_leave_entitled_peryear", data.al_leave_entitled_peryear);
+          setPassPayCurrency(data.pay_currency);
+          setValue("pay_currency", data.pay_currency);
+          setPassBasicSalary(data.basic_salary);
+          setValue("basic_salary", data.basic_salary);
+          setPassPaymentMethod(data.payment_method);
+          setValue("payment_method", data.payment_method);
+          setPassHomeAddress(data.home_address);
+          setValue("home_address", data.home_address);
+          setPassBankCode(data.bank_code);
+          setValue("bank_code", data.bank_code);
+          setPassBankName(data.bank_name);
+          setValue("bank_name", data.bank_name);
+          setPassBankNumber(data.bank_number);
+          setValue("bank_number", data.bank_number);
+          setPassBankPayee(data.bank_payee);
+          setValue("bank_payee", data.bank_payee);
+          setPassPaymentRemark(data.payment_remark);
+          setValue("payment_remark", data.payment_remark);
         });
 
-      // let fetchData = data.map((employee: any) => {
-      //   console.log(employee.id);
-      //   return {
-      //     employeeid: employee.id,
-      //     employeeWorkId: employee.employeeid,
-      //     first_name: employee.first_name,
-      //     last_name: employee.last_name,
-      //     chinese_name: employee.chinese_name,
-      //     alias: employee.alias,
-      //     hkid: employee.hkid,
-      //     passport: employee.passport,
-      //     gender: employee.gender,
-      //     nationality: employee.nationality,
-      //     date_of_birth: moment(employee.date_of_birth).format(
-      //       "YYYY-MM-DD"
-      //     ),
-      //     mobile_countrycode: employee.mobile_countrycode,
-      //     mobile: employee.mobile_no,
-      //     work_phone: employee.work_phone_no,
-      //     email_personal: employee.email_personal,
-      //     email_work: employee.email_work,
-      //     highest_edu: employee.highest_education,
-      //     ins_name: employee.institution_name,
-      //     major: employee.major,
-      //     last_job_company: employee.last_job_company,
-      //     last_job_title: employee.last_job_title,
-      //     start_date: moment(employee.start_date).format("YYYY-MM-DD"),
-      //     status: employee.status,
-      //     contract_end_date: moment(employee.contract_end_date).format(
-      //       "YYYY-MM-DD"
-      //     ),
-      //     probation_end_date: moment(employee.probation_end_date).format(
-      //       "YYYY-MM-DD"
-      //     ),
-      //     job_nature: employee.job_nature,
-      //     notice_period: employee.notice_period,
-      //     report_to: employee.report_to,
-      //     department: employee.dept_name,
-      //     team: employee.title_name,
-      //     al_leave_entitled_peryear: employee.al_leave_entitled_peryear,
-      //     pay_currency: employee.pay_currency,
-      //     basic_salary: employee.basic_salary,
-      //     payment_method: employee.payment_method,
-      //     home_address: employee.home_address,
-      //     bank_code: employee.bank_code,
-      //     bank_name: employee.bank_name,
-      //     bank_number: employee.bank_number,
-      //     bank_payee: employee.bank_payee,
-      //     payment_remark: employee.payment_remark,
-      //   };
-      // };
-
-      // });
-
       console.log("EID passed to form + fetch data");
+      showTab4();
       window.localStorage.removeItem("eid");
     } else {
       console.log("noEID found");
     }
   }, [eid]);
+
+  // form show probation end date if job status is probation
+  // form show contract end date if job status is contract
+
+  const [probationEndDate, setProbationEndDate] = useState(false);
+  const [contractEndDate, setContractEndDate] = useState(false);
+
+  function handleProbationEndDate() {
+    setProbationEndDate(true);
+    setContractEndDate(false);
+  }
+
+  function handleContractEndDate() {
+    setContractEndDate(true);
+    setProbationEndDate(false);
+  }
 
   const [age, setAge] = useState("0");
   // const [employeeid, setEmployeeid] = useState("");
@@ -440,156 +483,155 @@ export default function Employee(props: any) {
 
   return (
     <>
-      {eid ? (
-        <div className="page-container">
-          <div className="tab">
-            <div>
-              <button className="tablinks" onClick={showTab1}>
-                1.Basic Information
-              </button>
-              <button className="tablinks" onClick={showTab2}>
-                2.Contact Infomation
-              </button>
-              <button className="tablinks" onClick={showTab3}>
-                3.Education and Previous Job
-              </button>
-              <button className="tablinks" onClick={showTab4}>
-                4.Employment Detail
-              </button>
-              <button className="tablinks" onClick={showTab5}>
-                5.Payment Detail
-              </button>
-            </div>
+      <div className="page-container">
+        <div className="tab">
+          <div>
+            <button className="tablinks" onClick={showTab1}>
+              1.Basic Information
+            </button>
+            <button className="tablinks" onClick={showTab2}>
+              2.Contact Infomation
+            </button>
+            <button className="tablinks" onClick={showTab3}>
+              3.Education and Previous Job
+            </button>
+            <button className="tablinks" onClick={showTab4}>
+              4.Employment Detail
+            </button>
+            <button className="tablinks" onClick={showTab5}>
+              5.Payment Detail
+            </button>
           </div>
-          <form onSubmit={handleSubmit(submit)}>
-            <div id="new-employee-form">
-              {show1 && (
-                <>
-                  <h2>Basic Infomation</h2>
-                  <div className="five-column-grid">
+        </div>
+        <form onSubmit={handleSubmit(submit)}>
+          <div id="new-employee-form">
+            {show1 && (
+              <>
+                <h2>Basic Infomation</h2>
+                <div className="five-column-grid">
+                  <div>
                     <div>
-                      <div>
-                        <span>Employee ID*</span>
-                      </div>
-                      <input
-                        // value={employeeid}
-                        type="text"
-                        {...register("employeeid")}
-                        disabled
-                      />
+                      <span>Employee ID*</span>
                     </div>
+                    <input
+                      // value={employeeid}
+                      type="text"
+                      {...register("employeeid")}
+                      disabled
+                    />
+                  </div>
+                  <div>
                     <div>
-                      <div>
-                        <span>
-                          First Name*{" "}
-                          {errors.first_name && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-                      <input
-                        type="text"
-                        {...register("first_name", { required: true })}
-                        onChange={getFirstName}
-                      />
+                      <span>
+                        First Name*{" "}
+                        {errors.first_name && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
+                      </span>
                     </div>
+                    <input
+                      type="text"
+                      {...register("first_name", { required: true })}
+                      onChange={getFirstName}
+                    />
+                  </div>
+                  <div>
                     <div>
-                      <div>
-                        <span>
-                          Last Name*{" "}
-                          {errors.last_name && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <input
-                        type="text"
-                        {...register("last_name", { required: true })}
-                        onChange={getLastName}
-                      />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Chinese Name</span>
-                      </div>
-
-                      <input type="text" {...register("chinese_name")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Alias</span>
-                      </div>
-
-                      <input type="text" {...register("alias")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          HKID*{" "}
-                          {errors.hkid && (
-                            <span style={{ color: "red" }}>[Wrong format]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <input
-                        type="text"
-                        {...register("hkid", {
-                          pattern: /^([A-Z]{1,2})([0-9]{6})\(([A0-9])\)$/,
-                        })}
-                      />
-                      <div>
-                        <span style={{ fontSize: "small" }}>
-                          eg. Z987654(3) [no brackets]
-                        </span>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <span>Passport Number</span>
-                      </div>
-
-                      <input type="text" {...register("passport")} />
+                      <span>
+                        Last Name*{" "}
+                        {errors.last_name && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
+                      </span>
                     </div>
 
+                    <input
+                      type="text"
+                      {...register("last_name", { required: true })}
+                      onChange={getLastName}
+                    />
+                  </div>
+                  <div>
                     <div>
-                      <div>
-                        <span>Gender*</span>
-                      </div>
-
-                      <select {...register("gender")}>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                      </select>
+                      <span>Chinese Name</span>
                     </div>
 
+                    <input type="text" {...register("chinese_name")} />
+                  </div>
+                  <div>
                     <div>
-                      <div>
-                        <span>Nationality*</span>
-                      </div>
-
-                      <select {...register("nationality")}>
-                        <option value="HK">Hong Kong</option>
-                        <option value="China">China</option>
-                        <option value="UK">UK</option>
-                        <option value="Other">Other</option>
-                      </select>
+                      <span>Alias</span>
                     </div>
 
+                    <input type="text" {...register("alias")} />
+                  </div>
+                  <div>
                     <div>
-                      <div>
-                        <span>Date of Birth*</span>
-                      </div>
-
-                      <input
-                        type="date"
-                        {...register("date_of_birth")}
-                        onChange={calAge}
-                      />
+                      <span>
+                        HKID*{" "}
+                        {errors.hkid && (
+                          <span style={{ color: "red" }}>[Wrong format]</span>
+                        )}
+                      </span>
                     </div>
 
-                    {/* <div>
+                    <input
+                      type="text"
+                      {...register("hkid", {
+                        pattern: /^([A-Z]{1,2})([0-9]{6})\(([A0-9])\)$/,
+                      })}
+                    />
+                    <div>
+                      <span style={{ fontSize: "small" }}>
+                        eg. Z987654(3) [no brackets]
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <span>Passport Number</span>
+                    </div>
+
+                    <input type="text" {...register("passport")} />
+                  </div>
+
+                  <div>
+                    <div>
+                      <span>Gender*</span>
+                    </div>
+
+                    <select {...register("gender")}>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <div>
+                      <span>Nationality*</span>
+                    </div>
+
+                    <select {...register("nationality")}>
+                      <option value="HK">Hong Kong</option>
+                      <option value="China">China</option>
+                      <option value="UK">UK</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <div>
+                      <span>Date of Birth*</span>
+                    </div>
+
+                    <input
+                      type="date"
+                      {...register("date_of_birth")}
+                      onChange={calAge}
+                    />
+                  </div>
+
+                  {/* <div>
                   <div>
                     <span>Age</span>
                   </div>
@@ -601,151 +643,158 @@ export default function Employee(props: any) {
                     disabled
                   />
                 </div> */}
+                </div>
+                <hr />
+              </>
+            )}
+
+            {show2 && (
+              <>
+                <h2>Contact Infomation</h2>
+                <div className="five-column-grid">
+                  <div>
+                    <div>
+                      <span>Country Code*</span>
+                    </div>
+
+                    <input type="text" {...register("mobile_countrycode")} />
                   </div>
-                  <hr />
-                </>
-              )}
-
-              {show2 && (
-                <>
-                  <h2>Contact Infomation</h2>
-                  <div className="five-column-grid">
+                  <div>
                     <div>
-                      <div>
-                        <span>Country Code*</span>
-                      </div>
-
-                      <input type="text" {...register("mobile_countrycode")} />
+                      <span>Mobile No*</span>
                     </div>
-                    <div>
-                      <div>
-                        <span>Mobile No*</span>
-                      </div>
 
-                      <input type="text" {...register("mobile_no")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Work Phone No</span>
-                      </div>
-
-                      <input type="text" {...register("work_phone_no")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          Personal Email*{" "}
-                          {errors.email_personal && (
-                            <span style={{ color: "red" }}>[Wrong format]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <input
-                        type="text"
-                        {...register("email_personal", {
-                          pattern:
-                            /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
-                        })}
-                      />
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          Work Email*{" "}
-                          {errors.email_work && (
-                            <span style={{ color: "red" }}>[Wrong format]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <input
-                        type="text"
-                        {...register("email_work", {
-                          pattern:
-                            /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
-                        })}
-                        value={workEmail}
-                        disabled
-                      />
-                    </div>
+                    <input type="text" {...register("mobile_no")} />
                   </div>
-                  <hr />
-                </>
-              )}
-
-              {show3 && (
-                <>
-                  <h2>Education and Previous Job</h2>
-                  <div className="five-column-grid">
+                  <div>
                     <div>
-                      <div>
-                        <span>Highest Education</span>
-                      </div>
-
-                      <input type="text" {...register("highest_education")} />
+                      <span>Work Phone No</span>
                     </div>
-                    <div>
-                      <div>
-                        <span>Institution Name</span>
-                      </div>
 
-                      <input type="text" {...register("institution_name")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Major</span>
-                      </div>
-
-                      <input type="text" {...register("major")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Last Job Company</span>
-                      </div>
-
-                      <input type="text" {...register("last_job_company")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Last Job Title</span>
-                      </div>
-
-                      <input type="text" {...register("last_job_title")} />
-                    </div>
+                    <input type="text" {...register("work_phone_no")} />
                   </div>
-                  <hr />
-                </>
-              )}
-
-              {show4 && (
-                <>
-                  <h2>Employment Detail</h2>
-                  <div className="five-column-grid">
+                  <div>
                     <div>
-                      <div>
-                        <span>Start Date*</span>
-                      </div>
-
-                      <input type="date" {...register("start_date")} />
+                      <span>
+                        Personal Email*{" "}
+                        {errors.email_personal && (
+                          <span style={{ color: "red" }}>[Wrong format]</span>
+                        )}
+                      </span>
                     </div>
 
+                    <input
+                      type="text"
+                      {...register("email_personal", {
+                        pattern:
+                          /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
+                      })}
+                    />
+                  </div>
+                  <div>
                     <div>
-                      <div>
-                        <span>Job Status</span>
-                      </div>
-
-                      <select {...register("status")}>
-                        <option value="probation">Probation</option>
-                        <option value="perm">Permanent</option>
-                        <option value="contract">Contract</option>
-                        <option value="terminated">Terminated</option>
-                        <option value="resigned">Resigned</option>
-                        <option value="retired">Retired</option>
-                        <option value="other">Other</option>
-                      </select>
+                      <span>
+                        Work Email*{" "}
+                        {errors.email_work && (
+                          <span style={{ color: "red" }}>[Wrong format]</span>
+                        )}
+                      </span>
                     </div>
 
+                    <input
+                      type="text"
+                      {...register("email_work", {
+                        pattern:
+                          /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
+                      })}
+                      value={workEmail}
+                      disabled
+                    />
+                  </div>
+                </div>
+                <hr />
+              </>
+            )}
+
+            {show3 && (
+              <>
+                <h2>Education and Previous Job</h2>
+                <div className="five-column-grid">
+                  <div>
+                    <div>
+                      <span>Highest Education</span>
+                    </div>
+
+                    <input type="text" {...register("highest_education")} />
+                  </div>
+                  <div>
+                    <div>
+                      <span>Institution Name</span>
+                    </div>
+
+                    <input type="text" {...register("institution_name")} />
+                  </div>
+                  <div>
+                    <div>
+                      <span>Major</span>
+                    </div>
+
+                    <input type="text" {...register("major")} />
+                  </div>
+                  <div>
+                    <div>
+                      <span>Last Job Company</span>
+                    </div>
+
+                    <input type="text" {...register("last_job_company")} />
+                  </div>
+                  <div>
+                    <div>
+                      <span>Last Job Title</span>
+                    </div>
+
+                    <input type="text" {...register("last_job_title")} />
+                  </div>
+                </div>
+                <hr />
+              </>
+            )}
+
+            {show4 && (
+              <>
+                <h2>Employment Detail</h2>
+                <div className="five-column-grid">
+                  <div>
+                    <div>
+                      <span>Start Date*</span>
+                    </div>
+
+                    <input type="date" {...register("start_date")} />
+                  </div>
+
+                  <div>
+                    <div>
+                      <span>Job Status</span>
+                    </div>
+
+                    <select {...register("status")}>
+                      <option
+                        value="probation"
+                        onChange={handleProbationEndDate}
+                      >
+                        Probation
+                      </option>
+                      <option value="perm">Permanent</option>
+                      <option value="contract" onChange={handleContractEndDate}>
+                        Contract
+                      </option>
+                      <option value="terminated">Terminated</option>
+                      <option value="resigned">Resigned</option>
+                      <option value="retired">Retired</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  {/* {contractEndDate && ( */}
                     <div>
                       <div>
                         <span>Contract End Date*</span>
@@ -753,7 +802,8 @@ export default function Employee(props: any) {
 
                       <input type="date" {...register("contract_end_date")} />
                     </div>
-
+                  {/* )}
+                  {probationEndDate && ( */}
                     <div>
                       <div>
                         <span>Probation End Date*</span>
@@ -761,151 +811,148 @@ export default function Employee(props: any) {
 
                       <input type="date" {...register("probation_end_date")} />
                     </div>
-
+                  {/* )} */}
+                  <div>
                     <div>
-                      <div>
-                        <span>Job Nature*</span>
-                      </div>
-
-                      <select {...register("job_nature")}>
-                        <option value="full_time">Full Time</option>
-                        <option value="part_time">Part Time</option>
-                        <option value="temp">Temporary</option>
-                        <option value="intern">Intern</option>
-                        <option value="other">Other</option>
-                      </select>
+                      <span>Job Nature*</span>
                     </div>
 
-                    <div>
-                      <div>
-                        <span>Notice Period* (Days)</span>
-                      </div>
-                      <input type="text" {...register("notice_period")} />
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>AL Entitle / Year</span>
-                      </div>
-
-                      <input
-                        type="text"
-                        {...register("al_leave_entitled_peryear")}
-                      />
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>
-                          Title*{" "}
-                          {errors.title && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <select {...register("title", { required: true })}>
-                        {title.length > 0 &&
-                          title.map((title) => (
-                            <option
-                              value={title["id"]}
-                              key={"jobTitle" + title["id"]}
-                            >
-                              {title["title_name"]}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          Department*{" "}
-                          {errors.department && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <select {...register("department", { required: true })}>
-                        {department.length > 0 &&
-                          department.map((department) => (
-                            <option
-                              value={department["id"]}
-                              key={"department" + department["id"]}
-                            >
-                              {department["dept_name"]}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          Team*{" "}
-                          {errors.team && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <select {...register("team", { required: true })}>
-                        {team.length > 0 &&
-                          team.map((team) => (
-                            <option
-                              value={team["id"]}
-                              key={"team" + team["id"]}
-                            >
-                              {team["team_name"]}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          Report to*{" "}
-                          {errors.report_to && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <select {...register("report_to", { required: true })}>
-                        {reportTo.length > 0 &&
-                          reportTo.map((reportTo) => (
-                            <option
-                              value={reportTo["id"]}
-                              key={"report" + reportTo["id"]}
-                            >
-                              {reportTo["full_name"]}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
+                    <select {...register("job_nature")}>
+                      <option value="full_time">Full Time</option>
+                      <option value="part_time">Part Time</option>
+                      <option value="temp">Temporary</option>
+                      <option value="intern">Intern</option>
+                      <option value="other">Other</option>
+                    </select>
                   </div>
-                  <hr />
-                </>
-              )}
-              {show5 && (
-                <>
-                  <h2>Payment Detail</h2>
-                  <div className="five-column-grid">
-                    <div>
-                      <div>
-                        <span>Salary Currency*</span>
-                      </div>
-                      <select {...register("pay_currency")}>
-                        <option value="HKD">HKD</option>
-                      </select>
-                    </div>
-                    <div>
-                      <div>
-                        <span>Basic Salary*</span>
-                      </div>
 
-                      <input type="text" {...register("basic_salary")} />
+                  <div>
+                    <div>
+                      <span>Notice Period* (Days)</span>
                     </div>
-                    {/* <div>
+                    <input type="text" {...register("notice_period")} />
+                  </div>
+
+                  <div>
+                    <div>
+                      <span>AL Entitle / Year</span>
+                    </div>
+
+                    <input
+                      type="text"
+                      {...register("al_leave_entitled_peryear")}
+                    />
+                  </div>
+
+                  <div>
+                    <div>
+                      <span>
+                        Title*{" "}
+                        {errors.title && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
+                      </span>
+                    </div>
+
+                    <select {...register("title", { required: true })}>
+                      {title.length > 0 &&
+                        title.map((title) => (
+                          <option
+                            value={title["id"]}
+                            key={"jobTitle" + title["id"]}
+                          >
+                            {title["title_name"]}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                  <div>
+                    <div>
+                      <span>
+                        Department*{" "}
+                        {errors.department && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
+                      </span>
+                    </div>
+
+                    <select {...register("department", { required: true })}>
+                      {department.length > 0 &&
+                        department.map((department) => (
+                          <option
+                            value={department["id"]}
+                            key={"department" + department["id"]}
+                          >
+                            {department["dept_name"]}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                  <div>
+                    <div>
+                      <span>
+                        Team*{" "}
+                        {errors.team && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
+                      </span>
+                    </div>
+
+                    <select {...register("team", { required: true })}>
+                      {team.length > 0 &&
+                        team.map((team) => (
+                          <option value={team["id"]} key={"team" + team["id"]}>
+                            {team["team_name"]}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                  <div>
+                    <div>
+                      <span>
+                        Report to*{" "}
+                        {errors.report_to && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
+                      </span>
+                    </div>
+
+                    <select {...register("report_to", { required: true })}>
+                      {reportTo.length > 0 &&
+                        reportTo.map((reportTo) => (
+                          <option
+                            value={reportTo["id"]}
+                            key={"report" + reportTo["id"]}
+                          >
+                            {reportTo["full_name"]}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                </div>
+                <hr />
+              </>
+            )}
+            {show5 && (
+              <>
+                <h2>Payment Detail</h2>
+                <div className="five-column-grid">
+                  <div>
+                    <div>
+                      <span>Salary Currency*</span>
+                    </div>
+                    <select {...register("pay_currency")}>
+                      <option value="HKD">HKD</option>
+                    </select>
+                  </div>
+                  <div>
+                    <div>
+                      <span>Basic Salary*</span>
+                    </div>
+
+                    <input type="text" {...register("basic_salary")} />
+                  </div>
+                  {/* <div>
               <div>
                 <span>Payment Method</span>
               </div>
@@ -917,73 +964,71 @@ export default function Employee(props: any) {
                 <option value="other">Other</option>
               </select>
             </div> */}
+                  <div>
                     <div>
-                      <div>
-                        <span>
-                          Payment Method*{" "}
-                          {errors.payment_method && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <select
-                        {...register("payment_method", { required: true })}
-                      >
-                        <option value="bank_transfer">Bank Transfer</option>
-                        <option value="cheque">Cheque</option>
-                        <option value="cash">Cash</option>
-                        <option value="other">Other</option>
-                      </select>
+                      <span>
+                        Payment Method*{" "}
+                        {errors.payment_method && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
+                      </span>
                     </div>
-                    <div>
-                      <div>
-                        <span>Home Address</span>
-                      </div>
 
-                      <input type="text" {...register("home_address")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Bank Code</span>
-                      </div>
-
-                      <input type="text" {...register("bank_code")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Bank Name</span>
-                      </div>
-
-                      <input type="text" {...register("bank_name")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Bank Number</span>
-                      </div>
-
-                      <input type="text" {...register("bank_number")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Payee Name</span>
-                      </div>
-
-                      <input type="text" {...register("bank_payee")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Payment Remark</span>
-                      </div>
-
-                      <input type="text" {...register("payment_remark")} />
-                    </div>
+                    <select {...register("payment_method", { required: true })}>
+                      <option value="bank_transfer">Bank Transfer</option>
+                      <option value="cheque">Cheque</option>
+                      <option value="cash">Cash</option>
+                      <option value="other">Other</option>
+                    </select>
                   </div>
-                </>
-              )}
-            </div>
+                  <div>
+                    <div>
+                      <span>Home Address</span>
+                    </div>
 
-            {/* {false && (
+                    <input type="text" {...register("home_address")} />
+                  </div>
+                  <div>
+                    <div>
+                      <span>Bank Code</span>
+                    </div>
+
+                    <input type="text" {...register("bank_code")} />
+                  </div>
+                  <div>
+                    <div>
+                      <span>Bank Name</span>
+                    </div>
+
+                    <input type="text" {...register("bank_name")} />
+                  </div>
+                  <div>
+                    <div>
+                      <span>Bank Number</span>
+                    </div>
+
+                    <input type="text" {...register("bank_number")} />
+                  </div>
+                  <div>
+                    <div>
+                      <span>Payee Name</span>
+                    </div>
+
+                    <input type="text" {...register("bank_payee")} />
+                  </div>
+                  <div>
+                    <div>
+                      <span>Payment Remark</span>
+                    </div>
+
+                    <input type="text" {...register("payment_remark")} />
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* {false && (
           <>
             <hr />
             <div>
@@ -1016,589 +1061,9 @@ export default function Employee(props: any) {
           </>
         )} */}
 
-            <button type="submit">Submit Amendment</button>
-          </form>
-        </div>
-      ) : (
-        <div className="page-container">
-          <div className="tab">
-            <div>
-              <button className="tablinks" onClick={showTab1}>
-                1.Basic Information
-              </button>
-              <button className="tablinks" onClick={showTab2}>
-                2.Contact Infomation
-              </button>
-              <button className="tablinks" onClick={showTab3}>
-                3.Education and Previous Job
-              </button>
-              <button className="tablinks" onClick={showTab4}>
-                4.Employment Detail
-              </button>
-              <button className="tablinks" onClick={showTab5}>
-                5.Payment Detail
-              </button>
-            </div>
-          </div>
-          <form onSubmit={handleSubmit(submit)}>
-            <div id="new-employee-form">
-              {show1 && (
-                <>
-                  <h2>Basic Infomation</h2>
-                  <div className="five-column-grid">
-                    <div>
-                      <div>
-                        <span>Employee ID*</span>
-                      </div>
-                      <input
-                        // value={employeeid}
-                        type="text"
-                        {...register("employeeid")}
-                        disabled
-                      />
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          First Name*{" "}
-                          {errors.first_name && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-                      <input
-                        type="text"
-                        {...register("first_name", { required: true })}
-                        onChange={getFirstName}
-                      />
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          Last Name*{" "}
-                          {errors.last_name && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <input
-                        type="text"
-                        {...register("last_name", { required: true })}
-                        onChange={getLastName}
-                      />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Chinese Name</span>
-                      </div>
-
-                      <input type="text" {...register("chinese_name")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Alias</span>
-                      </div>
-
-                      <input type="text" {...register("alias")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          HKID*{" "}
-                          {errors.hkid && (
-                            <span style={{ color: "red" }}>[Wrong format]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <input
-                        type="text"
-                        {...register("hkid", {
-                          pattern: /^([A-Z]{1,2})([0-9]{6})\(([A0-9])\)$/,
-                        })}
-                      />
-                      <div>
-                        <span style={{ fontSize: "small" }}>
-                          eg. Z987654(3) [no brackets]
-                        </span>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <span>Passport Number</span>
-                      </div>
-
-                      <input type="text" {...register("passport")} />
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>Gender*</span>
-                      </div>
-
-                      <select {...register("gender")}>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>Nationality*</span>
-                      </div>
-
-                      <select {...register("nationality")}>
-                        <option value="HK">Hong Kong</option>
-                        <option value="China">China</option>
-                        <option value="UK">UK</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>Date of Birth*</span>
-                      </div>
-
-                      <input
-                        type="date"
-                        {...register("date_of_birth")}
-                        onChange={calAge}
-                      />
-                    </div>
-
-                    {/* <div>
-                  <div>
-                    <span>Age</span>
-                  </div>
-
-                  <input
-                    value={age}
-                    type="text"
-                    {...register("age")}
-                    disabled
-                  />
-                </div> */}
-                  </div>
-                  <hr />
-                </>
-              )}
-
-              {show2 && (
-                <>
-                  <h2>Contact Infomation</h2>
-                  <div className="five-column-grid">
-                    <div>
-                      <div>
-                        <span>Country Code*</span>
-                      </div>
-
-                      <input type="text" {...register("mobile_countrycode")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Mobile No*</span>
-                      </div>
-
-                      <input type="text" {...register("mobile_no")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Work Phone No</span>
-                      </div>
-
-                      <input type="text" {...register("work_phone_no")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          Personal Email*{" "}
-                          {errors.email_personal && (
-                            <span style={{ color: "red" }}>[Wrong format]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <input
-                        type="text"
-                        {...register("email_personal", {
-                          pattern:
-                            /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
-                        })}
-                      />
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          Work Email*{" "}
-                          {errors.email_work && (
-                            <span style={{ color: "red" }}>[Wrong format]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <input
-                        type="text"
-                        {...register("email_work", {
-                          pattern:
-                            /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
-                        })}
-                        value={workEmail}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                  <hr />
-                </>
-              )}
-
-              {show3 && (
-                <>
-                  <h2>Education and Previous Job</h2>
-                  <div className="five-column-grid">
-                    <div>
-                      <div>
-                        <span>Highest Education</span>
-                      </div>
-
-                      <input type="text" {...register("highest_education")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Institution Name</span>
-                      </div>
-
-                      <input type="text" {...register("institution_name")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Major</span>
-                      </div>
-
-                      <input type="text" {...register("major")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Last Job Company</span>
-                      </div>
-
-                      <input type="text" {...register("last_job_company")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Last Job Title</span>
-                      </div>
-
-                      <input type="text" {...register("last_job_title")} />
-                    </div>
-                  </div>
-                  <hr />
-                </>
-              )}
-
-              {show4 && (
-                <>
-                  <h2>Employment Detail</h2>
-                  <div className="five-column-grid">
-                    <div>
-                      <div>
-                        <span>Start Date*</span>
-                      </div>
-
-                      <input type="date" {...register("start_date")} />
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>Job Status</span>
-                      </div>
-
-                      <select {...register("status")}>
-                        <option value="probation">Probation</option>
-                        <option value="perm">Permanent</option>
-                        <option value="contract">Contract</option>
-                        <option value="terminated">Terminated</option>
-                        <option value="resigned">Resigned</option>
-                        <option value="retired">Retired</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>Contract End Date*</span>
-                      </div>
-
-                      <input type="date" {...register("contract_end_date")} />
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>Probation End Date*</span>
-                      </div>
-
-                      <input type="date" {...register("probation_end_date")} />
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>Job Nature*</span>
-                      </div>
-
-                      <select {...register("job_nature")}>
-                        <option value="full_time">Full Time</option>
-                        <option value="part_time">Part Time</option>
-                        <option value="temp">Temporary</option>
-                        <option value="intern">Intern</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>Notice Period* (Days)</span>
-                      </div>
-                      <input type="text" {...register("notice_period")} />
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>AL Entitle / Year</span>
-                      </div>
-
-                      <input
-                        type="text"
-                        {...register("al_leave_entitled_peryear")}
-                      />
-                    </div>
-
-                    <div>
-                      <div>
-                        <span>
-                          Title*{" "}
-                          {errors.title && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <select {...register("title", { required: true })}>
-                        {title.length > 0 &&
-                          title.map((title) => (
-                            <option
-                              value={title["id"]}
-                              key={"jobTitle" + title["id"]}
-                            >
-                              {title["title_name"]}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          Department*{" "}
-                          {errors.department && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <select {...register("department", { required: true })}>
-                        {department.length > 0 &&
-                          department.map((department) => (
-                            <option
-                              value={department["id"]}
-                              key={"department" + department["id"]}
-                            >
-                              {department["dept_name"]}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          Team*{" "}
-                          {errors.team && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <select {...register("team", { required: true })}>
-                        {team.length > 0 &&
-                          team.map((team) => (
-                            <option
-                              value={team["id"]}
-                              key={"team" + team["id"]}
-                            >
-                              {team["team_name"]}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                    <div>
-                      <div>
-                        <span>
-                          Report to*{" "}
-                          {errors.report_to && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <select {...register("report_to", { required: true })}>
-                        {reportTo.length > 0 &&
-                          reportTo.map((reportTo) => (
-                            <option
-                              value={reportTo["id"]}
-                              key={"report" + reportTo["id"]}
-                            >
-                              {reportTo["full_name"]}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                  </div>
-                  <hr />
-                </>
-              )}
-              {show5 && (
-                <>
-                  <h2>Payment Detail</h2>
-                  <div className="five-column-grid">
-                    <div>
-                      <div>
-                        <span>Salary Currency*</span>
-                      </div>
-                      <select {...register("pay_currency")}>
-                        <option value="HKD">HKD</option>
-                      </select>
-                    </div>
-                    <div>
-                      <div>
-                        <span>Basic Salary*</span>
-                      </div>
-
-                      <input type="text" {...register("basic_salary")} />
-                    </div>
-                    {/* <div>
-              <div>
-                <span>Payment Method</span>
-              </div>
-
-              <select {...register("payment_method")}>
-                <option value="bank_transfer">Bank Transfer</option>
-                <option value="cheque">Cheque</option>
-                <option value="cash">Cash</option>
-                <option value="other">Other</option>
-              </select>
-            </div> */}
-                    <div>
-                      <div>
-                        <span>
-                          Payment Method*{" "}
-                          {errors.payment_method && (
-                            <span style={{ color: "red" }}>[Required]</span>
-                          )}
-                        </span>
-                      </div>
-
-                      <select
-                        {...register("payment_method", { required: true })}
-                      >
-                        <option value="bank_transfer">Bank Transfer</option>
-                        <option value="cheque">Cheque</option>
-                        <option value="cash">Cash</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                    <div>
-                      <div>
-                        <span>Home Address</span>
-                      </div>
-
-                      <input type="text" {...register("home_address")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Bank Code</span>
-                      </div>
-
-                      <input type="text" {...register("bank_code")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Bank Name</span>
-                      </div>
-
-                      <input type="text" {...register("bank_name")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Bank Number</span>
-                      </div>
-
-                      <input type="text" {...register("bank_number")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Payee Name</span>
-                      </div>
-
-                      <input type="text" {...register("bank_payee")} />
-                    </div>
-                    <div>
-                      <div>
-                        <span>Payment Remark</span>
-                      </div>
-
-                      <input type="text" {...register("payment_remark")} />
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* {false && (
-          <>
-            <hr />
-            <div>
-              <div>
-                <h3>Profile Pic</h3>
-              </div>
-
-              <input type="file" {...register("profilepic")} />
-              {previewSrc && (
-                <div>
-                  <div>Preview:</div>
-                  <div>
-                    <img
-                      src={previewSrc}
-                      alt="Preview"
-                      // height="200px"
-
-                      style={{
-                        borderRadius: "50%",
-                        width: "200px",
-                        height: "200px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-            <hr />
-          </>
-        )} */}
-
-            <button type="submit">Submit Amendment</button>
-          </form>
-        </div>
-      )}
+          <button type="submit">Submit Amendment</button>
+        </form>
+      </div>
     </>
   );
 }
