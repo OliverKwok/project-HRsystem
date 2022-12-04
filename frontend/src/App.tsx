@@ -79,7 +79,7 @@ function App() {
     <>
       {isAuthenticated == true ? (
         <div className="container">
-          <div className="sidebar">
+          <div className="sidebar" style={{ minWidth: "280px" }}>
             {/* <div
               className="company-logo-container"
               onClick={() => navigate("dashboard")}
@@ -90,7 +90,7 @@ function App() {
                 display: "flex",
                 justifyContent: "center",
                 marginTop: "0px",
-                marginLeft: "0px"
+                marginLeft: "0px",
               }}
             >
               <img
