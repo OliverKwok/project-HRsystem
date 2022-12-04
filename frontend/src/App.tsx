@@ -75,19 +75,34 @@ function App() {
     }
   }, [dispatch]);
 
+  const SideBarStyle = {
+    minWidth: "300px",
+    margin: "0px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
+  };
+
   const NavLinkStyle = {
     height: "60px",
+    width: "280px",
     display: "flex",
     alignItems: "center",
     marginTop: "0px",
     marginBottom: "0px",
   };
 
+  const TriangleStyle = {
+    marginRight: "25px",
+    height: "30px",
+    width: "auto",
+    color: "#24d1ae",
+  };
+
   return (
     <>
       {isAuthenticated == true ? (
         <div className="container">
-          <div className="sidebar" style={{ minWidth: "300px" }}>
+          <div className="sidebar" style={SideBarStyle}>
             {/* <div
               className="company-logo-container"
               onClick={() => navigate("dashboard")}
@@ -124,7 +139,11 @@ function App() {
               <HiOutlineOfficeBuilding />
               <span>Company</span>
               <div className="sub-list-triangle">
-                {sideBarItemShow1 ? <GoTriangleDown /> : <GoTriangleLeft />}
+                {sideBarItemShow1 ? (
+                  <GoTriangleDown style={TriangleStyle} />
+                ) : (
+                  <GoTriangleLeft style={TriangleStyle} />
+                )}
               </div>
             </div>
 
@@ -186,7 +205,11 @@ function App() {
               <HiOutlineOfficeBuilding />
               <span>Payroll</span>
               <div className="sub-list-triangle">
-                {sideBarItemShow1 ? <GoTriangleDown /> : <GoTriangleLeft />}
+                {sideBarItemShow1 ? (
+                  <GoTriangleDown style={TriangleStyle} />
+                ) : (
+                  <GoTriangleLeft style={TriangleStyle} />
+                )}
               </div>
             </div>
 
@@ -239,7 +262,11 @@ function App() {
               <HiOutlineOfficeBuilding />
               <span>Leaves</span>
               <div className="sub-list-triangle">
-                {sideBarItemShow3 ? <GoTriangleDown /> : <GoTriangleLeft />}
+                {sideBarItemShow3 ? (
+                  <GoTriangleDown style={TriangleStyle} />
+                ) : (
+                  <GoTriangleLeft style={TriangleStyle} />
+                )}
               </div>
             </div>
 
