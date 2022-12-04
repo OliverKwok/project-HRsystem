@@ -193,6 +193,22 @@ export class PayrollService {
         .orderBy('id');
 
       OneMonthPayroll.forEach((item) => {
+        let ot_pay_calulate = 0;
+        let bonus_calulate = 0;
+        let nopay_leave_calulate = 0;
+        if (item.ot_pay != null) ot_pay_calulate = item.ot_pay;
+        if (item.bonus != null) bonus_calulate = item.bonus;
+        if (item.nopay_leave != null) nopay_leave_calulate = item.nopay_leave;
+
+        // check if MPF is amended
+        if (item.mpf_employee != null) {
+          item.mpf_employee_isAmended = true;
+        } else {
+          item.mpf_employee_isAmended = false;
+        }
+
+        // calulation of MPF
+
         // complete no amendment
         if (
           item.ot_pay == null &&
@@ -208,18 +224,29 @@ export class PayrollService {
           (item.ot_pay != 0 || item.bonus != 0 || item.nopay_leave != 0) &&
           item.mpf_employee == null
         ) {
-          let ot_pay_calulate = 0;
-          let bonus_calulate = 0;
-          let nopay_leave_calulate = 0;
-          if (item.ot_pay != null) ot_pay_calulate = item.ot_pay;
-          if (item.bonus != null) bonus_calulate = item.bonus;
-          if (item.nopay_leave != null) nopay_leave_calulate = item.nopay_leave;
           item.mpf_employee = calculateMpf(
             item.basic_salary +
               ot_pay_calulate +
               bonus_calulate -
               nopay_leave_calulate,
           );
+        }
+
+        // check if total is amended
+        if (item.total != null) {
+          item.total_isAmended = true;
+        } else {
+          item.total_isAmended = false;
+        }
+
+        // calculate total if it is not amended
+        if (item.total == null) {
+          item.total =
+            item.basic_salary +
+            ot_pay_calulate +
+            bonus_calulate -
+            nopay_leave_calulate -
+            item.mpf_employee;
         }
       });
 

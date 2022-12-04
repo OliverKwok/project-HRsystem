@@ -4,8 +4,18 @@ import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
 import { Dropdown } from "primereact/dropdown";
+import { red } from "@mui/material/colors";
+import { classNames } from "primereact/utils";
 // import { Button } from 'primereact/button';
 // import { Toast } from 'primereact/toast';
+
+// date picker
+import dayjs, { Dayjs } from "dayjs";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 export default function PaySummary() {
   // const [products1, setProducts1] = useState<any[]>();
@@ -16,28 +26,17 @@ export default function PaySummary() {
   const [toggleRefresh, setToggleRefresh] = useState(false);
   const toast = useRef();
 
+  // date picker
+  const [datePickerValue, setDatePickerValue] = React.useState<any>(
+    dayjs(new Date())
+  );
+
   const paginationComponentOptions = {
     rowsPerPageText: "Rows per page",
     rangeSeparatorText: "of",
     selectAllRowsItem: true,
     selectAllRowsItemText: "All",
   };
-
-  // const subHeaderComponent = useMemo(() => {
-  //   const handleClear = () => {
-  //     if (filterText) {
-  //       setResetPaginationToggle(!resetPaginationToggle);
-  //       setFilterText("");
-  //     }
-  //   };
-  //   return (
-  //     <Filter
-  //       onFilter={(e: any) => setFilterText(e.target.value)}
-  //       onClear={handleClear}
-  //       filterText={filterText}
-  //     />
-  //   );
-  // }, [filterText, resetPaginationToggle]);
 
   const columns = [
     { field: "employeeid", header: "Employee ID" },
@@ -47,6 +46,8 @@ export default function PaySummary() {
     { field: "bonus", header: "Bonus" },
     { field: "nopay_leave", header: "No Pay Leave" },
     { field: "mpf_employee", header: "MPF" },
+    { field: "mpf_employee_isAmended", header: "mpf_employee_isAmended" },
+    { field: "total_isAmended", header: "total_isAmended" },
     { field: "total", header: "TOTAL" },
   ];
 
@@ -208,6 +209,8 @@ export default function PaySummary() {
           onValueChange={(e) => {
             options.editorCallback(e.value);
 
+            console.log(options.rowData);
+
             const requestOptions = {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -252,118 +255,191 @@ export default function PaySummary() {
   };
 
   const otPayBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
+    const stockClassName = classNames({
+      redNumber: rowData.ot_pay > 0 || rowData.ot_pay < 0,
+    });
+
+    let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.ot_pay);
+
+    return <span className={stockClassName}>{numberShown}</span>;
   };
+
   const bonusBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
+    const stockClassName = classNames({
+      redNumber: rowData.bonus > 0 || rowData.bonus < 0,
+    });
+
+    let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.bonus);
+
+    return <span className={stockClassName}>{numberShown}</span>;
   };
 
   const noPayLeaveBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
+    const stockClassName = classNames({
+      redNumber: rowData.nopay_leave > 0 || rowData.nopay_leave < 0,
+    });
+
+    let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.nopay_leave);
+
+    return <span className={stockClassName}>{numberShown}</span>;
   };
 
   const mpfBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
+    const stockClassName = classNames({
+      redNumber: rowData.mpf_employee_isAmended == true,
+      blueNumber: rowData.mpf_employee_isAmended == false,
+    });
+
+    let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.mpf_employee);
+
+    return <span className={stockClassName}>{numberShown}</span>;
   };
 
   const totalBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
+    const stockClassName = classNames({
+      redNumber: rowData.total_isAmended == true,
+      blueNumber: rowData.total_isAmended == false,
+    });
+
+    let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.total);
-  };
 
+    return <span className={stockClassName}>{numberShown}</span>;
+  };
   return (
-    <div className="datatable-editing">
-      <div className="card p-fluid">
-        {/* <h5>Row Editing</h5> */}
-        <DataTable
-          value={products2}
-          editMode="row"
-          dataKey="id"
-          onRowEditComplete={onRowEditComplete1}
-          responsiveLayout="scroll"
-        >
-          <Column
-            field="employeeid"
-            header="ID"
-            // editor={(options) => textEditor(options)}
-            style={{ width: "10%" }}
-          ></Column>
-          <Column
-            field="name"
-            header="Name"
-            // editor={(options) => textEditor(options)}
-            style={{ width: "15%" }}
-          ></Column>
-          {/* <Column
+    <>
+      <div className="month-picker-container">
+        <div className="month-picker">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Stack spacing={3}>
+              <DatePicker
+                views={["year", "month"]}
+                label="Year and Month"
+                minDate={dayjs("2018-01-01")}
+                maxDate={dayjs("2023-06-01")}
+                value={datePickerValue}
+                onChange={(newDatePickerValue) => {
+                  setDatePickerValue(newDatePickerValue);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
+              />
+            </Stack>
+          </LocalizationProvider>
+        </div>
+      </div>
+      <div className="payroll-editing">
+        <div className="card p-fluid">
+          {/* <h5>Row Editing</h5> */}
+          <DataTable
+            value={products2}
+            editMode="row"
+            dataKey="id"
+            onRowEditComplete={onRowEditComplete1}
+            responsiveLayout="scroll"
+            paginator
+            paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+            rows={10}
+            rowsPerPageOptions={[10, 20, 50]}
+          >
+            <Column
+              field="employeeid"
+              header="ID"
+              // editor={(options) => textEditor(options)}
+              style={{ width: "10%" }}
+              sortable
+            ></Column>
+            <Column
+              field="name"
+              header="Name"
+              // editor={(options) => textEditor(options)}
+              style={{ width: "15%" }}
+              sortable
+            ></Column>
+            {/* <Column
             field="inventoryStatus"
             header="Status"
             body={statusBodyTemplate}
             editor={(options) => statusEditor(options)}
             style={{ width: "20%" }}
           ></Column> */}
-          <Column
-            field="basic_salary"
-            header="Basic Salary"
-            body={basicSalaryBodyTemplate}
-            // editor={(options) => priceEditor(options)}
-            style={{ width: "15%" }}
-          ></Column>
-          <Column
-            field="ot_pay"
-            header="+OT Pay"
-            body={otPayBodyTemplate}
-            editor={(options) => priceEditor(options)}
-            style={{ width: "10%" }}
-          ></Column>
-          <Column
-            field="bonus"
-            header="+Bonus"
-            body={bonusBodyTemplate}
-            editor={(options) => priceEditor(options)}
-            style={{ width: "10%" }}
-          ></Column>
-          <Column
-            field="nopay_leave"
-            header="-No Pay Leave"
-            body={noPayLeaveBodyTemplate}
-            editor={(options) => priceEditor(options)}
-            style={{ width: "10%" }}
-          ></Column>
-          <Column
-            field="mpf_employee"
-            header="-MPF"
-            body={mpfBodyTemplate}
-            editor={(options) => priceEditor(options)}
-            style={{ width: "10%" }}
-          ></Column>
-          <Column
-            field="total"
-            header="Total"
-            body={totalBodyTemplate}
-            editor={(options) => priceEditor(options)}
-            style={{ width: "15%" }}
-          ></Column>
-          <Column
-            rowEditor
-            headerStyle={{ width: "5%" }}
-            bodyStyle={{ textAlign: "center" }}
-          ></Column>
-        </DataTable>
+            <Column
+              field="basic_salary"
+              header="Basic Salary"
+              body={basicSalaryBodyTemplate}
+              // editor={(options) => priceEditor(options)}
+              style={{ width: "15%" }}
+              sortable
+            ></Column>
+            <Column
+              field="ot_pay"
+              header="+OT Pay"
+              body={otPayBodyTemplate}
+              editor={(options) => priceEditor(options)}
+              style={{ width: "10%" }}
+              sortable
+            ></Column>
+            <Column
+              field="bonus"
+              header="+Bonus"
+              body={bonusBodyTemplate}
+              editor={(options) => priceEditor(options)}
+              style={{ width: "10%" }}
+              sortable
+            ></Column>
+            <Column
+              field="nopay_leave"
+              header="-No Pay Leave"
+              body={noPayLeaveBodyTemplate}
+              editor={(options) => priceEditor(options)}
+              style={{ width: "10%" }}
+              sortable
+            ></Column>
+            <Column
+              field="mpf_employee"
+              header="-MPF"
+              body={mpfBodyTemplate}
+              editor={(options) => priceEditor(options)}
+              style={{ width: "10%" }}
+              sortable
+            ></Column>
+            <Column
+              field="mpf_employee_isAmended"
+              header="mpf_employee_isAmended"
+              style={{ display: "none" }}
+            ></Column>
+            <Column
+              field="total"
+              header="Total"
+              body={totalBodyTemplate}
+              editor={(options) => priceEditor(options)}
+              style={{ width: "15%" }}
+              sortable
+            ></Column>
+            <Column
+              rowEditor
+              headerStyle={{ width: "5%" }}
+              bodyStyle={{ textAlign: "center" }}
+            ></Column>
+          </DataTable>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
