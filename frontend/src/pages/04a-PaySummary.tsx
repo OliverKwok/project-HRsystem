@@ -17,6 +17,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
+import moment from "moment";
+moment().format();
+
 export default function PaySummary() {
   // const [products1, setProducts1] = useState<any[]>();
   const [products2, setProducts2] = useState<any[]>();
@@ -30,6 +33,8 @@ export default function PaySummary() {
   const [datePickerValue, setDatePickerValue] = React.useState<any>(
     dayjs(new Date())
   );
+  const [yearValue, setYearValue] = useState(2022);
+  const [monthValue, setMonthValue] = useState(12);
 
   const paginationComponentOptions = {
     rowsPerPageText: "Rows per page",
@@ -76,7 +81,7 @@ export default function PaySummary() {
       method: "Get",
     };
     fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/payroll/2022/12`,
+      `${process.env.REACT_APP_BACKEND_URL}/payroll/${yearValue}/${monthValue}`,
       requestOptions
     )
       .then((response) => {
@@ -209,14 +214,14 @@ export default function PaySummary() {
           onValueChange={(e) => {
             options.editorCallback(e.value);
 
-            console.log(options.rowData);
+            // console.log(options.rowData);
 
             const requestOptions = {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                year: 2022,
-                month: 12,
+                year: yearValue,
+                month: monthValue,
                 employeeid: options.rowData.id,
                 category: options.field,
                 updated_value: e.value,
@@ -320,6 +325,7 @@ export default function PaySummary() {
 
     return <span className={stockClassName}>{numberShown}</span>;
   };
+
   return (
     <>
       <div className="month-picker-container">
@@ -329,11 +335,18 @@ export default function PaySummary() {
               <DatePicker
                 views={["year", "month"]}
                 label="Year and Month"
-                minDate={dayjs("2018-01-01")}
-                maxDate={dayjs("2023-06-01")}
+                // minDate={dayjs("2018-01-01")}
+                // maxDate={dayjs("2023-06-01")}
                 value={datePickerValue}
-                onChange={(newDatePickerValue) => {
-                  setDatePickerValue(newDatePickerValue);
+                onChange={(dateInput) => {
+                  setDatePickerValue(dateInput);
+                  // console.log(new Date(dateInput).getMonth() + 1);
+                  let monthInput: number = new Date(dateInput).getMonth() + 1;
+                  let yearInput: number = new Date(dateInput).getFullYear();
+                  // setYearValue(moment(dateInput).format("YYYY"));
+                  setMonthValue(monthInput);
+                  setYearValue(yearInput);
+                  setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
                 }}
                 renderInput={(params) => (
                   <TextField {...params} helperText={null} />
@@ -405,7 +418,7 @@ export default function PaySummary() {
             ></Column>
             <Column
               field="nopay_leave"
-              header="-No Pay Leave"
+              header="-No Pay"
               body={noPayLeaveBodyTemplate}
               editor={(options) => priceEditor(options)}
               style={{ width: "10%" }}

@@ -1,5 +1,6 @@
 .organizationchart-demo .card {
-  overflow-x: auto;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .organizationchart-demo .p-organizationchart .p-person {
