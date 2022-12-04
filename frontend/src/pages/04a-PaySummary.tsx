@@ -9,6 +9,14 @@ import { classNames } from "primereact/utils";
 // import { Button } from 'primereact/button';
 // import { Toast } from 'primereact/toast';
 
+// date picker
+import dayjs, { Dayjs } from "dayjs";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 export default function PaySummary() {
   // const [products1, setProducts1] = useState<any[]>();
   const [products2, setProducts2] = useState<any[]>();
@@ -17,6 +25,11 @@ export default function PaySummary() {
   const [editingRows, setEditingRows] = useState({});
   const [toggleRefresh, setToggleRefresh] = useState(false);
   const toast = useRef();
+
+  // date picker
+  const [datePickerValue, setDatePickerValue] = React.useState<any>(
+    dayjs(new Date())
+  );
 
   const paginationComponentOptions = {
     rowsPerPageText: "Rows per page",
@@ -308,102 +321,125 @@ export default function PaySummary() {
     return <span className={stockClassName}>{numberShown}</span>;
   };
   return (
-    <div className="payroll-editing">
-      <div className="card p-fluid">
-        {/* <h5>Row Editing</h5> */}
-        <DataTable
-          value={products2}
-          editMode="row"
-          dataKey="id"
-          onRowEditComplete={onRowEditComplete1}
-          responsiveLayout="scroll"
-          paginator
-          paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-          rows={10}
-          rowsPerPageOptions={[10, 20, 50]}
-        >
-          <Column
-            field="employeeid"
-            header="ID"
-            // editor={(options) => textEditor(options)}
-            style={{ width: "10%" }}
-            sortable
-          ></Column>
-          <Column
-            field="name"
-            header="Name"
-            // editor={(options) => textEditor(options)}
-            style={{ width: "15%" }}
-            sortable
-          ></Column>
-          {/* <Column
+    <>
+      <div className="month-picker-container">
+        <div className="month-picker">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Stack spacing={3}>
+              <DatePicker
+                views={["year", "month"]}
+                label="Year and Month"
+                minDate={dayjs("2018-01-01")}
+                maxDate={dayjs("2023-06-01")}
+                value={datePickerValue}
+                onChange={(newDatePickerValue) => {
+                  setDatePickerValue(newDatePickerValue);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
+              />
+            </Stack>
+          </LocalizationProvider>
+        </div>
+      </div>
+      <div className="payroll-editing">
+        <div className="card p-fluid">
+          {/* <h5>Row Editing</h5> */}
+          <DataTable
+            value={products2}
+            editMode="row"
+            dataKey="id"
+            onRowEditComplete={onRowEditComplete1}
+            responsiveLayout="scroll"
+            paginator
+            paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+            rows={10}
+            rowsPerPageOptions={[10, 20, 50]}
+          >
+            <Column
+              field="employeeid"
+              header="ID"
+              // editor={(options) => textEditor(options)}
+              style={{ width: "10%" }}
+              sortable
+            ></Column>
+            <Column
+              field="name"
+              header="Name"
+              // editor={(options) => textEditor(options)}
+              style={{ width: "15%" }}
+              sortable
+            ></Column>
+            {/* <Column
             field="inventoryStatus"
             header="Status"
             body={statusBodyTemplate}
             editor={(options) => statusEditor(options)}
             style={{ width: "20%" }}
           ></Column> */}
-          <Column
-            field="basic_salary"
-            header="Basic Salary"
-            body={basicSalaryBodyTemplate}
-            // editor={(options) => priceEditor(options)}
-            style={{ width: "15%" }}
-            sortable
-          ></Column>
-          <Column
-            field="ot_pay"
-            header="+OT Pay"
-            body={otPayBodyTemplate}
-            editor={(options) => priceEditor(options)}
-            style={{ width: "10%" }}
-            sortable
-          ></Column>
-          <Column
-            field="bonus"
-            header="+Bonus"
-            body={bonusBodyTemplate}
-            editor={(options) => priceEditor(options)}
-            style={{ width: "10%" }}
-            sortable
-          ></Column>
-          <Column
-            field="nopay_leave"
-            header="-No Pay Leave"
-            body={noPayLeaveBodyTemplate}
-            editor={(options) => priceEditor(options)}
-            style={{ width: "10%" }}
-            sortable
-          ></Column>
-          <Column
-            field="mpf_employee"
-            header="-MPF"
-            body={mpfBodyTemplate}
-            editor={(options) => priceEditor(options)}
-            style={{ width: "10%" }}
-            sortable
-          ></Column>
-          <Column
-            field="mpf_employee_isAmended"
-            header="mpf_employee_isAmended"
-            style={{ display: "none" }}
-          ></Column>
-          <Column
-            field="total"
-            header="Total"
-            body={totalBodyTemplate}
-            editor={(options) => priceEditor(options)}
-            style={{ width: "15%" }}
-            sortable
-          ></Column>
-          <Column
-            rowEditor
-            headerStyle={{ width: "5%" }}
-            bodyStyle={{ textAlign: "center" }}
-          ></Column>
-        </DataTable>
+            <Column
+              field="basic_salary"
+              header="Basic Salary"
+              body={basicSalaryBodyTemplate}
+              // editor={(options) => priceEditor(options)}
+              style={{ width: "15%" }}
+              sortable
+            ></Column>
+            <Column
+              field="ot_pay"
+              header="+OT Pay"
+              body={otPayBodyTemplate}
+              editor={(options) => priceEditor(options)}
+              style={{ width: "10%" }}
+              sortable
+            ></Column>
+            <Column
+              field="bonus"
+              header="+Bonus"
+              body={bonusBodyTemplate}
+              editor={(options) => priceEditor(options)}
+              style={{ width: "10%" }}
+              sortable
+            ></Column>
+            <Column
+              field="nopay_leave"
+              header="-No Pay Leave"
+              body={noPayLeaveBodyTemplate}
+              editor={(options) => priceEditor(options)}
+              style={{ width: "10%" }}
+              sortable
+            ></Column>
+            <Column
+              field="mpf_employee"
+              header="-MPF"
+              body={mpfBodyTemplate}
+              editor={(options) => priceEditor(options)}
+              style={{ width: "10%" }}
+              sortable
+            ></Column>
+            <Column
+              field="mpf_employee_isAmended"
+              header="mpf_employee_isAmended"
+              style={{ display: "none" }}
+            ></Column>
+            <Column
+              field="total"
+              header="Total"
+              body={totalBodyTemplate}
+              editor={(options) => priceEditor(options)}
+              style={{ width: "15%" }}
+              sortable
+            ></Column>
+            <Column
+              rowEditor
+              headerStyle={{ width: "5%" }}
+              bodyStyle={{ textAlign: "center" }}
+            ></Column>
+          </DataTable>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
