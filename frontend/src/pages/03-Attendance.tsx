@@ -78,17 +78,17 @@ const Attendance = () => {
 
       let attendanceRecord = await res.json();
       attendanceRecord = attendanceRecord["res"];
-      attendanceRecord.sort((a: any, b: any) => {
-        const firstName = a["last_name"].toUpperCase();
-        const secondName = b["last_name"].toUpperCase();
-        if (firstName < secondName) {
-          return -1;
-        }
-        if (firstName > secondName) {
-          return 1;
-        }
-        return 0;
-      });
+      // attendanceRecord.sort((a: any, b: any) => {
+      //   const firstName = a["last_name"].toUpperCase();
+      //   const secondName = b["last_name"].toUpperCase();
+      //   if (firstName < secondName) {
+      //     return -1;
+      //   }
+      //   if (firstName > secondName) {
+      //     return 1;
+      //   }
+      //   return 0;
+      // });
       setAttend_preData(attendanceRecord);
     } catch {
       console.log("fetch fail");

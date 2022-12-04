@@ -45,6 +45,13 @@ export class AttendanceController {
   async getLeaveType() {
     return await this.attendanceService.getLeaveType();
   }
+
+  @Post(':id')
+  changeAttendanceRecord(@Body() data: UpdateAttendanceDto) {
+    console.log(data);
+
+    return this.attendanceService.changeAttendanceRecord(data);
+  }
   // @Post()
   // create(@Body() createAttendanceDto: CreateAttendanceDto) {
   //   return this.attendanceService.create(createAttendanceDto);
