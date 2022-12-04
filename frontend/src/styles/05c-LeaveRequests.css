@@ -1,50 +1,50 @@
 .datatable .rejected {
-    font-weight: 300;
-    background-color: #FF5252;
-    color: white;
-    text-align: center;
-    padding: 5px;
-    /* text-decoration: line-through; */
+  font-weight: 300;
+  background-color: #ff5252;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  /* text-decoration: line-through; */
 }
 
 .datatable .pending {
-    font-weight: 700;
-    background-color: #FFA726;
-        color: white;
-    text-align: center;
-    padding: 5px;
+  font-weight: 700;
+  background-color: #ffa726;
+  color: white;
+  text-align: center;
+  padding: 5px;
 }
 
 .datatable .approved {
-    font-weight: 700;
-    background-color: #66BB6A;
-        color: white;
-    text-align: center;
-    padding: 5px;
+  font-weight: 700;
+  background-color: #66bb6a;
+  color: white;
+  text-align: center;
+  padding: 5px;
 }
 
 .datatable .taken {
-    font-weight: 300;
-    background-color: #9fb0f3;
-        color: white;
-    text-align: center;
-    padding: 5px;
+  font-weight: 300;
+  background-color: #9fb0f3;
+  color: white;
+  text-align: center;
+  padding: 5px;
 }
 
 .datatable .cancelled {
-    font-weight: 300;
-    background-color: #a4a4a4;
-        color: white;
-    text-align: center;
-    padding: 5px;
+  font-weight: 300;
+  background-color: #a4a4a4;
+  color: white;
+  text-align: center;
+  padding: 5px;
 }
 
 .datatable .onleave {
-    font-weight: 300;
-    background-color: #55cfba;
-        color: white;
-    text-align: center;
-    padding: 5px;
+  font-weight: 300;
+  background-color: #55cfba;
+  color: white;
+  text-align: center;
+  padding: 5px;
 }
 
 /* .datatable .row-accessories {

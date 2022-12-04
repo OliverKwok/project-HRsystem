@@ -145,8 +145,9 @@ export default function OrgChart2() {
     });
   };
 
+
   return (
-    <>
+    <div>
       <button onClick={generatePDF} type="button">
         Export PDF
       </button>
@@ -174,6 +175,6 @@ export default function OrgChart2() {
         ></OrganizationChart> */}
         </div>
       </div>
-    </>
+    </div>
   );
 }

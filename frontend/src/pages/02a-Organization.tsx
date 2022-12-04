@@ -5,6 +5,10 @@ import OrgAddNew from "../components/02a-OrgAddNew";
 import "../styles/02a-Org.css";
 
 export default function Organization() {
+  const body = {
+    width: "calc(100%-300px)",
+  };
+  
   const [show1, setShow1] = useState(true);
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);
@@ -35,7 +39,7 @@ export default function Organization() {
   }
 
   return (
-    <div>
+    <div style={body}>
       <div className="tab">
         <div>
           <button className="tablinks" onClick={showChart}>

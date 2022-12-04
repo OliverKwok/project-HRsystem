@@ -43,6 +43,26 @@ export class AttendanceService {
     }
   }
 
+  async getLeaveRecord(employeeId, year, month) {
+    try {
+      let res = await this.knex
+        .select('*')
+        .from('attendance')
+        .where('employee', employeeId)
+        .andWhereRaw(`extract(month from attendance.date)=?`, [month])
+        .andWhereRaw(`extract(year from attendance.date)=?`, [year]);
+
+      return { res };
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async getLeaveType() {
+    let res = await this.knex.select('*').from('leave_type');
+    return { res };
+  }
+
   // let res = await this.knex
   // .select(
   //   'employee.id',

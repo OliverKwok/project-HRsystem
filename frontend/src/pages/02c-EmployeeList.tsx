@@ -295,7 +295,6 @@ export default function Title() {
     console.log("loop forever", eid);
     if (eid !== null) {
       setShowList(false);
-      // window.localStorage.removeItem("eid");
     }
   }, [eid]);
 

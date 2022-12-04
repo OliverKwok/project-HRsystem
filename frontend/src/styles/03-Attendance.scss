@@ -120,7 +120,7 @@
   }
 }
 .attendance-pop-up {
-  outline: 1px solid black;
+  outline: 3px solid #204887;
   height: 500px;
   width: 500px;
   display: flex;
@@ -129,20 +129,23 @@
   padding: 15px;
   font-size: 18px;
   position: fixed;
-  left: 35%;
-  top: 20%;
+  top: 30%;
+  left: 40%;
+  // transform: translate(-50%, -50%);
   z-index: 10;
-  background-color: #caf1d8;
+  border-radius: 30px;
+  background-color: #c3edf5;
 
   .employeeInfo-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    outline: 1px solid black;
-    border-radius: 80px;
+    outline: 2px solid #729798;
+    border-radius: 40px;
     height: 100px;
     font-size: 25px;
+    color: #0a898e;
   }
 
   .employeeId_and_date {

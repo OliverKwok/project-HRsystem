@@ -75,39 +75,86 @@ function App() {
     }
   }, [dispatch]);
 
+  const SideBarStyle = {
+    minWidth: "300px",
+    minHeight: "100vh",
+    margin: "0px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
+  };
+
+  const NavLinkStyle = {
+    height: "60px",
+    width: "280px",
+    display: "flex",
+    alignItems: "center",
+    marginTop: "0px",
+    marginBottom: "0px",
+  };
+
+  const TriangleStyle = {
+    marginRight: "25px",
+    height: "30px",
+    width: "auto",
+    color: "#24d1ae",
+  };
+
   return (
     <>
       {isAuthenticated == true ? (
         <div className="container">
-          <div className="sidebar">
-            <div
+          <div className="sidebar" style={SideBarStyle}>
+            {/* <div
               className="company-logo-container"
               onClick={() => navigate("dashboard")}
+            > */}
+            <div
+              id="logo"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "0px",
+                marginLeft: "0px",
+              }}
             >
-              <div id="logo">
-                <BsFillPeopleFill />
-                {/* <img src="../public/logo.png" /> */}
-              </div>
-              <div>Easy HR Solutions</div>
+              <img
+                style={{ height: "150px", width: "auto" }}
+                src={process.env.PUBLIC_URL + "/AppStoreLogoTransparentBG.png"}
+                onClick={() => navigate("dashboard")}
+              />
+              {/* <BsFillPeopleFill /> */}
             </div>
+            {/* <div>Easy HR Solutions</div> */}
+            {/* </div> */}
 
-            <NavLink to={"dashboard"}>
+            <NavLink to={"dashboard"} style={NavLinkStyle}>
               <div>
                 <MdOutlineSpaceDashboard /> <span>dashboard</span>
               </div>
             </NavLink>
 
-            <div onClick={() => setSideBarItemShow1(!sideBarItemShow1)}>
+            <div
+              onClick={() => setSideBarItemShow1(!sideBarItemShow1)}
+              style={NavLinkStyle}
+            >
               <HiOutlineOfficeBuilding />
               <span>Company</span>
               <div className="sub-list-triangle">
-                {sideBarItemShow1 ? <GoTriangleDown /> : <GoTriangleLeft />}
+                {sideBarItemShow1 ? (
+                  <GoTriangleDown style={TriangleStyle} />
+                ) : (
+                  <GoTriangleLeft style={TriangleStyle} />
+                )}
               </div>
             </div>
 
             {sideBarItemShow1 && (
               <>
-                <NavLink className="sub-item" to={"organization"}>
+                <NavLink
+                  className="sub-item"
+                  to={"organization"}
+                  style={NavLinkStyle}
+                >
                   <div>
                     <SlOrganization /> <span>organization</span>
                   </div>
@@ -117,17 +164,29 @@ function App() {
                     <TbReportSearch /> <span>grade</span>
                   </div>
                 </NavLink> */}
-                <NavLink className="sub-item" to={"employeeList"}>
+                <NavLink
+                  className="sub-item"
+                  to={"employeeList"}
+                  style={NavLinkStyle}
+                >
                   <div>
                     <MdOutlineSubtitles /> <span>employee list</span>
                   </div>
                 </NavLink>
-                <NavLink className="sub-item" to={"employee"}>
+                <NavLink
+                  className="sub-item"
+                  to={"employee"}
+                  style={NavLinkStyle}
+                >
                   <div>
                     <MdOutlinePeopleAlt /> <span>new employee</span>
                   </div>
                 </NavLink>
-                <NavLink className="sub-item" to={"statusupdate"}>
+                <NavLink
+                  className="sub-item"
+                  to={"statusupdate"}
+                  style={NavLinkStyle}
+                >
                   <div>
                     <MdOutlinePeopleAlt /> <span>status update</span>
                   </div>
@@ -140,27 +199,46 @@ function App() {
               </>
             )}
 
-            <div onClick={() => setSideBarItemShow2(!sideBarItemShow2)}>
+            <div
+              onClick={() => setSideBarItemShow2(!sideBarItemShow2)}
+              style={NavLinkStyle}
+            >
               <HiOutlineOfficeBuilding />
               <span>Payroll</span>
               <div className="sub-list-triangle">
-                {sideBarItemShow1 ? <GoTriangleDown /> : <GoTriangleLeft />}
+                {sideBarItemShow2 ? (
+                  <GoTriangleDown style={TriangleStyle} />
+                ) : (
+                  <GoTriangleLeft style={TriangleStyle} />
+                )}
               </div>
             </div>
 
             {sideBarItemShow2 && (
               <>
-                <NavLink className="sub-item" to={"paySummary"}>
+                <NavLink
+                  className="sub-item"
+                  to={"paySummary"}
+                  style={NavLinkStyle}
+                >
                   <div>
                     <SlOrganization /> <span>summary</span>
                   </div>
                 </NavLink>
-                <NavLink className="sub-item" to={"payExport"}>
+                <NavLink
+                  className="sub-item"
+                  to={"payExport"}
+                  style={NavLinkStyle}
+                >
                   <div>
                     <TbReportSearch /> <span>export</span>
                   </div>
                 </NavLink>
-                <NavLink className="sub-item" to={"paySetting"}>
+                <NavLink
+                  className="sub-item"
+                  to={"paySetting"}
+                  style={NavLinkStyle}
+                >
                   <div>
                     <MdOutlineSubtitles /> <span>setting</span>
                   </div>
@@ -168,28 +246,47 @@ function App() {
               </>
             )}
 
-            <NavLink className="nav-item" to={"attendance"}>
+            <NavLink
+              className="nav-item"
+              to={"attendance"}
+              style={NavLinkStyle}
+            >
               <div>
                 <MdOutlineSpaceDashboard /> <span>attendance</span>
               </div>
             </NavLink>
 
-            <div onClick={() => setSideBarItemShow3(!sideBarItemShow3)}>
+            <div
+              onClick={() => setSideBarItemShow3(!sideBarItemShow3)}
+              style={NavLinkStyle}
+            >
               <HiOutlineOfficeBuilding />
               <span>Leaves</span>
               <div className="sub-list-triangle">
-                {sideBarItemShow3 ? <GoTriangleDown /> : <GoTriangleLeft />}
+                {sideBarItemShow3 ? (
+                  <GoTriangleDown style={TriangleStyle} />
+                ) : (
+                  <GoTriangleLeft style={TriangleStyle} />
+                )}
               </div>
             </div>
 
             {sideBarItemShow3 && (
               <>
-                <NavLink className="sub-item" to={"leavesSummary"}>
+                <NavLink
+                  className="sub-item"
+                  to={"leavesSummary"}
+                  style={NavLinkStyle}
+                >
                   <div>
                     <SlOrganization /> <span>summary</span>
                   </div>
                 </NavLink>
-                <NavLink className="sub-item" to={"leavesType"}>
+                <NavLink
+                  className="sub-item"
+                  to={"leavesType"}
+                  style={NavLinkStyle}
+                >
                   <div>
                     <TbReportSearch /> <span>leaves type</span>
                   </div>
@@ -199,7 +296,11 @@ function App() {
                     <MdOutlineSubtitles /> <span>requests</span>
                   </div>
                 </NavLink> */}
-                <NavLink className="sub-item" to={"leavesRequest2"}>
+                <NavLink
+                  className="sub-item"
+                  to={"leavesRequest2"}
+                  style={NavLinkStyle}
+                >
                   <div>
                     <MdOutlineSubtitles /> <span>requests</span>
                   </div>
@@ -207,17 +308,29 @@ function App() {
               </>
             )}
 
-            <NavLink className="nav-item" to={"offboarding"}>
+            <NavLink
+              className="nav-item"
+              to={"offboarding"}
+              style={NavLinkStyle}
+            >
               <div>
                 <MdOutlineSpaceDashboard /> <span>offboarding</span>
               </div>
             </NavLink>
-            <NavLink className="nav-item" to={"datainsights"}>
+            <NavLink
+              className="nav-item"
+              to={"datainsights"}
+              style={NavLinkStyle}
+            >
               <div>
                 <MdOutlineSpaceDashboard /> <span>data insights</span>
               </div>
             </NavLink>
-            <NavLink className="nav-item" to={"notifications"}>
+            <NavLink
+              className="nav-item"
+              to={"notifications"}
+              style={NavLinkStyle}
+            >
               <div>
                 <MdOutlineSpaceDashboard /> <span>notifications</span>
               </div>
