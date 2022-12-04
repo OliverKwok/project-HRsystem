@@ -63,7 +63,7 @@ function App() {
         }
       );
       const profileJson = await profileRes.json();
-      console.log(profileJson);
+      // console.log(profileJson);
       dispatch(login(profileJson, token));
       localStorage.setItem("token", token);
       // setUsername(profileJson.username);

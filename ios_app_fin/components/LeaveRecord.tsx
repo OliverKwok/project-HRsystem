@@ -111,10 +111,10 @@ function LeaveRecord({
           <Text style={styles.leaveText}>Status : </Text>
           <Text style={styles.leaveText}>{data.status}</Text>
         </View>
-        <View style={styles.leaveDetailContainer}>
+        {/* <View style={styles.leaveDetailContainer}>
           <Text style={styles.leaveText}>Approved by : </Text>
           <Text style={styles.leaveText}>{data.approved_by}</Text>
-        </View>
+        </View> */}
         <View style={styles.leaveDetailContainer}>
           <Text style={styles.leaveText}>Created at </Text>
           <Text style={styles.leaveText}>
