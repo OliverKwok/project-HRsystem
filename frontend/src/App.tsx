@@ -80,16 +80,28 @@ function App() {
       {isAuthenticated == true ? (
         <div className="container">
           <div className="sidebar">
-            <div
+            {/* <div
               className="company-logo-container"
               onClick={() => navigate("dashboard")}
+            > */}
+            <div
+              id="logo"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "0px",
+                marginLeft: "0px"
+              }}
             >
-              <div id="logo">
-                <BsFillPeopleFill />
-                {/* <img src="../public/logo.png" /> */}
-              </div>
-              <div>Easy HR Solutions</div>
+              <img
+                style={{ height: "150px", width: "auto" }}
+                src={process.env.PUBLIC_URL + "/AppStoreLogoTransparentBG.png"}
+                onClick={() => navigate("dashboard")}
+              />
+              {/* <BsFillPeopleFill /> */}
             </div>
+            {/* <div>Easy HR Solutions</div> */}
+            {/* </div> */}
 
             <NavLink to={"dashboard"}>
               <div>

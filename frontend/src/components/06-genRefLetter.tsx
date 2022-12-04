@@ -119,9 +119,6 @@ export default function GenRefLetter() {
               text: `Date: ${moment(new Date()).format("DD-MM-YYYY")}`,
               alignment: AlignmentType.RIGHT,
               style: "whatever",
-              // font: {
-              //   name: "Calibri",
-              // },
             }),
             new Paragraph({
               text: "To whom it may concern:",
