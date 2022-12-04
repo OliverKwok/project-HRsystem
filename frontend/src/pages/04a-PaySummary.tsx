@@ -4,6 +4,8 @@ import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
 import { Dropdown } from "primereact/dropdown";
+import { red } from "@mui/material/colors";
+import { classNames } from "primereact/utils";
 // import { Button } from 'primereact/button';
 // import { Toast } from 'primereact/toast';
 
@@ -23,22 +25,6 @@ export default function PaySummary() {
     selectAllRowsItemText: "All",
   };
 
-  // const subHeaderComponent = useMemo(() => {
-  //   const handleClear = () => {
-  //     if (filterText) {
-  //       setResetPaginationToggle(!resetPaginationToggle);
-  //       setFilterText("");
-  //     }
-  //   };
-  //   return (
-  //     <Filter
-  //       onFilter={(e: any) => setFilterText(e.target.value)}
-  //       onClear={handleClear}
-  //       filterText={filterText}
-  //     />
-  //   );
-  // }, [filterText, resetPaginationToggle]);
-
   const columns = [
     { field: "employeeid", header: "Employee ID" },
     { field: "name", header: "Name" },
@@ -47,6 +33,8 @@ export default function PaySummary() {
     { field: "bonus", header: "Bonus" },
     { field: "nopay_leave", header: "No Pay Leave" },
     { field: "mpf_employee", header: "MPF" },
+    { field: "mpf_employee_isAmended", header: "mpf_employee_isAmended" },
+    { field: "total_isAmended", header: "total_isAmended" },
     { field: "total", header: "TOTAL" },
   ];
 
@@ -208,6 +196,8 @@ export default function PaySummary() {
           onValueChange={(e) => {
             options.editorCallback(e.value);
 
+            console.log(options.rowData);
+
             const requestOptions = {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -252,41 +242,73 @@ export default function PaySummary() {
   };
 
   const otPayBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
+    const stockClassName = classNames({
+      redNumber: rowData.ot_pay > 0 || rowData.ot_pay < 0,
+    });
+
+    let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.ot_pay);
+
+    return <span className={stockClassName}>{numberShown}</span>;
   };
+
   const bonusBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
+    const stockClassName = classNames({
+      redNumber: rowData.bonus > 0 || rowData.bonus < 0,
+    });
+
+    let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.bonus);
+
+    return <span className={stockClassName}>{numberShown}</span>;
   };
 
   const noPayLeaveBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
+    const stockClassName = classNames({
+      redNumber: rowData.nopay_leave > 0 || rowData.nopay_leave < 0,
+    });
+
+    let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.nopay_leave);
+
+    return <span className={stockClassName}>{numberShown}</span>;
   };
 
   const mpfBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
+    const stockClassName = classNames({
+      redNumber: rowData.mpf_employee_isAmended == true,
+      blueNumber: rowData.mpf_employee_isAmended == false,
+    });
+
+    let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.mpf_employee);
+
+    return <span className={stockClassName}>{numberShown}</span>;
   };
 
   const totalBodyTemplate = (rowData: any) => {
-    return new Intl.NumberFormat("en-US", {
+    const stockClassName = classNames({
+      redNumber: rowData.total_isAmended == true,
+      blueNumber: rowData.total_isAmended == false,
+    });
+
+    let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.total);
-  };
 
+    return <span className={stockClassName}>{numberShown}</span>;
+  };
   return (
-    <div className="datatable-editing">
+    <div className="payroll-editing">
       <div className="card p-fluid">
         {/* <h5>Row Editing</h5> */}
         <DataTable
@@ -295,18 +317,25 @@ export default function PaySummary() {
           dataKey="id"
           onRowEditComplete={onRowEditComplete1}
           responsiveLayout="scroll"
+          paginator
+          paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+          rows={10}
+          rowsPerPageOptions={[10, 20, 50]}
         >
           <Column
             field="employeeid"
             header="ID"
             // editor={(options) => textEditor(options)}
             style={{ width: "10%" }}
+            sortable
           ></Column>
           <Column
             field="name"
             header="Name"
             // editor={(options) => textEditor(options)}
             style={{ width: "15%" }}
+            sortable
           ></Column>
           {/* <Column
             field="inventoryStatus"
@@ -321,6 +350,7 @@ export default function PaySummary() {
             body={basicSalaryBodyTemplate}
             // editor={(options) => priceEditor(options)}
             style={{ width: "15%" }}
+            sortable
           ></Column>
           <Column
             field="ot_pay"
@@ -328,6 +358,7 @@ export default function PaySummary() {
             body={otPayBodyTemplate}
             editor={(options) => priceEditor(options)}
             style={{ width: "10%" }}
+            sortable
           ></Column>
           <Column
             field="bonus"
@@ -335,6 +366,7 @@ export default function PaySummary() {
             body={bonusBodyTemplate}
             editor={(options) => priceEditor(options)}
             style={{ width: "10%" }}
+            sortable
           ></Column>
           <Column
             field="nopay_leave"
@@ -342,6 +374,7 @@ export default function PaySummary() {
             body={noPayLeaveBodyTemplate}
             editor={(options) => priceEditor(options)}
             style={{ width: "10%" }}
+            sortable
           ></Column>
           <Column
             field="mpf_employee"
@@ -349,6 +382,12 @@ export default function PaySummary() {
             body={mpfBodyTemplate}
             editor={(options) => priceEditor(options)}
             style={{ width: "10%" }}
+            sortable
+          ></Column>
+          <Column
+            field="mpf_employee_isAmended"
+            header="mpf_employee_isAmended"
+            style={{ display: "none" }}
           ></Column>
           <Column
             field="total"
@@ -356,6 +395,7 @@ export default function PaySummary() {
             body={totalBodyTemplate}
             editor={(options) => priceEditor(options)}
             style={{ width: "15%" }}
+            sortable
           ></Column>
           <Column
             rowEditor
