@@ -30,6 +30,13 @@ function Notification() {
       let notifications = await res.json();
       notifications = notifications['res'];
 
+      notifications.sort((a: any, b: any) => {
+        if (a.id > b.id) {
+          return -1;
+        }
+        return 1;
+      });
+
       setNotifications(notifications);
     } catch {
       console.log('fetch fail');
