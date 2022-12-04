@@ -2,6 +2,7 @@
 //emotion 係 css in js 嘅其中一款
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 interface attendanceState {
   employeeId: number;
@@ -11,23 +12,28 @@ interface attendanceState {
   status: string;
 }
 interface show_word_state {
-  employeeId: number;
-  name: string;
-  department: string;
-  grade: string;
-  attendance: attendanceState[];
+  id: number;
+  employeeid: string;
+  first_name: string;
+  last_name: string;
+  dept_name: string;
+  gender: string;
 }
-interface state {
+interface attendInfoState {
   isShow: boolean;
-  attendanceStatus: string;
-  employeeId: number;
-  attendanceDate: string;
+  status: string;
+  employee: number;
+  date: string;
+  time_checkedin: string;
+  time_checkedout: string;
 }
 
 interface headerState {
-  name: string;
+  employeeId: string;
+  lastName: string;
+  firstName: string;
   department: string;
-  grade: string;
+  gender: string;
   year: number;
   month: number;
   month_days: number;
@@ -37,112 +43,234 @@ function Attendance_compo({
   show_word,
   header_info,
   handleClickOpen,
-  obj,
-}: {
+}: // obj,
+{
   show_word: show_word_state;
   header_info: headerState;
   handleClickOpen: (
     status: string,
-    employeeId: number,
-    attendanceDate: string
+    employee: number,
+    date: string,
+    time_checkedin: string,
+    time_checkedout: string,
+    employeeIdFull: string
   ) => void;
-  obj: state;
+  // obj: attendInfoState;
 }) {
   const [workedDays, setWorkDays] = useState(0);
+  const [attendanceRecord, setAttendanceRecord] = useState([]);
+
   useEffect(() => {
-    const ans_arr = show_word.attendance.map((data) => data.status);
-    // console.log(ans_arr);
+    async function fetchAttendance() {
+      try {
+        const options = { method: "GET" };
+        let res = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/attendance/getAttendanceRecord/${show_word.id}/${header_info.year}/${header_info.month}`,
+          options
+        );
 
-    const ans = ans_arr.reduce(
-      (count: number, b) => (b == "P" || b == "L" ? count + 1 : count),
-      0
-    );
-    // console.log(ans);
+        let attendanceRecord = await res.json();
+        attendanceRecord = attendanceRecord["res"];
 
-    setWorkDays(ans);
-  }, [show_word]);
+        setAttendanceRecord(attendanceRecord);
+      } catch {
+        console.log("fetch fail");
+      }
+
+      // console.log(show_word);
+    }
+    fetchAttendance();
+  }, [header_info]);
 
   function handleClick(
     status: string,
-    employeeId: number,
-    attendanceDate: string
+    employee: number,
+    date: string,
+    time_checkedin: string,
+    time_checkedout: string,
+    employeeIdFull: string
   ) {
     // alert("click open");
     // console.log(day_of_week[0]["status"]);
-    handleClickOpen(status, employeeId, attendanceDate);
+    handleClickOpen(
+      status,
+      employee,
+      date,
+      time_checkedin,
+      time_checkedout,
+      employeeIdFull
+    );
   }
+  const attendDays_arr = attendanceRecord.map((data) => data["status"]);
+  const punctualDays = attendDays_arr.reduce(
+    (count: number, b) => (b == "punctual" ? count + 1 : count),
+    0
+  );
+  const lateDays = attendDays_arr.reduce(
+    (count: number, b) => (b == "late" ? count + 1 : count),
+    0
+  );
 
   return (
     <div className="attendance-row">
-      <div className="attendance-info">{show_word.name}</div>
-      <div className="attendance-info">{show_word.department}</div>
-      <div className="attendance-info">{show_word.grade}</div>
+      <div className="attendance-info">{show_word.employeeid}</div>
+      <div className="attendance-info">{show_word.last_name}</div>
+      <div className="attendance-info">{show_word.first_name}</div>
+      <div className="attendance-info">{show_word.dept_name}</div>
       <div className="attendance-loop-container">
-        {new Array(new Date(2022, header_info.month, 0, 0, 0, 0, 0).getDate())
+        {new Array(header_info.month_days)
           .fill(0)
           .map(function (_: any, index: number) {
-            let day_of_week: any = show_word.attendance.filter(
-              (data) => new Date(data.date).getDate() === index + 1
+            let day_of_week: any = attendanceRecord.filter(
+              (data) => new Date(data["date"]).getDate() === index + 1
             );
+            // console.log(day_of_week);
 
             return new Date(
-              `${new Date(
-                `${show_word.attendance[0]["date"]}`
-              ).getFullYear()},${
-                new Date(`${show_word.attendance[0]["date"]}`).getMonth() + 1
-              },${index + 1}`
+              `${header_info.year},${header_info.month},${index + 1}`
             ).getDay() == 6 ||
               new Date(
-                `${new Date(
-                  `${show_word.attendance[0]["date"]}`
-                ).getFullYear()},${
-                  new Date(`${show_word.attendance[0]["date"]}`).getMonth() + 1
-                },${index + 1}`
+                `${header_info.year},${header_info.month},${index + 1}`
               ).getDay() == 0 ? (
-              <div
-                className="attendance-loop"
-                onClick={() => {
-                  // console.log(day_of_week[0]["status"]);
-                  // handleClick(
-                  //   day_of_week[0]["status"],
-                  //   day_of_week[0]["employeeId"],
-                  //   day_of_week[0]["date"]
-                  // );
-                }}
-                key={index}
-                css={css`
-                  background-color: #9294a2;
-                  pointer-events: none;
-                `}
-              >
+              <SatOrSun className="attendance-loop" key={index}>
                 {day_of_week.length == 1 ? day_of_week[0]["status"] : ""}
-              </div>
+              </SatOrSun>
+            ) : day_of_week.length == 1 ? (
+              day_of_week[0]["status"] == "punctual" ? (
+                <Punctual
+                  className="attendance-loop"
+                  onClick={() => {
+                    console.log(day_of_week[0]["status"]);
+                    handleClick(
+                      day_of_week[0]["status"],
+                      day_of_week[0]["employee"],
+                      day_of_week[0]["date"],
+                      day_of_week[0]["time_checkedin"],
+                      day_of_week[0]["time_checkedout"],
+                      show_word["employeeid"]
+                    );
+                  }}
+                  key={index}
+                >
+                  P
+                </Punctual>
+              ) : day_of_week[0]["status"] == "late" ? (
+                <Late
+                  className="attendance-loop"
+                  onClick={() => {
+                    console.log(day_of_week[0]["status"]);
+                    handleClick(
+                      day_of_week[0]["status"],
+                      day_of_week[0]["employee"],
+                      day_of_week[0]["date"],
+                      day_of_week[0]["time_checkedin"],
+                      day_of_week[0]["time_checkedout"],
+                      show_word["employeeid"]
+                    );
+                  }}
+                  key={index}
+                >
+                  L
+                </Late>
+              ) : (
+                <div
+                  className="attendance-loop"
+                  onClick={() => {
+                    let status = day_of_week[0] ? day_of_week[0]["status"] : "";
+                    let employeeId = day_of_week[0]
+                      ? day_of_week[0]["employeeId"]
+                      : show_word["id"];
+                    let date = day_of_week[0]
+                      ? day_of_week[0]["date"]
+                      : `${header_info.year}-${header_info.month}-${index + 1}`;
+                    let time_checkedin = day_of_week[0]
+                      ? day_of_week[0]["time_checkedin"]
+                      : "";
+                    let time_checkedout = day_of_week[0]
+                      ? day_of_week[0]["time_checkedout"]
+                      : "";
+                    handleClick(
+                      status,
+                      employeeId,
+                      date,
+                      time_checkedin,
+                      time_checkedout,
+                      show_word["employeeid"]
+                    );
+                  }}
+                  key={index}
+                ></div>
+              )
             ) : (
-              <div
+              <Nothing
                 className="attendance-loop"
                 onClick={() => {
                   let status = day_of_week[0] ? day_of_week[0]["status"] : "";
                   let employeeId = day_of_week[0]
                     ? day_of_week[0]["employeeId"]
-                    : show_word.employeeId;
+                    : show_word["id"];
                   let date = day_of_week[0]
                     ? day_of_week[0]["date"]
                     : `${header_info.year}-${header_info.month}-${index + 1}`;
-
-                  handleClick(status, employeeId, date);
+                  let time_checkedin = day_of_week[0]
+                    ? day_of_week[0]["time_checkedin"]
+                    : "";
+                  let time_checkedout = day_of_week[0]
+                    ? day_of_week[0]["time_checkedout"]
+                    : "";
+                  handleClick(
+                    status,
+                    employeeId,
+                    date,
+                    time_checkedin,
+                    time_checkedout,
+                    show_word["employeeid"]
+                  );
                 }}
                 key={index}
               >
-                {day_of_week.length == 1 ? day_of_week[0]["status"] : ""}
-              </div>
+                not
+              </Nothing>
             );
           })}
       </div>
       <div className="header-action">
-        <div>{workedDays}</div>
+        <div>{punctualDays}</div>
+      </div>
+      <div className="header-action">
+        <div>{lateDays}</div>
       </div>
     </div>
   );
 }
 
 export default Attendance_compo;
+
+export const SatOrSun = styled.div`
+  background-color: #9294a2;
+  pointer-events: none;
+`;
+
+export const Punctual = styled.div`
+  background-color: #deeeee;
+  &:hover {
+    transform: scale(1.12);
+    background-color: #c6e9e9;
+  }
+`;
+
+export const Late = styled.div`
+  background-color: #ef6b6b;
+  &:hover {
+    transform: scale(1.12);
+    background-color: #e95353;
+  }
+`;
+
+export const Nothing = styled.div`
+  background-color: #ef6b6b;
+  &:hover {
+    transform: scale(1.12);
+    background-color: #e95353;
+  }
+`;

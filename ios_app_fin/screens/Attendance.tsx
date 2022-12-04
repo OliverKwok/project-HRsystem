@@ -51,7 +51,7 @@ function Attendance() {
   const [selectedDate, setSelectedDate] = useState(
     new Date().toISOString().split('T')[0],
   );
-  const [attendanceRecord, setAttendanceRecord] = useState([]);
+  const [attendanceRecord, setAttendanceRecord] = useState([] as any);
   const [pHolidays, setPHolidays] = useState([]);
   const [holidaysName, setHolidaysName] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -86,6 +86,8 @@ function Attendance() {
       );
 
       let attendance = await res.json();
+      console.log(attendance);
+
       attendance = attendance['res'];
 
       setAttendanceRecord(attendance);
