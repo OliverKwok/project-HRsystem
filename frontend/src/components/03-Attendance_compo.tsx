@@ -59,26 +59,42 @@ function Attendance_compo({
 }) {
   const [workedDays, setWorkDays] = useState(0);
   const [attendanceRecord, setAttendanceRecord] = useState([]);
+  const [leaveType, setLeaveType] = useState([]);
+
+  async function fetchAttendance() {
+    try {
+      const options = { method: "GET" };
+      let res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/attendance/getAttendanceRecord/${show_word.id}/${header_info.year}/${header_info.month}`,
+        options
+      );
+
+      let attendanceRecord = await res.json();
+      attendanceRecord = attendanceRecord["res"];
+
+      setAttendanceRecord(attendanceRecord);
+    } catch {
+      console.log("fetch fail");
+    }
+  }
+  // async function fetchLeaveRecord() {
+  //   try {
+  //     const options = { method: "GET" };
+  //     let res = await fetch(
+  //       `${process.env.REACT_APP_BACKEND_URL}/attendance/getLeaveRecord/${show_word.id}/${header_info.year}/${header_info.month}`,
+  //       options
+  //     );
+
+  //     let leaveRecord = await res.json();
+  //     leaveRecord = leaveRecord["res"];
+
+  //     setLeaveRecord(leaveRecord);
+  //   } catch {
+  //     console.log("fetch fail");
+  //   }
+  // }
 
   useEffect(() => {
-    async function fetchAttendance() {
-      try {
-        const options = { method: "GET" };
-        let res = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/attendance/getAttendanceRecord/${show_word.id}/${header_info.year}/${header_info.month}`,
-          options
-        );
-
-        let attendanceRecord = await res.json();
-        attendanceRecord = attendanceRecord["res"];
-
-        setAttendanceRecord(attendanceRecord);
-      } catch {
-        console.log("fetch fail");
-      }
-
-      // console.log(show_word);
-    }
     fetchAttendance();
   }, [header_info]);
 
@@ -228,9 +244,7 @@ function Attendance_compo({
                   );
                 }}
                 key={index}
-              >
-                not
-              </Nothing>
+              ></Nothing>
             );
           })}
       </div>
@@ -268,9 +282,8 @@ export const Late = styled.div`
 `;
 
 export const Nothing = styled.div`
-  background-color: #ef6b6b;
+  background-color: #f3fbfd;
   &:hover {
     transform: scale(1.12);
-    background-color: #e95353;
   }
 `;

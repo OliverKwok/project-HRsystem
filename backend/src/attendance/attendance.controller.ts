@@ -32,7 +32,19 @@ export class AttendanceController {
       month,
     );
   }
+  @Get('get/:id/:year/:month')
+  async getLeaveRecord(
+    @Param('id') employeeId: string,
+    @Param('year') year: string,
+    @Param('month') month: string,
+  ) {
+    return await this.attendanceService.getLeaveRecord(employeeId, year, month);
+  }
 
+  @Get('getLeaveType')
+  async getLeaveType() {
+    return await this.attendanceService.getLeaveType();
+  }
   // @Post()
   // create(@Body() createAttendanceDto: CreateAttendanceDto) {
   //   return this.attendanceService.create(createAttendanceDto);
