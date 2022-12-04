@@ -113,9 +113,36 @@ export class PayrollService {
   //   return { result: 'monthly record added' };
   // }
 
-  async findAll() {
+  // async findAll() {
+  //   try {
+  //     const allPayroll = await this.knex
+  //       .select(
+  //         this.knex.raw(
+  //           `concat(employee.last_name, ' ', employee.first_name,', ',employee.alias) as name`,
+  //         ),
+  //         'employee.id',
+  //         'employee.employeeid',
+  //         'employee.basic_salary',
+  //         'payroll_edit_history.ot_pay',
+  //         'payroll_edit_history.bonus',
+  //         'payroll_edit_history.nopay_leave',
+  //       )
+  //       .from('employee')
+  //       .leftJoin(
+  //         'payroll_edit_history',
+  //         'employee.id',
+  //         '=',
+  //         'payroll_edit_history.employeeid',
+  //       );
+  //     return allPayroll;
+  //   } catch (err) {
+  //     throw new HttpException(err, HttpStatus.BAD_REQUEST);
+  //   }
+  // }
+
+  async findOneMonth(year: number, month: number) {
     try {
-      const allPayroll = await this.knex
+      const OneMonthPayroll = await this.knex
         .select(
           this.knex.raw(
             `concat(employee.last_name, ' ', employee.first_name,', ',employee.alias) as name`,
@@ -133,8 +160,9 @@ export class PayrollService {
           'employee.id',
           '=',
           'payroll_edit_history.employeeid',
-        );
-      return allPayroll;
+        )
+        .orderBy('id');
+      return OneMonthPayroll;
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }

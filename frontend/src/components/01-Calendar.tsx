@@ -109,8 +109,19 @@ export default function Calendar() {
 
         item["id"] = "leave" + i.toString();
         item["title"] = item["type"] + ": " + item["title"];
-        item["backgroundColor"] = "#42adf5";
-        item["borderColor"] = "#42adf5";
+
+        // decide the color deopends on status
+        if (item["status"] == "pending") {
+          item["backgroundColor"] = "#dc8665";
+          item["borderColor"] = "#dc8665";
+        } else if (item["status"] == "approved") {
+          item["backgroundColor"] = "#42adf5";
+          item["borderColor"] = "#42adf5";
+        } else if (item["status"] == "approved") {
+          item["backgroundColor"] = "#534666";
+          item["borderColor"] = "#534666";
+        }
+
         i++;
       }
       // console.log(response);

@@ -7,34 +7,34 @@ import { Dropdown } from "primereact/dropdown";
 // import { Button } from 'primereact/button';
 // import { Toast } from 'primereact/toast';
 
-let data = [
-  {
-    id: "1",
-    employeeid: "DEMO001",
-    name: "Peter Chan",
-    basic_salary: 20000,
-    ot_pay: 100,
-    bonus: 1,
-    nopay_leave: -2,
-    // mpf: -3,
-  },
-  {
-    id: "2",
-    employeeid: "DEMO002",
-    name: "John Wong",
-    basic_salary: 10000,
-    ot_pay: 100,
-    bonus: 4,
-    nopay_leave: -5,
-    // mpf: -6,
-  },
-];
+// let data = [
+//   {
+//     id: "1",
+//     employeeid: "DEMO001",
+//     name: "Peter Chan",
+//     basic_salary: 20000,
+//     ot_pay: 100,
+//     bonus: 1,
+//     nopay_leave: -2,
+//     // mpf: -3,
+//   },
+//   {
+//     id: "2",
+//     employeeid: "DEMO002",
+//     name: "John Wong",
+//     basic_salary: 10000,
+//     ot_pay: 100,
+//     bonus: 4,
+//     nopay_leave: -5,
+//     // mpf: -6,
+//   },
+// ];
 
 export default function PaySummary() {
-  const [products1, setProducts1] = useState<any[]>();
+  // const [products1, setProducts1] = useState<any[]>();
   const [products2, setProducts2] = useState<any[]>();
-  const [products3, setProducts3] = useState<any[]>();
-  const [products4, setProducts4] = useState<any[]>();
+  // const [products3, setProducts3] = useState<any[]>();
+  // const [products4, setProducts4] = useState<any[]>();
   const [editingRows, setEditingRows] = useState({});
   const toast = useRef();
 
@@ -55,21 +55,33 @@ export default function PaySummary() {
   ];
 
   const dataTableFuncMap = {
-    products1: setProducts1,
+    // products1: setProducts1,
     products2: setProducts2,
-    products3: setProducts3,
-    products4: setProducts4,
+    // products3: setProducts3,
+    // products4: setProducts4,
   };
 
   useEffect(() => {
-    fetchProductData("products1");
+    // fetchProductData("products1");
     fetchProductData("products2");
-    fetchProductData("products3");
-    fetchProductData("products4");
+    // fetchProductData("products3");
+    // fetchProductData("products4");
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchProductData = (productStateKey: any) => {
-    (dataTableFuncMap as any)[`${productStateKey}`](data);
+    const requestOptions = {
+      method: "Get",
+    };
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/payroll/2022/12`,
+      requestOptions
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        (dataTableFuncMap as any)[`${productStateKey}`](data);
+      });
   };
 
   const isPositiveInteger = (val: any) => {
@@ -123,24 +135,24 @@ export default function PaySummary() {
     setProducts2(_products2);
   };
 
-  const onRowEditComplete2 = (e: any) => {
-    let _products3: any = [...(products3 as any)];
-    let { newData, index } = e;
-    _products3[index] = newData;
-    setProducts3(_products3);
-  };
+  // const onRowEditComplete2 = (e: any) => {
+  //   let _products3: any = [...(products3 as any)];
+  //   let { newData, index } = e;
+  //   _products3[index] = newData;
+  //   setProducts3(_products3);
+  // };
 
   const onRowEditChange = (e: any) => {
     setEditingRows(e.data);
   };
 
-  const setActiveRowIndex = (index: any) => {
-    let _editingRows = {
-      ...editingRows,
-      ...{ [`${(products3 as any)[index].id}`]: true },
-    };
-    setEditingRows(_editingRows);
-  };
+  // const setActiveRowIndex = (index: any) => {
+  //   let _editingRows = {
+  //     ...editingRows,
+  //     ...{ [`${(products3 as any)[index].id}`]: true },
+  //   };
+  //   setEditingRows(_editingRows);
+  // };
 
   const cellEditor = (options: any) => {
     if (options.field === "basic_salary") return priceEditor(options);
@@ -152,6 +164,7 @@ export default function PaySummary() {
   };
 
   const textEditor = (options: any) => {
+    console.log(options);
     return (
       <InputText
         type="text"
@@ -211,8 +224,8 @@ export default function PaySummary() {
               .then((response) => {
                 return response.json();
               })
-              .then((data) => {
-                console.log(data);
+              .then((editData) => {
+                console.log(editData);
               });
           }}
           mode="currency"
@@ -262,7 +275,7 @@ export default function PaySummary() {
   // };
 
   return (
-    <div className="datatable-editing-demo">
+    <div className="datatable-editing">
       <div className="card p-fluid">
         {/* <h5>Row Editing</h5> */}
         <DataTable
@@ -275,13 +288,13 @@ export default function PaySummary() {
           <Column
             field="employeeid"
             header="Employee ID"
-            editor={(options) => textEditor(options)}
+            // editor={(options) => textEditor(options)}
             style={{ width: "10%" }}
           ></Column>
           <Column
             field="name"
             header="Name"
-            editor={(options) => textEditor(options)}
+            // editor={(options) => textEditor(options)}
             style={{ width: "15%" }}
           ></Column>
           {/* <Column
@@ -295,7 +308,7 @@ export default function PaySummary() {
             field="basic_salary"
             header="Basic Salary"
             body={basicSalaryBodyTemplate}
-            editor={(options) => priceEditor(options)}
+            // editor={(options) => priceEditor(options)}
             style={{ width: "10%" }}
           ></Column>
           <Column
