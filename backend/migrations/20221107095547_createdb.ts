@@ -221,6 +221,9 @@ export async function up(knex: Knex): Promise<void> {
     table.float('ot_pay');
     table.float('bonus');
     table.float('nopay_leave');
+    table.float('mpf_employee');
+    table.float('total');
+
     table.timestamp('updated_datetime');
 
     table.boolean('isApproved');

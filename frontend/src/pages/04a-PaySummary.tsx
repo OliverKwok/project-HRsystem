@@ -7,36 +7,37 @@ import { Dropdown } from "primereact/dropdown";
 // import { Button } from 'primereact/button';
 // import { Toast } from 'primereact/toast';
 
-// let data = [
-//   {
-//     id: "1",
-//     employeeid: "DEMO001",
-//     name: "Peter Chan",
-//     basic_salary: 20000,
-//     ot_pay: 100,
-//     bonus: 1,
-//     nopay_leave: -2,
-//     // mpf: -3,
-//   },
-//   {
-//     id: "2",
-//     employeeid: "DEMO002",
-//     name: "John Wong",
-//     basic_salary: 10000,
-//     ot_pay: 100,
-//     bonus: 4,
-//     nopay_leave: -5,
-//     // mpf: -6,
-//   },
-// ];
-
 export default function PaySummary() {
   // const [products1, setProducts1] = useState<any[]>();
   const [products2, setProducts2] = useState<any[]>();
   // const [products3, setProducts3] = useState<any[]>();
   // const [products4, setProducts4] = useState<any[]>();
   const [editingRows, setEditingRows] = useState({});
+  const [toggleRefresh, setToggleRefresh] = useState(false);
   const toast = useRef();
+
+  const paginationComponentOptions = {
+    rowsPerPageText: "Rows per page",
+    rangeSeparatorText: "of",
+    selectAllRowsItem: true,
+    selectAllRowsItemText: "All",
+  };
+
+  // const subHeaderComponent = useMemo(() => {
+  //   const handleClear = () => {
+  //     if (filterText) {
+  //       setResetPaginationToggle(!resetPaginationToggle);
+  //       setFilterText("");
+  //     }
+  //   };
+  //   return (
+  //     <Filter
+  //       onFilter={(e: any) => setFilterText(e.target.value)}
+  //       onClear={handleClear}
+  //       filterText={filterText}
+  //     />
+  //   );
+  // }, [filterText, resetPaginationToggle]);
 
   const columns = [
     { field: "employeeid", header: "Employee ID" },
@@ -45,7 +46,8 @@ export default function PaySummary() {
     { field: "ot_pay", header: "OT Pay" },
     { field: "bonus", header: "Bonus" },
     { field: "nopay_leave", header: "No Pay Leave" },
-    // { field: "mpf", header: "MPF" },
+    { field: "mpf_employee", header: "MPF" },
+    { field: "total", header: "TOTAL" },
   ];
 
   const statuses = [
@@ -66,7 +68,7 @@ export default function PaySummary() {
     fetchProductData("products2");
     // fetchProductData("products3");
     // fetchProductData("products4");
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [toggleRefresh]);
 
   const fetchProductData = (productStateKey: any) => {
     const requestOptions = {
@@ -159,7 +161,8 @@ export default function PaySummary() {
     else if (options.field === "ot_pay") return priceEditor(options);
     else if (options.field === "bonus") return priceEditor(options);
     else if (options.field === "nopay_leave") return priceEditor(options);
-    // else if (options.field === "mpf") return priceEditor(options);
+    else if (options.field === "mpf_employee") return priceEditor(options);
+    else if (options.field === "total") return priceEditor(options);
     return textEditor(options);
   };
 
@@ -216,7 +219,7 @@ export default function PaySummary() {
                 updated_value: e.value,
               }),
             };
-            console.log(requestOptions);
+            // console.log(requestOptions);
             fetch(
               `${process.env.REACT_APP_BACKEND_URL}/payroll/editHistoryCreate`,
               requestOptions
@@ -227,6 +230,7 @@ export default function PaySummary() {
               .then((editData) => {
                 console.log(editData);
               });
+            setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
           }}
           mode="currency"
           currency="USD"
@@ -267,12 +271,19 @@ export default function PaySummary() {
     }).format(rowData.nopay_leave);
   };
 
-  // const mpfBodyTemplate = (rowData: any) => {
-  //   return new Intl.NumberFormat("en-US", {
-  //     style: "currency",
-  //     currency: "USD",
-  //   }).format(rowData.mpf);
-  // };
+  const mpfBodyTemplate = (rowData: any) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(rowData.mpf_employee);
+  };
+
+  const totalBodyTemplate = (rowData: any) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(rowData.total);
+  };
 
   return (
     <div className="datatable-editing">
@@ -287,7 +298,7 @@ export default function PaySummary() {
         >
           <Column
             field="employeeid"
-            header="Employee ID"
+            header="ID"
             // editor={(options) => textEditor(options)}
             style={{ width: "10%" }}
           ></Column>
@@ -309,41 +320,46 @@ export default function PaySummary() {
             header="Basic Salary"
             body={basicSalaryBodyTemplate}
             // editor={(options) => priceEditor(options)}
-            style={{ width: "10%" }}
+            style={{ width: "15%" }}
           ></Column>
           <Column
             field="ot_pay"
-            header="OT Pay"
+            header="+OT Pay"
             body={otPayBodyTemplate}
             editor={(options) => priceEditor(options)}
             style={{ width: "10%" }}
           ></Column>
           <Column
             field="bonus"
-            header="Bonus"
+            header="+Bonus"
             body={bonusBodyTemplate}
             editor={(options) => priceEditor(options)}
             style={{ width: "10%" }}
           ></Column>
           <Column
             field="nopay_leave"
-            header="No Pay Leave"
+            header="-No Pay Leave"
             body={noPayLeaveBodyTemplate}
             editor={(options) => priceEditor(options)}
             style={{ width: "10%" }}
           ></Column>
-          {/* 
           <Column
-            field="mpf"
-            header="MPF"
+            field="mpf_employee"
+            header="-MPF"
             body={mpfBodyTemplate}
             editor={(options) => priceEditor(options)}
-            style={{ width: "20%" }}
-          ></Column> */}
-
+            style={{ width: "10%" }}
+          ></Column>
+          <Column
+            field="total"
+            header="Total"
+            body={totalBodyTemplate}
+            editor={(options) => priceEditor(options)}
+            style={{ width: "15%" }}
+          ></Column>
           <Column
             rowEditor
-            headerStyle={{ width: "10%", minWidth: "8rem" }}
+            headerStyle={{ width: "5%" }}
             bodyStyle={{ textAlign: "center" }}
           ></Column>
         </DataTable>
