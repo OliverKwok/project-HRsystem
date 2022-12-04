@@ -79,7 +79,7 @@ function App() {
     <>
       {isAuthenticated == true ? (
         <div className="container">
-          <div className="sidebar" style={{ minWidth: "280px" }}>
+          <div className="sidebar" style={{ minWidth: "300px" }}>
             {/* <div
               className="company-logo-container"
               onClick={() => navigate("dashboard")}
