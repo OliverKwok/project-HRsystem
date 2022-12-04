@@ -177,7 +177,7 @@ const Attendance = () => {
   };
 
   return (
-    <>
+    <div className="bigPageContainer">
       <div className="month-picker-container">
         <div className="month-picker">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -248,7 +248,7 @@ const Attendance = () => {
           <PopUp handleClickClose={handleClickCl} data={obj} />
         ) : null}
       </div>
-    </>
+    </div>
   );
 };
 
