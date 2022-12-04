@@ -206,7 +206,7 @@ function App() {
               <HiOutlineOfficeBuilding />
               <span>Payroll</span>
               <div className="sub-list-triangle">
-                {sideBarItemShow1 ? (
+                {sideBarItemShow2 ? (
                   <GoTriangleDown style={TriangleStyle} />
                 ) : (
                   <GoTriangleLeft style={TriangleStyle} />
