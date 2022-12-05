@@ -472,6 +472,37 @@ export class PayrollService {
     }
   }
 
+  async findOneMonthConfirmed(year: number, month: number) {
+    try {
+      let OneMonthPayroll = await this.knex
+        .select(
+          'payroll.id',
+          'payroll.year',
+          'payroll.month',
+          'payroll.basic_salary',
+          'payroll.ot_pay',
+          'payroll.bonus',
+          'payroll.nopay_leave',
+          'payroll.mpf_employee',
+          'payroll.total',
+          'employee.employeeid',
+          this.knex.raw(
+            `concat(employee.last_name, ' ', employee.first_name,', ',employee.alias) as name`,
+          ),
+        )
+        .from('payroll')
+        .where({
+          year: year,
+          month: month,
+        })
+        .join('employee', 'employee.id', 'payroll.employeeid');
+
+      return OneMonthPayroll;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} payroll`;
   }

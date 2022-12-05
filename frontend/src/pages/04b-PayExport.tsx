@@ -19,19 +19,47 @@ const PayExport = () => {
 
   const data = [
     {
-      id: 1,
+      id: 93,
       year: 2022,
       month: 12,
-      employeeid: "DEMO001",
-      name: "Chan Tai Man, Peter",
-      basic_salary: 20000,
+      basic_salary: 100000,
       ot_pay: 0,
-      bonus: 1000,
+      bonus: 0,
       nopay_leave: 0,
-      mpf_employee: 1050,
-      total: 19950,
+      mpf_employee: 1500,
+      total: 98500,
+      employeeid: "DEMO001",
+      name: "Chan Tse Hin, Liam",
+    },
+    {
+      id: 94,
+      year: 2022,
+      month: 12,
+      basic_salary: 85000,
+      ot_pay: 0,
+      bonus: 0,
+      nopay_leave: 0,
+      mpf_employee: 1500,
+      total: 83500,
+      employeeid: "DEMO002",
+      name: "Lee Yu Hin, Noah",
     },
   ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     year: 2022,
+  //     month: 12,
+  //     employeeid: "DEMO001",
+  //     name: "Chan Tai Man, Peter",
+  //     basic_salary: 20000,
+  //     ot_pay: 0,
+  //     bonus: 1000,
+  //     nopay_leave: 0,
+  //     mpf_employee: 1050,
+  //     total: 19950,
+  //   },
+  // ];
 
   useEffect(() => {
     setId(data[0].id);
