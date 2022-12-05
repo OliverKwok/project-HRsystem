@@ -1,6 +1,6 @@
 .statusCard {
   width: 300px;
-  height: 400px;
+  height: 450px;
   background-color: lightgoldenrodyellow;
   margin: 10px;
   padding: 10px;
@@ -8,13 +8,13 @@
   flex-direction: column;
 }
 
-.statusCard:active {
+/* .statusCard:active {
   transform: scale(1.1);
 }
 
 .statusCard:hover {
   transform: scale(1.1);
-}
+} */
 
 .status {
   width: 100%;
@@ -22,6 +22,13 @@
   text-align: center;
   padding-top: 8px;
   /* background-color: pink; */
+}
+
+.dateApplied {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .profilepic {

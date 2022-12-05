@@ -266,9 +266,10 @@ export default function Employee(props: any) {
       console.log("EID passed to form + fetch data");
       showTab4();
       window.localStorage.removeItem("eid");
-    } else {
-      console.log("noEID found");
-      showTab1();
+    } else if (!eid) {
+      console.log("noEID found or EID cleared");
+      // showTab1();
+      // window.localStorage.set("hello", "world");
     }
   }, [eid]);
 
