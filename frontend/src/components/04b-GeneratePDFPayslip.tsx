@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Document,
   Page,
@@ -75,188 +75,210 @@ Font.register({
 
 // Create Document Component
 export default function MyDocument(props: any) {
+  const [payrolls, setPayrolls] = useState([]);
+
+  useEffect(() => {
+    const requestOptions = {
+      method: "Get",
+    };
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/payroll/findConfirm/2022/12`,
+      requestOptions
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setPayrolls(data);
+      });
+  }, []);
+
   return (
     <Document>
-      <Page size="A4">
-        {/* <Link
-          style={styles.title}
-          src="https://es.wikipedia.org/wiki/Lorem_ipsum"
-        >
-          Lorem Ipsum
-        </Link> */}
+      {payrolls.map((payroll: any) => (
+        <Page size="A4">
+          <View style={styles.body}>
+            <View style={styles.column}>
+              <View style={{ backgroundColor: "#4BC9D4" }}>
+                <Text
+                  style={{
+                    color: "white",
+                    textAlign: "center",
+                    margin: 30,
+                    textTransform: "uppercase",
+                    fontFamily: "Oswald",
+                    fontSize: 40,
+                  }}
+                >
+                  The Company
+                </Text>
+              </View>
 
-        <View style={styles.body}>
-          <View style={styles.column}>
-            <View style={{ backgroundColor: "#4BC9D4" }}>
+              {/* title */}
               <Text
                 style={{
-                  color: "white",
+                  color: "#24D1AE",
                   textAlign: "center",
                   margin: 30,
                   textTransform: "uppercase",
                   fontFamily: "Oswald",
-                  fontSize: 40,
+                  fontSize: 25,
                 }}
               >
-                The Company
+                Payslip {payroll.year}-{payroll.month}
               </Text>
-            </View>
-            {/* title */}
-            <Text
-              style={{
-                color: "#24D1AE",
-                textAlign: "center",
-                margin: 30,
-                textTransform: "uppercase",
-                fontFamily: "Oswald",
-                fontSize: 25,
-              }}
-            >
-              Payslip {props.year}-{props.month}
-            </Text>
-            {/* personal info */}
-            <View style={{ backgroundColor: "#24D1AE" }}>
-              <Text
+              {/* personal info */}
+              <View style={{ backgroundColor: "#24D1AE" }}>
+                <Text
+                  style={{
+                    color: "black",
+                    textAlign: "left",
+                    margin: 5,
+                    marginLeft: 20,
+                    textTransform: "uppercase",
+                    fontFamily: "Oswald",
+                    fontSize: 15,
+                    width: 100,
+                  }}
+                >
+                  Personal Info
+                </Text>
+              </View>
+              <Text style={styles.text}>Employee ID: {payroll.employeeid}</Text>
+              <Text style={styles.text}>Name: {payroll.name}</Text>
+
+              {/* Payment */}
+              <View style={{ backgroundColor: "#24D1AE" }}>
+                <Text
+                  style={{
+                    color: "black",
+                    textAlign: "left",
+                    margin: 5,
+                    marginLeft: 20,
+                    textTransform: "uppercase",
+                    fontFamily: "Oswald",
+                    fontSize: 15,
+                    width: 100,
+                  }}
+                >
+                  Payment
+                </Text>
+              </View>
+
+              <View style={{ display: "flex", flexDirection: "row" }}>
+                <View style={{ flexGrow: 1 }}>
+                  <Text style={styles.text}>Salary:</Text>
+                </View>
+                <View style={{ display: "flex" }}>
+                  <Text style={styles.textNumber}>{payroll.basic_salary}</Text>
+                </View>
+              </View>
+
+              <View style={{ display: "flex", flexDirection: "row" }}>
+                <View style={{ flexGrow: 1 }}>
+                  <Text style={styles.text}>OT Pay:</Text>
+                </View>
+                <View style={{ display: "flex" }}>
+                  <Text style={styles.textNumber}>{payroll.ot_pay}</Text>
+                </View>
+              </View>
+
+              <View style={{ display: "flex", flexDirection: "row" }}>
+                <View style={{ flexGrow: 1 }}>
+                  <Text style={styles.text}>Bonus:</Text>
+                </View>
+                <View style={{ display: "flex" }}>
+                  <Text style={styles.textNumber}>{payroll.bonus}</Text>
+                </View>
+              </View>
+
+              <View style={{ display: "flex", flexDirection: "row" }}>
+                <View style={{ flexGrow: 1 }}>
+                  <Text style={styles.text}>Deduction:</Text>
+                </View>
+                <View style={{ display: "flex" }}>
+                  <Text style={styles.textNumber}>{payroll.nopay_leave}</Text>
+                </View>
+              </View>
+
+              <View style={{ backgroundColor: "#24D1AE" }}>
+                <Text
+                  style={{
+                    color: "black",
+                    textAlign: "left",
+                    margin: 5,
+                    marginLeft: 20,
+                    textTransform: "uppercase",
+                    fontFamily: "Oswald",
+                    fontSize: 15,
+                    width: 100,
+                  }}
+                >
+                  MPF
+                </Text>
+              </View>
+
+              <View style={{ display: "flex", flexDirection: "row" }}>
+                <View style={{ flexGrow: 1 }}>
+                  <Text style={styles.text}>MPF:</Text>
+                </View>
+                <View>
+                  <Text style={styles.textNumber}>{payroll.mpf_employee}</Text>
+                </View>
+              </View>
+
+              <View style={{ backgroundColor: "#24D1AE" }}>
+                <Text
+                  style={{
+                    color: "black",
+                    textAlign: "left",
+                    margin: 5,
+                    marginLeft: 20,
+                    textTransform: "uppercase",
+                    fontFamily: "Oswald",
+                    fontSize: 15,
+                    width: 100,
+                  }}
+                >
+                  Net Pay
+                </Text>
+              </View>
+
+              <View style={{ display: "flex", flexDirection: "row" }}>
+                <View style={{ flexGrow: 1 }}>
+                  <Text style={styles.text}>Total:</Text>
+                </View>
+                <View>
+                  <Text style={styles.textNumber}>{payroll.total}</Text>
+                </View>
+              </View>
+
+              <View
                 style={{
-                  color: "black",
-                  textAlign: "left",
-                  margin: 5,
-                  marginLeft: 20,
-                  textTransform: "uppercase",
-                  fontFamily: "Oswald",
-                  fontSize: 15,
-                  width: 100,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
                 }}
               >
-                Personal Info
-              </Text>
-            </View>
-            <Text style={styles.text}>Employee ID: {props.employeeid}</Text>
-            <Text style={styles.text}>Name: {props.name}</Text>
-
-            {/* Payment */}
-            <View style={{ backgroundColor: "#24D1AE" }}>
-              <Text
-                style={{
-                  color: "black",
-                  textAlign: "left",
-                  margin: 5,
-                  marginLeft: 20,
-                  textTransform: "uppercase",
-                  fontFamily: "Oswald",
-                  fontSize: 15,
-                  width: 100,
-                }}
-              >
-                Payment
-              </Text>
-            </View>
-
-            <View style={{ display: "flex", flexDirection: "row" }}>
-              <View style={{ flexGrow: 1 }}>
-                <Text style={styles.text}>Salary:</Text>
+                <View style={{ backgroundColor: "#4BC9D4" }}>
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                      margin: 10,
+                      // textTransform: "uppercase",
+                      fontFamily: "Oswald",
+                      fontSize: 10,
+                    }}
+                  >
+                    Powered by Easy HR Solutions
+                  </Text>
+                </View>
               </View>
-              <View style={{ display: "flex" }}>
-                <Text style={styles.textNumber}>{props.basic_salary}</Text>
-              </View>
-            </View>
-
-            <View style={{ display: "flex", flexDirection: "row" }}>
-              <View style={{ flexGrow: 1 }}>
-                <Text style={styles.text}>OT Pay:</Text>
-              </View>
-              <View style={{ display: "flex" }}>
-                <Text style={styles.textNumber}>{props.ot_pay}</Text>
-              </View>
-            </View>
-
-            <View style={{ display: "flex", flexDirection: "row" }}>
-              <View style={{ flexGrow: 1 }}>
-                <Text style={styles.text}>Bonus:</Text>
-              </View>
-              <View style={{ display: "flex" }}>
-                <Text style={styles.textNumber}>{props.bonus}</Text>
-              </View>
-            </View>
-
-            <View style={{ display: "flex", flexDirection: "row" }}>
-              <View style={{ flexGrow: 1 }}>
-                <Text style={styles.text}>Deduction:</Text>
-              </View>
-              <View style={{ display: "flex" }}>
-                <Text style={styles.textNumber}>{props.nopay_leave}</Text>
-              </View>
-            </View>
-
-            <View style={{ backgroundColor: "#24D1AE" }}>
-              <Text
-                style={{
-                  color: "black",
-                  textAlign: "left",
-                  margin: 5,
-                  marginLeft: 20,
-                  textTransform: "uppercase",
-                  fontFamily: "Oswald",
-                  fontSize: 15,
-                  width: 100,
-                }}
-              >
-                MPF
-              </Text>
-            </View>
-
-            <View style={{ display: "flex", flexDirection: "row" }}>
-              <View style={{ flexGrow: 1 }}>
-                <Text style={styles.text}>MPF:</Text>
-              </View>
-              <View>
-                <Text style={styles.textNumber}>{props.mpf_employee}</Text>
-              </View>
-            </View>
-
-            <View style={{ backgroundColor: "#24D1AE" }}>
-              <Text
-                style={{
-                  color: "black",
-                  textAlign: "left",
-                  margin: 5,
-                  marginLeft: 20,
-                  textTransform: "uppercase",
-                  fontFamily: "Oswald",
-                  fontSize: 15,
-                  width: 100,
-                }}
-              >
-                Net Pay
-              </Text>
-            </View>
-
-            <View style={{ display: "flex", flexDirection: "row" }}>
-              <View style={{ flexGrow: 1 }}>
-                <Text style={styles.text}>Total:</Text>
-              </View>
-              <View>
-                <Text style={styles.textNumber}>{props.total}</Text>
-              </View>
-            </View>
-
-            <View style={{ backgroundColor: "#4BC9D4" }}>
-              <Text
-                style={{
-                  color: "white",
-                  textAlign: "center",
-                  margin: 10,
-                  // textTransform: "uppercase",
-                  fontFamily: "Oswald",
-                  fontSize: 10,
-                }}
-              >
-                Powered by Easy HR Solutions
-              </Text>
             </View>
           </View>
-        </View>
-      </Page>
+        </Page>
+      ))}
     </Document>
   );
 }
