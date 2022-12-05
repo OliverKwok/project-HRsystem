@@ -268,7 +268,8 @@ export default function OffboardingCard(props: any) {
       <div>
         <img
           className="profilepic"
-          src="https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw"
+          // src="https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw"
+          src={props.profilepic}
         ></img>
         <h3 className="person">{props.person}</h3>
         <br />
