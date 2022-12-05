@@ -259,6 +259,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('event_name');
     table.date('date');
     table.string('details');
+    table.timestamp('created_at', { precision: 6 }).defaultTo(knex.fn.now(6));
   });
 }
 

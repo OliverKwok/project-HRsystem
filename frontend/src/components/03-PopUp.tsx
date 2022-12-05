@@ -120,6 +120,7 @@ export default function PopUp({
     );
     const patchRecordRes = await res.json();
     console.log(patchRecordRes);
+    handleClickClose();
   }
 
   return (
@@ -162,7 +163,7 @@ export default function PopUp({
                 value={selectValue}
                 onChange={handleChange}
               >
-                <option value=""></option>
+                <option value="">No Status</option>
                 <option value="punctual">Punctual</option>
                 <option value="late">Late</option>
                 <option value="absent">Absent</option>

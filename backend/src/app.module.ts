@@ -14,6 +14,7 @@ import { IosAppModule } from './ios_app/ios_app.module';
 import { PayrollModule } from './payroll/payroll.module';
 import { StatusupdateModule } from './statusupdate/statusupdate.module';
 import { AttendanceModule } from './attendance/attendance.module';
+import { NotificationModule } from './notification/notification.module';
 
 Config();
 
@@ -35,6 +36,7 @@ Config();
     PayrollModule,
     StatusupdateModule,
     AttendanceModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

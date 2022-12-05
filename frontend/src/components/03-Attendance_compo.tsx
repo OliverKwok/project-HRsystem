@@ -127,6 +127,11 @@ function Attendance_compo({
     0
   );
 
+  function get_the_first_character(string: any) {
+    let matches = string.match(/\b(\w)/g);
+    let acronym = matches.join("");
+    return acronym;
+  }
   return (
     <div className="attendance-row">
       <div className="attendance-info">{show_word.employeeid}</div>
@@ -206,6 +211,22 @@ function Attendance_compo({
                 >
                   A
                 </Absent>
+              ) : day_of_week[0]["status"] == "" ? (
+                <Nothing
+                  className="attendance-loop"
+                  onClick={() => {
+                    console.log(day_of_week[0]["status"]);
+                    handleClick(
+                      day_of_week[0]["status"],
+                      day_of_week[0]["employee"],
+                      day_of_week[0]["date"],
+                      day_of_week[0]["time_checkedin"],
+                      day_of_week[0]["time_checkedout"],
+                      show_word["employeeid"]
+                    );
+                  }}
+                  key={index}
+                ></Nothing>
               ) : (
                 <Other
                   className="attendance-loop"
@@ -234,7 +255,7 @@ function Attendance_compo({
                   }}
                   key={index}
                 >
-                  {day_of_week[0]["status"]}
+                  {get_the_first_character(day_of_week[0]["status"])}
                 </Other>
               )
             ) : (
