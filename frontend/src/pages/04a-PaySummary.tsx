@@ -324,7 +324,22 @@ export default function PaySummary() {
   };
 
   function handleSubmitPayrollEdit() {
-    alert(`payroll confirmed for ${yearValue}-${monthValue}`);
+    const requestOptions = {
+      method: "Post",
+    };
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/payroll/confirm/${yearValue}/${monthValue}`,
+      requestOptions
+    )
+      .then((response) => {
+        // console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        if (data.rowCount > 0) {
+          alert(`payroll confirmed for ${yearValue}-${monthValue}`);
+        }
+      });
   }
   return (
     <>

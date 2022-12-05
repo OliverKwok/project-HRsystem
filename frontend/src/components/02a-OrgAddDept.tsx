@@ -39,7 +39,7 @@ export default function OrgAddDept() {
     console.log(managingPerson);
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "-Type": "application/jsContenton" },
       body: JSON.stringify({
         dept_name: newDeptName,
         managed_by: managingPerson,

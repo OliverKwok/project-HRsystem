@@ -16,18 +16,14 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    margin: 5,
+    margin: 10,
     fontSize: 25,
     textAlign: "center",
     // backgroundColor: "#e4e4e4",
     textTransform: "uppercase",
     fontFamily: "Oswald",
   },
-  seperation: {
-    // flexGrow: 1,
-    heigth: "1%",
-    backgroundColor: "#24D1AE",
-  },
+
   body: {
     flexGrow: 1,
   },
@@ -43,10 +39,18 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   text: {
-    width: "80%",
-    margin: 10,
+    // width: "80%",
+    margin: 15,
+    paddingLeft: 30,
     fontFamily: "Oswald",
     textAlign: "justify",
+  },
+  textNumber: {
+    // width: "80%",
+    margin: 15,
+    paddingRight: 20,
+    fontFamily: "Oswald",
+    textAlign: "right",
   },
 
   fill1: {
@@ -91,16 +95,16 @@ export default function MyDocument(props: any) {
                   margin: 30,
                   textTransform: "uppercase",
                   fontFamily: "Oswald",
-                  fontSize: 30,
+                  fontSize: 40,
                 }}
               >
                 The Company
               </Text>
             </View>
-
+            {/* title */}
             <Text
               style={{
-                color: "#4BC9D4",
+                color: "#24D1AE",
                 textAlign: "center",
                 margin: 30,
                 textTransform: "uppercase",
@@ -110,52 +114,147 @@ export default function MyDocument(props: any) {
             >
               Payslip {props.year}-{props.month}
             </Text>
-
+            {/* personal info */}
+            <View style={{ backgroundColor: "#24D1AE" }}>
+              <Text
+                style={{
+                  color: "black",
+                  textAlign: "left",
+                  margin: 5,
+                  marginLeft: 20,
+                  textTransform: "uppercase",
+                  fontFamily: "Oswald",
+                  fontSize: 15,
+                  width: 100,
+                }}
+              >
+                Personal Info
+              </Text>
+            </View>
             <Text style={styles.text}>Employee ID: {props.employeeid}</Text>
             <Text style={styles.text}>Name: {props.name}</Text>
 
-            <Text style={styles.text}>Salary: {props.basic_salary}</Text>
-            <Text style={styles.text}>OT Pay: {props.ot_pay}</Text>
-            <Text style={styles.text}>Bonus: {props.bonus}</Text>
-            <Text style={styles.text}>Deduction: {props.nopay_leave}</Text>
-            <Text style={styles.text}>MPF: {props.mpf_employee}</Text>
+            {/* Payment */}
+            <View style={{ backgroundColor: "#24D1AE" }}>
+              <Text
+                style={{
+                  color: "black",
+                  textAlign: "left",
+                  margin: 5,
+                  marginLeft: 20,
+                  textTransform: "uppercase",
+                  fontFamily: "Oswald",
+                  fontSize: 15,
+                  width: 100,
+                }}
+              >
+                Payment
+              </Text>
+            </View>
 
-            <Text style={styles.text}>Total: {props.total}</Text>
-          </View>
+            <View style={{ display: "flex", flexDirection: "row" }}>
+              <View style={{ flexGrow: 1 }}>
+                <Text style={styles.text}>Salary:</Text>
+              </View>
+              <View style={{ display: "flex" }}>
+                <Text style={styles.textNumber}>{props.basic_salary}</Text>
+              </View>
+            </View>
 
-          {/* <View style={styles.row}> */}
-          {/* </View> */}
+            <View style={{ display: "flex", flexDirection: "row" }}>
+              <View style={{ flexGrow: 1 }}>
+                <Text style={styles.text}>OT Pay:</Text>
+              </View>
+              <View style={{ display: "flex" }}>
+                <Text style={styles.textNumber}>{props.ot_pay}</Text>
+              </View>
+            </View>
 
-          {/* <View style={styles.row}>
-            <Text style={styles.text}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum.
-            </Text>
-            <View style={styles.fill1} />
+            <View style={{ display: "flex", flexDirection: "row" }}>
+              <View style={{ flexGrow: 1 }}>
+                <Text style={styles.text}>Bonus:</Text>
+              </View>
+              <View style={{ display: "flex" }}>
+                <Text style={styles.textNumber}>{props.bonus}</Text>
+              </View>
+            </View>
+
+            <View style={{ display: "flex", flexDirection: "row" }}>
+              <View style={{ flexGrow: 1 }}>
+                <Text style={styles.text}>Deduction:</Text>
+              </View>
+              <View style={{ display: "flex" }}>
+                <Text style={styles.textNumber}>{props.nopay_leave}</Text>
+              </View>
+            </View>
+
+            <View style={{ backgroundColor: "#24D1AE" }}>
+              <Text
+                style={{
+                  color: "black",
+                  textAlign: "left",
+                  margin: 5,
+                  marginLeft: 20,
+                  textTransform: "uppercase",
+                  fontFamily: "Oswald",
+                  fontSize: 15,
+                  width: 100,
+                }}
+              >
+                MPF
+              </Text>
+            </View>
+
+            <View style={{ display: "flex", flexDirection: "row" }}>
+              <View style={{ flexGrow: 1 }}>
+                <Text style={styles.text}>MPF:</Text>
+              </View>
+              <View>
+                <Text style={styles.textNumber}>{props.mpf_employee}</Text>
+              </View>
+            </View>
+
+            <View style={{ backgroundColor: "#24D1AE" }}>
+              <Text
+                style={{
+                  color: "black",
+                  textAlign: "left",
+                  margin: 5,
+                  marginLeft: 20,
+                  textTransform: "uppercase",
+                  fontFamily: "Oswald",
+                  fontSize: 15,
+                  width: 100,
+                }}
+              >
+                Net Pay
+              </Text>
+            </View>
+
+            <View style={{ display: "flex", flexDirection: "row" }}>
+              <View style={{ flexGrow: 1 }}>
+                <Text style={styles.text}>Total:</Text>
+              </View>
+              <View>
+                <Text style={styles.textNumber}>{props.total}</Text>
+              </View>
+            </View>
+
+            <View style={{ backgroundColor: "#4BC9D4" }}>
+              <Text
+                style={{
+                  color: "white",
+                  textAlign: "center",
+                  margin: 10,
+                  // textTransform: "uppercase",
+                  fontFamily: "Oswald",
+                  fontSize: 10,
+                }}
+              >
+                Powered by Easy HR Solutions
+              </Text>
+            </View>
           </View>
-          <View style={styles.row}>
-            <View style={styles.fill2} />
-            <Text style={styles.text}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum.
-            </Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.text}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum.
-            </Text>
-            <View style={styles.fill3} />
-          </View> */}
         </View>
       </Page>
     </Document>

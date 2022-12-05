@@ -194,7 +194,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id');
     table.integer('year');
     table.integer('month');
-    table.integer('employee').references('employee.id');
+    table.integer('employeeid').references('employee.id');
     table.float('basic_salary');
     table.float('ot_pay');
     table.float('bonus');
