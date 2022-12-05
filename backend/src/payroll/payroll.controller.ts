@@ -36,6 +36,19 @@ export class PayrollController {
     return this.payrollService.findOneMonth(year, month);
   }
 
+  @Get('findConfirm/:year/:month')
+  findOneMonthConfirmed(
+    @Param('year') year: number,
+    @Param('month') month: number,
+  ) {
+    return this.payrollService.findOneMonthConfirmed(year, month);
+  }
+
+  @Post('confirm/:year/:month')
+  writeOneMonth(@Param('year') year: number, @Param('month') month: number) {
+    return this.payrollService.writeOneMonth(year, month);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.payrollService.findOne(+id);

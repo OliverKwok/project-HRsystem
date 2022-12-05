@@ -20,9 +20,17 @@ import * as fs from "fs";
 import { BsSlack } from "react-icons/bs";
 //import { render } from "react-dom";
 
-export default function GenRefLetter() {
+export default function GenRefLetter(props: any) {
+  // async function logoImage() {
+  //   let imageBlob = await fetch(
+  //     "https://images.pexels.com/photos/7250029/pexels-photo-7250029.jpeg"
+  //   ).then((r) => r.blob());
+  //   console.log(imageBlob);
+  //   return imageBlob;
+  // }
   /**######################################## */
-  const generate = () => {
+
+  const generate = async (props: any) => {
     const doc = new Document({
       styles: {
         paragraphStyles: [
@@ -109,12 +117,17 @@ export default function GenRefLetter() {
         {
           children: [
             // new ImageRun({
-            //   data: fs.readFileSync("../../public/AppStoreLogo.png"),
+            // data: fs.readFileSync("../../public/AppStoreLogo.png"),
             //   transformation: {
             //     width: 200,
             //     height: 200,
             //   },
             // }),
+
+            // new Paragraph({
+            //   children: [(await logoImage()) as any],
+            // }),
+
             new Paragraph({
               text: `Date: ${moment(new Date()).format("DD-MM-YYYY")}`,
               alignment: AlignmentType.RIGHT,
@@ -130,11 +143,11 @@ export default function GenRefLetter() {
               style: "underline",
             }),
             new Paragraph({
-              text: "This letter is to confirm that [employee] has been employed as [position] at our company The Company since [start date] until [effective date]. We wish her every success in her career pursuit.",
+              text: `This letter is to confirm that ${props.person}[EMPLOYEE'S FULL NAME] has been employed as [POSITION] at our company The Company since [START DATE] until [EFFECTIVE DATE]. We wish her every success in her career pursuit.`,
               style: "whatever",
             }),
             new Paragraph({
-              text: "If you have any questions or require additional information about [employee alias]'s employment, please contact me at 12345678 .",
+              text: "If you have any questions or require additional information about [EMPLOYEE'S ALIAS]'s employment, please contact me at 12345678 .",
               style: "whatever",
             }),
             new Paragraph({
@@ -165,8 +178,8 @@ export default function GenRefLetter() {
     });
   };
   return (
-    <div className="App">
-      <button onClick={generate}>Generate doc</button>
-    </div>
+    <>
+      <button onClick={generate}>Generate Reference Letter</button>
+    </>
   );
 }

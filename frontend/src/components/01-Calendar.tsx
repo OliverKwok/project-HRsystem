@@ -179,7 +179,8 @@ export default function Calendar() {
         </div>
         <div className="calendar-info">
           <div className="calendar-sidebar">
-            <h2>Upcoming Events ({initialEvent.length})</h2>
+            <h2>Upcoming Events</h2>
+            {/* <h2>Upcoming Events ({initialEvent.length})</h2> */}
 
             <ul>{initialEvent.map(renderSidebarEvent)}</ul>
           </div>

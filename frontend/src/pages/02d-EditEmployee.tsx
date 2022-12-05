@@ -266,9 +266,10 @@ export default function Employee(props: any) {
       console.log("EID passed to form + fetch data");
       showTab4();
       window.localStorage.removeItem("eid");
-    } else {
-      console.log("noEID found");
-      showTab1();
+    } else if (!eid) {
+      console.log("noEID found or EID cleared");
+      // showTab1();
+      // window.localStorage.set("hello", "world");
     }
   }, [eid]);
 
@@ -303,6 +304,17 @@ export default function Employee(props: any) {
     setContractEndDate(false);
     setProbationEndDate(false);
   }
+
+  // redirect from offboarding
+  const [offboard, setOffboard] = useState<string | null>();
+
+  useEffect(() => {
+    setOffboard(window.localStorage.getItem("offboarding"));
+    if (offboard !== null) {
+      showTab4();
+      window.localStorage.removeItem("offboarding");
+    }
+  }, [offboard]);
 
   const [age, setAge] = useState("0");
   // const [employeeid, setEmployeeid] = useState("");
