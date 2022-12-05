@@ -263,7 +263,6 @@ export default function Employee(props: any) {
           setPassPaymentRemark(data.payment_remark);
           setValue("payment_remark", data.payment_remark);
         });
-
       console.log("EID passed to form + fetch data");
       showTab4();
       window.localStorage.removeItem("eid");
@@ -277,6 +276,17 @@ export default function Employee(props: any) {
 
   const [probationEndDate, setProbationEndDate] = useState(false);
   const [contractEndDate, setContractEndDate] = useState(false);
+
+  console.log(props.editStatus);
+  console.log(passStatus);
+
+  useEffect(() => {
+    if (props.editStatus == "probation" || passStatus == "probation") {
+      handleProbationEndDate();
+    } else if (props.editStatus == "contract" || passStatus == "contract") {
+      handleContractEndDate();
+    }
+  }, [passStatus]);
 
   function handleProbationEndDate() {
     setProbationEndDate(true);
