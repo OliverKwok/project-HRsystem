@@ -28,6 +28,41 @@ export class NotificationService {
     }
   }
 
+  async postNewEvent(data) {
+    try {
+      let res = await this.knex
+        .table('event')
+        .insert({
+          event_name: data['eventName'],
+          date: data['eventDate'],
+          details: data['eventDetails'],
+        })
+        .returning('id');
+      return { res };
+    } catch (err) {
+      return err;
+    }
+  }
+  async postNewNotification(data) {
+    try {
+      console.log(data);
+      let res = await this.knex
+        .table('notification')
+        .insert({
+          title: data['notificationTitle'],
+          message: data['notificationMessage'],
+          message_type: 'company',
+          recipient: data['notificationRecipient'],
+        })
+        .returning('id');
+      return { res };
+    } catch (err) {
+      console.log(err);
+
+      return err;
+    }
+  }
+
   // create(createNotificationDto: CreateNotificationDto) {
   //   return 'This action adds a new notification';
   // }

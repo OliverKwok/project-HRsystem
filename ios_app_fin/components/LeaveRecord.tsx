@@ -31,6 +31,47 @@ interface leaveRecordType {
   type: string;
 }
 
+function dateFormatter(dateString: string) {
+  // Create a date object from a date string
+  var date = new Date(dateString);
+
+  // Get year, month, and day part from the date
+  var year = date
+    .toLocaleString('default', {year: 'numeric'})
+    .replace('年', '');
+  var month = date
+    .toLocaleString('default', {month: '2-digit'})
+    .replace('月', '');
+
+  var day = date.toLocaleString('default', {day: '2-digit'}).replace('日', '');
+
+  // Generate yyyy-mm-dd date string
+  var formattedDate = year + '-' + month + '-' + day;
+  return formattedDate;
+}
+
+function dataTimeFormatter(dateTimeString: string) {
+  // Create a date object from a date string
+  var date = new Date(dateTimeString);
+
+  // Get year, month, and day part from the date
+  var year = date
+    .toLocaleString('default', {year: 'numeric'})
+    .replace('年', '');
+  var month = date
+    .toLocaleString('default', {month: '2-digit'})
+    .replace('月', '');
+
+  var day = date.toLocaleString('default', {day: '2-digit'}).replace('日', '');
+
+  let date_of_dateTimeString = year + '-' + month + '-' + day;
+  let time_of_dateTimeString = new Date(dateTimeString)
+    .toTimeString()
+    .split(' ')[0];
+  let final_date_time = date_of_dateTimeString + ' ' + time_of_dateTimeString;
+  return final_date_time;
+}
+
 function LeaveRecord({
   data,
   fetchLeaveRecord,
@@ -87,19 +128,15 @@ function LeaveRecord({
         </View>
         <View style={styles.leaveDetailContainer}>
           <Text style={styles.leaveText}>Start date : </Text>
-          <Text style={styles.leaveText}>
-            {new Date(data.start_date).toISOString().split('T')[0]}
-          </Text>
-          <Text style={{marginLeft: 15, fontSize: 18}}>
+          <Text style={styles.leaveText}>{dateFormatter(data.start_date)}</Text>
+          <Text style={{marginLeft: 10, fontSize: 18}}>
             {data.start_date_period.replace('_', ' ')}
           </Text>
         </View>
         <View style={styles.leaveDetailContainer}>
           <Text style={styles.leaveText}>End date : </Text>
-          <Text style={styles.leaveText}>
-            {new Date(data.end_date).toISOString().split('T')[0]}
-          </Text>
-          <Text style={{marginLeft: 15, fontSize: 18}}>
+          <Text style={styles.leaveText}>{dateFormatter(data.end_date)}</Text>
+          <Text style={{marginLeft: 10, fontSize: 18}}>
             {data.end_date_period.replace('_', ' ')}
           </Text>
         </View>
@@ -108,25 +145,17 @@ function LeaveRecord({
           <Text style={styles.leaveText}>{data.number_of_days}</Text>
         </View>
         <View style={styles.leaveDetailContainer}>
-          <Text style={styles.leaveText}>Status : </Text>
-          <Text style={styles.leaveText}>{data.status}</Text>
-        </View>
-        {/* <View style={styles.leaveDetailContainer}>
-          <Text style={styles.leaveText}>Approved by : </Text>
-          <Text style={styles.leaveText}>{data.approved_by}</Text>
-        </View> */}
-        <View style={styles.leaveDetailContainer}>
-          <Text style={styles.leaveText}>Created at </Text>
-          <Text style={styles.leaveText}>
-            {new Date(data.created_at).toLocaleString()}
+          <Text style={[styles.leaveText, {fontWeight: 'bold'}]}>
+            Status :{' '}
+          </Text>
+          <Text style={[styles.leaveText, {fontWeight: 'bold'}]}>
+            {data.status}
           </Text>
         </View>
-        <View style={styles.leaveDetailContainer}>
-          <Text style={styles.leaveText}>Updated at </Text>
-          <Text style={styles.leaveText}>
-            {!!data.updated_at
-              ? new Date(data.updated_at).toLocaleString()
-              : ''}
+
+        <View style={styles.createTimeContainer}>
+          <Text style={[styles.leaveText, {fontSize: 13}]}>
+            {dataTimeFormatter(data['created_at'] as any)}
           </Text>
         </View>
 
@@ -182,7 +211,7 @@ export default LeaveRecord;
 
 const styles = StyleSheet.create({
   LeaveBigContainer: {
-    marginTop: 25,
+    marginTop: 10,
     flex: 1,
     alignItems: 'center',
     width: '100%',
@@ -191,15 +220,16 @@ const styles = StyleSheet.create({
 
   leaveItemContainer: {
     flex: 1,
-    borderWidth: 1,
+    // borderWidth: 1,
+    // borderColor: '#A8ABB6',
     padding: 15,
     borderRadius: 20,
-    width: '90%',
+    width: '95%',
     backgroundColor: GlobalStyles.colors.backgroundColorDarker,
   },
   leaveDetailContainer: {
     flexDirection: 'row',
-    margin: 2,
+    marginBottom: 6,
   },
   leaveText: {
     fontSize: 18,
@@ -234,5 +264,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#E67067',
     marginTop: 10,
+  },
+
+  createTimeContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    marginTop: 5,
+    marginBottom: 5,
   },
 });

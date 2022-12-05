@@ -46,7 +46,7 @@ function Attendance() {
   const userId = useSelector((state: AuthState) => state.auth.user.id);
 
   let userID = userId;
-  console.log(userId, '49');
+  // console.log(userId, '49');
 
   const [companyEvent, setCompanyEvent] = useState([] as any);
   const [selectedDate, setSelectedDate] = useState(
@@ -198,13 +198,16 @@ function Attendance() {
           </View>
           <View style={styles.activityBigContainer}>
             <View style={styles.eventContainer}>
-              <Text style={{fontSize: 20}}>Events : </Text>
+              <Text style={{fontSize: 20, fontWeight: 'bold'}}>Events : </Text>
               {selectedEvent.map((data: itemType, index: number) => {
                 return <EventItem data={data} index={index} key={index} />;
               })}
             </View>
             <View style={styles.eventContainer}>
-              <Text style={{fontSize: 20}}> Attendance : </Text>
+              <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                {' '}
+                Attendance :{' '}
+              </Text>
               <AttendanceRecord data={selectedAttendance} />
             </View>
           </View>
@@ -249,7 +252,10 @@ const styles = StyleSheet.create({
   activityBigContainer: {flex: 1},
 
   eventContainer: {
-    borderWidth: 1,
+    // borderWidth: 1,
+    marginBottom: 15,
+    backgroundColor: '#C1E3E3',
+    borderRadius: 20,
     borderColor: '#C0C0C0',
     padding: 15,
     height: '150%',
