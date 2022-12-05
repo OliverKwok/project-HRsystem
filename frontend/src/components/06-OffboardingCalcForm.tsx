@@ -42,14 +42,49 @@ export default function OffboardingCalcForm(props: any) {
               X
             </h2>
           </div>
-          <p>Applied Date: 2022-12-06</p>
+          {/* <p>Applied Date: 2022-12-06</p>
           <p>Effective Date: 2023-01-05 </p>
           <p>Within Notice Period? Yes</p>
           <p>Basic Salary: HKD 16,000.00</p>
           <p>Annual Leave in lieu: 5 days</p>
           <p>Compensation from Employee: HKD 0.00</p>
           <p>Compensation from Employer: HKD 21,000.00</p>
-          <p>Total Compensation: -HKD 21,000.00</p>
+          <p>Total Compensation: -HKD 21,000.00</p> */}
+
+          <table>
+            <tr>
+              <td>Applied Date:</td>
+              <td>2022-12-06</td>
+            </tr>
+            <tr>
+              <td>Effective Date:</td>
+              <td>2023-01-05</td>
+            </tr>
+            <tr>
+              <td>Within Notice Period?</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Basic Salary: </td>
+              <td>HKD 16,000.00</td>
+            </tr>
+            <tr>
+              <td>Annual Leave in lieu: </td>
+              <td>5 days</td>
+            </tr>
+            <tr>
+              <td>Compensation from Employee: </td>
+              <td>HKD 0.00</td>
+            </tr>
+            <tr>
+              <td>Compensation from Employer:</td>
+              <td>HKD 21,000.00</td>
+            </tr>
+            <tr>
+              <td>Total Compensation:</td>
+              <td>-HKD 21,000.00</td>
+            </tr>
+          </table>
         </div>
       )}
     </div>
