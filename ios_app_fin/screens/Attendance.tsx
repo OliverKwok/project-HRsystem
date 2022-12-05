@@ -46,6 +46,7 @@ function Attendance() {
   const userId = useSelector((state: AuthState) => state.auth.user.id);
 
   let userID = userId;
+  console.log(userId, '49');
 
   const [companyEvent, setCompanyEvent] = useState([] as any);
   const [selectedDate, setSelectedDate] = useState(
@@ -86,7 +87,6 @@ function Attendance() {
       );
 
       let attendance = await res.json();
-      console.log(attendance);
 
       attendance = attendance['res'];
 
@@ -95,6 +95,7 @@ function Attendance() {
       console.log('fetch fail');
     }
   }
+  // console.log(attendanceRecord);
 
   async function getPublicHolidays() {
     try {
@@ -129,7 +130,6 @@ function Attendance() {
       console.log('fetch fail');
     }
   }
-  // console.log(holidaysName);
 
   let pHolidays_obj = pHolidays.map(data => {
     return {[data]: {marked: true, dotColor: 'red', activeOpacity: 0}};

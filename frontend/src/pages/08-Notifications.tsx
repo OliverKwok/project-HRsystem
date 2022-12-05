@@ -7,6 +7,7 @@ export default function Notifications() {
   const { register, handleSubmit } = useForm();
   const handleNotifications = (data: any) => console.log(data);
   const [companyEvent, setCompanyEvent] = useState([]);
+  const [notificaitons, setNotifications] = useState([]);
 
   async function getCompanyEvent() {
     try {
@@ -23,7 +24,22 @@ export default function Notifications() {
       console.log("fetch fail");
     }
   }
-  console.log(companyEvent);
+  async function getNotifications() {
+    try {
+      const options = { method: "GET" };
+      let res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/notification/getNotifications`,
+        options
+      );
+
+      let notification = await res.json();
+      notification = notification["res"];
+      setNotifications(notification);
+    } catch {
+      console.log("fetch fail");
+    }
+  }
+  console.log(notificaitons);
 
   function dateFormatter(dateString: string) {
     // Create a date object from a date string
@@ -46,46 +62,26 @@ export default function Notifications() {
     return formattedDate;
   }
 
+  function dataTimeFormatter(dateTimeString: string) {
+    let date_of_dateTimeString = new Date(dateTimeString)
+      .toISOString()
+      .split("T")[0];
+    let time_of_dateTimeString = new Date(dateTimeString)
+      .toTimeString()
+      .split(" ")[0];
+    let final_date_time = date_of_dateTimeString + " " + time_of_dateTimeString;
+    return final_date_time;
+  }
+
   useEffect(() => {
     getCompanyEvent();
   }, []);
 
   return (
-    <>
-      <div className="card">
-        <Splitter style={{ height: "300px" }} className="mb-5">
-          <SplitterPanel className="flex align-items-center justify-content-center">
-            <form onSubmit={handleSubmit(handleNotifications)}>
-              <div>
-                <h2>Create Company Announcement</h2>
-                <div>
-                  <textarea
-                    placeholder="write your message here"
-                    {...register("name")}
-                  />
-                </div>
-                <div>
-                  <input type="date" {...register("broadcast date")} />
-
-                  <input type="time" {...register("broadcast time")} />
-                </div>
-              </div>
-              <button>Broadcast</button>
-            </form>
-          </SplitterPanel>
-          <SplitterPanel className="flex align-items-center justify-content-center">
-            <h3>Previous Announcements</h3>
-            <div className="prevAnn">
-              <p>Date:</p>
-              <p>Time:</p>
-              <p>Message:</p>
-            </div>
-          </SplitterPanel>
-        </Splitter>
-      </div>
+    <div className="pageBigContainer">
       <div className="eventBigContainer">
         <div>
-          <h1>Event Announcement</h1>
+          <h1>Events Announcement</h1>
         </div>
         <div className="eventInnerContainer">
           <div className="eventAnnounceContainer">
@@ -111,7 +107,7 @@ export default function Notifications() {
               </div>
               <div className="eventDetailsContainer">
                 <label>
-                  Event Details :
+                  <div>Event Details :</div>
                   <textarea name="name" rows={10} className="eventDetails" />
                 </label>
               </div>
@@ -146,6 +142,13 @@ export default function Notifications() {
                       Event details :{" "}
                       <div className="recordItemText">{data["details"]}</div>
                     </div>
+                    <div className="recordItem">
+                      Create time :{" "}
+                      <div className="recordItemText">
+                        {" "}
+                        {dataTimeFormatter(data["created_at"])}
+                      </div>
+                    </div>
                   </div>
                 );
               })}
@@ -153,16 +156,91 @@ export default function Notifications() {
           </div>
         </div>
       </div>
-      {/* ///////// */}
+      {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
       <div className="notificationBigContainer">
         <div>
-          <h2>Notification Announcement</h2>
+          <h1>Notifications Announcement</h1>
         </div>
-        <div className="notificationInnerContainer">
-          <div className="notificationAnnounceContainer"></div>
-          <div className="notificationRecordContainer"></div>
+        <div className="eventInnerContainer">
+          <div className="eventAnnounceContainer">
+            <div>
+              <h2>Create Notification</h2>
+            </div>
+            <div className="eventAnnouncementForm">
+              <div className="eventNameContainer">
+                <label>
+                  Title :
+                  <div>
+                    <input type="text" name="name" className="eventName" />
+                  </div>
+                </label>
+              </div>
+
+              <div className="eventDetailsContainer">
+                <label>
+                  <div>Message :</div>
+                  <textarea name="name" rows={10} className="eventDetails" />
+                </label>
+              </div>
+
+              <div className="eventRecepientContainer">
+                <label>
+                  <div>Recepient :</div>
+                  <select className="eventRecepient">
+                    <option value="grapefruit">Grapefruit</option>
+                    <option value="lime">Lime</option>
+                    <option selected value="coconut">
+                      Coconut
+                    </option>
+                    <option value="mango">Mango</option>
+                  </select>
+                </label>
+              </div>
+              <div className="eventButtonContainer">
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="boardcastButton"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="eventRecordContainer">
+            <div>
+              <h2>Previous Notifications</h2>
+            </div>
+            <div className="recordsContainer">
+              {companyEvent.map((data) => {
+                return (
+                  <div className="eachRecordContainer">
+                    <div className="recordItem">
+                      Title :{" "}
+                      <div className="recordItemText">{data["event_name"]}</div>
+                    </div>
+                    <div className="recordItem">
+                      Message :{" "}
+                      <div className="recordItemText">
+                        {dateFormatter(data["date"])}
+                      </div>
+                    </div>
+                    <div className="recordItem">
+                      Recepients :{" "}
+                      <div className="recordItemText">{data["details"]}</div>
+                    </div>
+                    <div className="recordItem createTime">
+                      Create time :{" "}
+                      <div className="recordItemText">
+                        {" "}
+                        {dataTimeFormatter(data["created_at"])}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

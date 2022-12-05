@@ -20,6 +20,11 @@ export class NotificationController {
     return await this.notificationService.getEventRecord();
   }
 
+  @Get('getNotifications')
+  async getNotifications() {
+    return await this.notificationService.getNotifications();
+  }
+
   // @Post()
   // create(@Body() createNotificationDto: CreateNotificationDto) {
   //   return this.notificationService.create(createNotificationDto);
