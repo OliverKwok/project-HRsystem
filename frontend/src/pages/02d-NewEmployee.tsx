@@ -361,6 +361,27 @@ export default function Employee() {
     return;
   };
 
+  // form show probation end date if job status is probation
+  // form show contract end date if job status is contract
+
+  const [probationEndDate, setProbationEndDate] = useState(false);
+  const [contractEndDate, setContractEndDate] = useState(false);
+
+  function handleProbationEndDate() {
+    setProbationEndDate(true);
+    setContractEndDate(false);
+  }
+
+  function handleContractEndDate() {
+    setContractEndDate(true);
+    setProbationEndDate(false);
+  }
+
+  function handleOtherStatus() {
+    setContractEndDate(false);
+    setProbationEndDate(false);
+  }
+
   return (
     <div className="page-container">
       <div className="tab">
@@ -656,7 +677,19 @@ export default function Employee() {
                     <span>Job Status*</span>
                   </div>
 
-                  <select {...register("status")}>
+                  <select
+                    {...register("status")}
+                    onChange={(event: any) => {
+                      console.log(event.target.value);
+                      if (event.target.value == "probation") {
+                        handleProbationEndDate();
+                      } else if (event.target.value == "contract") {
+                        handleContractEndDate();
+                      } else {
+                        handleOtherStatus();
+                      }
+                    }}
+                  >
                     <option value="probation">Probation</option>
                     <option value="perm">Permanent</option>
                     <option value="contract">Contract</option>
@@ -666,23 +699,24 @@ export default function Employee() {
                     <option value="other">Other</option>
                   </select>
                 </div>
-
-                <div>
+                {contractEndDate && (
                   <div>
-                    <span>Contract End Date*</span>
+                    <div>
+                      <span>Contract End Date*</span>
+                    </div>
+
+                    <input type="date" {...register("contract_end_date")} />
                   </div>
-
-                  <input type="date" {...register("contract_end_date")} />
-                </div>
-
-                <div>
+                )}
+                {probationEndDate && (
                   <div>
-                    <span>Probation End Date*</span>
+                    <div>
+                      <span>Probation End Date*</span>
+                    </div>
+
+                    <input type="date" {...register("probation_end_date")} />
                   </div>
-
-                  <input type="date" {...register("probation_end_date")} />
-                </div>
-
+                )}
                 <div>
                   <div>
                     <span>Job Nature*</span>

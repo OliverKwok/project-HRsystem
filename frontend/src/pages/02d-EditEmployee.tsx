@@ -288,6 +288,11 @@ export default function Employee(props: any) {
     setProbationEndDate(false);
   }
 
+  function handleOtherStatus() {
+    setContractEndDate(false);
+    setProbationEndDate(false);
+  }
+
   const [age, setAge] = useState("0");
   // const [employeeid, setEmployeeid] = useState("");
   const profilepic = watch("profilepic");
@@ -777,24 +782,29 @@ export default function Employee(props: any) {
                       <span>Job Status</span>
                     </div>
 
-                    <select {...register("status")}>
-                      <option
-                        value="probation"
-                        onChange={handleProbationEndDate}
-                      >
-                        Probation
-                      </option>
+                    <select
+                      {...register("status")}
+                      onChange={(event: any) => {
+                        console.log(event.target.value);
+                        if (event.target.value == "probation") {
+                          handleProbationEndDate();
+                        } else if (event.target.value == "contract") {
+                          handleContractEndDate();
+                        } else {
+                          handleOtherStatus();
+                        }
+                      }}
+                    >
+                      <option value="probation">Probation</option>
                       <option value="perm">Permanent</option>
-                      <option value="contract" onChange={handleContractEndDate}>
-                        Contract
-                      </option>
+                      <option value="contract">Contract</option>
                       <option value="terminated">Terminated</option>
                       <option value="resigned">Resigned</option>
                       <option value="retired">Retired</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
-                  {/* {contractEndDate && ( */}
+                  {contractEndDate && (
                     <div>
                       <div>
                         <span>Contract End Date*</span>
@@ -802,8 +812,8 @@ export default function Employee(props: any) {
 
                       <input type="date" {...register("contract_end_date")} />
                     </div>
-                  {/* )}
-                  {probationEndDate && ( */}
+                  )}
+                  {probationEndDate && (
                     <div>
                       <div>
                         <span>Probation End Date*</span>
@@ -811,7 +821,7 @@ export default function Employee(props: any) {
 
                       <input type="date" {...register("probation_end_date")} />
                     </div>
-                  {/* )} */}
+                  )}
                   <div>
                     <div>
                       <span>Job Nature*</span>
