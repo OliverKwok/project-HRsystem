@@ -263,12 +263,12 @@ export default function Employee(props: any) {
           setPassPaymentRemark(data.payment_remark);
           setValue("payment_remark", data.payment_remark);
         });
-
       console.log("EID passed to form + fetch data");
       showTab4();
       window.localStorage.removeItem("eid");
     } else {
       console.log("noEID found");
+      showTab1();
     }
   }, [eid]);
 
@@ -278,6 +278,17 @@ export default function Employee(props: any) {
   const [probationEndDate, setProbationEndDate] = useState(false);
   const [contractEndDate, setContractEndDate] = useState(false);
 
+  console.log(props.editStatus);
+  console.log(passStatus);
+
+  useEffect(() => {
+    if (props.editStatus == "probation" || passStatus == "probation") {
+      handleProbationEndDate();
+    } else if (props.editStatus == "contract" || passStatus == "contract") {
+      handleContractEndDate();
+    }
+  }, [passStatus]);
+
   function handleProbationEndDate() {
     setProbationEndDate(true);
     setContractEndDate(false);
@@ -285,6 +296,11 @@ export default function Employee(props: any) {
 
   function handleContractEndDate() {
     setContractEndDate(true);
+    setProbationEndDate(false);
+  }
+
+  function handleOtherStatus() {
+    setContractEndDate(false);
     setProbationEndDate(false);
   }
 
@@ -777,24 +793,29 @@ export default function Employee(props: any) {
                       <span>Job Status</span>
                     </div>
 
-                    <select {...register("status")}>
-                      <option
-                        value="probation"
-                        onChange={handleProbationEndDate}
-                      >
-                        Probation
-                      </option>
+                    <select
+                      {...register("status")}
+                      onChange={(event: any) => {
+                        console.log(event.target.value);
+                        if (event.target.value == "probation") {
+                          handleProbationEndDate();
+                        } else if (event.target.value == "contract") {
+                          handleContractEndDate();
+                        } else {
+                          handleOtherStatus();
+                        }
+                      }}
+                    >
+                      <option value="probation">Probation</option>
                       <option value="perm">Permanent</option>
-                      <option value="contract" onChange={handleContractEndDate}>
-                        Contract
-                      </option>
+                      <option value="contract">Contract</option>
                       <option value="terminated">Terminated</option>
                       <option value="resigned">Resigned</option>
                       <option value="retired">Retired</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
-                  {/* {contractEndDate && ( */}
+                  {contractEndDate && (
                     <div>
                       <div>
                         <span>Contract End Date*</span>
@@ -802,8 +823,8 @@ export default function Employee(props: any) {
 
                       <input type="date" {...register("contract_end_date")} />
                     </div>
-                  {/* )}
-                  {probationEndDate && ( */}
+                  )}
+                  {probationEndDate && (
                     <div>
                       <div>
                         <span>Probation End Date*</span>
@@ -811,7 +832,7 @@ export default function Employee(props: any) {
 
                       <input type="date" {...register("probation_end_date")} />
                     </div>
-                  {/* )} */}
+                  )}
                   <div>
                     <div>
                       <span>Job Nature*</span>

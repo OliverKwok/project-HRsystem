@@ -215,7 +215,7 @@ export class PayrollService {
         .from('employee')
         .orderBy('employee.id');
 
-      console.log(OneMonthPayroll_B);
+      // console.log(OneMonthPayroll_B);
 
       OneMonthPayroll_B.forEach((item) => {
         item.ot_pay = null;
@@ -226,6 +226,16 @@ export class PayrollService {
       });
 
       let OneMonthPayroll = [...OneMonthPayroll_A.rows, ...OneMonthPayroll_B];
+
+      OneMonthPayroll.sort(function (a, b) {
+        let keyA = a.id;
+        let keyB = b.id;
+        // Compare the 2 dates
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+      });
+
       // let OneMonthPayroll = await this.knex
       //   .select(
       //     this.knex.raw(
