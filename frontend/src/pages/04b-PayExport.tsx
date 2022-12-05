@@ -17,6 +17,8 @@ const PayExport = () => {
   const [mpfEmployee, setMpfEmployee] = useState(0);
   const [total, setTotal] = useState(0);
 
+  const [json, setJson] = useState("");
+
   const data = [
     {
       id: 93,
@@ -73,42 +75,16 @@ const PayExport = () => {
     setNopayLeave(data[0].nopay_leave);
     setMpfEmployee(data[0].mpf_employee);
     setTotal(data[0].total);
+    setJson(JSON.stringify(data));
   });
 
   return (
     <>
-      <div>PayExport</div>
-      <PDFViewer>
-        <MyDocument
-          id={id}
-          year={year}
-          month={month}
-          employeeid={employeeid}
-          name={name}
-          basic_salary={basicSalary}
-          ot_pay={otPay}
-          bonus={bonus}
-          nopay_leave={nopayLeave}
-          mpf_employee={mpfEmployee}
-          total={total}
-        />
+      <PDFViewer height="800" width="1600">
+        <MyDocument year={year} month={month} />
       </PDFViewer>
       <PDFDownloadLink
-        document={
-          <MyDocument
-            id={id}
-            year={year}
-            month={month}
-            employeeid={employeeid}
-            name={name}
-            basic_salary={basicSalary}
-            ot_pay={otPay}
-            bonus={bonus}
-            nopay_leave={nopayLeave}
-            mpf_employee={mpfEmployee}
-            total={total}
-          />
-        }
+        document={<MyDocument year={year} month={month} />}
         fileName={"Payslip"}
       >
         <button> Download </button>
