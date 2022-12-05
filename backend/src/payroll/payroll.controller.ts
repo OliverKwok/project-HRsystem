@@ -36,6 +36,11 @@ export class PayrollController {
     return this.payrollService.findOneMonth(year, month);
   }
 
+  @Post('/:year/:month')
+  writeOneMonth(@Param('year') year: number, @Param('month') month: number) {
+    return this.payrollService.writeOneMonth(year, month);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.payrollService.findOne(+id);

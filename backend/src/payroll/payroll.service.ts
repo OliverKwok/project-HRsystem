@@ -168,8 +168,6 @@ export class PayrollService {
   // }
 
   async findOneMonth(year: number, month: number) {
-    console.log(year);
-    console.log(month);
     try {
       let OneMonthPayroll_A = await this.knex.raw(`
         select concat(employee.last_name, ' ', employee.first_name,', ',employee.alias) as name,
@@ -320,6 +318,19 @@ export class PayrollService {
             item.mpf_employee;
         }
       });
+
+      return OneMonthPayroll;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async writeOneMonth(year: number, month: number) {
+    try {
+      let OneMonthPayroll = await this.knex.raw(`
+        select id,
+        from employee
+        `);
 
       return OneMonthPayroll;
     } catch (err) {

@@ -195,14 +195,14 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('year');
     table.integer('month');
     table.integer('employee').references('employee.id');
-    table.float('salary');
+    table.float('basic_salary');
     table.float('ot_pay');
     table.float('bonus');
     table.float('nopay_leave');
     table.float('mpf_employee');
+    table.float('total');
 
     table.float('mpf_employer');
-    table.float('total');
   });
 
   await knex.schema.createTable('payroll_edit_history', (table) => {

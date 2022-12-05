@@ -30,8 +30,8 @@ export default function PaySummary() {
   const [datePickerValue, setDatePickerValue] = React.useState<any>(
     dayjs(new Date())
   );
-  const [yearValue, setYearValue] = useState(2022);
-  const [monthValue, setMonthValue] = useState(12);
+  const [yearValue, setYearValue] = useState(new Date().getFullYear());
+  const [monthValue, setMonthValue] = useState(new Date().getMonth() + 1);
 
   const paginationComponentOptions = {
     rowsPerPageText: "Rows per page",
@@ -323,6 +323,9 @@ export default function PaySummary() {
     return <span className={stockClassName}>{numberShown}</span>;
   };
 
+  function handleSubmitPayrollEdit() {
+    alert(`payroll confirmed for ${yearValue}-${monthValue}`);
+  }
   return (
     <>
       <div className="month-picker-container">
@@ -448,6 +451,9 @@ export default function PaySummary() {
             ></Column>
           </DataTable>
         </div>
+      </div>
+      <div>
+        <button onClick={handleSubmitPayrollEdit}>Confirm</button>
       </div>
     </>
   );
