@@ -31,18 +31,6 @@ function LeaveApplication({navigation, route}: any) {
 
   //Check the input for leave application
   function checkLeaveApplicationInput() {
-    // console.log(
-    //   'yo',
-    //   (new Date(formObject.endDate).getTime() -
-    //     new Date(formObject.startDate).getTime()) /
-    //     (1000 * 3600 * 24),
-    // );
-    // console.log(
-    //   'fuck',
-    //   (new Date(formObject.startDate).getTime() - new Date().getTime()) /
-    //     (1000 * 3600 * 24),
-    // );
-
     if (
       (new Date(formObject.endDate).getTime() -
         new Date(formObject.startDate).getTime()) /
@@ -51,9 +39,7 @@ function LeaveApplication({navigation, route}: any) {
     ) {
       setShowInvalidDate(true);
       setShowApply(false);
-      // setShowInputNotFilled(false);
-      // setShowSubmitSucceeded(false);
-      // setShowInputReminder(false);
+
       return;
     } else {
       setShowInvalidDate(false);
@@ -67,9 +53,7 @@ function LeaveApplication({navigation, route}: any) {
       formObject.workingDays == 0 ||
       !formObject.workingDays
     ) {
-      // setShowInvalidDate(false);
       setShowInputNotFilled(true);
-      // setShowSubmitSucceeded(false);
       setShowInputReminder(false);
       setShowApply(false);
       return;
@@ -79,12 +63,6 @@ function LeaveApplication({navigation, route}: any) {
     }
 
     setShowApply(true);
-    // else {
-    //   setShowInvalidDate(false);
-    //   setShowInputNotFilled(false);
-    //   setShowSubmitSucceeded(true);
-    //   setShowInputReminder(false);
-    // }
   }
 
   async function submitHandler() {
@@ -92,8 +70,6 @@ function LeaveApplication({navigation, route}: any) {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(formObject),
-      // headers: { "Content-Type": "multi-type/form-data" },
-      // body: formData,
     };
     const res = await fetch(
       `${Config.REACT_APP_BACKEND_URL}/ios-app/leaveApplication`,

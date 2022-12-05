@@ -42,9 +42,13 @@ const Stack = createNativeStackNavigator();
 function App() {
   const dispatch = useAppDispatch();
   const [jwtToken, setJwtToken] = useState<string | null>(null);
-  const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
+  const [firebaseObj, setFirebaseObj] = useState({
+    employeeId: '',
+    firebase_taken: '',
+  });
 
-  // console.log(isAuthenticated, 'hihi');
+  const userId = useSelector((state: AuthState) => state.auth.user.id);
+  const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
 
   async function reg_event_listener() {
     // foreground
@@ -64,11 +68,15 @@ function App() {
       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
+    const token = await messaging().getToken();
+    setFirebaseObj({...firebaseObj, firebase_taken: token, employeeId: userId});
+
     if (enabled) {
-      // console.log('Authorization status:', authStatus);
+      console.log('Authorization status:', authStatus);
       const token = await messaging().getToken();
-      // console.log(token);
+      console.log(token, 'firebase token 79');
       // put token into local storage
+      await AsyncStorage.setItem('firebase_token', token);
     }
   }
 
@@ -92,7 +100,6 @@ function App() {
   useEffect(() => {
     async function main() {
       let token = await AsyncStorage.getItem('token');
-      // console.log({token});
 
       setJwtToken(token);
 
@@ -106,6 +113,7 @@ function App() {
       await reg_event_listener();
     }
     main();
+    console.log(firebaseObj, 'firebase obj 118');
   }, []);
 
   return (
