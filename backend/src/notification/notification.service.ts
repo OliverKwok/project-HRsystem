@@ -16,6 +16,18 @@ export class NotificationService {
     }
   }
 
+  async getNotifications() {
+    try {
+      let res = await this.knex
+        .select('*')
+        .from('notification')
+        .orderBy('id', 'desc');
+      return { res };
+    } catch (err) {
+      return err;
+    }
+  }
+
   // create(createNotificationDto: CreateNotificationDto) {
   //   return 'This action adds a new notification';
   // }
