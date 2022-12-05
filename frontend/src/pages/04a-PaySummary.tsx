@@ -414,7 +414,7 @@ export default function PaySummary() {
             ></Column>
             <Column
               field="nopay_leave"
-              header="-No Pay"
+              header="-Deduction"
               body={noPayLeaveBodyTemplate}
               editor={(options) => priceEditor(options)}
               style={{ width: "10%" }}
