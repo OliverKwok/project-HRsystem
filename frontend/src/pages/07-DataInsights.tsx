@@ -48,9 +48,11 @@ const DataInsights = () => {
     <>
       <div className="two-column-grid">
         <div>
+          <div>Job Status of Employees</div>
           <DoughnutChart />
         </div>
         <div>
+          <div>Year of Service</div>
           <VerticalBarChart />
         </div>
         <div>

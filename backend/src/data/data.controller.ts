@@ -9,4 +9,9 @@ export class DataController {
   getJobStatus() {
     return this.dataService.getJobStatus();
   }
+
+  @Get('yearService')
+  getYearService() {
+    return this.dataService.getYearService();
+  }
 }

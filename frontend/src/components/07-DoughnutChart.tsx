@@ -45,7 +45,7 @@ export default function DoughnutChart() {
     const requestOptions = {
       method: "Get",
     };
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/data/JobStatus`, requestOptions)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/data/jobStatus`, requestOptions)
       .then((response) => {
         return response.json();
       })
