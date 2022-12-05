@@ -2,7 +2,7 @@ import OffboardingCard from "../components/06-OffboardingCard";
 import { Carousel } from "primereact/carousel";
 import { Splitter, SplitterPanel } from "primereact/splitter";
 import "../styles/06-Carousel.css";
-import OffboardingForm from "../components/06-OffboardingForm";
+import OffboardingForm from "../components/06-OffboardingCalcForm";
 
 interface statusCard {
   id: string;

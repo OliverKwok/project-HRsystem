@@ -19,6 +19,7 @@ import { saveAs } from "file-saver";
 import moment from "moment";
 // import GenRefLetter from "./06-genRefLetter";
 import { useNavigate } from "react-router-dom";
+import OffboardingCalcForm from "../components/06-OffboardingCalcForm";
 
 export default function OffboardingCard(props: any) {
   // progress bar styling
@@ -288,8 +289,7 @@ export default function OffboardingCard(props: any) {
           <span style={labelStyles}>{`${props.completed}%`}</span>
         </div>
       </div> */}
-      <button>Calc Compensation</button>
-      {/* <GenRefLetter props /> */}
+      <OffboardingCalcForm />
       <button onClick={generate}>Generate Reference Letter</button>
       <button
         onClick={() =>
