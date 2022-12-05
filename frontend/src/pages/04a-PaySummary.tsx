@@ -17,9 +17,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import moment from "moment";
-moment().format();
-
 export default function PaySummary() {
   // const [products1, setProducts1] = useState<any[]>();
   const [products2, setProducts2] = useState<any[]>();
@@ -343,7 +340,6 @@ export default function PaySummary() {
                   // console.log(new Date(dateInput).getMonth() + 1);
                   let monthInput: number = new Date(dateInput).getMonth() + 1;
                   let yearInput: number = new Date(dateInput).getFullYear();
-                  // setYearValue(moment(dateInput).format("YYYY"));
                   setMonthValue(monthInput);
                   setYearValue(yearInput);
                   setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
