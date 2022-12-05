@@ -305,6 +305,17 @@ export default function Employee(props: any) {
     setProbationEndDate(false);
   }
 
+  // redirect from offboarding
+  const [offboard, setOffboard] = useState<string | null>();
+
+  useEffect(() => {
+    setOffboard(window.localStorage.getItem("offboarding"));
+    if (offboard !== null) {
+      showTab4();
+      window.localStorage.removeItem("offboarding");
+    }
+  }, [offboard]);
+
   const [age, setAge] = useState("0");
   // const [employeeid, setEmployeeid] = useState("");
   const profilepic = watch("profilepic");

@@ -18,6 +18,7 @@ import {
 import { saveAs } from "file-saver";
 import moment from "moment";
 // import GenRefLetter from "./06-genRefLetter";
+import { useNavigate } from "react-router-dom";
 
 export default function OffboardingCard(props: any) {
   // progress bar styling
@@ -259,6 +260,13 @@ export default function OffboardingCard(props: any) {
     });
   };
 
+  // redirect to edit page
+  const navigate = useNavigate();
+  function redirect() {
+    window.localStorage.setItem("offboarding", "hahaha");
+    navigate("/employeeList");
+  }
+
   return (
     <div className="statusCard">
       <h2 className="status" style={statusColor}>
@@ -284,11 +292,13 @@ export default function OffboardingCard(props: any) {
       {/* <GenRefLetter props /> */}
       <button onClick={generate}>Generate Reference Letter</button>
       <button
-        onClick={() => openInNewTab("https://www.ird.gov.hk/chi/paf/for.htm")}
+        onClick={() =>
+          openInNewTab("https://www.ird.gov.hk/chi/paf/for.htm#ertitle")
+        }
       >
         Tax Filings
       </button>
-      <button>Edit Status</button>
+      <button onClick={redirect}>Edit Status</button>
     </div>
   );
 }

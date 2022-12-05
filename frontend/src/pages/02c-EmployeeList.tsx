@@ -57,6 +57,7 @@ export default function Title() {
 
   // get eid from status update page
   const [eid, setEid] = useState<string | null>(null);
+  const [offboard, setOffboard] = useState<string | null>(null);
 
   // table columns
   const columns = [
@@ -244,6 +245,7 @@ export default function Title() {
         // console.log(fetchData);
         setData(fetchData);
         setEid(window.localStorage.getItem("eid"));
+        setEid(window.localStorage.getItem("offboarding"));
       });
   }, []);
 
