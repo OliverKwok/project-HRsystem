@@ -15,6 +15,7 @@ import { PayrollModule } from './payroll/payroll.module';
 import { StatusupdateModule } from './statusupdate/statusupdate.module';
 import { AttendanceModule } from './attendance/attendance.module';
 import { NotificationModule } from './notification/notification.module';
+import { DataModule } from './data/data.module';
 
 Config();
 
@@ -37,6 +38,7 @@ Config();
     StatusupdateModule,
     AttendanceModule,
     NotificationModule,
+    DataModule,
   ],
   controllers: [AppController],
   providers: [AppService],

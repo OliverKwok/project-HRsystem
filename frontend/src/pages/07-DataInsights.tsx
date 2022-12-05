@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Bar, Doughnut } from "react-chartjs-2";
 import Barchart from "../components/07-Barchart";
 import LineChart from "../components/07-LineChart";
+import DoughnutChart from "../components/07-DoughnutChart";
 import userData from "../jsonFiles/DataInsights.json";
+import VerticalBarChart from "../components/07-VerticalBarChart";
 
 const DataInsights = () => {
   const [dataGain, setDataGain] = useState({
@@ -44,11 +46,19 @@ const DataInsights = () => {
 
   return (
     <>
-      <div className="">
-        <Barchart chartData={dataGain} />
-      </div>
-      <div>
-        <LineChart chartData={dataLost} />
+      <div className="two-column-grid">
+        <div>
+          <DoughnutChart />
+        </div>
+        <div>
+          <VerticalBarChart />
+        </div>
+        <div>
+          <Barchart chartData={dataGain} />
+        </div>
+        <div>
+          <LineChart chartData={dataLost} />
+        </div>
       </div>
     </>
   );
