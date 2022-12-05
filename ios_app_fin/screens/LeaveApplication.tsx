@@ -26,7 +26,7 @@ LogBox.ignoreLogs([
 function LeaveApplication({navigation, route}: any) {
   const {fetchLeaveRecord} = route.params;
 
-  const userId = useSelector((state: AuthState) => state.auth.user.id);
+  const userId = useSelector((state: AuthState) => state.auth['user']['id']);
   console.log(userId, 'from leave application');
 
   //Check the input for leave application

@@ -44,10 +44,12 @@ function App() {
   const [jwtToken, setJwtToken] = useState<string | null>(null);
   const [firebaseObj, setFirebaseObj] = useState({
     employeeId: '',
-    firebase_taken: '',
+    firebase_token: '',
   });
 
-  const userId = useSelector((state: AuthState) => state.auth.user.id);
+  const userId = useSelector((state: AuthState) => state.auth['user']['id']);
+  console.log(userId, 'from app.ts 51');
+
   const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
 
   async function reg_event_listener() {
@@ -69,12 +71,23 @@ function App() {
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
     const token = await messaging().getToken();
-    setFirebaseObj({...firebaseObj, firebase_taken: token, employeeId: userId});
+    setFirebaseObj({...firebaseObj, firebase_token: token, employeeId: userId});
+    const requestOptions = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(firebaseObj),
+    };
+    const res = await fetch(
+      `${Config.REACT_APP_BACKEND_URL}/ios-app/addFirebaseToken`,
+      requestOptions,
+    );
+    const firebaseAction = await res.json();
+    console.log(firebaseAction);
 
     if (enabled) {
       console.log('Authorization status:', authStatus);
       const token = await messaging().getToken();
-      console.log(token, 'firebase token 79');
+      // console.log(token, 'firebase token 79');
       // put token into local storage
       await AsyncStorage.setItem('firebase_token', token);
     }
