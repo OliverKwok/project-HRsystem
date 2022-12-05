@@ -143,6 +143,36 @@ export class IosAppService {
     return formattedDate;
   }
 
+  async addFirebaseToken(data) {
+    // console.log(data);
+    let res_pre = await this.knex
+      .table('employee')
+      .select('employee.firebase_token')
+      .where('id', data['employeeId']);
+
+    console.log(res_pre[0]);
+
+    if (!res_pre[0]) {
+      let res = await this.knex
+        .table('employee')
+        .insert({
+          firebase_token: data['firebase_taken'],
+        })
+        .where('id', data['employeeId'])
+        .returning('id');
+      return { res };
+    }
+    {
+      let res = await this.knex
+        .table('employee')
+        .update({
+          firebase_token: data['firebase_taken'],
+        })
+        .where('id', data['employeeId'])
+        .returning('id');
+      return { res };
+    }
+  }
   // create(createIosAppDto: CreateIosAppDto) {
   //   return 'This action adds a new iosApp';
   // }

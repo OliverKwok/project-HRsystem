@@ -76,6 +76,13 @@ export class IosAppController {
     return await this.iosAppService.getNotifications();
   }
 
+  @Post('addFirebaseToken')
+  async addFirebaseToken(@Body() data) {
+    // console.log(data);
+
+    return await this.iosAppService.addFirebaseToken(data);
+  }
+
   // @Post()
   // create(@Body() createIosAppDto: CreateIosAppDto) {
   //   return this.iosAppService.create(createIosAppDto);
