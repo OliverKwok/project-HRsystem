@@ -17,22 +17,23 @@ const PayExport = () => {
   const [mpfEmployee, setMpfEmployee] = useState(0);
   const [total, setTotal] = useState(0);
 
+  const data = [
+    {
+      id: 1,
+      year: 2022,
+      month: 12,
+      employeeid: "DEMO001",
+      name: "Chan Tai Man, Peter",
+      basic_salary: 20000,
+      ot_pay: 0,
+      bonus: 1000,
+      nopay_leave: 0,
+      mpf_employee: 1050,
+      total: 19950,
+    },
+  ];
+
   useEffect(() => {
-    const data = [
-      {
-        id: 1,
-        year: 2022,
-        month: 12,
-        employeeid: "DEMO001",
-        name: "Chan Tai Man, Peter",
-        basic_salary: 20000,
-        ot_pay: 0,
-        bonus: 1000,
-        nopay_leave: 0,
-        mpf_employee: 1050,
-        total: 19950,
-      },
-    ];
     setId(data[0].id);
     setYear(data[0].year);
     setMonth(data[0].month);
@@ -64,7 +65,24 @@ const PayExport = () => {
           total={total}
         />
       </PDFViewer>
-      <PDFDownloadLink document={<MyDocument />} fileName={"FileName"}>
+      <PDFDownloadLink
+        document={
+          <MyDocument
+            id={id}
+            year={year}
+            month={month}
+            employeeid={employeeid}
+            name={name}
+            basic_salary={basicSalary}
+            ot_pay={otPay}
+            bonus={bonus}
+            nopay_leave={nopayLeave}
+            mpf_employee={mpfEmployee}
+            total={total}
+          />
+        }
+        fileName={"Payslip"}
+      >
         <button> Download </button>
       </PDFDownloadLink>
     </>
