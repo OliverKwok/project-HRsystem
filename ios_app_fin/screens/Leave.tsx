@@ -62,7 +62,7 @@ function Leave({navigation}: any) {
         return -1;
       });
 
-      setLeaveRecord(leaveSorted);
+      setLeaveRecord(leave);
     } catch {
       console.log('fetch fail');
     }
@@ -118,7 +118,7 @@ function Leave({navigation}: any) {
         }
         style={{width: '100%'}}>
         <View style={styles.scrollViewContainer}>
-          {leaveRecord.length == 0 ? (
+          {!leaveRecord ? (
             <View style={styles.noRecordContainer}>
               <Text style={styles.noRecordText}>
                 No Leave Application Record

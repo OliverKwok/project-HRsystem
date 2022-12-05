@@ -58,26 +58,26 @@ export async function seed(knex: Knex): Promise<void> {
     number_of_days: 3,
   });
 
-  // await seedRow('leave_application', {
-  //   employee_id: 2,
-  //   leave_type: '1',
-  //   start_date: '2022-10-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-10-21',
-  //   end_date_period: 'full_day',
-  //   status: 'taken',
-  //   number_of_days: 1,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 2,
-  //   leave_type: '1',
-  //   start_date: '2022-10-31',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-10-31',
-  //   end_date_period: 'full_day',
-  //   status: 'taken',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 2,
+    leave_type: '1',
+    start_date: '2022-10-21',
+    start_date_period: 'full_day',
+    end_date: '2022-10-21',
+    end_date_period: 'full_day',
+    status: 'taken',
+    number_of_days: 1,
+  });
+  await seedRow('leave_application', {
+    employee_id: 2,
+    leave_type: '1',
+    start_date: '2022-10-31',
+    start_date_period: 'full_day',
+    end_date: '2022-10-31',
+    end_date_period: 'full_day',
+    status: 'taken',
+    number_of_days: 1,
+  });
   await seedRow('leave_application', {
     employee_id: 2,
     leave_type: '1',
@@ -99,26 +99,26 @@ export async function seed(knex: Knex): Promise<void> {
     number_of_days: 2,
   });
 
-  // await seedRow('leave_application', {
-  //   employee_id: 3,
-  //   leave_type: '2',
-  //   start_date: '2022-11-22',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-11-23',
-  //   end_date_period: 'full_day',
-  //   status: 'taken',
-  //   number_of_days: 2,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 3,
-  //   leave_type: '1',
-  //   start_date: '2022-11-30',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-11-30',
-  //   end_date_period: 'full_day',
-  //   status: 'taken',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 3,
+    leave_type: '2',
+    start_date: '2022-11-22',
+    start_date_period: 'full_day',
+    end_date: '2022-11-23',
+    end_date_period: 'full_day',
+    status: 'taken',
+    number_of_days: 2,
+  });
+  await seedRow('leave_application', {
+    employee_id: 3,
+    leave_type: '1',
+    start_date: '2022-11-30',
+    start_date_period: 'full_day',
+    end_date: '2022-11-30',
+    end_date_period: 'full_day',
+    status: 'taken',
+    number_of_days: 1,
+  });
   await seedRow('leave_application', {
     employee_id: 3,
     leave_type: '1',
@@ -140,26 +140,26 @@ export async function seed(knex: Knex): Promise<void> {
     number_of_days: 0.5,
   });
 
-  // await seedRow('leave_application', {
-  //   employee_id: 4,
-  //   leave_type: '2',
-  //   start_date: '2022-11-14',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-11-14',
-  //   end_date_period: 'full_day',
-  //   status: 'taken',
-  //   number_of_days: 1,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 4,
-  //   leave_type: '1',
-  //   start_date: '2022-11-18',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-11-18',
-  //   end_date_period: 'full_day',
-  //   status: 'taken',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 4,
+    leave_type: '2',
+    start_date: '2022-11-14',
+    start_date_period: 'full_day',
+    end_date: '2022-11-14',
+    end_date_period: 'full_day',
+    status: 'taken',
+    number_of_days: 1,
+  });
+  await seedRow('leave_application', {
+    employee_id: 4,
+    leave_type: '1',
+    start_date: '2022-11-18',
+    start_date_period: 'full_day',
+    end_date: '2022-11-18',
+    end_date_period: 'full_day',
+    status: 'taken',
+    number_of_days: 1,
+  });
   await seedRow('leave_application', {
     employee_id: 4,
     leave_type: '1',
@@ -191,16 +191,16 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 5,
-  //   leave_type: '1',
-  //   start_date: '2022-11-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-11-21',
-  //   end_date_period: 'full_day',
-  //   status: 'taken',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 5,
+    leave_type: '1',
+    start_date: '2022-11-21',
+    start_date_period: 'full_day',
+    end_date: '2022-11-21',
+    end_date_period: 'full_day',
+    status: 'taken',
+    number_of_days: 1,
+  });
   await seedRow('leave_application', {
     employee_id: 5,
     leave_type: '1',
@@ -252,16 +252,16 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'pending',
     number_of_days: 1.5,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 6,
-  //   leave_type: '1',
-  //   start_date: '2022-12-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-21',
-  //   end_date_period: 'full_day',
-  //   status: 'pending',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 6,
+    leave_type: '1',
+    start_date: '2022-12-21',
+    start_date_period: 'full_day',
+    end_date: '2022-12-21',
+    end_date_period: 'full_day',
+    status: 'pending',
+    number_of_days: 1,
+  });
 
   await seedRow('leave_application', {
     employee_id: 7,
@@ -283,26 +283,26 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 7,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 7,
-  //   leave_type: '1',
-  //   start_date: '2022-12-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-21',
-  //   end_date_period: 'full_day',
-  //   status: 'pending',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 7,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
+  await seedRow('leave_application', {
+    employee_id: 7,
+    leave_type: '1',
+    start_date: '2022-12-21',
+    start_date_period: 'full_day',
+    end_date: '2022-12-21',
+    end_date_period: 'full_day',
+    status: 'pending',
+    number_of_days: 1,
+  });
 
   await seedRow('leave_application', {
     employee_id: 8,
@@ -324,26 +324,26 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 8,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 8,
-  //   leave_type: '1',
-  //   start_date: '2022-12-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-21',
-  //   end_date_period: 'full_day',
-  //   status: 'pending',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 8,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
+  await seedRow('leave_application', {
+    employee_id: 8,
+    leave_type: '1',
+    start_date: '2022-12-21',
+    start_date_period: 'full_day',
+    end_date: '2022-12-21',
+    end_date_period: 'full_day',
+    status: 'pending',
+    number_of_days: 1,
+  });
 
   await seedRow('leave_application', {
     employee_id: 9,
@@ -365,26 +365,26 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 9,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 9,
-  //   leave_type: '1',
-  //   start_date: '2022-12-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-21',
-  //   end_date_period: 'full_day',
-  //   status: 'pending',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 9,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
+  await seedRow('leave_application', {
+    employee_id: 9,
+    leave_type: '1',
+    start_date: '2022-12-21',
+    start_date_period: 'full_day',
+    end_date: '2022-12-21',
+    end_date_period: 'full_day',
+    status: 'pending',
+    number_of_days: 1,
+  });
 
   await seedRow('leave_application', {
     employee_id: 10,
@@ -406,26 +406,26 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 10,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 10,
-  //   leave_type: '1',
-  //   start_date: '2022-12-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-21',
-  //   end_date_period: 'full_day',
-  //   status: 'pending',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 10,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
+  await seedRow('leave_application', {
+    employee_id: 10,
+    leave_type: '1',
+    start_date: '2022-12-21',
+    start_date_period: 'full_day',
+    end_date: '2022-12-21',
+    end_date_period: 'full_day',
+    status: 'pending',
+    number_of_days: 1,
+  });
 
   await seedRow('leave_application', {
     employee_id: 11,
@@ -447,26 +447,26 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 11,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 11,
-  //   leave_type: '1',
-  //   start_date: '2022-12-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-21',
-  //   end_date_period: 'full_day',
-  //   status: 'pending',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 11,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
+  await seedRow('leave_application', {
+    employee_id: 11,
+    leave_type: '1',
+    start_date: '2022-12-21',
+    start_date_period: 'full_day',
+    end_date: '2022-12-21',
+    end_date_period: 'full_day',
+    status: 'pending',
+    number_of_days: 1,
+  });
 
   await seedRow('leave_application', {
     employee_id: 12,
@@ -488,16 +488,16 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 12,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 12,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
   await seedRow('leave_application', {
     employee_id: 12,
     leave_type: '1',
@@ -505,7 +505,7 @@ export async function seed(knex: Knex): Promise<void> {
     start_date_period: 'full_day',
     end_date: '2022-12-21',
     end_date_period: 'full_day',
-    status: 'approved',
+    status: 'pending',
     number_of_days: 1,
   });
 
@@ -536,7 +536,7 @@ export async function seed(knex: Knex): Promise<void> {
     start_date_period: 'full_day',
     end_date: '2022-12-16',
     end_date_period: 'first_half',
-    status: 'approved',
+    status: 'pending',
     number_of_days: 1.5,
   });
   await seedRow('leave_application', {
@@ -546,7 +546,7 @@ export async function seed(knex: Knex): Promise<void> {
     start_date_period: 'full_day',
     end_date: '2022-12-21',
     end_date_period: 'full_day',
-    status: 'approved',
+    status: 'pending',
     number_of_days: 1,
   });
 
@@ -617,7 +617,7 @@ export async function seed(knex: Knex): Promise<void> {
     start_date_period: 'full_day',
     end_date: '2022-12-31',
     end_date_period: 'full_day',
-    status: 'approved',
+    status: 'pending',
     number_of_days: 2,
   });
   await seedRow('leave_application', {
@@ -627,7 +627,7 @@ export async function seed(knex: Knex): Promise<void> {
     start_date_period: 'full_day',
     end_date: '2022-01-13',
     end_date_period: 'full_day',
-    status: 'approved',
+    status: 'pending',
     number_of_days: 2,
   });
   await seedRow('leave_application', {
@@ -637,7 +637,7 @@ export async function seed(knex: Knex): Promise<void> {
     start_date_period: 'full_day',
     end_date: '2022-01-27',
     end_date_period: 'full_day',
-    status: 'approved',
+    status: 'pending',
     number_of_days: 2,
   });
 
@@ -678,7 +678,7 @@ export async function seed(knex: Knex): Promise<void> {
     start_date_period: 'full_day',
     end_date: '2022-12-21',
     end_date_period: 'full_day',
-    status: 'approved',
+    status: 'pending',
     number_of_days: 1,
   });
 
@@ -709,7 +709,7 @@ export async function seed(knex: Knex): Promise<void> {
     start_date_period: 'full_day',
     end_date: '2022-12-16',
     end_date_period: 'first_half',
-    status: 'approved',
+    status: 'pending',
     number_of_days: 1.5,
   });
   await seedRow('leave_application', {
@@ -719,7 +719,7 @@ export async function seed(knex: Knex): Promise<void> {
     start_date_period: 'full_day',
     end_date: '2022-12-21',
     end_date_period: 'full_day',
-    status: 'approved',
+    status: 'pending',
     number_of_days: 1,
   });
 
@@ -750,7 +750,7 @@ export async function seed(knex: Knex): Promise<void> {
     start_date_period: 'full_day',
     end_date: '2022-12-16',
     end_date_period: 'first_half',
-    status: 'approved',
+    status: 'pending',
     number_of_days: 1.5,
   });
   await seedRow('leave_application', {
@@ -760,7 +760,7 @@ export async function seed(knex: Knex): Promise<void> {
     start_date_period: 'full_day',
     end_date: '2022-12-21',
     end_date_period: 'full_day',
-    status: 'approved',
+    status: 'pending',
     number_of_days: 1,
   });
 
@@ -784,26 +784,26 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 18,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 18,
-  //   leave_type: '1',
-  //   start_date: '2022-12-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-21',
-  //   end_date_period: 'full_day',
-  //   status: 'pending',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 18,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
+  await seedRow('leave_application', {
+    employee_id: 18,
+    leave_type: '1',
+    start_date: '2022-12-21',
+    start_date_period: 'full_day',
+    end_date: '2022-12-21',
+    end_date_period: 'full_day',
+    status: 'pending',
+    number_of_days: 1,
+  });
 
   await seedRow('leave_application', {
     employee_id: 19,
@@ -825,26 +825,26 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 19,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 19,
-  //   leave_type: '1',
-  //   start_date: '2022-12-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-21',
-  //   end_date_period: 'full_day',
-  //   status: 'pending',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 19,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
+  await seedRow('leave_application', {
+    employee_id: 19,
+    leave_type: '1',
+    start_date: '2022-12-21',
+    start_date_period: 'full_day',
+    end_date: '2022-12-21',
+    end_date_period: 'full_day',
+    status: 'pending',
+    number_of_days: 1,
+  });
 
   await seedRow('leave_application', {
     employee_id: 20,
@@ -866,26 +866,26 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 20,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 20,
-  //   leave_type: '1',
-  //   start_date: '2022-12-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-21',
-  //   end_date_period: 'full_day',
-  //   status: 'pending',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 20,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
+  await seedRow('leave_application', {
+    employee_id: 20,
+    leave_type: '1',
+    start_date: '2022-12-21',
+    start_date_period: 'full_day',
+    end_date: '2022-12-21',
+    end_date_period: 'full_day',
+    status: 'pending',
+    number_of_days: 1,
+  });
 
   await seedRow('leave_application', {
     employee_id: 21,
@@ -907,26 +907,26 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 21,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 21,
-  //   leave_type: '1',
-  //   start_date: '2022-12-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-21',
-  //   end_date_period: 'full_day',
-  //   status: 'pending',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 21,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
+  await seedRow('leave_application', {
+    employee_id: 21,
+    leave_type: '1',
+    start_date: '2022-12-21',
+    start_date_period: 'full_day',
+    end_date: '2022-12-21',
+    end_date_period: 'full_day',
+    status: 'pending',
+    number_of_days: 1,
+  });
 
   await seedRow('leave_application', {
     employee_id: 22,
@@ -948,26 +948,26 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 22,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
-  // await seedRow('leave_application', {
-  //   employee_id: 22,
-  //   leave_type: '1',
-  //   start_date: '2022-12-21',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-21',
-  //   end_date_period: 'full_day',
-  //   status: 'pending',
-  //   number_of_days: 1,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 22,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
+  await seedRow('leave_application', {
+    employee_id: 22,
+    leave_type: '1',
+    start_date: '2022-12-21',
+    start_date_period: 'full_day',
+    end_date: '2022-12-21',
+    end_date_period: 'full_day',
+    status: 'pending',
+    number_of_days: 1,
+  });
 
   await seedRow('leave_application', {
     employee_id: 23,
@@ -989,16 +989,16 @@ export async function seed(knex: Knex): Promise<void> {
     status: 'taken',
     number_of_days: 1,
   });
-  // await seedRow('leave_application', {
-  //   employee_id: 23,
-  //   leave_type: '1',
-  //   start_date: '2022-12-15',
-  //   start_date_period: 'full_day',
-  //   end_date: '2022-12-16',
-  //   end_date_period: 'first_half',
-  //   status: 'pending',
-  //   number_of_days: 1.5,
-  // });
+  await seedRow('leave_application', {
+    employee_id: 23,
+    leave_type: '1',
+    start_date: '2022-12-15',
+    start_date_period: 'full_day',
+    end_date: '2022-12-16',
+    end_date_period: 'first_half',
+    status: 'pending',
+    number_of_days: 1.5,
+  });
   await seedRow('leave_application', {
     employee_id: 23,
     leave_type: '1',

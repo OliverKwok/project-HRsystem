@@ -9,6 +9,8 @@ export function authReducer(
   switch (action.type) {
     case '@@auth/LOGIN':
       if (action.token) {
+        console.log(action.user);
+
         return {
           ...state,
           user: action.user,

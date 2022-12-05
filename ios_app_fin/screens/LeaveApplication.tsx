@@ -22,15 +22,12 @@ import {AuthState} from '../redux/auth/state';
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
-// YellowBox.ignoreWarnings([
-//   'Non-serializable values were found in the navigation state',
-// ]);
 
 function LeaveApplication({navigation, route}: any) {
   const {fetchLeaveRecord} = route.params;
 
   const userId = useSelector((state: AuthState) => state.auth.user.id);
-  // console.log(userId);
+  console.log(userId, 'from leave application');
 
   //Check the input for leave application
   function checkLeaveApplicationInput() {
@@ -50,10 +47,7 @@ function LeaveApplication({navigation, route}: any) {
       (new Date(formObject.endDate).getTime() -
         new Date(formObject.startDate).getTime()) /
         (1000 * 3600 * 24) <
-        0 ||
-      (new Date(formObject.startDate).getTime() - new Date().getTime()) /
-        (1000 * 3600 * 24) <
-        3
+      0
     ) {
       setShowInvalidDate(true);
       setShowApply(false);
@@ -65,7 +59,6 @@ function LeaveApplication({navigation, route}: any) {
       setShowInvalidDate(false);
     }
     if (
-      // formObject.employeeID == '' ||
       formObject.leaveType == '' ||
       formObject.startDate == 'Please select a start date' ||
       formObject.startDateDuration == '' ||
@@ -166,6 +159,8 @@ function LeaveApplication({navigation, route}: any) {
     checkLeaveApplicationInput();
   }, [formObject]);
 
+  console.log(userId);
+
   return (
     <View style={styles.container}>
       {/* <Button title="Open" onPress={() => setOpenPicker1(true)} /> */}
@@ -210,18 +205,18 @@ function LeaveApplication({navigation, route}: any) {
       {/* ======================================================================================================= */}
 
       {/* Employee ID part */}
-      <View style={styles.inputContainer}>
+      {/* <View style={styles.inputContainer}>
         <Text style={styles.label}>Employee ID</Text>
         <TextInput
           style={styles.input}
-          value={userId.toString()}
+          value={userId}
           placeholder="Please type your employee id"
           // onChangeText={text => {
           //   setFormObject({...formObject, employeeID: text});
           //   checkLeaveApplicationInput();
           // }}
         />
-      </View>
+      </View> */}
 
       {/* Leave Type Part */}
       <View style={styles.inputContainer}>
@@ -380,7 +375,7 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.backgroundColor,
   },
 
-  inputContainer: {marginHorizontal: 4, marginVertical: 7, width: '75%'},
+  inputContainer: {marginHorizontal: 4, marginVertical: 15, width: '75%'},
 
   label: {
     fontSize: 18,
