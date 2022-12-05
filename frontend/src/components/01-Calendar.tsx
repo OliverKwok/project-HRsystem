@@ -138,7 +138,17 @@ export default function Calendar() {
       let array1 = await checkBirthdayShowCalendar();
       let array2 = await checkLeaveShowCalendar();
       let show = [...array1, ...array2];
-      // console.log(show);
+
+      // sort by date;
+      show.sort(function (a, b) {
+        var keyA = new Date(a.start),
+          keyB = new Date(b.start);
+        // Compare the 2 dates
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+      });
+
       setInitialEvent(show);
     }
     main();
@@ -169,7 +179,7 @@ export default function Calendar() {
         </div>
         <div className="calendar-info">
           <div className="calendar-sidebar">
-            <h2>All Events ({initialEvent.length})</h2>
+            <h2>Upcoming Events ({initialEvent.length})</h2>
 
             <ul>{initialEvent.map(renderSidebarEvent)}</ul>
           </div>
@@ -231,15 +241,21 @@ export default function Calendar() {
 
 function renderSidebarEvent(event: any) {
   return (
-    <li key={event.id}>
-      <b>
-        {formatDate(event.start, {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })}
-      </b>
-      <i> {event.title}</i>
-    </li>
+    <>
+      {new Date(event.start) >= new Date() ? (
+        <li key={event.id}>
+          <b>
+            {formatDate(event.start, {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </b>
+          <i> {event.title}</i>
+        </li>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }

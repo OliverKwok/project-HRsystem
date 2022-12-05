@@ -52,7 +52,7 @@ function BottomBar() {
       <Tab.Screen name="Attendance" component={Attendance} />
       <Tab.Screen name="Leave" component={Leave} />
 
-      {/* <Tab.Screen name="Salary" component={Salary} /> */}
+      <Tab.Screen name="Salary" component={Salary} />
       <Tab.Screen name="Notification" component={Notification} />
       <Tab.Screen name="Settings" component={Setting} />
     </Tab.Navigator>

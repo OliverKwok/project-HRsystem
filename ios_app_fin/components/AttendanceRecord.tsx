@@ -11,6 +11,8 @@ interface attendanceType {
 }
 
 function AttendanceRecord({data}: {data: attendanceType}) {
+  console.log('fk you', data);
+
   return data ? (
     <View style={styles.attendanceContainer}>
       <View style={styles.itemContainer}>

@@ -60,6 +60,8 @@ export class IosAppController {
 
   @Get('getAttendance/:userId')
   async getAttendance(@Param('userId') userId: string) {
+    console.log(userId);
+
     return await this.iosAppService.getAttendance(+userId);
   }
 
