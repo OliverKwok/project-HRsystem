@@ -155,16 +155,17 @@ const styles = StyleSheet.create({
   },
 
   ButtonContainer: {
-    borderWidth: 1,
+    // borderWidth: 1,
     // flex: 1,
     width: '50%',
     height: '7%',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 20,
-    backgroundColor: '#c1e6e6',
+    borderRadius: 30,
+    backgroundColor: GlobalStyles.colors.logoColor,
     marginTop: 10,
     marginBottom: 20,
+    opacity: 0.7,
   },
 
   scrollViewContainer: {
@@ -172,7 +173,6 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    // height: '20%',
     flex: 1,
   },
 

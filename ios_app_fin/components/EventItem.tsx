@@ -24,7 +24,8 @@ export default EventItem;
 const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
-    borderBottomWidth: 1,
+    // borderBottomWidth: 2,
+    borderBottomColor: '#A8ABB6',
     padding: 3,
   },
   textContainer: {

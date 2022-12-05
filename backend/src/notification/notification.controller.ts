@@ -25,6 +25,35 @@ export class NotificationController {
     return await this.notificationService.getNotifications();
   }
 
+  @Post('postNewEvent')
+  postNewEvent(@Body() data) {
+    if (
+      data['eventName'] == '' ||
+      data['eventDate'] == '' ||
+      data['eventDetails'] == ''
+    ) {
+      console.log("'All input should be filled'");
+
+      return 'All input should be filled';
+    } else {
+      return this.notificationService.postNewEvent(data);
+    }
+  }
+
+  @Post('postNewNotification')
+  postNewNotification(@Body() data) {
+    if (
+      data['notificationTitle'] == '' ||
+      data['notificationMessage'] == '' ||
+      data['notificationRecipient'] == ''
+    ) {
+      console.log("'All input should be filled'");
+
+      return 'All input should be filled';
+    } else {
+      return this.notificationService.postNewNotification(data);
+    }
+  }
   // @Post()
   // create(@Body() createNotificationDto: CreateNotificationDto) {
   //   return this.notificationService.create(createNotificationDto);

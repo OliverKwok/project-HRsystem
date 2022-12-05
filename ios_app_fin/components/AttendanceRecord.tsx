@@ -11,8 +11,6 @@ interface attendanceType {
 }
 
 function AttendanceRecord({data}: {data: attendanceType}) {
-  console.log('fk you', data);
-
   return data ? (
     <View style={styles.attendanceContainer}>
       <View style={styles.itemContainer}>
@@ -44,7 +42,8 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     flexDirection: 'row',
-    borderBottomWidth: 1,
+    // borderBottomWidth: 2,
+    borderBottomColor: '#A8ABB6',
     padding: 3,
   },
   textContainer: {

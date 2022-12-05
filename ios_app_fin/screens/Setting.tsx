@@ -46,12 +46,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
-    backgroundColor: '#c1e6e6',
+    backgroundColor: '#E67067',
+    opacity: 0.7,
   },
 
   pressed: {
-    opacity: 0.5,
-    backgroundColor: GlobalStyles.colors.logoColor,
+    opacity: 0.7,
+    backgroundColor: '#CD2C25',
     borderWidth: 1,
     width: '40%',
     height: '7%',

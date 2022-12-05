@@ -48,8 +48,6 @@ export class IosAppController {
 
   @Patch('cancelLeave')
   async cancelLeaveApplication(@Body() updateIosAppDto: UpdateIosAppDto) {
-    console.log(updateIosAppDto);
-
     return await this.iosAppService.cancelLeave(updateIosAppDto);
   }
 
@@ -60,8 +58,6 @@ export class IosAppController {
 
   @Get('getAttendance/:userId')
   async getAttendance(@Param('userId') userId: string) {
-    console.log(userId);
-
     return await this.iosAppService.getAttendance(+userId);
   }
 
