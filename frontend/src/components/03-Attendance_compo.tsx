@@ -127,6 +127,11 @@ function Attendance_compo({
     0
   );
 
+  function get_the_first_character(string: any) {
+    let matches = string.match(/\b(\w)/g);
+    let acronym = matches.join("");
+    return acronym;
+  }
   return (
     <div className="attendance-row">
       <div className="attendance-info">{show_word.employeeid}</div>
@@ -188,8 +193,42 @@ function Attendance_compo({
                 >
                   L
                 </Late>
+              ) : day_of_week[0]["status"] == "absent" ? (
+                <Absent
+                  className="attendance-loop"
+                  onClick={() => {
+                    console.log(day_of_week[0]["status"]);
+                    handleClick(
+                      day_of_week[0]["status"],
+                      day_of_week[0]["employee"],
+                      day_of_week[0]["date"],
+                      day_of_week[0]["time_checkedin"],
+                      day_of_week[0]["time_checkedout"],
+                      show_word["employeeid"]
+                    );
+                  }}
+                  key={index}
+                >
+                  A
+                </Absent>
+              ) : day_of_week[0]["status"] == "" ? (
+                <Nothing
+                  className="attendance-loop"
+                  onClick={() => {
+                    console.log(day_of_week[0]["status"]);
+                    handleClick(
+                      day_of_week[0]["status"],
+                      day_of_week[0]["employee"],
+                      day_of_week[0]["date"],
+                      day_of_week[0]["time_checkedin"],
+                      day_of_week[0]["time_checkedout"],
+                      show_word["employeeid"]
+                    );
+                  }}
+                  key={index}
+                ></Nothing>
               ) : (
-                <div
+                <Other
                   className="attendance-loop"
                   onClick={() => {
                     let status = day_of_week[0] ? day_of_week[0]["status"] : "";
@@ -206,16 +245,18 @@ function Attendance_compo({
                       ? day_of_week[0]["time_checkedout"]
                       : "";
                     handleClick(
-                      status,
-                      employeeId,
-                      date,
-                      time_checkedin,
-                      time_checkedout,
+                      day_of_week[0]["status"],
+                      day_of_week[0]["employee"],
+                      day_of_week[0]["date"],
+                      day_of_week[0]["time_checkedin"],
+                      day_of_week[0]["time_checkedout"],
                       show_word["employeeid"]
                     );
                   }}
                   key={index}
-                ></div>
+                >
+                  {get_the_first_character(day_of_week[0]["status"])}
+                </Other>
               )
             ) : (
               <Nothing
@@ -274,6 +315,13 @@ export const Punctual = styled.div`
 `;
 
 export const Late = styled.div`
+  background-color: #d4a76f;
+  &:hover {
+    transform: scale(1.12);
+    background-color: #cf954e;
+  }
+`;
+export const Absent = styled.div`
   background-color: #ef6b6b;
   &:hover {
     transform: scale(1.12);
@@ -281,9 +329,18 @@ export const Late = styled.div`
   }
 `;
 
+export const Other = styled.div`
+  background-color: #75a5e0;
+  &:hover {
+    transform: scale(1.12);
+    background-color: #4581cb;
+  }
+`;
+
 export const Nothing = styled.div`
   background-color: #f3fbfd;
   &:hover {
     transform: scale(1.12);
+    background-color: #d9f6ff;
   }
 `;

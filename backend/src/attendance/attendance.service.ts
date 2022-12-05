@@ -20,7 +20,8 @@ export class AttendanceService {
         )
         .from('employee')
         .join('employee_role', 'employee.id', 'employee_role.employeeid')
-        .join('department', 'employee_role.department_id', 'department.id');
+        .join('department', 'employee_role.department_id', 'department.id')
+        .orderBy('employee.last_name');
 
       return { res };
     } catch (err) {
@@ -59,10 +60,53 @@ export class AttendanceService {
   }
 
   async getLeaveType() {
-    let res = await this.knex.select('*').from('leave_type');
-    return { res };
+    try {
+      let res = await this.knex.select('*').from('leave_type');
+      return { res };
+    } catch (err) {
+      return err;
+    }
   }
 
+  async changeAttendanceRecord(data: UpdateAttendanceDto) {
+    try {
+      console.log(data);
+
+      let res_pre = await this.knex
+        .select('*')
+        .from('attendance')
+        .where('employee', data['employeeId'])
+        .where('date', data['attendanceDate']);
+      console.log(res_pre);
+
+      if (res_pre.length == 0) {
+        let res = await this.knex
+          .table('attendance')
+          .insert({
+            employee: data['employeeId'],
+            date: data['attendanceDate'],
+            status: data['status'],
+          })
+          .returning('id');
+        return { res };
+      } else if (res_pre.length == 1) {
+        console.log('this date already has a record , help you revise it');
+        let res = await this.knex
+          .table('attendance')
+          .update({
+            employee: data['employeeId'],
+            date: data['attendanceDate'],
+            status: data['status'],
+          })
+          .where('employee', data['employeeId'])
+          .where('date', data['attendanceDate'])
+          .returning('id');
+        return { res };
+      }
+    } catch (err) {
+      return err;
+    }
+  }
   // let res = await this.knex
   // .select(
   //   'employee.id',
