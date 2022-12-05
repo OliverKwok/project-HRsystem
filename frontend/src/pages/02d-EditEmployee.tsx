@@ -268,6 +268,7 @@ export default function Employee(props: any) {
       window.localStorage.removeItem("eid");
     } else {
       console.log("noEID found");
+      showTab1();
     }
   }, [eid]);
 
