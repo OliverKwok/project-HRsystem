@@ -234,7 +234,7 @@ function App() {
                     <TbReportSearch /> <span>export</span>
                   </div>
                 </NavLink>
-                <NavLink
+                {/* <NavLink
                   className="sub-item"
                   to={"paySetting"}
                   style={NavLinkStyle}
@@ -242,7 +242,7 @@ function App() {
                   <div>
                     <MdOutlineSubtitles /> <span>setting</span>
                   </div>
-                </NavLink>
+                </NavLink> */}
               </>
             )}
 
