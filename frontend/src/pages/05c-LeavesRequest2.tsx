@@ -93,6 +93,7 @@ export default function LeavesRequest2() {
       body: JSON.stringify({
         application_id: id,
         action: name,
+        // ALdeduct: event.target.number_of_days,
       }),
     };
 

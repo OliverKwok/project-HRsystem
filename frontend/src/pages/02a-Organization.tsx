@@ -8,7 +8,7 @@ export default function Organization() {
   const body = {
     width: "calc(100%-300px)",
   };
-  
+
   const [show1, setShow1] = useState(true);
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);
@@ -26,11 +26,11 @@ export default function Organization() {
     setShow3(false);
   }
 
-  function showList() {
-    setShow1(false);
-    setShow2(true);
-    setShow3(false);
-  }
+  // function showList() {
+  //   setShow1(false);
+  //   setShow2(true);
+  //   setShow3(false);
+  // }
 
   function showAddNew() {
     setShow1(false);
@@ -43,11 +43,11 @@ export default function Organization() {
       <div className="tab">
         <div>
           <button className="tablinks" onClick={showChart}>
-            Org Chart
+            Organization Chart
           </button>
-          <button className="tablinks" onClick={showList}>
+          {/* <button className="tablinks" onClick={showList}>
             List View
-          </button>
+          </button> */}
         </div>
         <div>
           <button className="addnew" onClick={showAddNew}>
@@ -57,7 +57,7 @@ export default function Organization() {
       </div>
 
       {show1 && <OrgChart2 />}
-      {show2 && <NestedList />}
+      {/* {show2 && <NestedList />} */}
       {show3 && <OrgAddNew />}
     </div>
   );
