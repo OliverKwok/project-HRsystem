@@ -139,12 +139,11 @@ export default function OrgChart2() {
   // }, []);
 
   const generatePDF = () => {
-    const report = new JsPDF("landscape", "pt", "a3");
+    const report = new JsPDF("landscape", "pt", "a1");
     report.html((document as any).querySelector(".report")).then(() => {
       report.save("orgchart.pdf");
     });
   };
-
 
   return (
     <div>
