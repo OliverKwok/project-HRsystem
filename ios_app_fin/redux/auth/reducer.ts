@@ -9,7 +9,7 @@ export function authReducer(
   switch (action.type) {
     case '@@auth/LOGIN':
       if (action.token) {
-        console.log(action.user);
+        console.log(action.user, 'from reducer');
 
         return {
           ...state,
@@ -18,12 +18,14 @@ export function authReducer(
           isAuthenticated: true,
         };
       } else {
-        return {
-          ...state,
-          user: null,
-          token: null,
-          isAuthenticated: false,
-        };
+        return state;
+        // return {
+        //   // ...state,
+        //   // user: null,
+        //   // token: null,
+        //   // isAuthenticated: false,
+        //   // };
+        // };
       }
     case '@@auth/LOGOUT':
       AsyncStorage.removeItem('token');

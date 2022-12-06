@@ -17,6 +17,7 @@ import {GlobalStyles} from '../constants/styles';
 import DatePicker from 'react-native-date-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import {useSelector} from 'react-redux';
+import {store, useAppDispatch, useAppSelector} from '../store';
 import {AuthState} from '../redux/auth/state';
 
 LogBox.ignoreLogs([
@@ -26,7 +27,7 @@ LogBox.ignoreLogs([
 function LeaveApplication({navigation, route}: any) {
   const {fetchLeaveRecord} = route.params;
 
-  const userId = useSelector((state: AuthState) => state.auth['user']['id']);
+  const userId = useAppSelector(state => state.auth['user']['id']);
   console.log(userId, 'from leave application');
 
   //Check the input for leave application

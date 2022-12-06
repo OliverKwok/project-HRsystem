@@ -32,23 +32,26 @@ import LeaveApplication from './screens/LeaveApplication';
 import BottomBar from './screens/BottomBar';
 import Login from './screens/Login';
 import {Provider, useSelector} from 'react-redux';
-import {store, useAppDispatch, useAppSelector} from './store';
+import {RootState, store, useAppDispatch, useAppSelector} from './store';
 import {login, logout} from './redux/auth/actions';
 import Config from 'react-native-config';
 import {AuthState} from './redux/auth/state';
+import {appendErrors} from 'react-hook-form';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   const dispatch = useAppDispatch();
-  const [jwtToken, setJwtToken] = useState<string | null>(null);
+  // const user = useAppSelector(state => state.auth.user);
+  const userId = useSelector((state: RootState) => state.auth.user);
+
+  console.log(userId, 'from app.tsx 48');
+
+  const [jwtToken, setJwtToken] = useState<string | null>('');
   const [firebaseObj, setFirebaseObj] = useState({
     employeeId: '',
-    firebase_token: '',
+    firebase_taken: '',
   });
-
-  const userId = useSelector((state: AuthState) => state.auth['user']['id']);
-  console.log(userId, 'from app.ts 51');
 
   const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
 
@@ -71,24 +74,16 @@ function App() {
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
     const token = await messaging().getToken();
-    setFirebaseObj({...firebaseObj, firebase_token: token, employeeId: userId});
-    const requestOptions = {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(firebaseObj),
-    };
-    const res = await fetch(
-      `${Config.REACT_APP_BACKEND_URL}/ios-app/addFirebaseToken`,
-      requestOptions,
-    );
-    const firebaseAction = await res.json();
-    console.log(firebaseAction);
+    // setFirebaseObj({...firebaseObj, firebase_taken: token, employeeId: userId});
 
     if (enabled) {
       console.log('Authorization status:', authStatus);
       const token = await messaging().getToken();
       // console.log(token, 'firebase token 79');
+      setFirebaseObj({...firebaseObj, firebase_taken: token});
       // put token into local storage
+      console.log(firebaseObj, 'firebase obj 90');
+
       await AsyncStorage.setItem('firebase_token', token);
     }
   }
@@ -96,7 +91,7 @@ function App() {
   async function checkLogin(token: string) {
     // console.log({token});
 
-    if (!token) return;
+    if (token === null || token === undefined) return;
     const profileRes = await fetch(`${Config.REACT_APP_BACKEND_URL}/profile`, {
       headers: {
         'Content-Type': 'application/json',
@@ -104,19 +99,23 @@ function App() {
       },
     });
     const profileJson = await profileRes.json();
-    // console.log({profileJson});
-    dispatch(login(profileJson, token!));
-    AsyncStorage.setItem('token', token!);
+    console.log({profileJson}, 'from app.tsx 133');
+    dispatch(login(profileJson, token));
+    AsyncStorage.setItem('token', token);
     // setUsername(profileJson.username);
   }
 
   useEffect(() => {
+    // console.log(userId, 'show at the first of 用效果');
+    // setFirebaseObj({...firebaseObj, employeeId: userId});
+
     async function main() {
       let token = await AsyncStorage.getItem('token');
 
       setJwtToken(token);
 
-      if (token == undefined) {
+      // console.log(firebaseObj, 'for the search of me');
+      if (token === undefined || token === null) {
         dispatch(logout());
       } else if (token) {
         await checkLogin(token);
@@ -124,9 +123,21 @@ function App() {
 
       await reg_token();
       await reg_event_listener();
+
+      // console.log(firebaseObj, 'firebase obj 118');
+      // const requestOptions = {
+      //   method: 'POST',
+      //   headers: {'Content-Type': 'application/json'},
+      //   body: JSON.stringify(firebaseObj),
+      // };
+      // const res = await fetch(
+      //   `${Config.REACT_APP_BACKEND_URL}/ios-app/addFirebaseToken`,
+      //   requestOptions,
+      // );
+      // const firebase_res = await res.json();
+      // console.log(firebase_res);
     }
     main();
-    console.log(firebaseObj, 'firebase obj 118');
   }, []);
 
   return (
