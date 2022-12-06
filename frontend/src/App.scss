@@ -162,7 +162,10 @@
 
 // payroll
 .payroll-editing .redNumber {
-  color: #ff5c5c;
+  color: white;
+  // color: #ff5c5c;
+  background: #03045e;
+  padding: 0.5rem;
 }
 
 .payroll-editing .blueNumber {
