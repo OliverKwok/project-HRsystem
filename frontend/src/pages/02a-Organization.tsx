@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import OrgChart2 from "../components/02a-OrgChart2";
-import NestedList from "../components/02a-OrgListView";
+// import NestedList from "../components/02a-OrgListView";
 import OrgAddNew from "../components/02a-OrgAddNew";
 import "../styles/02a-Org.css";
 
@@ -14,7 +14,7 @@ export default function Organization() {
   const [show3, setShow3] = useState(false);
   // const ref = useRef(null);
   const [toggleRefresh, setToggleRefresh] = useState(false);
-  
+
   // useEffect(() => {
   //   const licenseBanner: any = document.querySelector("div#js-licensing");
   //   licenseBanner.innerHTML = "";
