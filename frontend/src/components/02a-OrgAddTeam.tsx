@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export default function OrgAddTeam() {
   const [getDept, setGetDept] = useState([]);
 
+
   useEffect(() => {
     const requestOptions = {
       method: "Get",
@@ -37,6 +38,7 @@ export default function OrgAddTeam() {
     );
     const jsonData = await res.json();
     console.log(jsonData);
+
   }
 
   return (

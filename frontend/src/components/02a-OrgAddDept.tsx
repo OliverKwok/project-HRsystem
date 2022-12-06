@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-// import { useForm } from "react-hook-form";
 
-export default function OrgAddDept() {
+export default function OrgAddDept(props: any) {
   //create form
   // const {
   //   register,
@@ -39,7 +38,7 @@ export default function OrgAddDept() {
     console.log(managingPerson);
     const requestOptions = {
       method: "POST",
-      headers: { "-Type": "application/jsContenton" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         dept_name: newDeptName,
         managed_by: managingPerson,
@@ -51,6 +50,8 @@ export default function OrgAddDept() {
     );
     const jsonData = await res.json();
     console.log(jsonData);
+
+    props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
   }
 
   return (
