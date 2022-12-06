@@ -3,13 +3,11 @@ import OrgAddTeam from "./02a-OrgAddTeam";
 // import OrgAddAssistant from "./02a-OrgAddAssistant";
 
 export default function OrgAddNew(props: any) {
-
   return (
     <>
-      <OrgAddDept setToggleRefresh={props.setToggleRefresh}/>
-      <OrgAddTeam />
+      <OrgAddDept setToggleRefresh={props.setToggleRefresh} />
+      <OrgAddTeam setToggleRefresh={props.setToggleRefresh} />
       {/* <OrgAddAssistant /> */}
     </>
   );
 }
-

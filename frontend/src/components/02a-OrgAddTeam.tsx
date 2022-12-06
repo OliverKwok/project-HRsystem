@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-export default function OrgAddTeam() {
+export default function OrgAddTeam(props: any) {
   const [getDept, setGetDept] = useState([]);
-
 
   useEffect(() => {
     const requestOptions = {
@@ -15,7 +14,6 @@ export default function OrgAddTeam() {
       .then((data) => {
         setGetDept(data);
       });
-
   }, []);
 
   const [newTeamName, setNewTeamName] = useState("");
@@ -38,7 +36,7 @@ export default function OrgAddTeam() {
     );
     const jsonData = await res.json();
     console.log(jsonData);
-
+    props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
   }
 
   return (
@@ -70,7 +68,6 @@ export default function OrgAddTeam() {
             </select>
           </div>
           <div>
-
             <input type="submit" value="Add Team" />
           </div>
         </div>

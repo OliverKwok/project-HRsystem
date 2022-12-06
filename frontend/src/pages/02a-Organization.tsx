@@ -14,6 +14,7 @@ export default function Organization() {
   const [show3, setShow3] = useState(false);
   // const ref = useRef(null);
   const [toggleRefresh, setToggleRefresh] = useState(false);
+  
   // useEffect(() => {
   //   const licenseBanner: any = document.querySelector("div#js-licensing");
   //   licenseBanner.innerHTML = "";
