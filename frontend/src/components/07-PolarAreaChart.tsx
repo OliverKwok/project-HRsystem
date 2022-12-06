@@ -12,13 +12,15 @@ ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
 export default function PolarAreaChart() {
   const [inputData, setInputData] = useState<any>();
+  const [inputName, setInputName] = useState<any>();
 
   const data = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: inputName,
+    // labels: ["Marketing", "Finance", "Management", "Human Resources", "Sale"],
     datasets: [
       {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
+        label: "Cost of Department",
+        data: inputData,
         backgroundColor: [
           "rgba(255, 99, 132, 0.5)",
           "rgba(54, 162, 235, 0.5)",
@@ -31,6 +33,38 @@ export default function PolarAreaChart() {
       },
     ],
   };
+
+  useEffect(() => {
+    const requestOptions = {
+      method: "Get",
+    };
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/data/departmentName`,
+      requestOptions
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setInputName(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    const requestOptions = {
+      method: "Get",
+    };
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/data/departmentCost`,
+      requestOptions
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setInputData(data);
+      });
+  }, []);
 
   return <PolarArea data={data} />;
 }

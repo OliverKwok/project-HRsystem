@@ -19,4 +19,14 @@ export class DataController {
   getYearServiceMale() {
     return this.dataService.getYearServiceMale();
   }
+
+  @Get('departmentName')
+  getDepartmentName() {
+    return this.dataService.getDepartmentName();
+  }
+
+  @Get('departmentCost')
+  getDepartmentCost() {
+    return this.dataService.getDepartmentCost();
+  }
 }
