@@ -14,13 +14,13 @@
 }
 
 .organizationchart-demo .p-organizationchart .node-header {
-  background-color: #495ebb;
+  background-color: #24d1ae;
   color: #ffffff;
 }
 
 .organizationchart-demo .p-organizationchart .node-content {
   text-align: center;
-  border: 1px solid #495ebb;
+  border: 1px solid #24d1ae;
 }
 
 .organizationchart-demo .p-organizationchart .node-content img {

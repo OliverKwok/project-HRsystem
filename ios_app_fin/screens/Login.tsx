@@ -67,7 +67,7 @@ function Login({navigation}: any) {
       dispatch(login(profileJson, json.access_token));
 
       await AsyncStorage.setItem('token', json.access_token);
-      navigation.navigate('Navigation Bar');
+      navigation.navigate('NavigationBar');
 
       let firebaseToken = await AsyncStorage.getItem('firebase_token');
       console.log(profileJson, 'profileJson from login.tsx 75');
