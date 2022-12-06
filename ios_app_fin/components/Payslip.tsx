@@ -42,8 +42,8 @@ function Payslip({data}: {data: payrollType}) {
           <Text style={styles.salaryText}>{data['bonus']}</Text>
         </View>
         <View style={styles.salaryDetailContainer}>
-          <Text style={styles.salaryText}>No pay Leave : </Text>
-          <Text style={styles.salaryText}>{data['nopay_leave']}</Text>
+          <Text style={styles.salaryText}>Deduction : </Text>
+          <Text style={styles.salaryText}>{`(${data['nopay_leave']})`}</Text>
         </View>
         <View style={styles.salaryDetailContainer}>
           <Text style={styles.salaryText}>MPF contributed by employee :</Text>

@@ -44,6 +44,25 @@ export class AttendanceController {
 
     return this.attendanceService.changeAttendanceRecord(data);
   }
+
+  @Post('importAttendanceRecord')
+  importAttendanceRecord(@Body() data) {
+    for (let element of data) {
+      if (
+        new Date(element['time_checkedin']).getTime() >
+        new Date(`${element['date']} 09:00:00`).getTime()
+      ) {
+        element['status'] = 'punctual';
+        delete element['status\r'];
+      } else {
+        element['status'] = 'late';
+        delete element['status\r'];
+      }
+    }
+
+    return this.attendanceService.importAttendanceRecord(data);
+  }
+
   // @Post()
   // create(@Body() createAttendanceDto: CreateAttendanceDto) {
   //   return this.attendanceService.create(createAttendanceDto);
