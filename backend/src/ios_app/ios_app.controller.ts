@@ -90,6 +90,10 @@ export class IosAppController {
     return await this.iosAppService.addFirebaseToken(data);
   }
 
+  @Get('getProfile/:userId')
+  async getPayslip(@Param('userId') userId: string) {
+    return await this.iosAppService.getPayslip(+userId);
+  }
   // @Post()
   // create(@Body() createIosAppDto: CreateIosAppDto) {
   //   return this.iosAppService.create(createIosAppDto);

@@ -187,6 +187,20 @@ export class IosAppService {
       return { res };
     }
   }
+
+  async getProfile(userId: number) {
+    try {
+      let res = await this.knex
+        .select('*')
+        .from('payroll')
+        .where('employeeid', userId)
+        .orderBy('month', 'desc');
+
+      return { res };
+    } catch (err) {
+      return err;
+    }
+  }
   // create(createIosAppDto: CreateIosAppDto) {
   //   return 'This action adds a new iosApp';
   // }

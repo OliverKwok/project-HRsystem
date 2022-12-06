@@ -4,12 +4,30 @@ import {GlobalStyles} from '../constants/styles';
 import {logout} from '../redux/auth/actions';
 import {useAppDispatch} from '../store';
 
-function Setting() {
+function Profile() {
   const dispatch = useAppDispatch();
 
   const logoutHandler = () => {
     dispatch(logout());
   };
+
+  async function getAttendance() {
+    try {
+      const options = {method: 'GET'};
+      let res = await fetch(
+        `${Config.REACT_APP_BACKEND_URL}/ios-app/getAttendance/${userID}`,
+        options,
+      );
+
+      let attendance = await res.json();
+
+      attendance = attendance['res'];
+
+      setAttendanceRecord(attendance);
+    } catch {
+      console.log('fetch fail');
+    }
+  }
 
   return (
     <View style={styles.bigPageContainer}>
@@ -26,7 +44,7 @@ function Setting() {
   );
 }
 
-export default Setting;
+export default Profile;
 
 const styles = StyleSheet.create({
   bigPageContainer: {

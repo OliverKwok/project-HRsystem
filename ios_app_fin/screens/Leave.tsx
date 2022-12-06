@@ -93,7 +93,7 @@ function Leave({navigation}: any) {
 
     refetchLeaveRecord
       .then(async () => {
-        await wait(2000);
+        await wait(1000);
 
         // console.log('loading...');
       })
