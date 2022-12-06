@@ -147,7 +147,7 @@ export default function OrgChart2() {
 
   return (
     <div>
-      <button onClick={generatePDF} type="button">
+      <button onClick={generatePDF} type="button" className="exportPDF">
         Export PDF
       </button>
       <div className="organizationchart-demo report">

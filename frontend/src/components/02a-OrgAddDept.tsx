@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
-// import { useForm } from "react-hook-form";
+import "../styles/02a-AddDept.css";
 
-export default function OrgAddDept() {
-  //create form
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm();
-
+export default function OrgAddDept(props: any) {
   // csuite dropdown
   const [managedBy, setManagedBy] = useState([]);
 
@@ -36,38 +28,41 @@ export default function OrgAddDept() {
 
   async function submitAddDept(event: any) {
     event.preventDefault();
-    console.log(managingPerson);
-    const requestOptions = {
-      method: "POST",
-      headers: { "-Type": "application/jsContenton" },
-      body: JSON.stringify({
-        dept_name: newDeptName,
-        managed_by: managingPerson,
-      }),
-    };
-    const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/department/add`,
-      requestOptions
-    );
-    const jsonData = await res.json();
-    console.log(jsonData);
+    if (newDeptName !== "") {
+      console.log(managingPerson);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          dept_name: newDeptName,
+          managed_by: managingPerson,
+        }),
+      };
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/department/add`,
+        requestOptions
+      );
+      const jsonData = await res.json();
+      console.log(jsonData);
+
+      props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
+    }
   }
 
   return (
-    <>
+    <div className="addSection">
       <h3>Add new Department</h3>
       <form onSubmit={submitAddDept}>
         <div className="addDept">
-          <div>
-            New Department Name
-            <input
-              type="text"
-              value={newDeptName}
-              onChange={(event) => setNewDeptName(event.target.value)}
-            ></input>
-          </div>
-
-          <div>
+          <div className="fills">
+            <div>
+              New Department Name
+              <input
+                type="text"
+                value={newDeptName}
+                onChange={(event) => setNewDeptName(event.target.value)}
+              ></input>
+            </div>
             Managed by:
             <select
               onChange={(event: any) => {
@@ -87,6 +82,6 @@ export default function OrgAddDept() {
           <input type="submit" value="Add Department" />
         </div>
       </form>
-    </>
+    </div>
   );
 }

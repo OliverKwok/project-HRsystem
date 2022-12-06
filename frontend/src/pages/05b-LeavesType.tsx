@@ -58,7 +58,7 @@ export default function LeavesType() {
       <PopupAddType setToggleRefresh={setToggleRefresh} />
       <PopupDeleteType setToggleRefreshDelete={setToggleRefreshDelete} />
 
-      <div className="cards" >
+      <div className="cardsContainer" >
         {leavestype.map((type: any, id: any) => (
           <LeavesTypeCard key={id} obj={type} />
         ))}

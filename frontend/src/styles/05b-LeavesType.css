@@ -1,4 +1,23 @@
-.cards {
-  display: flex;
-  flex-direction: row;
+.cardsContainer {
+  display: grid;
+  grid-template-areas: "one one one one one one";
+  gap: 10px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .cardsContainer {
+    grid-template-areas: "one one one";
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .cardsContainer {
+    grid-template-areas: "one one one one";
+  }
+}
+
+@media only screen and (min-width: 2000px) {
+  .cardsContainer {
+    grid-template-areas: "one one one one one one";
+  }
 }
