@@ -118,7 +118,7 @@ export default function StatusChange() {
         <Carousel
           value={statuses}
           itemTemplate={OffboardingCard}
-          numVisible={3}
+          numVisible={4}
           numScroll={1}
           responsiveOptions={responsiveOptions}
         />
