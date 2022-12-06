@@ -28,23 +28,25 @@ export default function OrgAddDept(props: any) {
 
   async function submitAddDept(event: any) {
     event.preventDefault();
-    console.log(managingPerson);
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        dept_name: newDeptName,
-        managed_by: managingPerson,
-      }),
-    };
-    const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/department/add`,
-      requestOptions
-    );
-    const jsonData = await res.json();
-    console.log(jsonData);
+    if (newDeptName !== "") {
+      console.log(managingPerson);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          dept_name: newDeptName,
+          managed_by: managingPerson,
+        }),
+      };
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/department/add`,
+        requestOptions
+      );
+      const jsonData = await res.json();
+      console.log(jsonData);
 
-    props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
+      props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
+    }
   }
 
   return (

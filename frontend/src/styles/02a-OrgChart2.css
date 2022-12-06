@@ -58,4 +58,8 @@ button.exportPDF {
   border: solid;
   border-width: 0.5px;
   margin-top: 10px;
+  transition: all 150ms ease-out;
+}
+button.exportPDF:active {
+  transform: scale(0.95);
 }

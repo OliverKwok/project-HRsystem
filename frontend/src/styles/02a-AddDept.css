@@ -31,4 +31,8 @@ input[type="submit"] {
   padding: 10px;
   border: solid;
   border-width: 0.5px;
+  transition: all 150ms ease-out;
+}
+input[type="submit"]:active {
+  transform: scale(0.95);
 }
