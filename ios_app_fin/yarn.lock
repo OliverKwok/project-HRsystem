@@ -7647,6 +7647,11 @@
   dependencies:
     "punycode" "^2.1.0"
 
+"uri-scheme@^1.0.121":
+  "integrity" "sha512-uBB1Q5ftcs44XLdvZm0A9RhRV/dil5wzLVJxWV83Ug8IdSFesM3jYQ04hz3H3LkK+bN+e8XGtbzos1kweLkiCw=="
+  "resolved" "https://registry.npmjs.org/uri-scheme/-/uri-scheme-1.0.121.tgz"
+  "version" "1.0.121"
+
 "urix@^0.1.0":
   "integrity" "sha512-Am1ousAhSLBeB9cG/7k7r2R0zj50uDRlZHPGbazid5s9rlF1F/QKYObEKSIunSjIOkJZqwRRLpvewjEkM7pSqg=="
   "resolved" "https://registry.npmjs.org/urix/-/urix-0.1.0.tgz"

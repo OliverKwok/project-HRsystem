@@ -17,6 +17,8 @@ import Stack from "@mui/material/Stack";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { ReactSpreadsheetImport } from "react-spreadsheet-import";
+
 interface attendanceInfoState {
   isShow: boolean;
   status: string;
@@ -176,8 +178,16 @@ const Attendance = () => {
     ).getDate(),
   };
 
+  let isOpen = true;
+
   return (
     <div className="bigPageContainer">
+      <ReactSpreadsheetImport
+        isOpen={isOpen}
+        onClose={onClose}
+        onSubmit={onSubmit}
+        fields={fields}
+      />
       <div className="month-picker-container">
         <div className="month-picker">
           <LocalizationProvider dateAdapter={AdapterDayjs}>

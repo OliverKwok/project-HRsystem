@@ -140,6 +140,24 @@ function App() {
     main();
   }, []);
 
+  const config = {
+    screens: {
+      NavigationBar: {
+        screens: {
+          Attendance: 'attendance',
+          Leave: 'leave',
+          Salary: 'salary',
+        },
+      },
+      LeaveApplication: 'leaveapplication',
+    },
+  };
+
+  const linking = {
+    prefixes: ['easyhrsolutions://'],
+    config,
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -150,7 +168,7 @@ function App() {
         {isAuthenticated ? (
           <>
             <Stack.Screen
-              name="Navigation Bar"
+              name="NavigationBar"
               component={BottomBar}
               options={{headerShown: false}}
             />
