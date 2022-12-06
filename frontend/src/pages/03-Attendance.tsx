@@ -182,12 +182,6 @@ const Attendance = () => {
 
   return (
     <div className="bigPageContainer">
-      <ReactSpreadsheetImport
-        isOpen={isOpen}
-        onClose={onClose}
-        onSubmit={onSubmit}
-        fields={fields}
-      />
       <div className="month-picker-container">
         <div className="month-picker">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
