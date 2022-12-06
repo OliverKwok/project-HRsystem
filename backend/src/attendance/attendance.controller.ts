@@ -49,7 +49,7 @@ export class AttendanceController {
   importAttendanceRecord(@Body() data) {
     for (let element of data) {
       if (
-        new Date(element['time_checkedin']).getTime() >
+        new Date(element['time_checkedin']).getTime() <
         new Date(`${element['date']} 09:00:00`).getTime()
       ) {
         element['status'] = 'punctual';
