@@ -10,8 +10,13 @@ export class DataController {
     return this.dataService.getJobStatus();
   }
 
-  @Get('yearService')
-  getYearService() {
-    return this.dataService.getYearService();
+  @Get('yearServiceFemale')
+  getYearServiceFemale() {
+    return this.dataService.getYearServiceFemale();
+  }
+
+  @Get('yearServiceMale')
+  getYearServiceMale() {
+    return this.dataService.getYearServiceMale();
   }
 }

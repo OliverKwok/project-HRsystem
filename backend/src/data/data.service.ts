@@ -60,7 +60,53 @@ export class DataService {
     return numArr;
   }
 
-  async getYearService() {
+  async getYearServiceFemale() {
+    let yearService = await this.knex.raw(`
+    select gender, start_date from employee`);
+
+    const json = yearService.rows;
+
+    function calculateYear(day) {
+      var ageDifMs = Date.now() - day;
+      var ageDate = new Date(ageDifMs);
+      return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+
+    // let maleArr = [0, 0, 0, 0, 0];
+    let femaleArr = [0, 0, 0, 0, 0];
+
+    json.forEach((data) => {
+      if (calculateYear(new Date(data.start_date)) < 1 && data.gender == 'F') {
+        femaleArr[0] = femaleArr[0] + 1;
+      } else if (
+        calculateYear(new Date(data.start_date)) >= 1 &&
+        calculateYear(new Date(data.start_date)) < 3 &&
+        data.gender == 'F'
+      ) {
+        femaleArr[1] = femaleArr[1] + 1;
+      } else if (
+        calculateYear(new Date(data.start_date)) >= 3 &&
+        calculateYear(new Date(data.start_date)) < 5 &&
+        data.gender == 'F'
+      ) {
+        femaleArr[2] = femaleArr[2] + 1;
+      } else if (
+        calculateYear(new Date(data.start_date)) >= 5 &&
+        calculateYear(new Date(data.start_date)) < 8 &&
+        data.gender == 'F'
+      ) {
+        femaleArr[3] = femaleArr[3] + 1;
+      } else if (
+        calculateYear(new Date(data.start_date)) >= 8 &&
+        data.gender == 'F'
+      ) {
+        femaleArr[4] = femaleArr[4] + 1;
+      }
+    });
+
+    return femaleArr;
+  }
+  async getYearServiceMale() {
     let yearService = await this.knex.raw(`
     select gender, start_date from employee`);
 
@@ -73,7 +119,7 @@ export class DataService {
     }
 
     let maleArr = [0, 0, 0, 0, 0];
-    let femaleArr = [0, 0, 0, 0, 0];
+    // let femaleArr = [0, 0, 0, 0, 0];
 
     json.forEach((data) => {
       if (calculateYear(new Date(data.start_date)) < 1 && data.gender == 'M') {
@@ -101,37 +147,10 @@ export class DataService {
         data.gender == 'M'
       ) {
         maleArr[4] = maleArr[4] + 1;
-      } else if (
-        calculateYear(new Date(data.start_date)) < 1 &&
-        data.gender == 'F'
-      ) {
-        maleArr[0] = maleArr[0] + 1;
-      } else if (
-        calculateYear(new Date(data.start_date)) >= 1 &&
-        calculateYear(new Date(data.start_date)) < 3 &&
-        data.gender == 'F'
-      ) {
-        femaleArr[1] = femaleArr[1] + 1;
-      } else if (
-        calculateYear(new Date(data.start_date)) >= 3 &&
-        calculateYear(new Date(data.start_date)) < 5 &&
-        data.gender == 'F'
-      ) {
-        femaleArr[2] = femaleArr[2] + 1;
-      } else if (
-        calculateYear(new Date(data.start_date)) >= 5 &&
-        calculateYear(new Date(data.start_date)) < 8 &&
-        data.gender == 'F'
-      ) {
-        femaleArr[3] = femaleArr[3] + 1;
-      } else if (
-        calculateYear(new Date(data.start_date)) >= 8 &&
-        data.gender == 'F'
-      ) {
-        femaleArr[4] = femaleArr[4] + 1;
       }
     });
 
-    return { maleArr, femaleArr };
+    return maleArr;
+    // return { maleArr, femaleArr };
   }
 }
