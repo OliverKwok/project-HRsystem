@@ -21,16 +21,26 @@
   font-size: 22px;
   margin-left: 10px;
   margin-right: 10px;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: #3bccc4;
+  background-color: #d6d6d6;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: rgb(103, 230, 189);
+  background-color: rgb(255, 255, 255);
 }
 
 /* Create an active/current tablink class */
 .tab button:focus {
-  background-color: #8ef3db;
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #3bccc4;
+  background-color: #ffffff;
 }
 
 /* Style the tab content */
