@@ -27,7 +27,7 @@ export default function StackBarChart() {
     plugins: {
       title: {
         display: true,
-        text: "Turnove by Department",
+        text: "Year 2022",
       },
     },
     responsive: true,
@@ -55,19 +55,29 @@ export default function StackBarChart() {
     labels,
     datasets: [
       {
-        label: "Dataset 1",
+        label: "Marketing",
         data: [1, 2, 3, 4, 5, 6, 7],
-        backgroundColor: "rgb(255, 99, 132)",
+        backgroundColor: "#06d6a0",
       },
       {
-        label: "Dataset 2",
+        label: "Finance",
         data: [1, 1, 3, 6, 3, 2, 1],
-        backgroundColor: "rgb(75, 192, 192)",
+        backgroundColor: "#1b9aaa",
       },
       {
-        label: "Dataset 3",
+        label: "Management",
         data: [5, 1, 2, 1, 2, 4, 2],
-        backgroundColor: "rgb(53, 162, 235)",
+        backgroundColor: "#ef476f",
+      },
+      {
+        label: "Human Resources",
+        data: [1, 2, 1, 2, 4, 2, 5],
+        backgroundColor: "#ffc43d",
+      },
+      {
+        label: "Sales",
+        data: [2, 1, 2, 4, 2, 3, 2],
+        backgroundColor: "#1d4e89",
       },
     ],
   };

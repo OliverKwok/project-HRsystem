@@ -1,0 +1,38 @@
+.addSection {
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: rgb(22, 52, 52);
+  margin: 20px;
+  padding: 20px 40px;
+}
+
+.fills {
+  line-height: 2.5;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: #267a65;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 22px;
+  padding: 10px;
+  border: solid;
+  border-width: 0.5px;
+  transition: all 150ms ease-out;
+}
+input[type="submit"]:active {
+  transform: scale(0.95);
+}

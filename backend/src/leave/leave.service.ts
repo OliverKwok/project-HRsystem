@@ -146,7 +146,7 @@ export class LeaveService {
           'leave_type.type as leavetype',
           'leave_type.id as leavetype_id',
           'leave_application.start_date',
-          'leave_application.start_date_period',                      
+          'leave_application.start_date_period',
           'leave_application.end_date',
           'leave_application.end_date_period',
           'leave_application.number_of_days',
@@ -162,7 +162,7 @@ export class LeaveService {
           'leave_type.id',
         )
         .whereNot({ 'leave_application.status': 'pending' })
-        .orderBy('leave_application.id', 'desc');
+        .orderBy('leave_application.start_date', 'desc');
       return applications;
     } catch (err) {
       console.log(err);
@@ -172,12 +172,9 @@ export class LeaveService {
   async update_status(updateStatusDto: UpdateStatusDto) {
     console.log(updateStatusDto);
     try {
-      // if (updateStatusDto.action == "approved"){
       const statusApproved = await this.knex
         .table('leave_application')
-        // .join('employee', 'leave_application.employee_id', '=', 'employee.id')
         .update({ status: updateStatusDto.action })
-        // .update({ al_leave_taken: employee.al_leave_taken - updateStatusDto.ALdeduct})
         .where({ id: updateStatusDto.application_id });
       return statusApproved;
     } catch (err) {

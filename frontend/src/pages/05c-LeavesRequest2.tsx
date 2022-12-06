@@ -93,7 +93,6 @@ export default function LeavesRequest2() {
       body: JSON.stringify({
         application_id: id,
         action: name,
-        // ALdeduct: event.target.number_of_days,
       }),
     };
 
@@ -101,9 +100,9 @@ export default function LeavesRequest2() {
       `${process.env.REACT_APP_BACKEND_URL}/leave/update_status`,
       requestOptions
     )
-      .then((response) => response.json)
+      .then((response) => response.json())
       .then((data) => console.log(data));
-
+      
     setActionOnPending(!actionOnPending);
   }
 

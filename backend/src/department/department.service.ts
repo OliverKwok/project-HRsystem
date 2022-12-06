@@ -265,7 +265,7 @@ export class DepartmentService {
       const managedByNumber = await this.knex('title')
         .select('id')
         // .from('title')
-        .where({ title_name: createDepartmentDto.managed_by });
+        .where({ title_name: createDepartmentDto.managed_by });              
       console.log(managedByNumber);
 
       const newDept = await this.knex.table('department').insert({

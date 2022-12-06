@@ -8,7 +8,4 @@ export class UpdateStatusDto {
 
   @MinLength(0)
   action: string;
-
-  @MinLength(0)
-  ALdeduct: string;
 }

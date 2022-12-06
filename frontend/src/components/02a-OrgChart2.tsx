@@ -139,16 +139,15 @@ export default function OrgChart2() {
   // }, []);
 
   const generatePDF = () => {
-    const report = new JsPDF("landscape", "pt", "a3");
+    const report = new JsPDF("landscape", "pt", "a1");
     report.html((document as any).querySelector(".report")).then(() => {
       report.save("orgchart.pdf");
     });
   };
 
-
   return (
     <div>
-      <button onClick={generatePDF} type="button">
+      <button onClick={generatePDF} type="button" className="exportPDF">
         Export PDF
       </button>
       <div className="organizationchart-demo report">

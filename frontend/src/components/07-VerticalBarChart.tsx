@@ -44,12 +44,12 @@ export default function VerticalBarChart() {
       {
         label: "Male",
         data: inputDataMale,
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        backgroundColor: "#006d77",
       },
       {
         label: "Female",
         data: inputDataFemale,
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: "rgba(255, 99, 132)",
       },
     ],
   };

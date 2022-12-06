@@ -9,10 +9,6 @@ import { classNames } from "primereact/utils";
 // import { Button } from 'primereact/button';
 // import { Toast } from 'primereact/toast';
 
-import MyDocument from "../components/04b-GeneratePDFPayslipSingle";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import { PDFViewer } from "@react-pdf/renderer";
-
 // date picker
 import dayjs, { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
@@ -28,7 +24,6 @@ export default function PaySummary() {
   // const [products4, setProducts4] = useState<any[]>();
   const [editingRows, setEditingRows] = useState({});
   const [toggleRefresh, setToggleRefresh] = useState(false);
-  const [loading, setLoading] = useState(false);
   const toast = useRef();
 
   // date picker
@@ -53,8 +48,8 @@ export default function PaySummary() {
     { field: "bonus", header: "Bonus" },
     { field: "nopay_leave", header: "No Pay Leave" },
     { field: "mpf_employee", header: "MPF" },
-    // { field: "mpf_employee_isAmended", header: "mpf_employee_isAmended" },
-    // { field: "total_isAmended", header: "total_isAmended" },
+    { field: "mpf_employee_isAmended", header: "mpf_employee_isAmended" },
+    { field: "total_isAmended", header: "total_isAmended" },
     { field: "total", header: "TOTAL" },
   ];
 
@@ -72,13 +67,10 @@ export default function PaySummary() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(true);
-    }, 3000);
-  }, [toggleRefresh]);
-
-  useEffect(() => {
+    // fetchProductData("products1");
     fetchProductData("products2");
+    // fetchProductData("products3");
+    // fetchProductData("products4");
   }, [toggleRefresh]);
 
   const fetchProductData = (productStateKey: any) => {
@@ -86,19 +78,13 @@ export default function PaySummary() {
       method: "Get",
     };
     fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/payroll/findConfirm/${yearValue}/${monthValue}`,
+      `${process.env.REACT_APP_BACKEND_URL}/payroll/${yearValue}/${monthValue}`,
       requestOptions
     )
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        // console.log(data);
-        // data.map((item: any) => {
-        //   delete item.year;
-        //   delete item.month;
-        // });
-
         (dataTableFuncMap as any)[`${productStateKey}`](data);
       });
   };
@@ -271,115 +257,90 @@ export default function PaySummary() {
   };
 
   const otPayBodyTemplate = (rowData: any) => {
-    // const stockClassName = classNames({
-    //   redNumber: rowData.ot_pay > 0 || rowData.ot_pay < 0,
-    // });
+    const stockClassName = classNames({
+      redNumber: rowData.ot_pay > 0 || rowData.ot_pay < 0,
+    });
 
     let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.ot_pay);
 
-    return <span>{numberShown}</span>;
+    return <span className={stockClassName}>{numberShown}</span>;
   };
 
   const bonusBodyTemplate = (rowData: any) => {
-    // const stockClassName = classNames({
-    //   redNumber: rowData.bonus > 0 || rowData.bonus < 0,
-    // });
+    const stockClassName = classNames({
+      redNumber: rowData.bonus > 0 || rowData.bonus < 0,
+    });
 
     let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.bonus);
 
-    return <span>{numberShown}</span>;
+    return <span className={stockClassName}>{numberShown}</span>;
   };
 
   const noPayLeaveBodyTemplate = (rowData: any) => {
-    // const stockClassName = classNames({
-    //   redNumber: rowData.nopay_leave > 0 || rowData.nopay_leave < 0,
-    // });
+    const stockClassName = classNames({
+      redNumber: rowData.nopay_leave > 0 || rowData.nopay_leave < 0,
+    });
 
     let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.nopay_leave);
 
-    return <span>{numberShown}</span>;
+    return <span className={stockClassName}>{numberShown}</span>;
   };
 
   const mpfBodyTemplate = (rowData: any) => {
-    // const stockClassName = classNames({
-    //   redNumber: rowData.mpf_employee_isAmended == true,
-    //   blueNumber: rowData.mpf_employee_isAmended == false,
-    // });
+    const stockClassName = classNames({
+      redNumber: rowData.mpf_employee_isAmended == true,
+      blueNumber: rowData.mpf_employee_isAmended == false,
+    });
 
     let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.mpf_employee);
 
-    return <span>{numberShown}</span>;
+    return <span className={stockClassName}>{numberShown}</span>;
   };
 
   const totalBodyTemplate = (rowData: any) => {
-    // const stockClassName = classNames({
-    //   redNumber: rowData.total_isAmended == true,
-    //   blueNumber: rowData.total_isAmended == false,
-    // });
+    const stockClassName = classNames({
+      redNumber: rowData.total_isAmended == true,
+      blueNumber: rowData.total_isAmended == false,
+    });
 
     let numberShown = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     }).format(rowData.total);
 
-    return <span>{numberShown}</span>;
+    return <span className={stockClassName}>{numberShown}</span>;
   };
 
-  const payslipBodyTemplate = (rowData: any) => {
-    // function handleClickDownload(rowData: any) {
-    //   console.log(rowData);
-    // }
-    return (
-      // <button onClick={() => handleClickDownload(rowData)}> Download </button>
-      <div>
-        {loading && (
-          <PDFDownloadLink
-            document={
-              <MyDocument
-                year={yearValue}
-                month={monthValue}
-                realid={rowData.realid}
-              />
-            }
-            fileName={`Payslip  ${yearValue}-${monthValue}`}
-          >
-            <button> Download </button>
-          </PDFDownloadLink>
-        )}
-      </div>
-    );
-  };
-
-  // function handleSubmitPayrollEdit() {
-  //   const requestOptions = {
-  //     method: "Post",
-  //   };
-  //   fetch(
-  //     `${process.env.REACT_APP_BACKEND_URL}/payroll/confirm/${yearValue}/${monthValue}`,
-  //     requestOptions
-  //   )
-  //     .then((response) => {
-  //       // console.log(response);
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       if (data.rowCount > 0) {
-  //         alert(`payroll confirmed for ${yearValue}-${monthValue}`);
-  //       }
-  //     });
-  // }
+  function handleSubmitPayrollEdit() {
+    const requestOptions = {
+      method: "Post",
+    };
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/payroll/confirm/${yearValue}/${monthValue}`,
+      requestOptions
+    )
+      .then((response) => {
+        // console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        if (data.rowCount > 0) {
+          alert(`payroll confirmed for ${yearValue}-${monthValue}`);
+        }
+      });
+  }
   return (
     <>
       <div className="month-picker-container">
@@ -457,7 +418,7 @@ export default function PaySummary() {
               field="ot_pay"
               header="+OT Pay"
               body={otPayBodyTemplate}
-              // editor={(options) => priceEditor(options)}
+              editor={(options) => priceEditor(options)}
               style={{ width: "10%" }}
               sortable
             ></Column>
@@ -465,7 +426,7 @@ export default function PaySummary() {
               field="bonus"
               header="+Bonus"
               body={bonusBodyTemplate}
-              // editor={(options) => priceEditor(options)}
+              editor={(options) => priceEditor(options)}
               style={{ width: "10%" }}
               sortable
             ></Column>
@@ -473,7 +434,7 @@ export default function PaySummary() {
               field="nopay_leave"
               header="-Deduction"
               body={noPayLeaveBodyTemplate}
-              // editor={(options) => priceEditor(options)}
+              editor={(options) => priceEditor(options)}
               style={{ width: "10%" }}
               sortable
             ></Column>
@@ -481,15 +442,15 @@ export default function PaySummary() {
               field="mpf_employee"
               header="-MPF"
               body={mpfBodyTemplate}
-              // editor={(options) => priceEditor(options)}
+              editor={(options) => priceEditor(options)}
               style={{ width: "10%" }}
               sortable
             ></Column>
-            {/* <Column
+            <Column
               field="mpf_employee_isAmended"
               header="mpf_employee_isAmended"
               style={{ display: "none" }}
-            ></Column> */}
+            ></Column>
             <Column
               field="total"
               header="Total"
@@ -499,17 +460,15 @@ export default function PaySummary() {
               sortable
             ></Column>
             <Column
-              field="payslip"
-              header="Payslip"
-              body={payslipBodyTemplate}
-              // rowEditor
+              rowEditor
               headerStyle={{ width: "5%" }}
               bodyStyle={{ textAlign: "center" }}
-            >
-              Payslip
-            </Column>
+            ></Column>
           </DataTable>
         </div>
+      </div>
+      <div>
+        <button onClick={handleSubmitPayrollEdit}>Confirm</button>
       </div>
     </>
   );
