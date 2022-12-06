@@ -245,7 +245,6 @@ export default function Title() {
         // console.log(fetchData);
         setData(fetchData);
         setEid(window.localStorage.getItem("eid"));
-        setEid(window.localStorage.getItem("offboarding"));
       });
   }, []);
 
