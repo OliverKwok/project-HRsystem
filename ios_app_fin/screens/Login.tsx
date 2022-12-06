@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Alert,
   Pressable,
@@ -10,20 +10,30 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {GlobalStyles} from '../constants/styles';
 import LinearGradient from 'react-native-linear-gradient';
-import {useAppDispatch} from '../store';
+import {RootState, useAppDispatch, useAppSelector} from '../store';
 import {login} from '../redux/auth/actions';
 import Config from 'react-native-config';
 import {useSelector} from 'react-redux';
+import {AuthState} from '../redux/auth/state';
+
+interface firebaseObjTpye {
+  employeeId: null | string;
+  firebase_token: null | string;
+}
 
 function Login({navigation}: any) {
   const dispatch = useAppDispatch();
   // const james = useSelector(state => state);
+  const userId = useAppSelector(state => {
+    if (!state.auth.user?.id) {
+      return null;
+    }
+    return state.auth.user.id;
+  });
   const [loginObject, setLoginObject] = useState({
     username: '',
     password: '',
   });
-
-  // console.log(loginObject);
 
   async function loginHandler() {
     const res = await fetch(`${Config.REACT_APP_BACKEND_URL}/auth/login_ios`, {
@@ -55,8 +65,30 @@ function Login({navigation}: any) {
       console.log({profileJson});
 
       dispatch(login(profileJson, json.access_token));
+
       await AsyncStorage.setItem('token', json.access_token);
       navigation.navigate('Navigation Bar');
+
+      let firebaseToken = await AsyncStorage.getItem('firebase_token');
+      console.log(profileJson, 'profileJson from login.tsx 75');
+      console.log(firebaseToken, 'from 79');
+      let firebaseObj = {
+        employeeId: profileJson.id,
+        firebase_token: firebaseToken,
+      };
+      console.log(firebaseObj, 'firebaseObj from 79');
+
+      const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(firebaseObj),
+      };
+      const res = await fetch(
+        `${Config.REACT_APP_BACKEND_URL}/ios-app/addFirebaseToken`,
+        requestOptions,
+      );
+      const firebase_res = await res.json();
+      console.log(firebase_res);
     }
   }
 

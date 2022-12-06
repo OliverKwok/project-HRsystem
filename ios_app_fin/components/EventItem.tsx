@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     fontSize: 20,
-    marginRight: 30,
+    marginRight: 20,
   },
 });

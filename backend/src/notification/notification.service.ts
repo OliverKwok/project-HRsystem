@@ -45,7 +45,7 @@ export class NotificationService {
   }
   async postNewNotification(data) {
     try {
-      console.log(data);
+      // console.log(data);
       let res = await this.knex
         .table('notification')
         .insert({
@@ -55,6 +55,48 @@ export class NotificationService {
           recipient: data['notificationRecipient'],
         })
         .returning('id');
+
+      let firebase_token = await this.knex
+        .table('employee')
+        .select('firebase_token')
+        .whereRaw('firebase_token IS NOT NULL');
+
+      let firebase_token_arr = [];
+      for (let element of firebase_token) {
+        firebase_token_arr.push(element['firebase_token']);
+      }
+
+      console.log(firebase_token_arr);
+
+      let firebase_body = {
+        registration_ids: firebase_token_arr,
+        content_available: true,
+        priority: 'high',
+        notification: {
+          title: data['notificationTitle'],
+          body: 'Click to see the details!',
+          data: {
+            path: 'notifications',
+            id: '1',
+          },
+        },
+      };
+      const firebaseRequest = {
+        method: 'POST',
+        headers: {
+          Authorization:
+            'key=AAAAXGC1ZlI:APA91bFZzHOmDrfJiaYXs8FnESg-Wh3h8EykjtPgrsF5ylpMscp7hmk3wwSDgNENoUxNayqmwsmzO3_985miNjpVFfontS6RAdYdxy8mY_DwOg8YtwT43ypIqfWsEF0h0zlZGQwqcE7g',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(firebase_body),
+        // headers: { "Content-Type": "multi-type/form-data" },
+        // body: formData,
+      };
+      const firebase_res = await fetch(
+        `https://fcm.googleapis.com/fcm/send`,
+        firebaseRequest,
+      );
+
       return { res };
     } catch (err) {
       console.log(err);

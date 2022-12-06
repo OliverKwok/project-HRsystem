@@ -129,6 +129,20 @@ export class IosAppService {
     }
   }
 
+  async getPayslip(userId: number) {
+    try {
+      let res = await this.knex
+        .select('*')
+        .from('payroll')
+        .where('employeeid', userId)
+        .orderBy('month', 'desc');
+
+      return { res };
+    } catch (err) {
+      return err;
+    }
+  }
+
   dateFormatter(dateString: string) {
     // Create a date object from a date string
     var date = new Date(dateString);
@@ -144,7 +158,7 @@ export class IosAppService {
   }
 
   async addFirebaseToken(data) {
-    // console.log(data);
+    console.log(data);
     let res_pre = await this.knex
       .table('employee')
       .select('employee.firebase_token')
@@ -156,7 +170,7 @@ export class IosAppService {
       let res = await this.knex
         .table('employee')
         .insert({
-          firebase_token: data['firebase_taken'],
+          firebase_token: data['firebase_token'],
         })
         .where('id', data['employeeId'])
         .returning('id');
@@ -166,7 +180,7 @@ export class IosAppService {
       let res = await this.knex
         .table('employee')
         .update({
-          firebase_token: data['firebase_taken'],
+          firebase_token: data['firebase_token'],
         })
         .where('id', data['employeeId'])
         .returning('id');

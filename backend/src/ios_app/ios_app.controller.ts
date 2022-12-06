@@ -61,25 +61,32 @@ export class IosAppController {
     return await this.iosAppService.getAttendance(+userId);
   }
 
-  @Get('getPHolidays/')
+  @Get('getPHolidays')
   async getPHolidays() {
     return await this.iosAppService.getPHolidays();
   }
 
-  @Get('getHolidaysName/')
+  @Get('getHolidaysName')
   async getHolidaysName() {
     return await this.iosAppService.getHolidaysName();
   }
 
-  @Get('getNotification/')
+  @Get('getNotification')
   async getNotifications() {
     return await this.iosAppService.getNotifications();
   }
 
+  @Get('getPayslip/:userId')
+  async getPayslip(@Param('userId') userId: string) {
+    return await this.iosAppService.getPayslip(+userId);
+  }
+
   @Post('addFirebaseToken')
   async addFirebaseToken(@Body() data) {
-    // console.log(data);
-
+    console.log(data);
+    if (data['employeeId'] == '' || data['firebase_token'] == '') {
+      return "there isn't firebase_token and employee ID";
+    }
     return await this.iosAppService.addFirebaseToken(data);
   }
 
