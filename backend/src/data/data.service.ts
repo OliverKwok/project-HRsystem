@@ -153,4 +153,40 @@ export class DataService {
     return maleArr;
     // return { maleArr, femaleArr };
   }
+
+  async getDepartmentName() {
+    let departmentName = await this.knex.raw(`
+    select department.dept_name, sum(employee.basic_salary) as total from employee
+    inner join employee_role on employee_role.employeeid = employee.id
+    inner join department on department.id = employee_role.department_id
+    group by department.dept_name
+    ;`);
+
+    const result = departmentName.rows;
+
+    const nameArr = [];
+    result.forEach((data) => {
+      nameArr.push(data.dept_name);
+    });
+
+    return nameArr;
+  }
+
+  async getDepartmentCost() {
+    let departmentCost = await this.knex.raw(`
+    select department.dept_name, sum(employee.basic_salary) as total from employee
+    inner join employee_role on employee_role.employeeid = employee.id
+    inner join department on department.id = employee_role.department_id
+    group by department.dept_name
+    ;`);
+
+    const result = departmentCost.rows;
+
+    const totalArr = [];
+    result.forEach((data) => {
+      totalArr.push(+data.total);
+    });
+
+    return totalArr;
+  }
 }
