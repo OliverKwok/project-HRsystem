@@ -15,8 +15,22 @@ import Setting from './Setting';
 
 function BottomBar() {
   const Tab = createBottomTabNavigator();
+  // const config = {
+  //   screens: {
+  //     Attendance: 'attendance',
+  //     Leave: 'leave',
+  //     Salary: 'salary',
+  //   },
+  // };
+
+  // const linking = {
+  //   prefixes: ['easyhrsolutions://'],
+  //   config,
+  // };
+
   return (
     <Tab.Navigator
+      // linking={linking}
       initialRouteName="Attendance"
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, size, color}) => {

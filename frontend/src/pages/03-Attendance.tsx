@@ -17,6 +17,8 @@ import Stack from "@mui/material/Stack";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { ReactSpreadsheetImport } from "react-spreadsheet-import";
+
 interface attendanceInfoState {
   isShow: boolean;
   status: string;
@@ -175,6 +177,8 @@ const Attendance = () => {
       0
     ).getDate(),
   };
+
+  let isOpen = true;
 
   return (
     <div className="bigPageContainer">
