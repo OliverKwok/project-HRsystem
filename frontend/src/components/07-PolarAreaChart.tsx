@@ -16,20 +16,19 @@ export default function PolarAreaChart() {
 
   const data = {
     labels: inputName,
-    // labels: ["Marketing", "Finance", "Management", "Human Resources", "Sale"],
     datasets: [
       {
         label: "Cost of Department",
         data: inputData,
         backgroundColor: [
-          "rgba(255, 99, 132, 0.5)",
-          "rgba(54, 162, 235, 0.5)",
-          "rgba(255, 206, 86, 0.5)",
-          "rgba(75, 192, 192, 0.5)",
-          "rgba(153, 102, 255, 0.5)",
-          "rgba(255, 159, 64, 0.5)",
+          "#0affc2",
+          "#00ccf5",
+          "#ff7700",
+          "#f50076",
+          "#ffcf00",
+          "#52a1a3",
         ],
-        borderWidth: 1,
+        borderWidth: 0,
       },
     ],
   };
