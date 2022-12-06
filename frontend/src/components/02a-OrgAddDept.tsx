@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
+import "../styles/02a-AddDept.css";
 
 export default function OrgAddDept(props: any) {
-  //create form
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm();
-
   // csuite dropdown
   const [managedBy, setManagedBy] = useState([]);
 
@@ -55,20 +48,19 @@ export default function OrgAddDept(props: any) {
   }
 
   return (
-    <>
+    <div className="addSection">
       <h3>Add new Department</h3>
       <form onSubmit={submitAddDept}>
         <div className="addDept">
-          <div>
-            New Department Name
-            <input
-              type="text"
-              value={newDeptName}
-              onChange={(event) => setNewDeptName(event.target.value)}
-            ></input>
-          </div>
-
-          <div>
+          <div className="fills">
+            <div>
+              New Department Name
+              <input
+                type="text"
+                value={newDeptName}
+                onChange={(event) => setNewDeptName(event.target.value)}
+              ></input>
+            </div>
             Managed by:
             <select
               onChange={(event: any) => {
@@ -88,6 +80,6 @@ export default function OrgAddDept(props: any) {
           <input type="submit" value="Add Department" />
         </div>
       </form>
-    </>
+    </div>
   );
 }

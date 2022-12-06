@@ -6,6 +6,7 @@
 .organizationchart-demo .p-organizationchart .p-person {
   padding: 0;
   border: 0 none;
+  /* min-width: 40px; */
 }
 
 .organizationchart-demo .p-organizationchart .node-header,
@@ -38,11 +39,23 @@
 } */
 
 .organizationchart-demo .p-organizationchart .department {
-  background-color: #e9286f;
+  background-color: #cf8e80;
   color: #ffffff;
 }
 
 .organizationchart-demo .p-organizationchart .team {
-  background-color: #f990b6;
+  background-color: #f7ab71;
   color: #ffffff;
+}
+
+button.exportPDF {
+  width: 100%;
+  background-color: #267a65;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 22px;
+  padding: 10px;
+  border: solid;
+  border-width: 0.5px;
+  margin-top: 10px;
 }

@@ -1,7 +1,9 @@
+import "../styles/02a-Org.css";
 import React, { useEffect, useState } from "react";
 // import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import moment from "moment";
+import OrgAddDept from "../components/02a-OrgAddDept";
 moment().format();
 
 type FormState = {
@@ -384,7 +386,7 @@ export default function Employee() {
 
   return (
     <div className="page-container">
-      <div className="tab">
+      <div className="tabNewEmployee">
         <div>
           <button className="tablinks" onClick={showTab1}>
             1.Basic Information

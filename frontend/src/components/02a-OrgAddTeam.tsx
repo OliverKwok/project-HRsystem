@@ -40,38 +40,45 @@ export default function OrgAddTeam(props: any) {
   }
 
   return (
-    <section>
+    <div className="addSection">
       <h3>Add new Team</h3>
       <form onSubmit={submitAddTeam}>
         <div className="addTeam">
-          <div>
-            New Team Name
-            <input
-              type="text"
-              value={newTeamName}
-              onChange={(event) => setNewTeamName(event.target.value)}
-            ></input>
-          </div>
+      
+            <div className="fills">
 
-          <div>
-            Under which department
-            <select
-              onChange={(event: any) => {
-                setTeamDept(event.target.value);
-                console.log(event.target.value);
-              }}
-            >
-              {getDept.length > 0 &&
-                getDept.map((dept) => (
-                  <option value={dept["dept_name"]}>{dept["dept_name"]}</option>
-                ))}
-            </select>
-          </div>
+              New Team Name
+              <input
+                type="text"
+                value={newTeamName}
+                onChange={(event) => setNewTeamName(event.target.value)}
+              ></input>
+
+          
+              <div>
+                Under which department
+                <select
+                  onChange={(event: any) => {
+                    setTeamDept(event.target.value);
+                    console.log(event.target.value);
+                  }}
+                >
+                  {getDept.length > 0 &&
+                    getDept.map((dept) => (
+                      <option value={dept["dept_name"]}>
+                        {dept["dept_name"]}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+            </div>
+    
           <div>
             <input type="submit" value="Add Team" />
           </div>
         </div>
       </form>
-    </section>
+    </div>
   );
 }

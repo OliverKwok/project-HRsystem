@@ -17,19 +17,21 @@
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
+  color: #276047;
+  font-size: 22px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: rgb(194, 255, 206);
-  font-size: 20px;
+  background-color: rgb(103, 230, 189);
 }
 
 /* Create an active/current tablink class */
-.tab button.active {
-  background-color: rgb(214, 255, 199);
+.tab button:focus {
+  background-color: #8ef3db;
 }
-
 
 /* Style the tab content */
 /* .tabcontent {
@@ -38,3 +40,32 @@
   border: 1px solid #ccc;
   border-top: none;
 } */
+.tabNewEmployee {
+  overflow: visible;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #3bccc4;
+}
+
+.tabNewEmployee button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  color: #276047;
+  font-size: 22px;
+}
+
+.tabNewEmployee button:hover {
+  background-color: rgb(103, 230, 189);
+}
+
+.tabNewEmployee button:focus {
+  background-color: #8ef3db;
+  font-size: 20px;
+}
