@@ -161,11 +161,7 @@ const PayExport = () => {
         </div>
       </div>
 
-      <div
-        style={{ display: "none" }}
-        id="payroll_export_datepicker"
-        className="month-picker"
-      >
+      <div style={{ display: "none" }} className="month-picker">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Stack spacing={3}>
             <DatePicker

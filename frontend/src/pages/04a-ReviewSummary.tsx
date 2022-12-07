@@ -354,33 +354,50 @@ export default function PaySummary() {
   }
   return (
     <>
-      <div className="month-picker-container">
-        <div className="month-picker">
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Stack spacing={3}>
-              <DatePicker
-                views={["year", "month"]}
-                label="Year and Month"
-                // minDate={dayjs("2018-01-01")}
-                // maxDate={dayjs("2023-06-01")}
-                value={datePickerValue}
-                onChange={(dateInput) => {
-                  setDatePickerValue(dateInput);
-                  // console.log(new Date(dateInput).getMonth() + 1);
-                  let monthInput: number = new Date(dateInput).getMonth() + 1;
-                  let yearInput: number = new Date(dateInput).getFullYear();
-                  setMonthValue(monthInput);
-                  setYearValue(yearInput);
-                  setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
-                }}
-                renderInput={(params) => (
-                  <TextField {...params} helperText={null} />
-                )}
-              />
-            </Stack>
-          </LocalizationProvider>
+      <div className="payroll-review-header">
+        <div id="payroll_export_datepicker" className="month-picker-container">
+          <div className="month-picker">
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Stack spacing={3}>
+                <DatePicker
+                  views={["year", "month"]}
+                  label="Year and Month"
+                  // minDate={dayjs("2018-01-01")}
+                  // maxDate={dayjs("2023-06-01")}
+                  value={datePickerValue}
+                  onChange={(dateInput) => {
+                    setDatePickerValue(dateInput);
+                    // console.log(new Date(dateInput).getMonth() + 1);
+                    let monthInput: number = new Date(dateInput).getMonth() + 1;
+                    let yearInput: number = new Date(dateInput).getFullYear();
+                    setMonthValue(monthInput);
+                    setYearValue(yearInput);
+                    setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
+                  }}
+                  renderInput={(params) => (
+                    <TextField {...params} helperText={null} />
+                  )}
+                />
+              </Stack>
+            </LocalizationProvider>
+          </div>
+        </div>
+        <div className="payroll-review-word">
+          {!isConfirmed ? (
+            <div>
+              <button onClick={handleSubmitPayrollEdit}>Confirm</button>
+            </div>
+          ) : (
+            <div>
+              <span className="payroll-review-status">Status</span>
+              <span className="payroll-review-status-wording">
+                {`  The payroll for ${yearValue}-${monthValue} is already confirmed`}
+              </span>
+            </div>
+          )}
         </div>
       </div>
+
       <div className="payroll-editing">
         <div className="card p-fluid">
           {/* <h5>Row Editing</h5> */}
@@ -478,13 +495,6 @@ export default function PaySummary() {
           </DataTable>
         </div>
       </div>
-      {!isConfirmed ? (
-        <div>
-          <button onClick={handleSubmitPayrollEdit}>Confirm</button>
-        </div>
-      ) : (
-        <div>{`The payroll for ${yearValue}-${monthValue} is already confirmed`}</div>
-      )}
     </>
   );
 }

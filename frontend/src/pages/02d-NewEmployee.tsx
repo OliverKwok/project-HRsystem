@@ -1,5 +1,6 @@
 import "../styles/02a-Org.css";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import moment from "moment";
@@ -126,6 +127,8 @@ export default function Employee() {
       payment_remark: "",
     },
   });
+
+  const navigate = useNavigate();
 
   const [age, setAge] = useState("0");
   const [employeeid, setEmployeeid] = useState("");
@@ -303,18 +306,10 @@ export default function Employee() {
     const jsonData = await res.json();
 
     if (jsonData.newEmployee.rowCount) {
-      alert("inserted into employee table");
+      alert("New employees created");
     }
 
-    // const resRole = await fetch(
-    //   `${process.env.REACT_APP_BACKEND_URL}/role/create`,
-    //   requestOptions
-    // );
-    // const jsonDataRole = await res.json();
-
-    // if (jsonDataRole.newRole.rowCount) {
-    //   alert("inserted into role table");
-    // }
+    navigate("/employeeList");
 
     checkEmployeeid();
   }
