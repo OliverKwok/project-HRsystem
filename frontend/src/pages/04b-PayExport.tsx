@@ -39,14 +39,14 @@ const PayExport = () => {
   const [show2301, setShow2301] = useState(false);
   const [show2302, setShow2302] = useState(false);
   const [show2303, setShow2303] = useState(false);
-  const [show2304, setShow2304] = useState(false);
+  // const [show2304, setShow2304] = useState(false);
 
   const [showTabTitle2211, setShowTabTitle2211] = useState(false);
   const [showTabTitle2212, setShowTabTitle2212] = useState(false);
   const [showTabTitle2301, setShowTabTitle2301] = useState(false);
   const [showTabTitle2302, setShowTabTitle2302] = useState(false);
   const [showTabTitle2303, setShowTabTitle2303] = useState(false);
-  const [showTabTitle2304, setShowTabTitle2304] = useState(false);
+  // const [showTabTitle2304, setShowTabTitle2304] = useState(false);
 
   function showTab2211() {
     setShow2211(true);
@@ -54,7 +54,7 @@ const PayExport = () => {
     setShow2301(false);
     setShow2302(false);
     setShow2303(false);
-    setShow2304(false);
+    // setShow2304(false);
   }
 
   function showTab2212() {
@@ -63,7 +63,7 @@ const PayExport = () => {
     setShow2301(false);
     setShow2302(false);
     setShow2303(false);
-    setShow2304(false);
+    // setShow2304(false);
   }
 
   function showTab2301() {
@@ -72,7 +72,7 @@ const PayExport = () => {
     setShow2301(true);
     setShow2302(false);
     setShow2303(false);
-    setShow2304(false);
+    // setShow2304(false);
   }
 
   function showTab2302() {
@@ -81,7 +81,7 @@ const PayExport = () => {
     setShow2301(false);
     setShow2302(true);
     setShow2303(false);
-    setShow2304(false);
+    // setShow2304(false);
   }
 
   function showTab2303() {
@@ -90,7 +90,7 @@ const PayExport = () => {
     setShow2301(false);
     setShow2302(false);
     setShow2303(true);
-    setShow2304(false);
+    // setShow2304(false);
   }
 
   function showTab2304() {
@@ -99,7 +99,7 @@ const PayExport = () => {
     setShow2301(false);
     setShow2302(false);
     setShow2303(false);
-    setShow2304(true);
+    // setShow2304(true);
   }
 
   useEffect(() => {
@@ -120,7 +120,7 @@ const PayExport = () => {
         if (data.indexOf("2023-1") >= 0) setShowTabTitle2301(true);
         if (data.indexOf("2023-2") >= 0) setShowTabTitle2302(true);
         if (data.indexOf("2023-3") >= 0) setShowTabTitle2303(true);
-        if (data.indexOf("2023-4") >= 0) setShowTabTitle2304(true);
+        // if (data.indexOf("2023-4") >= 0) setShowTabTitle2304(true);
       });
   });
 
@@ -153,11 +153,11 @@ const PayExport = () => {
               2023-03
             </button>
           )}
-          {showTabTitle2304 && (
+          {/* {showTabTitle2304 && (
             <button className="tablinks" onClick={showTab2304}>
               2023-04
             </button>
-          )}
+          )} */}
         </div>
       </div>
 
@@ -263,7 +263,7 @@ const PayExport = () => {
           </PDFDownloadLink>
         </>
       )}
-      {show2304 && (
+      {/* {show2304 && (
         <>
           <PDFViewer height="800" width="1600">
             {document2304}
@@ -275,7 +275,7 @@ const PayExport = () => {
             <button className="downloadPayslip"> Download </button>
           </PDFDownloadLink>
         </>
-      )}
+      )} */}
     </>
   );
 };
