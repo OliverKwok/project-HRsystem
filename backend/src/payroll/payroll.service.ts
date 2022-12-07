@@ -234,33 +234,6 @@ export class PayrollService {
         return 0;
       });
 
-      // let OneMonthPayroll = await this.knex
-      //   .select(
-      //     this.knex.raw(
-      //       `concat(employee.last_name, ' ', employee.first_name,', ',employee.alias) as name`,
-      //     ),
-      //     'employee.id',
-      //     'employee.employeeid',
-      //     'employee.basic_salary',
-      //     'payroll_edit_history.ot_pay',
-      //     'payroll_edit_history.bonus',
-      //     'payroll_edit_history.nopay_leave',
-      //     'payroll_edit_history.mpf_employee',
-      //     'payroll_edit_history.total',
-      //   )
-      //   .where({
-      //     year: year,
-      //     month: month,
-      //   })
-      //   .from('employee')
-      //   .leftJoin(
-      //     'payroll_edit_history',
-      //     'employee.id',
-      //     '=',
-      //     'payroll_edit_history.employeeid',
-      //   )
-      //   .orderBy('employee.id');
-
       OneMonthPayroll.forEach((item) => {
         let ot_pay_calulate = 0;
         let bonus_calulate = 0;
