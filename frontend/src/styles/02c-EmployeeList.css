@@ -25,6 +25,11 @@ button.editButton:active {
   transform: scale(0.95);
 }
 
+header.sc-dIfARi {
+  display: flex;
+  justify-content: center;
+}
+
 button.sc-hhOBVt {
   background-color: rgb(14, 178, 179);
   height: 35px;
@@ -33,7 +38,7 @@ button.sc-hhOBVt {
 }
 
 #search {
-  width: 80%;
+  width: 30%;
   height: 35px;
   padding: 12px 20px;
   margin: 8px 0;
