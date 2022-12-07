@@ -33,6 +33,8 @@ export default function PaySummary() {
   const [yearValue, setYearValue] = useState(new Date().getFullYear());
   const [monthValue, setMonthValue] = useState(new Date().getMonth() + 1);
 
+  const [isConfirmed, setIsConfirmed] = useState(true);
+
   const paginationComponentOptions = {
     rowsPerPageText: "Rows per page",
     rangeSeparatorText: "of",
@@ -60,17 +62,26 @@ export default function PaySummary() {
   ];
 
   const dataTableFuncMap = {
-    // products1: setProducts1,
     products2: setProducts2,
-    // products3: setProducts3,
-    // products4: setProducts4,
   };
 
   useEffect(() => {
-    // fetchProductData("products1");
     fetchProductData("products2");
-    // fetchProductData("products3");
-    // fetchProductData("products4");
+
+    // show the confirm button or not
+    const requestOptions = {
+      method: "Get",
+    };
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/payroll/isConfirmed/${yearValue}/${monthValue}`,
+      requestOptions
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setIsConfirmed(data);
+      });
   }, [toggleRefresh]);
 
   const fetchProductData = (productStateKey: any) => {
@@ -467,9 +478,13 @@ export default function PaySummary() {
           </DataTable>
         </div>
       </div>
-      <div>
-        <button onClick={handleSubmitPayrollEdit}>Confirm</button>
-      </div>
+      {!isConfirmed ? (
+        <div>
+          <button onClick={handleSubmitPayrollEdit}>Confirm</button>
+        </div>
+      ) : (
+        <div>{`The payroll for ${yearValue}-${monthValue} is already confirmed`}</div>
+      )}
     </>
   );
 }
