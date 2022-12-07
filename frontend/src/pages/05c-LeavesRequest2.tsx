@@ -42,6 +42,7 @@ export default function LeavesRequest2() {
                 id={`appId-${app.application_id}`}
                 name="approved"
                 onClick={pendingAction}
+                className="actionButton approved"
               >
                 Approve
               </button>
@@ -51,6 +52,7 @@ export default function LeavesRequest2() {
                 id={`appId-${app.application_id}`}
                 name="rejected"
                 onClick={pendingAction}
+                className="actionButton rejected"
               >
                 Reject
               </button>
@@ -60,6 +62,7 @@ export default function LeavesRequest2() {
                 id={`appId-${app.application_id}`}
                 name="cancelled"
                 onClick={pendingAction}
+                className="actionButton cancelled"
               >
                 Cancel
               </button>
@@ -69,6 +72,7 @@ export default function LeavesRequest2() {
                 id={`appId-${app.application_id}`}
                 name="taken"
                 onClick={pendingAction}
+                className="actionButton taken"
               >
                 Mark as Taken
               </button>
@@ -102,7 +106,7 @@ export default function LeavesRequest2() {
     )
       .then((response) => response.json())
       .then((data) => console.log(data));
-      
+
     setActionOnPending(!actionOnPending);
   }
 
@@ -136,6 +140,7 @@ export default function LeavesRequest2() {
                   id={`appId-${app.application_id}`}
                   name="pending"
                   onClick={pendingAction}
+                  className="actionButton pending"
                 >
                   Back to Pending
                 </button>
@@ -145,6 +150,7 @@ export default function LeavesRequest2() {
                   id={`appId-${app.application_id}`}
                   name="pending"
                   onClick={pendingAction}
+                  className="actionButton cancelledApp"
                 >
                   Cancel Application
                 </button>
@@ -167,6 +173,7 @@ export default function LeavesRequest2() {
                   id={`appId-${app.application_id}`}
                   name="pending"
                   onClick={pendingAction}
+                  className="actionButton pending"
                 >
                   Back to Pending
                 </button>

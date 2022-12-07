@@ -8,7 +8,7 @@
 }
 
 .datatable .pending {
-  font-weight: 700;
+  font-weight: 300;
   background-color: #ffa726;
   color: white;
   text-align: center;
@@ -16,7 +16,7 @@
 }
 
 .datatable .approved {
-  font-weight: 700;
+  font-weight: 300;
   background-color: #66bb6a;
   color: white;
   text-align: center;
@@ -50,3 +50,20 @@
 /* .datatable .row-accessories {
     background-color: rgba(0, 0, 0, 0.15) !important;
 } */
+
+button.actionButton {
+  border-style: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 4px;
+  margin: 0;
+  width: 120px;
+}
+
+button.cancelledApp {
+   width: 160px;
+}
+
+button.pending{
+  width: 160px;
+}
