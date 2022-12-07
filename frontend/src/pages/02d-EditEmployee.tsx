@@ -666,7 +666,10 @@ export default function Employee(props: any) {
 
                     <input
                       type="date"
-                      {...register("date_of_birth", { required: true })}
+                      {...register("date_of_birth", {
+                        pattern: /^[0-9]{4}/,
+                        required: true,
+                      })}
                       onChange={calAge}
                     />
                   </div>
@@ -694,17 +697,33 @@ export default function Employee(props: any) {
                 <div className="five-column-grid">
                   <div>
                     <div>
-                      <span>Country Code* 🌐</span>
+                      <span>
+                        Country Code* 🌐{" "}
+                        {errors.email_personal && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
+                      </span>
                     </div>
 
-                    <input type="text" {...register("mobile_countrycode")} />
+                    <input
+                      type="text"
+                      {...register("mobile_countrycode", { required: true })}
+                    />
                   </div>
                   <div>
                     <div>
-                      <span>Mobile No* 📱</span>
+                      <span>
+                        Mobile No* 📱{" "}
+                        {errors.email_personal && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
+                      </span>
                     </div>
 
-                    <input type="text" {...register("mobile_no")} />
+                    <input
+                      type="text"
+                      {...register("mobile_no", { required: true })}
+                    />
                   </div>
                   <div>
                     <div>
@@ -726,6 +745,7 @@ export default function Employee(props: any) {
                     <input
                       type="text"
                       {...register("email_personal", {
+                        required: true,
                         pattern:
                           /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
                       })}
