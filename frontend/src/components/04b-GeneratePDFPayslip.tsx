@@ -82,7 +82,7 @@ export default function MyDocument(props: any) {
       method: "Get",
     };
     fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/payroll/findConfirm/2022/12`,
+      `${process.env.REACT_APP_BACKEND_URL}/payroll/findConfirm/${props.year}/${props.month}`,
       requestOptions
     )
       .then((response) => {

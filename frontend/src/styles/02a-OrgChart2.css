@@ -59,7 +59,12 @@ button.exportPDF {
   border-width: 0.5px;
   margin-top: 10px;
   transition: all 150ms ease-out;
+   border-radius: 4px;
 }
+button.exportPDF:hover {
+  transform: scale(1.02);
+}
+
 button.exportPDF:active {
   transform: scale(0.95);
 }

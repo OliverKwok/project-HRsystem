@@ -290,7 +290,7 @@ export class UserService {
   async birthdayShowCalendar() {
     try {
       const res = await this.knex.raw(
-        `select concat(employee.alias,' ',employee.last_name) as title, TO_CHAR(date_of_birth::date, 'yyyy-mm-dd') as start from employee where date_of_birth is not null`,
+        `select concat(employee.last_name,' ',employee.first_name,', ',employee.alias) as title, TO_CHAR(date_of_birth::date, 'yyyy-mm-dd') as start from employee where date_of_birth is not null`,
       );
       const birthdays = res.rows;
 
@@ -299,10 +299,11 @@ export class UserService {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
+
   async leaveShowCalendar() {
     try {
       const res = await this.knex.raw(
-        `select concat(employee.alias,' ',employee.last_name) as title,
+        `select concat(employee.last_name,' ',employee.first_name,', ',employee.alias) as title,
         leave_type.type,
         leave_application.status,
         TO_CHAR(leave_application.start_date::date, 'yyyy-mm-dd') as start,
@@ -320,6 +321,56 @@ export class UserService {
       const leaveDays = res.rows;
 
       return leaveDays;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async firstDateShowCalendar() {
+    try {
+      const res = await this.knex.raw(
+        `select concat(employee.last_name,' ',employee.first_name,', ',employee.alias) as title,
+        TO_CHAR(start_date::date, 'yyyy-mm-dd') as start
+        from employee 
+        `,
+      );
+      const firstDays = res.rows;
+
+      return firstDays;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async contractEndShowCalendar() {
+    try {
+      const res = await this.knex.raw(
+        `select concat(employee.last_name,' ',employee.first_name,', ',employee.alias) as title,
+        TO_CHAR(contract_end_date::date, 'yyyy-mm-dd') as start
+        from employee 
+        where contract_end_date is not null
+        `,
+      );
+      const contractDays = res.rows;
+
+      return contractDays;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async probationEndShowCalendar() {
+    try {
+      const res = await this.knex.raw(
+        `select concat(employee.last_name,' ',employee.first_name,', ',employee.alias) as title,
+        TO_CHAR(probation_end_date::date, 'yyyy-mm-dd') as start
+        from employee 
+        where probation_end_date is not null
+        `,
+      );
+      const probationDays = res.rows;
+
+      return probationDays;
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }

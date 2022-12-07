@@ -4,6 +4,8 @@
   border-color: rgb(22, 52, 52);
   margin: 20px;
   padding: 20px 40px;
+  border-radius: 4px;
+  background-color: rgb(241, 241, 241);
 }
 
 .fills {
@@ -33,6 +35,10 @@ input[type="submit"] {
   border-width: 0.5px;
   transition: all 150ms ease-out;
 }
+input[type="submit"]:hover {
+  transform: scale(1.05);
+}
+
 input[type="submit"]:active {
   transform: scale(0.95);
 }

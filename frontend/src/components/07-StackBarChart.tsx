@@ -82,21 +82,21 @@ export default function StackBarChart() {
     ],
   };
 
-  useEffect(() => {
-    const requestOptions = {
-      method: "Get",
-    };
-    fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/data/departmentCost`,
-      requestOptions
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setInputData(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   const requestOptions = {
+  //     method: "Get",
+  //   };
+  //   fetch(
+  //     `${process.env.REACT_APP_BACKEND_URL}/data/departmentCost`,
+  //     requestOptions
+  //   )
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setInputData(data);
+  //     });
+  // }, []);
 
   return <Bar options={options} data={data} />;
 }

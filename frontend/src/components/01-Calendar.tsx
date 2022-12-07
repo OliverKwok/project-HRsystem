@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 // import { INITIAL_EVENTS, createEventId } from "./01-eventSetting";
+import "../styles/01-Calendar.css";
 
 import moment from "moment";
 moment().format();
@@ -35,13 +36,13 @@ export default function Calendar() {
         item["id"] = "birthday" + i.toString();
         item["start"] = changeBirthdayDateFormat(item["start"]);
         item["title"] = "Birthday: " + item["title"];
-        item["backgroundColor"] = "#0EB3B3";
+        item["backgroundColor"] = "#eab676";
         item["borderColor"] = "#0EB3B3";
         i++;
       }
       return response;
-      // setInitialEvent(response);
     }
+
     async function checkLeaveShowCalendar() {
       const requestOptions = {
         method: "Get",
@@ -112,12 +113,12 @@ export default function Calendar() {
 
         // decide the color deopends on status
         if (item["status"] == "pending") {
-          item["backgroundColor"] = "#dc8665";
-          item["borderColor"] = "#dc8665";
+          item["backgroundColor"] = "#d5dfe1";
+          item["borderColor"] = "#d5dfe1";
         } else if (item["status"] == "approved") {
-          item["backgroundColor"] = "#42adf5";
+          item["backgroundColor"] = "#9fa0f4";
           item["borderColor"] = "#42adf5";
-        } else if (item["status"] == "approved") {
+        } else if (item["status"] == "taken") {
           item["backgroundColor"] = "#534666";
           item["borderColor"] = "#534666";
         }
@@ -131,13 +132,111 @@ export default function Calendar() {
     function changeBirthdayDateFormat(date: string) {
       return moment(new Date()).format("YYYY") + date.substring(4);
     }
-    // function changeDateFormat(date: string) {
-    //   return moment(date).format("YYYY-MM-DD");
-    // }
+
+    async function checkFirstDayShowCalendar() {
+      const requestOptions = {
+        method: "Get",
+      };
+
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/firstDateShowCalendar`,
+        requestOptions
+      );
+      const response = await res.json();
+
+      let i = 1;
+      for (let item of response) {
+        item["id"] = "firstday" + i.toString();
+        item["start"] = item["start"];
+        item["title"] = "First Day: " + item["title"];
+        item["backgroundColor"] = "#0EEEEE";
+        item["borderColor"] = "#0EEEEE";
+        i++;
+      }
+      return response;
+      // setInitialEvent(response);
+    }
+
+    async function checkContractDayShowCalendar() {
+      const requestOptions = {
+        method: "Get",
+      };
+
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/contractEndShowCalendar`,
+        requestOptions
+      );
+      const response = await res.json();
+
+      let i = 1;
+      for (let item of response) {
+        item["id"] = "contract" + i.toString();
+        item["start"] = item["start"];
+        item["title"] = "Contract End: " + item["title"];
+        item["backgroundColor"] = "#873e23";
+        item["borderColor"] = "#0EEEEE";
+        i++;
+      }
+      return response;
+      // setInitialEvent(response);
+    }
+
+    async function checkProbationDayShowCalendar() {
+      const requestOptions = {
+        method: "Get",
+      };
+
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user/probationEndShowCalendar`,
+        requestOptions
+      );
+      const response = await res.json();
+
+      let i = 1;
+      for (let item of response) {
+        item["id"] = "probation" + i.toString();
+        item["start"] = item["start"];
+        item["title"] = "Probation End: " + item["title"];
+        item["backgroundColor"] = "#095f9c";
+        item["borderColor"] = "#0EEEEE";
+        i++;
+      }
+      return response;
+      // setInitialEvent(response);
+    }
+
     async function main() {
       let array1 = await checkBirthdayShowCalendar();
+      let array1nextYear = [...array1];
+      array1nextYear.map((item) => {
+        item["start"] =
+          (+item["start"].substring(0, 4) + 1).toString() +
+          item["start"].substring(4);
+      });
       let array2 = await checkLeaveShowCalendar();
-      let show = [...array1, ...array2];
+      let array3 = await checkFirstDayShowCalendar();
+      let array4 = await checkContractDayShowCalendar();
+      let array5 = await checkProbationDayShowCalendar();
+
+      const lastDay = [
+        {
+          id: "lastday1",
+          start: "2022-12-28",
+          title: "Last Day: Cheung Ka Yee, Mia",
+          backgroundColor: "#ec6480",
+          borderColor: "#0EEEEE",
+        },
+      ];
+
+      let show = [
+        ...array1,
+        array1nextYear,
+        ...array2,
+        ...array3,
+        ...array4,
+        ...array5,
+        ...lastDay,
+      ];
 
       // sort by date;
       show.sort(function (a, b) {
@@ -179,10 +278,10 @@ export default function Calendar() {
         </div>
         <div className="calendar-info">
           <div className="calendar-sidebar">
-            <h2>Upcoming Events</h2>
+            <h2 className="board-title">Upcoming Events</h2>
             {/* <h2>Upcoming Events ({initialEvent.length})</h2> */}
 
-            <ul>{initialEvent.map(renderSidebarEvent)}</ul>
+            <ul className="dotspace">{initialEvent.map(renderSidebarEvent)}</ul>
           </div>
         </div>
       </div>
@@ -190,61 +289,11 @@ export default function Calendar() {
   );
 }
 
-// export class Calendar2 extends React.Component {
-//   state = {
-//     weekendsVisible: true,
-//     currentEvents: [],
-//   };
-
-//   render() {
-//     return (
-//       <div className="calendar-container">
-//         <div className="calendar-main">
-//           <FullCalendar
-//             plugins={[dayGridPlugin]}
-//             headerToolbar={{
-//               left: "prev,next today",
-//               center: "title",
-//               right: "dayGridMonth",
-//             }}
-//             initialView="dayGridMonth"
-//             editable={false} // disable drag and drop
-//             selectable={true}
-//             selectMirror={true}
-//             dayMaxEvents={true}
-//             initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-//             eventContent={renderEventContent} // custom render function
-//           />
-//         </div>
-//         <div className="calendar-info">{this.renderInfoBox()}</div>
-//       </div>
-//     );
-//   }
-
-//   function renderInfoBox() {
-//     return (
-//       <div className="calendar-sidebar">
-//         <h2>All Events ({this.state.currentEvents.length})</h2>
-//         <ul>{this.state.currentEvents.map(renderSidebarEvent)}</ul>
-//       </div>
-//     );
-//   }
-// }
-
-// function renderEventContent(eventInfo: any) {
-//   return (
-//   <>
-//   <b>{eventInfo.timeText}</b>
-//   <i>{eventInfo.event.title}</i>
-// </>
-//   );
-// }
-
 function renderSidebarEvent(event: any) {
   return (
     <>
       {new Date(event.start) >= new Date() ? (
-        <li key={event.id}>
+        <li key={event.id} className="dot">
           <b>
             {formatDate(event.start, {
               year: "numeric",
@@ -252,6 +301,7 @@ function renderSidebarEvent(event: any) {
               day: "numeric",
             })}
           </b>
+          <br />
           <i> {event.title}</i>
         </li>
       ) : (

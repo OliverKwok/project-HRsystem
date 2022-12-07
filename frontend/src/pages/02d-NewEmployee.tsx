@@ -389,19 +389,19 @@ export default function Employee() {
       <div className="tabNewEmployee">
         <div>
           <button className="tablinks" onClick={showTab1}>
-            1.Basic Information
+            1.Basic Information 🪪
           </button>
           <button className="tablinks" onClick={showTab2}>
-            2.Contact Infomation
+            2.Contact Infomation ☎️
           </button>
           <button className="tablinks" onClick={showTab3}>
-            3.Education and Previous Job
+            3.Education & Previous Job 🎓💼
           </button>
           <button className="tablinks" onClick={showTab4}>
-            4.Employment Detail
+            4.Employment Detail 🏢
           </button>
           <button className="tablinks" onClick={showTab5}>
-            5.Payment Detail
+            5.Payment Detail 💰
           </button>
         </div>
       </div>
@@ -409,7 +409,7 @@ export default function Employee() {
         <div id="new-employee-form">
           {show1 && (
             <>
-              <h2>Basic Infomation</h2>
+              <h2 className="bigTitle">Basic Infomation</h2>
               <div className="five-column-grid">
                 <div>
                   <div>
@@ -455,14 +455,14 @@ export default function Employee() {
                 </div>
                 <div>
                   <div>
-                    <span>Chinese Name</span>
+                    <span>Chinese Name 🇭🇰</span>
                   </div>
 
                   <input type="text" {...register("chinese_name")} />
                 </div>
                 <div>
                   <div>
-                    <span>Alias</span>
+                    <span>Alias 💬</span>
                   </div>
 
                   <input type="text" {...register("alias")} />
@@ -470,7 +470,7 @@ export default function Employee() {
                 <div>
                   <div>
                     <span>
-                      HKID*{" "}
+                      HKID* 🆔
                       {errors.hkid && (
                         <span style={{ color: "red" }}>[Wrong format]</span>
                       )}
@@ -479,19 +479,15 @@ export default function Employee() {
 
                   <input
                     type="text"
+                    placeholder="eg. Z987654(3)"
                     {...register("hkid", {
                       pattern: /^([A-Z]{1,2})([0-9]{6})\(([A0-9])\)$/,
                     })}
                   />
-                  <div>
-                    <span style={{ fontSize: "small" }}>
-                      eg. Z987654(3) [no brackets]
-                    </span>
-                  </div>
                 </div>
                 <div>
                   <div>
-                    <span>Passport Number</span>
+                    <span>Passport Number ✈️</span>
                   </div>
 
                   <input type="text" {...register("passport")} />
@@ -499,10 +495,15 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Gender*</span>
+                    <span>
+                      Gender* 👩🏻‍⚕️👨🏻‍⚕️{" "}
+                      {errors.gender && (
+                        <span style={{ color: "red" }}>[Required]</span>
+                      )}
+                    </span>
                   </div>
 
-                  <select {...register("gender")}>
+                  <select {...register("gender", { required: true })}>
                     <option value="M">Male</option>
                     <option value="F">Female</option>
                   </select>
@@ -510,10 +511,15 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Nationality*</span>
+                    <span>
+                      Nationality* 🌎{" "}
+                      {errors.nationality && (
+                        <span style={{ color: "red" }}>[Required]</span>
+                      )}
+                    </span>
                   </div>
 
-                  <select {...register("nationality")}>
+                  <select {...register("nationality", { required: true })}>
                     <option value="HK">Hong Kong</option>
                     <option value="China">China</option>
                     <option value="UK">UK</option>
@@ -523,19 +529,24 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Date of Birth*</span>
+                    <span>
+                      Date of Birth* 🎂{" "}
+                      {errors.date_of_birth && (
+                        <span style={{ color: "red" }}>[Required]</span>
+                      )}
+                    </span>
                   </div>
 
                   <input
                     type="date"
-                    {...register("date_of_birth")}
+                    {...register("date_of_birth", { required: true })}
                     onChange={calAge}
                   />
                 </div>
 
                 <div>
                   <div>
-                    <span>Age</span>
+                    <span>Age 🎈</span>
                   </div>
 
                   <input
@@ -552,25 +563,25 @@ export default function Employee() {
 
           {show2 && (
             <>
-              <h2>Contact Infomation</h2>
+              <h2 className="bigTitle">Contact Infomation</h2>
               <div className="five-column-grid">
                 <div>
                   <div>
-                    <span>Country Code*</span>
+                    <span>Country Code* 🌐</span>
                   </div>
 
                   <input type="text" {...register("mobile_countrycode")} />
                 </div>
                 <div>
                   <div>
-                    <span>Mobile No*</span>
+                    <span>Mobile No* 📱</span>
                   </div>
 
                   <input type="text" {...register("mobile_no")} />
                 </div>
                 <div>
                   <div>
-                    <span>Work Phone No</span>
+                    <span>Work Phone No 📞</span>
                   </div>
 
                   <input type="text" {...register("work_phone_no")} />
@@ -578,7 +589,7 @@ export default function Employee() {
                 <div>
                   <div>
                     <span>
-                      Personal Email*{" "}
+                      Personal Email* 📫{" "}
                       {errors.email_personal && (
                         <span style={{ color: "red" }}>[Wrong format]</span>
                       )}
@@ -596,7 +607,7 @@ export default function Employee() {
                 <div>
                   <div>
                     <span>
-                      Work Email*{" "}
+                      Work Email* 📧{" "}
                       {errors.email_work && (
                         <span style={{ color: "red" }}>[Wrong format]</span>
                       )}
@@ -620,39 +631,39 @@ export default function Employee() {
 
           {show3 && (
             <>
-              <h2>Education and Previous Job</h2>
+              <h2 className="bigTitle">Education and Previous Job</h2>
               <div className="five-column-grid">
                 <div>
                   <div>
-                    <span>Highest Education</span>
+                    <span>Highest Education 📚</span>
                   </div>
 
                   <input type="text" {...register("highest_education")} />
                 </div>
                 <div>
                   <div>
-                    <span>Institution Name</span>
+                    <span>Institution Name 🏫</span>
                   </div>
 
                   <input type="text" {...register("institution_name")} />
                 </div>
                 <div>
                   <div>
-                    <span>Major</span>
+                    <span>Major 🙇🏻‍♀️</span>
                   </div>
 
                   <input type="text" {...register("major")} />
                 </div>
                 <div>
                   <div>
-                    <span>Last Job Company</span>
+                    <span>Last Job Company 💻</span>
                   </div>
 
                   <input type="text" {...register("last_job_company")} />
                 </div>
                 <div>
                   <div>
-                    <span>Last Job Title</span>
+                    <span>Last Job Title 👩🏻‍🍳</span>
                   </div>
 
                   <input type="text" {...register("last_job_title")} />
@@ -664,11 +675,11 @@ export default function Employee() {
 
           {show4 && (
             <>
-              <h2>Employment Detail</h2>
+              <h2 className="bigTitle">Employment Detail</h2>
               <div className="five-column-grid">
                 <div>
                   <div>
-                    <span>Start Date*</span>
+                    <span>Start Date* 🎬</span>
                   </div>
 
                   <input type="date" {...register("start_date")} />
@@ -676,7 +687,7 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Job Status*</span>
+                    <span>Job Status* 📑</span>
                   </div>
 
                   <select
@@ -704,7 +715,7 @@ export default function Employee() {
                 {contractEndDate && (
                   <div>
                     <div>
-                      <span>Contract End Date*</span>
+                      <span>Contract End Date* 🔚</span>
                     </div>
 
                     <input type="date" {...register("contract_end_date")} />
@@ -713,7 +724,7 @@ export default function Employee() {
                 {probationEndDate && (
                   <div>
                     <div>
-                      <span>Probation End Date*</span>
+                      <span>Probation End Date* 🔚</span>
                     </div>
 
                     <input type="date" {...register("probation_end_date")} />
@@ -721,7 +732,7 @@ export default function Employee() {
                 )}
                 <div>
                   <div>
-                    <span>Job Nature*</span>
+                    <span>Job Nature* 🕰️</span>
                   </div>
 
                   <select {...register("job_nature")}>
@@ -735,14 +746,14 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Notice Period* (Days)</span>
+                    <span>Notice Period* (Days) 🌤️</span>
                   </div>
                   <input type="text" {...register("notice_period")} />
                 </div>
 
                 <div>
                   <div>
-                    <span>AL Entitle / Year</span>
+                    <span>AL Entitle / Year ⛱️</span>
                   </div>
 
                   <input
@@ -754,7 +765,7 @@ export default function Employee() {
                 <div>
                   <div>
                     <span>
-                      Title*{" "}
+                      Title* 🎩{" "}
                       {errors.title && (
                         <span style={{ color: "red" }}>[Required]</span>
                       )}
@@ -776,7 +787,7 @@ export default function Employee() {
                 <div>
                   <div>
                     <span>
-                      Department*{" "}
+                      Department* ⚓️{" "}
                       {errors.department && (
                         <span style={{ color: "red" }}>[Required]</span>
                       )}
@@ -798,7 +809,7 @@ export default function Employee() {
                 <div>
                   <div>
                     <span>
-                      Team*{" "}
+                      Team* 👥{" "}
                       {errors.team && (
                         <span style={{ color: "red" }}>[Required]</span>
                       )}
@@ -817,7 +828,7 @@ export default function Employee() {
                 <div>
                   <div>
                     <span>
-                      Report to*{" "}
+                      Report to* 🔝{" "}
                       {errors.report_to && (
                         <span style={{ color: "red" }}>[Required]</span>
                       )}
@@ -842,11 +853,11 @@ export default function Employee() {
           )}
           {show5 && (
             <>
-              <h2>Payment Detail</h2>
+              <h2 className="bigTitle">Payment Detail</h2>
               <div className="five-column-grid">
                 <div>
                   <div>
-                    <span>Salary Currency*</span>
+                    <span>Salary Currency* 💲</span>
                   </div>
                   <select {...register("pay_currency")}>
                     <option value="HKD">HKD</option>
@@ -854,7 +865,7 @@ export default function Employee() {
                 </div>
                 <div>
                   <div>
-                    <span>Basic Salary*</span>
+                    <span>Basic Salary* 💰</span>
                   </div>
 
                   <input type="text" {...register("basic_salary")} />
@@ -874,7 +885,7 @@ export default function Employee() {
                 <div>
                   <div>
                     <span>
-                      Payment Method*{" "}
+                      Payment Method* 🏦{" "}
                       {errors.payment_method && (
                         <span style={{ color: "red" }}>[Required]</span>
                       )}
@@ -890,42 +901,42 @@ export default function Employee() {
                 </div>
                 <div>
                   <div>
-                    <span>Home Address</span>
+                    <span>Home Address 🏡</span>
                   </div>
 
                   <input type="text" {...register("home_address")} />
                 </div>
                 <div>
                   <div>
-                    <span>Bank Code</span>
+                    <span>Bank Code 🔢</span>
                   </div>
 
                   <input type="text" {...register("bank_code")} />
                 </div>
                 <div>
                   <div>
-                    <span>Bank Name</span>
+                    <span>Bank Name 🏷️</span>
                   </div>
 
                   <input type="text" {...register("bank_name")} />
                 </div>
                 <div>
                   <div>
-                    <span>Bank Number</span>
+                    <span>Bank Number 💳</span>
                   </div>
 
                   <input type="text" {...register("bank_number")} />
                 </div>
                 <div>
                   <div>
-                    <span>Payee Name</span>
+                    <span>Payee Name 🤑</span>
                   </div>
 
                   <input type="text" {...register("bank_payee")} />
                 </div>
                 <div>
                   <div>
-                    <span>Payment Remark</span>
+                    <span>Payment Remark ✏️</span>
                   </div>
 
                   <input type="text" {...register("payment_remark")} />
@@ -968,7 +979,9 @@ export default function Employee() {
           </>
         )}
 
-        <button type="submit">Add</button>
+        <button type="submit" className="submitButton">
+          Add
+        </button>
       </form>
     </div>
   );

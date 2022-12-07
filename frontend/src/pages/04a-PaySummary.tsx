@@ -9,9 +9,20 @@ import { classNames } from "primereact/utils";
 // import { Button } from 'primereact/button';
 // import { Toast } from 'primereact/toast';
 
+// react pdf
 import MyDocument from "../components/04b-GeneratePDFPayslipSingle";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { PDFViewer } from "@react-pdf/renderer";
+import {
+  usePDF,
+  Document,
+  Page,
+  View,
+  Text,
+  Link,
+  Font,
+  StyleSheet,
+} from "@react-pdf/renderer";
 
 // date picker
 import dayjs, { Dayjs } from "dayjs";
@@ -22,13 +33,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 export default function PaySummary() {
-  // const [products1, setProducts1] = useState<any[]>();
   const [products2, setProducts2] = useState<any[]>();
-  // const [products3, setProducts3] = useState<any[]>();
-  // const [products4, setProducts4] = useState<any[]>();
   const [editingRows, setEditingRows] = useState({});
   const [toggleRefresh, setToggleRefresh] = useState(false);
-  const [loading, setLoading] = useState(false);
   const toast = useRef();
 
   // date picker
@@ -37,6 +44,19 @@ export default function PaySummary() {
   );
   const [yearValue, setYearValue] = useState(new Date().getFullYear());
   const [monthValue, setMonthValue] = useState(new Date().getMonth() + 1);
+
+  // reaact pdf
+  // const [singleRowData, setSingleRowData] = useState<any>({});
+  // const MyDoc = (
+  //   <Document>
+  //     <Page size="A4">
+  //       <Text>try</Text>
+  //       <Text>try</Text>
+  //       <Text>{singleRowData.realid}</Text>
+  //     </Page>
+  //   </Document>
+  // );
+  // const [instance, updateInstance] = usePDF({ document: MyDoc });
 
   const paginationComponentOptions = {
     rowsPerPageText: "Rows per page",
@@ -70,12 +90,6 @@ export default function PaySummary() {
     // products3: setProducts3,
     // products4: setProducts4,
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(true);
-    }, 3000);
-  }, [toggleRefresh]);
 
   useEffect(() => {
     fetchProductData("products2");
@@ -337,49 +351,35 @@ export default function PaySummary() {
     return <span>{numberShown}</span>;
   };
 
-  const payslipBodyTemplate = (rowData: any) => {
-    // function handleClickDownload(rowData: any) {
-    //   console.log(rowData);
-    // }
-    return (
-      // <button onClick={() => handleClickDownload(rowData)}> Download </button>
-      <div>
-        {loading && (
-          <PDFDownloadLink
-            document={
-              <MyDocument
-                year={yearValue}
-                month={monthValue}
-                realid={rowData.realid}
-              />
-            }
-            fileName={`Payslip  ${yearValue}-${monthValue}`}
-          >
-            <button> Download </button>
-          </PDFDownloadLink>
-        )}
-      </div>
-    );
-  };
+  // const payslipBodyTemplate = (rowData: any) => {
+  //   setSingleRowData(rowData);
 
-  // function handleSubmitPayrollEdit() {
-  //   const requestOptions = {
-  //     method: "Post",
-  //   };
-  //   fetch(
-  //     `${process.env.REACT_APP_BACKEND_URL}/payroll/confirm/${yearValue}/${monthValue}`,
-  //     requestOptions
-  //   )
-  //     .then((response) => {
-  //       // console.log(response);
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       if (data.rowCount > 0) {
-  //         alert(`payroll confirmed for ${yearValue}-${monthValue}`);
-  //       }
-  //     });
-  // }
+  //   return (
+  //     // <button onClick={() => handleClickDownload(rowData)}> Download </button>
+  //     // <div>
+  //     //   <PDFDownloadLink
+  //     //     document={
+  //     //       <MyDocument
+  //     //         year={yearValue}
+  //     //         month={monthValue}
+  //     //         realid={rowData.realid}
+  //     //       />
+  //     //     }
+  //     //     fileName={`Payslip  ${yearValue}-${monthValue}`}
+  //     //   >
+  //     //     <button> Download </button>
+  //     //   </PDFDownloadLink>
+  //     // </div>
+  //     <a href={instance.url as string} download="test.pdf">
+  //       Downloaded
+  //     </a>
+  //   );
+  // };
+
+  // if (instance.loading) return <div>Loading ...</div>;
+
+  // if (instance.error) return <div>Something went wrong: {instance.error}</div>;
+
   return (
     <>
       <div className="month-picker-container">
@@ -498,7 +498,7 @@ export default function PaySummary() {
               style={{ width: "15%" }}
               sortable
             ></Column>
-            <Column
+            {/* <Column
               field="payslip"
               header="Payslip"
               body={payslipBodyTemplate}
@@ -507,7 +507,7 @@ export default function PaySummary() {
               bodyStyle={{ textAlign: "center" }}
             >
               Payslip
-            </Column>
+            </Column> */}
           </DataTable>
         </div>
       </div>

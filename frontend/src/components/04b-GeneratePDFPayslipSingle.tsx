@@ -94,7 +94,7 @@ export default function MyDocument(props: any) {
       });
   }, []);
 
-  console.log(payroll);
+  // console.log(payroll);
 
   return (
     <Document>

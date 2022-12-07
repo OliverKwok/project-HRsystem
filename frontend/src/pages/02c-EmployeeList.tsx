@@ -3,7 +3,7 @@ import DataTable from "react-data-table-component";
 import Filter from "../components/02c-Filter";
 // import PopupAddTitle from "../components/02c-PopupAddTitle";
 // import PopupEditTitle from "../components/02c-PopupEditTitle";
-import "../styles/02c-title.css";
+import "../styles/02c-EmployeeList.css";
 import EditEmployee from "./02d-EditEmployee";
 
 export default function Title() {
@@ -91,7 +91,11 @@ export default function Title() {
       selector: (row: any) => row.team,
       sortable: true,
     },
-
+    {
+      name: "Status",
+      selector: (row: any) => row.status,
+      sortable: true,
+    },
     {
       name: "Nature",
       selector: (row: any) => row.nature,
@@ -178,7 +182,7 @@ export default function Title() {
               />
             ),
             edit: (
-              <button
+              <button className="editButton"
                 onClick={() => {
                   setShowList(false);
                   setPassId(employee.id);
@@ -268,7 +272,8 @@ export default function Title() {
       (item.title && item.title.toLowerCase().includes(filterText)) ||
       (item.department && item.department.toLowerCase().includes(filterText)) ||
       (item.team && item.team.toLowerCase().includes(filterText)) ||
-      (item.nature && item.nature.toLowerCase().includes(filterText))
+      (item.nature && item.nature.toLowerCase().includes(filterText)) ||
+      (item.status && item.status.toLowerCase().includes(filterText))
   );
   // const filteredItems = data.filter(
   //   (item) =>
@@ -288,6 +293,7 @@ export default function Title() {
         onFilter={(e: any) => setFilterText(e.target.value)}
         onClear={handleClear}
         filterText={filterText}
+        className="filter"
       />
     );
   }, [filterText, resetPaginationToggle]);
@@ -370,7 +376,7 @@ export default function Title() {
         />
       )}
 
-      {!showList && <button onClick={() => setShowList(true)}>Cancel</button>}
+      {!showList && <button onClick={() => setShowList(true)} className="cancelButton">Cancel</button>}
     </>
   );
 }
