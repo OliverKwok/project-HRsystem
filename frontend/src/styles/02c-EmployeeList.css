@@ -29,6 +29,8 @@ button.editButton:active {
 header.sc-dIfARi {
   display: flex;
   justify-content: center;
+  padding-bottom: 20px;
+  padding-top: 10px;
 }
 
 button.sc-hhOBVt {
@@ -36,6 +38,7 @@ button.sc-hhOBVt {
   height: 60px;
   border-style: none;
   color: white;
+  width: 50px;
 }
 
 #search {
@@ -49,6 +52,7 @@ button.sc-hhOBVt {
   border-bottom-left-radius: 4px;
   box-sizing: border-box;
 }
+
 .main {
   padding: 20px;
 }
