@@ -1,3 +1,45 @@
 #payroll_export_datepicker {
   width: 200px;
 }
+
+.p-datatable .p-datatable-wrapper .p-datatable-tbody > tr:nth-child(even) {
+  background: #edf6f9;
+}
+
+.p-datatable .p-datatable-wrapper .p-datatable-tbody > tr:nth-child(odd) {
+  background: #fcfffd;
+}
+
+.p-sortable-column .p-column-header-content {
+  color: RGB(14, 178, 179);
+  // color: #006f57;
+}
+
+.p-sortable-column .p-column-header-content .p-sortable-column-icon {
+  color: RGB(36, 209, 174);
+  // color: #03045e;
+}
+
+.payroll-editing .redNumber {
+  color: white;
+  // color: #ff5c5c;
+  background: #03045e;
+  padding: 0.5rem;
+}
+
+.payroll-editing .blueNumber {
+  color: #00b4ab;
+}
+
+// .whiteNumber {
+//   color: rgba(160, 0, 0, 0.5);
+//   padding: 1rem;
+// }
+
+.payroll-summary .p-datatable .p-datatable-tbody > tr > td {
+  padding: 1.4rem 1rem;
+}
+
+.p-row-editor-init-icon.pi.pi-fw.pi-pencil {
+  color: #00b4ab;
+}
