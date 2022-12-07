@@ -881,11 +881,14 @@ export default function Employee(props: any) {
                       <span>
                         Job Status*
                         {/* 📑 */}
+                        {errors.status && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
                       </span>
                     </div>
 
                     <select
-                      {...register("status")}
+                      {...register("status", { required: true })}
                       onChange={(event: any) => {
                         console.log(event.target.value);
                         if (event.target.value == "probation") {
