@@ -118,7 +118,9 @@ function Leave({navigation}: any) {
         }
         style={{width: '100%'}}>
         <View style={styles.scrollViewContainer}>
-          {!leaveRecord ? (
+          {leaveRecord.length == 0 ||
+          leaveRecord == null ||
+          leaveRecord == undefined ? (
             <View style={styles.noRecordContainer}>
               <Text style={styles.noRecordText}>
                 No Leave Application Record

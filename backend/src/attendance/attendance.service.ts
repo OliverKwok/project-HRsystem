@@ -21,6 +21,7 @@ export class AttendanceService {
         .from('employee')
         .join('employee_role', 'employee.id', 'employee_role.employeeid')
         .join('department', 'employee_role.department_id', 'department.id')
+        // .join('attendance', 'employee.id', 'attendance.employee')
         .orderBy('employee.last_name');
 
       return { res };
@@ -110,10 +111,26 @@ export class AttendanceService {
 
   async importAttendanceRecord(data) {
     try {
-      console.log(data);
+      let res_pre = await this.knex('attendance')
+        .select('*')
+        .where('date', data[0]['date']);
+      console.log(res_pre);
 
-      let res = await this.knex('attendance').insert(data);
-      return { res };
+      if (res_pre.length == 0) {
+        let res = await this.knex('attendance').insert(data);
+        return { res };
+      } else {
+        let res_0 = await this.knex('attendance')
+          .delete()
+          .where('date', data[0]['date'])
+          .returning('id');
+
+        let res = await this.knex('attendance').insert(data);
+        return { res };
+        return { res };
+      }
+
+      console.log(data);
     } catch (err) {
       console.log(err);
 

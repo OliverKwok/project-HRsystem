@@ -612,13 +612,14 @@ export async function seed(knex: Knex): Promise<void> {
   });
   await seedRow('leave_application', {
     employee_id: 14,
-    leave_type: '1',
+    leave_type: '2',
     start_date: '2022-12-30',
     start_date_period: 'full_day',
     end_date: '2022-12-31',
     end_date_period: 'full_day',
     status: 'pending',
     number_of_days: 2,
+    remarks: 'I will send the medical certificate through email',
   });
   // await seedRow('leave_application', {
   //   employee_id: 14,

@@ -1,7 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import styled from "styled-components";
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useState,
+  useRef,
+} from "react";
 import "../styles/03-Attendance.scss";
 import { nanoid } from "nanoid";
 // import path from "path";
@@ -74,8 +80,15 @@ const Attendance = () => {
 
   const fileReader = new FileReader();
 
+  const fileUpload: any = useRef(null);
+  const uploadProfilePic = (e: any) => {
+    console.log(e);
+  };
   const handleOnChange = (e: any) => {
     setFile(e.target.files[0]);
+  };
+  const handleUpload = () => {
+    console.log(fileUpload.current.click(), "fileUpload");
   };
 
   const csvFileToArray = async (string: string) => {
@@ -257,8 +270,6 @@ const Attendance = () => {
     ).getDate(),
   };
 
-  let isOpen = true;
-
   return (
     <div className="bigPageContainer">
       <div className="month-picker-container">
@@ -290,24 +301,29 @@ const Attendance = () => {
         </div>
 
         <div className="importCSVpartContainer">
-          <form>
-            <input
-              // className="CSVinput custom-file-input"
-              type={"file"}
-              id={"csvFileInput"}
-              accept={".csv"}
-              onChange={handleOnChange}
-            />
-
-            <button
-              className="importCSVbutton"
-              onClick={(e) => {
-                handleOnSubmit(e);
-              }}
-            >
-              IMPORT CSV
-            </button>
-          </form>
+          {/* <form> */}
+          <input
+            // className="CSVinput custom-file-input"
+            type={"file"}
+            id={"csvFileInput"}
+            ref={fileUpload}
+            name={"csvFileInput"}
+            accept={".csv"}
+            onChange={handleOnChange}
+            // value="upload"
+          />
+          {/* <button className="importCSVbutton" onClick={() => handleUpload()}>
+            UPLOAD CSV
+          </button> */}
+          <button
+            className="importCSVbutton"
+            onClick={(e) => {
+              handleOnSubmit(e);
+            }}
+          >
+            IMPORT CSV
+          </button>
+          {/* </form> */}
         </div>
         <div className="month-picker">
           <LocalizationProvider dateAdapter={AdapterDayjs}>

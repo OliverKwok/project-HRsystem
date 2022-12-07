@@ -51,6 +51,7 @@ export class IosAppService {
         end_date_period: data.endDateDuration,
         number_of_days: data.workingDays,
         status: 'pending',
+        remarks: data['remarks'],
       })
       .returning('id');
 
@@ -195,6 +196,20 @@ export class IosAppService {
         .select('*')
         .from('employee')
         .where('id', userId);
+
+      return { res };
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async getUserStatus(userId: number) {
+    try {
+      let res = await this.knex
+        .select('employee.id', 'employee.status', 'employee.email_work')
+        .from('employee')
+        .where('id', userId);
+      // console.log(res);
 
       return { res };
     } catch (err) {

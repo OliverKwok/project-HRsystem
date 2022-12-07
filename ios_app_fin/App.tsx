@@ -43,13 +43,9 @@ interface linkType {
   url: string;
 }
 function App() {
-  const navigation = useNavigation<any>();
+  // const navigation = useNavigation<any>();
   const dispatch = useAppDispatch();
   // const user = useAppSelector(state => state.auth.user);
-  const userId = useSelector((state: RootState) => state.auth.user);
-
-  console.log(userId, 'from app.tsx 48');
-
   const [jwtToken, setJwtToken] = useState<string | null>('');
   const [firebaseObj, setFirebaseObj] = useState({
     employeeId: '',
@@ -85,7 +81,7 @@ function App() {
       // console.log(token, 'firebase token 79');
       setFirebaseObj({...firebaseObj, firebase_taken: token});
       // put token into local storage
-      console.log(firebaseObj, 'firebase obj 90');
+      // console.log(firebaseObj, 'firebase obj 90');
 
       await AsyncStorage.setItem('firebase_token', token);
     }
@@ -102,7 +98,29 @@ function App() {
       },
     });
     const profileJson = await profileRes.json();
-    console.log({profileJson}, 'from app.tsx 133');
+    console.log(profileJson['id'], 'from app.tsx 101');
+
+    const options = {method: 'GET'};
+    let res = await fetch(
+      `${Config.REACT_APP_BACKEND_URL}/ios-app/getUserStatus/${profileJson['id']}`,
+      options,
+    );
+
+    let userInfo = await res.json();
+    userInfo = userInfo['res'][0];
+    let userStatus = userInfo['status'];
+
+    if (
+      userStatus == 'terminated' ||
+      userStatus == 'resigned' ||
+      userStatus == 'retired'
+    ) {
+      dispatch(logout());
+      Alert.alert("'No authorization to access the mobile app'");
+      // console.log('hihi from app.tsx 108');
+      return;
+    }
+
     dispatch(login(profileJson, token));
     AsyncStorage.setItem('token', token);
     // setUsername(profileJson.username);
@@ -112,28 +130,26 @@ function App() {
     // if (link.url === 'https://invertase.io/offer') {
     //   // ...navigate to your offers screen
     // }
-
-    let url = link.url;
-
-    console.log(url);
-    let path = url.split('/')[3];
-    if (path === 'Login') {
-      navigation.navigate('/Login');
-    }
+    // let url = link.url;
+    // console.log(url);
+    // let path = url.split('/')[3];
+    // if (path === 'Login') {
+    //   navigation.navigate('/Login');
+    // }
   };
 
-  const reg_dynamicBackground_event_listener = async () => {
-    const linkUrl: linkType =
-      (await dynamicLinks().getInitialLink()) as linkType;
-    let url = linkUrl.url;
+  // const reg_dynamicBackground_event_listener = async () => {
+  //   const linkUrl: linkType =
+  //     (await dynamicLinks().getInitialLink()) as linkType;
+  //   let url = linkUrl.url;
 
-    console.log(url);
-    let path = url.split('/')[3];
-    if (path === 'Login') {
-      navigation.navigate('/Login');
-    }
-    // if(url==='https://invertase.io/offer')
-  };
+  //   console.log(url);
+  //   let path = url.split('/')[3];
+  //   if (path === 'Login') {
+  //     navigation.navigate('/Login');
+  //   }
+  //   // if(url==='https://invertase.io/offer')
+  // };
   useEffect(() => {
     // console.log(userId, 'show at the first of 用效果');
     // setFirebaseObj({...firebaseObj, employeeId: userId});
@@ -152,22 +168,10 @@ function App() {
 
       await reg_token();
       await reg_event_listener();
-      await reg_dynamicBackground_event_listener();
-      const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
-      // console.log(firebaseObj, 'firebase obj 118');
-      // const requestOptions = {
-      //   method: 'POST',
-      //   headers: {'Content-Type': 'application/json'},
-      //   body: JSON.stringify(firebaseObj),
-      // };
-      // const res = await fetch(
-      //   `${Config.REACT_APP_BACKEND_URL}/ios-app/addFirebaseToken`,
-      //   requestOptions,
-      // );
-      // const firebase_res = await res.json();
-      // console.log(firebase_res);
+      // await reg_dynamicBackground_event_listener();
+      // const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
 
-      return () => unsubscribe();
+      // return () => unsubscribe();
     }
     main();
   }, []);

@@ -54,6 +54,9 @@ export class AttendanceController {
       ) {
         element['status'] = 'punctual';
         delete element['status\r'];
+      } else if (element['time_checkedin'] == '') {
+        element['status'] = 'absent';
+        delete element['status\r'];
       } else {
         element['status'] = 'late';
         delete element['status\r'];
