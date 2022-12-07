@@ -76,3 +76,24 @@ select.sc-cwSeag {
   font-size: 20px;
   color: rgb(14, 178, 179);
 }
+
+button.cancelButton {
+  background-color: #c5c5c5;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 22px;
+  padding: 10px;
+  border: solid;
+  border-width: 0.5px;
+  transition: all 150ms ease-out;
+  width: 100%;
+  margin: 10px;
+}
+
+button.cancelButton:hover {
+  transform: scale(1.01);
+}
+
+button.cancelButton:active {
+  transform: scale(0.98);
+}
