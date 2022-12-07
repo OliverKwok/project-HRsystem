@@ -5,7 +5,6 @@ import MyDocument from "../components/04b-GeneratePDFPayslip";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { usePDF } from "@react-pdf/renderer";
 import "../styles/04b-ExportPDF.css";
-
 import "../styles/04-Payroll.scss";
 
 // date picker

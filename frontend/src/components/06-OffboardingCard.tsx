@@ -290,15 +290,15 @@ export default function OffboardingCard(props: any) {
         </div>
       </div> */}
       <OffboardingCalcForm />
-      <button onClick={generate}>Generate Reference Letter</button>
+      <button className="refletter" onClick={generate}>Generate Reference Letter</button>
       <button
         onClick={() =>
           openInNewTab("https://www.ird.gov.hk/chi/paf/for.htm#ertitle")
-        }
+        } className="taxfilings"
       >
         Tax Filings
       </button>
-      <button onClick={redirect}>Edit Status</button>
+      <button onClick={redirect} className="editStatus">Edit Status</button>
     </div>
   );
 }

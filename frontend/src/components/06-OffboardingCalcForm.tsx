@@ -2,6 +2,7 @@ import { useState } from "react";
 // import { Steps } from "primereact/steps";
 // import "../styles/06-HandleSteps.css";
 import "../styles/06-PopupCalcComp.css";
+import "../styles/06-OffboardingCard.css";
 // import { useForm } from "react-hook-form";
 // import GenRefLetter from "./06-genRefLetter";
 
@@ -30,7 +31,7 @@ export default function OffboardingCalcForm(props: any) {
   // }
 
   return (
-    <div className="btn_div">
+    <div className="btn_div_offboarding">
       <button className="calcCompButton" onClick={openPopup}>
         Calculate Compensation
       </button>
