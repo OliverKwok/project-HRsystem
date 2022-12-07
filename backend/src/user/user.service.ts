@@ -58,6 +58,8 @@ export class UserService {
         bank_number: createUserDto.bank_number,
         bank_payee: createUserDto.bank_payee,
         payment_remark: createUserDto.payment_remark,
+
+        profilepic: 'default.jpg',
       });
 
       const checkid = await this.knex

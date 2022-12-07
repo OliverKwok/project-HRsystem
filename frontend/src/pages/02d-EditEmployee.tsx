@@ -464,8 +464,9 @@ export default function Employee(props: any) {
     const jsonData = await res.json();
 
     if (jsonData.updateEmployee) {
-      alert("updated in the employee table");
+      alert("Employee's info is updateed");
     }
+    props.editShowList(true);
   }
 
   // auto calculate the age
@@ -516,19 +517,24 @@ export default function Employee(props: any) {
         <div className="tabNewEmployee">
           <div>
             <button className="tablinks" onClick={showTab1}>
-              1.Basic Information 🪪
+              1.Basic Information
+              {/* 🪪 */}
             </button>
             <button className="tablinks" onClick={showTab2}>
-              2.Contact Infomation ☎️
+              2.Contact Infomation
+              {/* ☎️ */}
             </button>
             <button className="tablinks" onClick={showTab3}>
-              3.Education & Previous Job 🎓💼
+              3.Education & Previous Job
+              {/* 🎓💼 */}
             </button>
             <button className="tablinks" onClick={showTab4}>
-              4.Employment Detail 🏢
+              4.Employment Detail
+              {/* 🏢 */}
             </button>
             <button className="tablinks" onClick={showTab5}>
-              5.Payment Detail 💰
+              5.Payment Detail
+              {/* 💰 */}
             </button>
           </div>
         </div>
@@ -589,7 +595,10 @@ export default function Employee(props: any) {
                   </div>
                   <div>
                     <div>
-                      <span>Alias 💬</span>
+                      <span>
+                        Alias
+                        {/* 💬 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("alias")} />
@@ -597,7 +606,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        HKID* 🆔{" "}
+                        HKID*
+                        {/* 🆔 */}{" "}
                         {errors.hkid && (
                           <span style={{ color: "red" }}>[Wrong Format]</span>
                         )}
@@ -614,7 +624,10 @@ export default function Employee(props: any) {
                   </div>
                   <div>
                     <div>
-                      <span>Passport Number ✈️</span>
+                      <span>
+                        Passport Number
+                        {/* ✈️ */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("passport")} />
@@ -623,7 +636,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Gender* 👩🏻‍⚕️👨🏻‍⚕️{" "}
+                        Gender*
+                        {/* 👩🏻‍⚕️👨🏻‍⚕️ */}{" "}
                         {errors.gender && (
                           <span style={{ color: "red" }}>[Required]</span>
                         )}
@@ -639,7 +653,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Nationality* 🌎{" "}
+                        Nationality*
+                        {/* 🌎 */}{" "}
                         {errors.nationality && (
                           <span style={{ color: "red" }}>[Required]</span>
                         )}
@@ -657,7 +672,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Date of Birth* 🎂{" "}
+                        Date of Birth*
+                        {/* 🎂 */}{" "}
                         {errors.date_of_birth && (
                           <span style={{ color: "red" }}>[Required]</span>
                         )}
@@ -698,7 +714,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Country Code* 🌐{" "}
+                        Country Code*
+                        {/* 🌐 */}{" "}
                         {errors.email_personal && (
                           <span style={{ color: "red" }}>[Required]</span>
                         )}
@@ -713,7 +730,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Mobile No* 📱{" "}
+                        Mobile No*
+                        {/* 📱 */}{" "}
                         {errors.email_personal && (
                           <span style={{ color: "red" }}>[Required]</span>
                         )}
@@ -727,7 +745,10 @@ export default function Employee(props: any) {
                   </div>
                   <div>
                     <div>
-                      <span>Work Phone No 📞</span>
+                      <span>
+                        Work Phone No
+                        {/* 📞 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("work_phone_no")} />
@@ -735,7 +756,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Personal Email* 📫{" "}
+                        Personal Email*
+                        {/* 📫 */}{" "}
                         {errors.email_personal && (
                           <span style={{ color: "red" }}>[Wrong format]</span>
                         )}
@@ -754,7 +776,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Work Email* 📧{" "}
+                        Work Email*
+                        {/* 📧 */}{" "}
                         {errors.email_work && (
                           <span style={{ color: "red" }}>[Wrong format]</span>
                         )}
@@ -782,35 +805,50 @@ export default function Employee(props: any) {
                 <div className="five-column-grid">
                   <div>
                     <div>
-                      <span>Highest Education 📚</span>
+                      <span>
+                        Highest Education
+                        {/* 📚 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("highest_education")} />
                   </div>
                   <div>
                     <div>
-                      <span>Institution Name 🏫</span>
+                      <span>
+                        Institution Name
+                        {/* 🏫 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("institution_name")} />
                   </div>
                   <div>
                     <div>
-                      <span>Major 🙇🏻‍♀️</span>
+                      <span>
+                        Major
+                        {/* 🙇🏻‍♀️ */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("major")} />
                   </div>
                   <div>
                     <div>
-                      <span>Last Job Company 💻</span>
+                      <span>
+                        Last Job Company
+                        {/* 💻 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("last_job_company")} />
                   </div>
                   <div>
                     <div>
-                      <span>Last Job Title 👩🏻‍🍳</span>
+                      <span>
+                        Last Job Title
+                        {/* 👩🏻‍🍳 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("last_job_title")} />
@@ -826,7 +864,10 @@ export default function Employee(props: any) {
                 <div className="five-column-grid">
                   <div>
                     <div>
-                      <span>Start Date* 🎬</span>
+                      <span>
+                        Start Date*
+                        {/* 🎬 */}
+                      </span>
                     </div>
 
                     <input type="date" {...register("start_date")} />
@@ -834,7 +875,10 @@ export default function Employee(props: any) {
 
                   <div>
                     <div>
-                      <span>Job Status* 📑</span>
+                      <span>
+                        Job Status*
+                        {/* 📑 */}
+                      </span>
                     </div>
 
                     <select
@@ -862,7 +906,10 @@ export default function Employee(props: any) {
                   {contractEndDate && (
                     <div>
                       <div>
-                        <span>Contract End Date* 🔚</span>
+                        <span>
+                          Contract End Date*
+                          {/* 🔚 */}
+                        </span>
                       </div>
 
                       <input type="date" {...register("contract_end_date")} />
@@ -871,7 +918,10 @@ export default function Employee(props: any) {
                   {probationEndDate && (
                     <div>
                       <div>
-                        <span>Probation End Date* 🔚</span>
+                        <span>
+                          Probation End Date*
+                          {/* 🔚 */}
+                        </span>
                       </div>
 
                       <input type="date" {...register("probation_end_date")} />
@@ -879,7 +929,10 @@ export default function Employee(props: any) {
                   )}
                   <div>
                     <div>
-                      <span>Job Nature* 🕰️</span>
+                      <span>
+                        Job Nature*
+                        {/* 🕰️ */}
+                      </span>
                     </div>
 
                     <select {...register("job_nature")}>
@@ -893,14 +946,20 @@ export default function Employee(props: any) {
 
                   <div>
                     <div>
-                      <span>Notice Period* (Days) 🌤️</span>
+                      <span>
+                        Notice Period* (Days)
+                        {/* 🌤️ */}
+                      </span>
                     </div>
                     <input type="text" {...register("notice_period")} />
                   </div>
 
                   <div>
                     <div>
-                      <span>AL Entitle / Year ⛱️</span>
+                      <span>
+                        AL Entitle / Year
+                        {/* ⛱️ */}
+                      </span>
                     </div>
 
                     <input
@@ -912,7 +971,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Title* 🎩{" "}
+                        Title*
+                        {/* 🎩 */}{" "}
                         {errors.title && (
                           <span style={{ color: "red" }}>[Required]</span>
                         )}
@@ -934,7 +994,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Department* ⚓️{" "}
+                        Department*
+                        {/* ⚓️ */}{" "}
                         {errors.department && (
                           <span style={{ color: "red" }}>[Required]</span>
                         )}
@@ -956,7 +1017,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Team* 👥{" "}
+                        Team*
+                        {/* 👥 */}{" "}
                         {errors.team && (
                           <span style={{ color: "red" }}>[Required]</span>
                         )}
@@ -975,7 +1037,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Report to* 🔝{" "}
+                        Report to*
+                        {/* 🔝 */}{" "}
                         {errors.report_to && (
                           <span style={{ color: "red" }}>[Required]</span>
                         )}
@@ -1004,7 +1067,10 @@ export default function Employee(props: any) {
                 <div className="five-column-grid">
                   <div>
                     <div>
-                      <span>Salary Currency* 💲</span>
+                      <span>
+                        Salary Currency*
+                        {/* 💲 */}
+                      </span>
                     </div>
                     <select {...register("pay_currency")}>
                       <option value="HKD">HKD</option>
@@ -1012,7 +1078,10 @@ export default function Employee(props: any) {
                   </div>
                   <div>
                     <div>
-                      <span>Basic Salary* 💰</span>
+                      <span>
+                        Basic Salary*
+                        {/* 💰 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("basic_salary")} />
@@ -1032,7 +1101,8 @@ export default function Employee(props: any) {
                   <div>
                     <div>
                       <span>
-                        Payment Method* 🏦{" "}
+                        Payment Method*
+                        {/* 🏦 */}{" "}
                         {errors.payment_method && (
                           <span style={{ color: "red" }}>[Required]</span>
                         )}
@@ -1048,42 +1118,60 @@ export default function Employee(props: any) {
                   </div>
                   <div>
                     <div>
-                      <span>Home Address 🏡</span>
+                      <span>
+                        Home Address
+                        {/* 🏡 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("home_address")} />
                   </div>
                   <div>
                     <div>
-                      <span>Bank Code 🔢</span>
+                      <span>
+                        Bank Code
+                        {/* 🔢 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("bank_code")} />
                   </div>
                   <div>
                     <div>
-                      <span>Bank Name 🏷️</span>
+                      <span>
+                        Bank Name
+                        {/* 🏷️ */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("bank_name")} />
                   </div>
                   <div>
                     <div>
-                      <span>Bank Number 💳</span>
+                      <span>
+                        Bank Number
+                        {/* 💳 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("bank_number")} />
                   </div>
                   <div>
                     <div>
-                      <span>Payee Name 🤑</span>
+                      <span>
+                        Payee Name
+                        {/* 🤑 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("bank_payee")} />
                   </div>
                   <div>
                     <div>
-                      <span>Payment Remark ✏️</span>
+                      <span>
+                        Payment Remark
+                        {/* ✏️ */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("payment_remark")} />
