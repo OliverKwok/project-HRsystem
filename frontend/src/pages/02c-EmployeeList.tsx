@@ -3,7 +3,7 @@ import DataTable from "react-data-table-component";
 import Filter from "../components/02c-Filter";
 // import PopupAddTitle from "../components/02c-PopupAddTitle";
 // import PopupEditTitle from "../components/02c-PopupEditTitle";
-import "../styles/02c-title.css";
+import "../styles/02c-EmployeeList.css";
 import EditEmployee from "./02d-EditEmployee";
 
 export default function Title() {
@@ -182,7 +182,7 @@ export default function Title() {
               />
             ),
             edit: (
-              <button
+              <button className="editButton"
                 onClick={() => {
                   setShowList(false);
                   setPassId(employee.id);
