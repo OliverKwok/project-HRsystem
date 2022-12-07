@@ -3,11 +3,23 @@
   border-color: rgb(192, 255, 255);
   margin: 5px;
 }
-
-.fc.fc-theme-standard .fc-toolbar .fc-button:disabled {
+/* .fc .fc-theme-standard .fc-toolbar .fc-button-group button {
   background-color: rgb(14, 178, 179);
   border-color: rgb(192, 255, 255);
   margin: 5px;
+}
+
+.fc.fc-theme-standard
+  .fc-toolbar
+  .fc-button.fc-dayGridMonth-button.fc-button-active {
+  background-color: rgb(14, 178, 179);
+  border-color: rgb(192, 255, 255);
+  margin: 5px;
+} */
+
+.fc-daygrid-block-event .fc-event-time,
+.fc-daygrid-block-event .fc-event-title .fc-sticky {
+  font-weight: 700;
 }
 
 div.calendar-sidebar {
@@ -31,6 +43,7 @@ li.dot {
 
 li.dot > b {
   color: rgb(36, 108, 84);
+  font-size: larger;
 }
 
 ul.dotspace {

@@ -36,7 +36,7 @@ export default function Calendar() {
         item["id"] = "birthday" + i.toString();
         item["start"] = changeBirthdayDateFormat(item["start"]);
         item["title"] = "Birthday: " + item["title"];
-        item["backgroundColor"] = "#0EB3B3";
+        item["backgroundColor"] = "#eab676";
         item["borderColor"] = "#0EB3B3";
         i++;
       }
@@ -113,10 +113,10 @@ export default function Calendar() {
 
         // decide the color deopends on status
         if (item["status"] == "pending") {
-          item["backgroundColor"] = "#dc8665";
-          item["borderColor"] = "#dc8665";
+          item["backgroundColor"] = "#d5dfe1";
+          item["borderColor"] = "#d5dfe1";
         } else if (item["status"] == "approved") {
-          item["backgroundColor"] = "#42adf5";
+          item["backgroundColor"] = "#9fa0f4";
           item["borderColor"] = "#42adf5";
         } else if (item["status"] == "approved") {
           item["backgroundColor"] = "#534666";
@@ -173,7 +173,7 @@ export default function Calendar() {
         item["id"] = "contract" + i.toString();
         item["start"] = item["start"];
         item["title"] = "Contract End: " + item["title"];
-        item["backgroundColor"] = "#0EEEEE";
+        item["backgroundColor"] = "#873e23";
         item["borderColor"] = "#0EEEEE";
         i++;
       }
@@ -197,7 +197,7 @@ export default function Calendar() {
         item["id"] = "probation" + i.toString();
         item["start"] = item["start"];
         item["title"] = "Probation End: " + item["title"];
-        item["backgroundColor"] = "#0EEEEE";
+        item["backgroundColor"] = "#095f9c";
         item["borderColor"] = "#0EEEEE";
         i++;
       }
@@ -223,7 +223,7 @@ export default function Calendar() {
           id: "lastday1",
           start: "2022-12-28",
           title: "Last Day: Cheung Ka Yee, Mia",
-          backgroundColor: "#0EEEEE",
+          backgroundColor: "#ec6480",
           borderColor: "#0EEEEE",
         },
       ];
