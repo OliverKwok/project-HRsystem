@@ -62,6 +62,11 @@ export class PayrollController {
     return this.payrollService.isConfirmed(year, month);
   }
 
+  @Get('checkConfirmMonth')
+  checkConfirmMonth() {
+    return this.payrollService.checkConfirmMonth();
+  }
+
   @Post('confirm/:year/:month')
   writeOneMonth(@Param('year') year: number, @Param('month') month: number) {
     return this.payrollService.writeOneMonth(year, month);

@@ -470,7 +470,7 @@ export default function Employee() {
                 <div>
                   <div>
                     <span>
-                      HKID* 🆔{" "}
+                      HKID* 🆔
                       {errors.hkid && (
                         <span style={{ color: "red" }}>[Wrong format]</span>
                       )}
@@ -479,15 +479,11 @@ export default function Employee() {
 
                   <input
                     type="text"
+                    placeholder="eg. Z987654(3)"
                     {...register("hkid", {
                       pattern: /^([A-Z]{1,2})([0-9]{6})\(([A0-9])\)$/,
                     })}
                   />
-                  <div>
-                    <span style={{ fontSize: "small" }}>
-                      eg. Z987654(3) [no brackets]
-                    </span>
-                  </div>
                 </div>
                 <div>
                   <div>
@@ -499,10 +495,15 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Gender* 👩🏻‍⚕️👨🏻‍⚕️</span>
+                    <span>
+                      Gender* 👩🏻‍⚕️👨🏻‍⚕️{" "}
+                      {errors.gender && (
+                        <span style={{ color: "red" }}>[Required]</span>
+                      )}
+                    </span>
                   </div>
 
-                  <select {...register("gender")}>
+                  <select {...register("gender", { required: true })}>
                     <option value="M">Male</option>
                     <option value="F">Female</option>
                   </select>
@@ -510,10 +511,15 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Nationality* 🌎</span>
+                    <span>
+                      Nationality* 🌎{" "}
+                      {errors.nationality && (
+                        <span style={{ color: "red" }}>[Required]</span>
+                      )}
+                    </span>
                   </div>
 
-                  <select {...register("nationality")}>
+                  <select {...register("nationality", { required: true })}>
                     <option value="HK">Hong Kong</option>
                     <option value="China">China</option>
                     <option value="UK">UK</option>
@@ -523,12 +529,17 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Date of Birth* 🎂</span>
+                    <span>
+                      Date of Birth* 🎂{" "}
+                      {errors.date_of_birth && (
+                        <span style={{ color: "red" }}>[Required]</span>
+                      )}
+                    </span>
                   </div>
 
                   <input
                     type="date"
-                    {...register("date_of_birth")}
+                    {...register("date_of_birth", { required: true })}
                     onChange={calAge}
                   />
                 </div>
@@ -754,7 +765,7 @@ export default function Employee() {
                 <div>
                   <div>
                     <span>
-                      Title* 🎩 {" "} 
+                      Title* 🎩{" "}
                       {errors.title && (
                         <span style={{ color: "red" }}>[Required]</span>
                       )}
@@ -968,7 +979,9 @@ export default function Employee() {
           </>
         )}
 
-        <button type="submit" className="submitButton">Add</button>
+        <button type="submit" className="submitButton">
+          Add
+        </button>
       </form>
     </div>
   );
