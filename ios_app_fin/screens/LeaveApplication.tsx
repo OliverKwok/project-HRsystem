@@ -36,7 +36,10 @@ function LeaveApplication({navigation, route}: any) {
       (new Date(formObject.endDate).getTime() -
         new Date(formObject.startDate).getTime()) /
         (1000 * 3600 * 24) <
-      0
+        0 ||
+      (new Date(formObject.startDate).getTime() - new Date().getTime()) /
+        (1000 * 3600 * 24) <
+        -1
     ) {
       setShowInvalidDate(true);
       setShowApply(false);

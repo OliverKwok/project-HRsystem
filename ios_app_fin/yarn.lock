@@ -1362,6 +1362,13 @@
     "opencollective-postinstall" "^2.0.1"
     "superstruct" "^0.6.2"
 
+"@react-native-firebase/dynamic-links@^16.4.6":
+  "integrity" "sha512-bZPdrLw1HbFVe/uHI/+p1iGA/g+9EDdP0ySmRE1GKEOX84xSZhOrjEdF5Yhzf/OGcekrG1WDlxIpwkEQCuDJpA=="
+  "resolved" "https://registry.npmjs.org/@react-native-firebase/dynamic-links/-/dynamic-links-16.4.6.tgz"
+  "version" "16.4.6"
+  dependencies:
+    "@expo/config-plugins" "^5.0.4"
+
 "@react-native-firebase/messaging@^16.4.6":
   "integrity" "sha512-5XHc++UxK+wEYifyovemr+K5aUpcDuqzGPAqc2tqrVxtsELmGi9pCOFbCuFhkg5DzNGToNT9Z79DTd+XLCVemA=="
   "resolved" "https://registry.npmjs.org/@react-native-firebase/messaging/-/messaging-16.4.6.tgz"

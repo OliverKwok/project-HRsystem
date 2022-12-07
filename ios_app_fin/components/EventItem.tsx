@@ -27,9 +27,13 @@ const styles = StyleSheet.create({
     // borderBottomWidth: 2,
     borderBottomColor: '#A8ABB6',
     padding: 3,
+    width: '100%',
   },
   textContainer: {
-    fontSize: 20,
-    marginRight: 20,
+    width: '50%',
+    fontSize: 18,
+    marginRight: 10,
+    flexWrap: 'wrap',
+    flexShrink: 1,
   },
 });

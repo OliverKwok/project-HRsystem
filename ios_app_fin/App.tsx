@@ -19,7 +19,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 import {
   Colors,
   DebugInstructions,
@@ -39,8 +39,11 @@ import {AuthState} from './redux/auth/state';
 import {appendErrors} from 'react-hook-form';
 
 const Stack = createNativeStackNavigator();
-
+interface linkType {
+  url: string;
+}
 function App() {
+  const navigation = useNavigation<any>();
   const dispatch = useAppDispatch();
   // const user = useAppSelector(state => state.auth.user);
   const userId = useSelector((state: RootState) => state.auth.user);
@@ -104,7 +107,33 @@ function App() {
     AsyncStorage.setItem('token', token);
     // setUsername(profileJson.username);
   }
+  const handleDynamicLink = (link: linkType) => {
+    // Handle dynamic link inside your own application
+    // if (link.url === 'https://invertase.io/offer') {
+    //   // ...navigate to your offers screen
+    // }
 
+    let url = link.url;
+
+    console.log(url);
+    let path = url.split('/')[3];
+    if (path === 'Login') {
+      navigation.navigate('/Login');
+    }
+  };
+
+  const reg_dynamicBackground_event_listener = async () => {
+    const linkUrl: linkType =
+      (await dynamicLinks().getInitialLink()) as linkType;
+    let url = linkUrl.url;
+
+    console.log(url);
+    let path = url.split('/')[3];
+    if (path === 'Login') {
+      navigation.navigate('/Login');
+    }
+    // if(url==='https://invertase.io/offer')
+  };
   useEffect(() => {
     // console.log(userId, 'show at the first of 用效果');
     // setFirebaseObj({...firebaseObj, employeeId: userId});
@@ -123,7 +152,8 @@ function App() {
 
       await reg_token();
       await reg_event_listener();
-
+      await reg_dynamicBackground_event_listener();
+      const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
       // console.log(firebaseObj, 'firebase obj 118');
       // const requestOptions = {
       //   method: 'POST',
@@ -136,6 +166,8 @@ function App() {
       // );
       // const firebase_res = await res.json();
       // console.log(firebase_res);
+
+      return () => unsubscribe();
     }
     main();
   }, []);

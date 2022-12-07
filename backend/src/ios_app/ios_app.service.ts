@@ -122,6 +122,7 @@ export class IosAppService {
   async getNotifications() {
     try {
       let res = await this.knex.select('*').from('notification');
+      console.log(res);
 
       return { res };
     } catch (err) {
@@ -185,6 +186,19 @@ export class IosAppService {
         .where('id', data['employeeId'])
         .returning('id');
       return { res };
+    }
+  }
+
+  async getProfile(userId: number) {
+    try {
+      let res = await this.knex
+        .select('*')
+        .from('employee')
+        .where('id', userId);
+
+      return { res };
+    } catch (err) {
+      return err;
     }
   }
   // create(createIosAppDto: CreateIosAppDto) {

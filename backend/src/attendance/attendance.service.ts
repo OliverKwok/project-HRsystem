@@ -107,6 +107,19 @@ export class AttendanceService {
       return err;
     }
   }
+
+  async importAttendanceRecord(data) {
+    try {
+      console.log(data);
+
+      let res = await this.knex('attendance').insert(data);
+      return { res };
+    } catch (err) {
+      console.log(err);
+
+      return err;
+    }
+  }
   // let res = await this.knex
   // .select(
   //   'employee.id',

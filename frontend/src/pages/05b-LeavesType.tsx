@@ -13,7 +13,7 @@ interface typeState {
 }
 
 export default function LeavesType() {
-  const [leavestype, setLeavesType] = useState([]);
+  const [leavestype, setLeavesType] = useState<string[]>([]);
   const [toggleRefresh, setToggleRefresh] = useState(false);
   const [toggleRefreshDelete, setToggleRefreshDelete] = useState(false);
 
@@ -49,16 +49,26 @@ export default function LeavesType() {
   //     description: "blahblahblahblahblah",
   //   },
   // ];
- const body={
-    maxWidth: "calc(100%-300px)",
- }
 
   return (
-    <div style={body}>
-      <PopupAddType setToggleRefresh={setToggleRefresh} />
-      <PopupDeleteType setToggleRefreshDelete={setToggleRefreshDelete} />
+    <div>
+      <PopupAddType
+        setToggleRefresh={setToggleRefresh}
+        addType={(newType: string) => {
+          setLeavesType([...leavestype, newType]);
+        }}
+      />
+      <PopupDeleteType
+        setToggleRefreshDelete={setToggleRefreshDelete}
+        setToggleRefresh={setToggleRefresh}
+        leaveTypes={leavestype}
+        onDelete={(item: string) => {
+          const newList = leavestype.slice(0);
+          setLeavesType(newList.filter((leavestype) => leavestype != item));
+        }}
+      />
 
-      <div className="cardsContainer" >
+      <div className="cardsContainer">
         {leavestype.map((type: any, id: any) => (
           <LeavesTypeCard key={id} obj={type} />
         ))}

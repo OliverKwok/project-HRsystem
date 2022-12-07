@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   textContainer: {
-    fontSize: 20,
+    fontSize: 18,
     marginRight: 10,
   },
 });

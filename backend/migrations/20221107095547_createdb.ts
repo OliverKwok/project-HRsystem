@@ -178,8 +178,8 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id');
     table.integer('employee').references('employee.id');
     table.date('date');
-    table.timestamp('time_checkedin');
-    table.timestamp('time_checkedout');
+    table.string('time_checkedin');
+    table.string('time_checkedout');
     table.string('status');
   });
 

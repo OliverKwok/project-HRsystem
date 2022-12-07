@@ -1,3 +1,4 @@
+import { processPathData } from "@syncfusion/ej2-react-diagrams";
 import { useState } from "react";
 // import Popup from "reactjs-popup";
 // import "reactjs-popup/dist/index.css";
@@ -37,6 +38,7 @@ export default function PopupAddType(props: any) {
     setNewType("");
     // window.location.reload();
     props.setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
+    props.addType(newType);
   }
 
   return (

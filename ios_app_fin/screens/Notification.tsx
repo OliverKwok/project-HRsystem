@@ -16,6 +16,7 @@ function Notification() {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
+    getNotifications();
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
@@ -23,7 +24,7 @@ function Notification() {
     try {
       const options = {method: 'GET'};
       let res = await fetch(
-        `${Config.REACT_APP_BACKEND_URL}/ios-app/getNotification`,
+        `${Config.REACT_APP_BACKEND_URL}/ios-app/getNotifications`,
         options,
       );
 
