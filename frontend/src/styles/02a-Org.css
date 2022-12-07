@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   background-color: #3bccc4;
+  border-radius: 4px;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -24,9 +25,10 @@
   border-style: solid;
   border-width: 0.5px;
   border-color: #3bccc4;
-  background-color: #d6d6d6;
+  background-color: #ffffff;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-radius: 4px;
   transition: all 150ms ease-out;
 }
 
@@ -60,9 +62,9 @@
   overflow: visible;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
-  display: flex;
-  justify-content: space-evenly;
   background-color: #3bccc4;
+  height: 4.5em;
+  border-radius: 4px;
 }
 
 .tabNewEmployee button {
@@ -75,13 +77,45 @@
   transition: 0.3s;
   color: #276047;
   font-size: 22px;
+  width: 20%;
+  height: 3em;
+  border-radius: 4px;
 }
 
 .tabNewEmployee button:hover {
   background-color: rgb(103, 230, 189);
+  height: 4em;
 }
 
 .tabNewEmployee button:focus {
   background-color: #8ef3db;
   font-size: 20px;
+}
+
+h2.bigTitle {
+  color: #267a65;
+}
+
+button.submitButton {
+  background-color: #267a65;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 22px;
+  padding: 10px;
+  border: solid;
+  border-width: 0.5px;
+  transition: all 150ms ease-out;
+  width: 100%;
+  margin: 10px;
+}
+
+button.submitButton:hover {
+  transform: scale(1.01);
+}
+
+button.submitButton:active {
+  transform: scale(0.98);
+}
+input {
+  margin-bottom: 30px;
 }

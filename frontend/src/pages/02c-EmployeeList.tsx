@@ -293,6 +293,7 @@ export default function Title() {
         onFilter={(e: any) => setFilterText(e.target.value)}
         onClear={handleClear}
         filterText={filterText}
+        className="filter"
       />
     );
   }, [filterText, resetPaginationToggle]);
@@ -375,7 +376,7 @@ export default function Title() {
         />
       )}
 
-      {!showList && <button onClick={() => setShowList(true)}>Cancel</button>}
+      {!showList && <button onClick={() => setShowList(true)} className="cancelButton">Cancel</button>}
     </>
   );
 }
