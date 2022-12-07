@@ -27,11 +27,17 @@
   background-color: #d6d6d6;
   margin-top: 10px;
   margin-bottom: 10px;
+  transition: all 150ms ease-out;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
   background-color: rgb(255, 255, 255);
+  transform: scale(1.05);
+}
+
+.tab button:active {
+  transform: scale(0.98);
 }
 
 /* Create an active/current tablink class */

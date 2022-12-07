@@ -33,6 +33,10 @@ input[type="submit"] {
   border-width: 0.5px;
   transition: all 150ms ease-out;
 }
+input[type="submit"]:hover {
+  transform: scale(1.05);
+}
+
 input[type="submit"]:active {
   transform: scale(0.95);
 }

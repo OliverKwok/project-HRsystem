@@ -60,6 +60,10 @@ button.exportPDF {
   margin-top: 10px;
   transition: all 150ms ease-out;
 }
+button.exportPDF:hover {
+  transform: scale(1.02);
+}
+
 button.exportPDF:active {
   transform: scale(0.95);
 }
