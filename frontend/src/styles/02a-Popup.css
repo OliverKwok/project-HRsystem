@@ -1,47 +1,100 @@
-/* button {
-  background-color: rgb(14, 178, 179);
-  color: white;
-  position: absolute;
-  right: 30px;
-  z-index: 100;
-  cursor: pointer;
-  padding: 10px;
-} */
-
 .popupBody {
+  outline: 1px solid #b8fbff;
   height: 400px;
-  width: 50%;
-  background-color: rgb(238, 254, 255);
-  position: absolute;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* padding: 35px; */
+  font-size: 18px;
+  position: fixed;
   top: 20%;
-  right: 10%;
+  left: 40%;
+  z-index: 10;
+  background-color: #e1fffb;
+  border-radius: 4px;
+  position: fixed;
   padding: 20px;
-  z-index: 200;
 }
 
 .popupHeader {
   display: flex;
   justify-content: space-between;
-  padding: 0 30px 0 15px;
+  /* padding: 0 30px 0 15px; */
   border-bottom: 2px solid black;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
 }
 
-.closeBtn {
+h2.closeBtn {
   cursor: pointer;
-  border-width: 1px;
+  border-width: 0.5px;
   border-color: grey;
   border-style: solid;
-  padding: 0 10px;
   background-color: white;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 20px;
+  width: 30px;
+  height: 30px;
+  padding-left: 8px;
+  padding-top: 3px;
+  border-radius: 4px;
+}
+
+div.big {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+div.big div.ALcalc {
+  padding-left: 20px;
+}
+
+form {
+  font-size: 22px;
+  line-height: 40px;
+  padding-top: 30px;
+}
+
+form.popupTitle {
+  padding: 0;
+}
+
+button.operators {
+  background-color: #267a65;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 22px;
+  border: solid;
+  border-width: 0.5px;
+  transition: all 150ms ease-out;
+  height: 30px;
+  margin: 0;
+}
+
+form > button.changeLeave {
+  background-color: #267a65;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 22px;
+  border: solid;
+  border-width: 0.5px;
+  transition: all 150ms ease-out;
+  width: 100%;
+  margin-top: 30px;
 }
 
 .btn_div {
   display: inline-flex;
   flex-direction: row;
+  width: 30%;
+  padding-right: 20px;
 }
 
-.popupBody_editTitle{
+.popupBody_editTitle {
   height: 400px;
   width: 300%;
   background-color: rgb(238, 254, 255);
@@ -85,3 +138,40 @@
   border-radius: 18px;
   border: 1px solid #cfcece;
 } */
+
+div.leaveSummaryHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+button.editLeaveButton {
+  background-color: #267a65;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 22px;
+  padding: 10px;
+  border: solid;
+  border-width: 0.5px;
+  transition: all 150ms ease-out;
+  width: 100%;
+}
+button.editLeaveButton:hover {
+  transform: scale(1.05);
+}
+
+button.editLeaveButton:active {
+  transform: scale(0.95);
+}
+
+div.p-datatable-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 0;
+}
+
+div.p-datable-header div {
+  width: 100%;
+}

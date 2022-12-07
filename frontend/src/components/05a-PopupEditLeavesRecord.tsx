@@ -130,41 +130,55 @@ export default function PopupEditLeavesRecord(props: any) {
 
   return (
     <div className="btn_div">
-      <button className="edittitleBtn" onClick={openPopup}>
+      <button className="editLeaveButton" onClick={openPopup}>
         Edit Leaves Record
       </button>
       {popup && (
         <div className="popupBody">
           <div className="popupHeader">
-            <h2>Edit Leave Record</h2>
+            <h2 className="popupTitle">Edit Leave Record</h2>
             <h2 onClick={closePopup} className="closeBtn">
               X
             </h2>
           </div>
           <form onSubmit={submitEditAL}>
-            {/* TODO filter search employee */}
-            <Dropdown
-              value={employeeField}
-              options={namelist}
-              onChange={onNameChange}
-              optionLabel="name"
-              filter
-              // showClear
-              filterBy="name"
-              placeholder="Select an Employee"
-              // itemTemplate={countryOptionTemplate}
-            />
-            <br />
-            Employee: {employeeField}
-            <br />
-            AL entitled: {alEntitled}
-            <br />
-            AL taken
-            <button onClick={subtractAL}> - </button>
-            {alTaken}
-            <button onClick={addAL}> + </button>
-            <br />
-            <button type="submit">Save</button>
+            <div className="big">
+              <div>
+                {/* TODO filter search employee */}
+                <Dropdown
+                  value={employeeField}
+                  options={namelist}
+                  onChange={onNameChange}
+                  optionLabel="name"
+                  filter
+                  // showClear
+                  filterBy="name"
+                  placeholder="Select an Employee"
+                  // itemTemplate={countryOptionTemplate}
+                />
+                <br />
+              </div>
+              <div className="ALcalc">
+                Employee: {employeeField}
+                <br />
+                AL entitled: {alEntitled}
+                <br />
+                AL taken
+                <button className="operators" onClick={subtractAL}>
+                  {" "}
+                  -{" "}
+                </button>
+                {alTaken}
+                <button className="operators" onClick={addAL}>
+                  {" "}
+                  +{" "}
+                </button>
+                <br />
+              </div>
+            </div>
+            <button className="changeLeave" type="submit">
+              Save
+            </button>
           </form>
         </div>
       )}
