@@ -34,6 +34,7 @@ div.calendar-sidebar {
 
 h2.board-title {
   color: rgb(255, 255, 255);
+  font-weight: 400;
 }
 
 li.dot {
@@ -44,6 +45,7 @@ li.dot {
 li.dot > b {
   color: rgb(36, 108, 84);
   font-size: larger;
+  font-weight: 300;
 }
 
 ul.dotspace {
