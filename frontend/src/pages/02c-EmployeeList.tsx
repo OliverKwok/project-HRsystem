@@ -91,7 +91,11 @@ export default function Title() {
       selector: (row: any) => row.team,
       sortable: true,
     },
-
+    {
+      name: "Status",
+      selector: (row: any) => row.status,
+      sortable: true,
+    },
     {
       name: "Nature",
       selector: (row: any) => row.nature,
@@ -268,7 +272,8 @@ export default function Title() {
       (item.title && item.title.toLowerCase().includes(filterText)) ||
       (item.department && item.department.toLowerCase().includes(filterText)) ||
       (item.team && item.team.toLowerCase().includes(filterText)) ||
-      (item.nature && item.nature.toLowerCase().includes(filterText))
+      (item.nature && item.nature.toLowerCase().includes(filterText)) ||
+      (item.status && item.status.toLowerCase().includes(filterText))
   );
   // const filteredItems = data.filter(
   //   (item) =>

@@ -319,7 +319,7 @@ export class PayrollService {
         }
       });
 
-      return OneMonthPayroll;
+      return OneMonthPayroll; 
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
