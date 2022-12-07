@@ -163,7 +163,7 @@ export async function up(knex: Knex): Promise<void> {
       'cancelled',
       'taken',
     ]);
-    table.integer('approved_by').references('employee.id');
+    table.string('remarks');
   });
 
   await knex.schema.createTable('public_holidays', (table) => {

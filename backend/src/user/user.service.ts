@@ -219,18 +219,37 @@ export class UserService {
   }
 
   async findIOSUser(username: string) {
+    console.log(username);
+
     const checkByWorkEmail = await this.knex
       .table('employee')
-      .select('password', 'employee.id')
-      .join('employee_role', 'employee.id', '=', 'employee_role.employeeid')
-      .where({ email_work: username });
+      .select('password', 'employee.id', 'status', 'email_work')
+      .join('employee_role', 'employee.id', 'employee_role.employeeid')
+      .andWhere('employee.email_work', username)
+      .whereIn(
+        'status',
+        ['perm', 'contract', 'probation', 'other'],
+        // this.knex.raw(
+        //   "status='perm' or status='contract' or status='probation' or status='other'",
+        // ),
+      );
+    // .where({ status: 'perm' })
+    // .orWhere({ status: 'contract' })
+    // .orWhere({ status: 'probation' });
+    // .andWhere(
+    //   /*{ status: 'perm' } || { status: 'contract' } ||*/ {
+    //     status: 'probation',
+    //   },
+
     // .where('employee_role.department_id', '=', '6');
 
+    console.log(checkByWorkEmail);
     // console.log(checkByWorkEmail);
 
     return {
       id: checkByWorkEmail[0].id,
-      username: username,
+      status: checkByWorkEmail[0].status,
+      username: checkByWorkEmail[0]['email_work'],
       password: await bcrypt.hash(checkByWorkEmail[0].password, 10),
     };
     // return {

@@ -14,7 +14,13 @@ function EventItem({data, index}: {data: itemType; index: number}) {
       <Text style={styles.textContainer}>{`${index + 1}. ${
         data.event_name
       }`}</Text>
-      <Text style={styles.textContainer}>{data.details}</Text>
+      <Text
+        style={[
+          styles.textContainer,
+          {marginLeft: 50, fontSize: 18, marginTop: 5, marginBottom: 5},
+        ]}>
+        {data.details}
+      </Text>
     </View>
   );
 }
@@ -23,16 +29,16 @@ export default EventItem;
 
 const styles = StyleSheet.create({
   itemContainer: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     // borderBottomWidth: 2,
     borderBottomColor: '#A8ABB6',
     padding: 3,
     width: '100%',
   },
   textContainer: {
-    width: '50%',
+    // width: '50%',
     fontSize: 18,
-    marginRight: 10,
+    // marginRight: 10,
     flexWrap: 'wrap',
     flexShrink: 1,
   },

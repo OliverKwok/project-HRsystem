@@ -99,6 +99,7 @@ function LeaveApplication({navigation, route}: any) {
     endDate: 'Please select a end date',
     endDateDuration: '',
     workingDays: 0,
+    remarks: '',
   });
   console.log(formObject);
   const [inputTextColor1, setInputTextColor1] = useState('#97AEB0');
@@ -306,6 +307,17 @@ function LeaveApplication({navigation, route}: any) {
           }}
         />
       </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Remarks :</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Example: I will send the proof through email"
+          onChangeText={remarks => {
+            setFormObject({...formObject, remarks: remarks});
+            checkLeaveApplicationInput();
+          }}
+        />
+      </View>
       <View style={styles.alertContainer}>
         {showInvalidDate && (
           <Text style={styles.invalidDate}>Invalid Date</Text>
@@ -355,7 +367,7 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.backgroundColor,
   },
 
-  inputContainer: {marginHorizontal: 4, marginVertical: 15, width: '75%'},
+  inputContainer: {marginHorizontal: 4, marginVertical: 11, width: '75%'},
 
   label: {
     fontSize: 18,

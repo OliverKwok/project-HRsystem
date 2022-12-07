@@ -152,7 +152,10 @@ function LeaveRecord({
             {data.status}
           </Text>
         </View>
-
+        <View style={styles.leaveRemarksContainer}>
+          <Text style={styles.leaveText}>Remarks : </Text>
+          <Text style={styles.leaveRemarksText}>{data['remarks']}</Text>
+        </View>
         <View style={styles.createTimeContainer}>
           <Text style={[styles.leaveText, {fontSize: 13}]}>
             {dataTimeFormatter(data['created_at'] as any)}
@@ -231,8 +234,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 6,
   },
+
+  leaveRemarksContainer: {
+    flexDirection: 'column',
+    marginTop: 4,
+  },
+
+  leaveRemarksText: {
+    fontSize: 18,
+    marginLeft: 10,
+    marginTop: 5,
+  },
   leaveText: {
     fontSize: 18,
+    flexWrap: 'wrap',
+    flexShrink: 1,
   },
 
   buttonContainerBig: {

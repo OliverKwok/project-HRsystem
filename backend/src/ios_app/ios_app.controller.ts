@@ -96,6 +96,14 @@ export class IosAppController {
 
     return await this.iosAppService.getProfile(+userId);
   }
+
+  @Get('getUserStatus/:userId')
+  async getUserStatus(@Param('userId') userId: string) {
+    // console.log(userId);
+
+    return await this.iosAppService.getUserStatus(+userId);
+  }
+
   // @Post()
   // create(@Body() createIosAppDto: CreateIosAppDto) {
   //   return this.iosAppService.create(createIosAppDto);

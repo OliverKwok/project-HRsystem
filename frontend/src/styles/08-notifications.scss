@@ -9,7 +9,7 @@
   .eventBigContainer {
     background-color: #51afb2;
     // height: 620px;
-    height: 80vh;
+    height: 90vh;
     width: 1000px;
     // max-width: 1500px;
     // border: 2px solid black;
@@ -26,6 +26,7 @@
       background-color: #f2f7f7;
       border-radius: 30px;
       height: 85%;
+      // min-height: 520px;
       width: 100%;
       border: 2px solid rgb(170, 165, 165);
       display: flex;
@@ -88,11 +89,15 @@
             justify-content: center;
             align-items: center;
             margin-top: 20px;
+
             .boardcastButton {
-              height: 30px;
+              height: 45px;
               width: 100px;
               font-size: 20px;
               border-radius: 30px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
             }
             .boardcastButton:hover {
               transform: scale(1.12);
@@ -157,7 +162,7 @@
   .notificationBigContainer {
     background-color: #64ceb0;
     // height: 620px;
-    height: 80vh;
+    height: 90vh;
     width: 1000px;
     // max-width: 1500px;
     // border: 2px solid black;
@@ -245,7 +250,7 @@
             align-items: center;
             margin-top: 20px;
             .boardcastButton {
-              height: 30px;
+              height: 45px;
               width: 100px;
               font-size: 20px;
               border-radius: 30px;
