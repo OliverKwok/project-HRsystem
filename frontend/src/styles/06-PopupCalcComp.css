@@ -13,31 +13,31 @@
 }
 
 .popupBody {
-  height: 320px;
+  /* height: 320px;
   width: 50%;
   background-color: rgb(238, 254, 255);
   position: absolute;
   top: 20%;
   right: 30%;
   padding: 20px;
-  z-index: 200;
+  z-index: 200; */
 }
 
 .popupHeader {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
   padding: 0 30px 0 15px;
   border-bottom: 2px solid black;
-  padding-bottom: 10px;
+  padding-bottom: 10px; */
 }
 
 .closeBtn {
-  cursor: pointer;
+  /* cursor: pointer;
   border-width: 1px;
   border-color: grey;
   border-style: solid;
   padding: 0 10px;
-  background-color: white;
+  background-color: white; */
 }
 
 .btn_div {

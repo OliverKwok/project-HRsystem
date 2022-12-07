@@ -1,3 +1,9 @@
+.adddeltype{
+display:grid;
+grid-template-areas: "one one";
+gap: 10px;
+}
+
 .cardsContainer {
   display: grid;
   grid-template-areas: "one one one one one one";

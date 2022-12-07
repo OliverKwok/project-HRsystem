@@ -4,6 +4,7 @@ import ReactPDF, { PDFViewer } from "@react-pdf/renderer";
 import MyDocument from "../components/04b-GeneratePDFPayslip";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { usePDF } from "@react-pdf/renderer";
+import "../styles/04b-ExportPDF.css";
 
 import "../styles/04-Payroll.scss";
 
@@ -205,7 +206,7 @@ const PayExport = () => {
             document={document2211}
             fileName={`Payslip of all employees 2022-11`}
           >
-            <button> Download </button>
+            <button className="downloadPayslip"> Download </button>
           </PDFDownloadLink>
         </>
       )}
@@ -219,7 +220,7 @@ const PayExport = () => {
             document={document2212}
             fileName={`Payslip of all employees 2022-12`}
           >
-            <button> Download </button>
+            <button className="downloadPayslip"> Download </button>
           </PDFDownloadLink>
         </>
       )}
@@ -232,7 +233,7 @@ const PayExport = () => {
             document={document2301}
             fileName={`Payslip of all employees 2023-01`}
           >
-            <button> Download </button>
+            <button className="downloadPayslip"> Download </button>
           </PDFDownloadLink>
         </>
       )}
@@ -246,7 +247,7 @@ const PayExport = () => {
             document={document2302}
             fileName={`Payslip of all employees 2023-02`}
           >
-            <button> Download </button>
+            <button className="downloadPayslip"> Download </button>
           </PDFDownloadLink>
         </>
       )}
@@ -259,7 +260,7 @@ const PayExport = () => {
             document={document2303}
             fileName={`Payslip of all employees 2023-03`}
           >
-            <button> Download </button>
+            <button className="downloadPayslip"> Download </button>
           </PDFDownloadLink>
         </>
       )}
@@ -272,7 +273,7 @@ const PayExport = () => {
             document={document2304}
             fileName={`Payslip of all employees 2023-04`}
           >
-            <button> Download </button>
+            <button className="downloadPayslip"> Download </button>
           </PDFDownloadLink>
         </>
       )}

@@ -52,6 +52,7 @@ export default function LeavesType() {
 
   return (
     <div>
+      <div className="adddeltype">
       <PopupAddType
         setToggleRefresh={setToggleRefresh}
         addType={(newType: string) => {
@@ -67,7 +68,7 @@ export default function LeavesType() {
           setLeavesType(newList.filter((leavestype) => leavestype != item));
         }}
       />
-
+</div>
       <div className="cardsContainer">
         {leavestype.map((type: any, id: any) => (
           <LeavesTypeCard key={id} obj={type} />
