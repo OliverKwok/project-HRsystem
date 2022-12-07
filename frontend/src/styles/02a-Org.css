@@ -92,6 +92,10 @@
   font-size: 20px;
 }
 
+h2.bigTitle {
+  color: #267a65;
+}
+
 button.submitButton {
   background-color: #267a65;
   color: rgb(255, 255, 255);
@@ -111,4 +115,7 @@ button.submitButton:hover {
 
 button.submitButton:active {
   transform: scale(0.98);
+}
+input {
+  margin-bottom: 30px;
 }

@@ -409,7 +409,7 @@ export default function Employee() {
         <div id="new-employee-form">
           {show1 && (
             <>
-              <h2>Basic Infomation</h2>
+              <h2 className="bigTitle">Basic Infomation</h2>
               <div className="five-column-grid">
                 <div>
                   <div>
@@ -552,7 +552,7 @@ export default function Employee() {
 
           {show2 && (
             <>
-              <h2>Contact Infomation</h2>
+              <h2 className="bigTitle">Contact Infomation</h2>
               <div className="five-column-grid">
                 <div>
                   <div>
@@ -620,7 +620,7 @@ export default function Employee() {
 
           {show3 && (
             <>
-              <h2>Education and Previous Job</h2>
+              <h2 className="bigTitle">Education and Previous Job</h2>
               <div className="five-column-grid">
                 <div>
                   <div>
@@ -664,7 +664,7 @@ export default function Employee() {
 
           {show4 && (
             <>
-              <h2>Employment Detail</h2>
+              <h2 className="bigTitle">Employment Detail</h2>
               <div className="five-column-grid">
                 <div>
                   <div>
@@ -842,7 +842,7 @@ export default function Employee() {
           )}
           {show5 && (
             <>
-              <h2>Payment Detail</h2>
+              <h2 className="bigTitle">Payment Detail</h2>
               <div className="five-column-grid">
                 <div>
                   <div>
