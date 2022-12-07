@@ -870,10 +870,19 @@ export default function Employee(props: any) {
                       <span>
                         Start Date*
                         {/* 🎬 */}
+                        {errors.start_date && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
                       </span>
                     </div>
 
-                    <input type="date" {...register("start_date")} />
+                    <input
+                      type="date"
+                      {...register("start_date", {
+                        pattern: /^[0-9]{4}/,
+                        required: true,
+                      })}
+                    />
                   </div>
 
                   <div>
@@ -938,10 +947,13 @@ export default function Employee(props: any) {
                       <span>
                         Job Nature*
                         {/* 🕰️ */}
+                        {errors.job_nature && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
                       </span>
                     </div>
 
-                    <select {...register("job_nature")}>
+                    <select {...register("job_nature", { required: true })}>
                       <option value="full_time">Full Time</option>
                       <option value="part_time">Part Time</option>
                       <option value="temp">Temporary</option>
@@ -955,9 +967,15 @@ export default function Employee(props: any) {
                       <span>
                         Notice Period* (Days)
                         {/* 🌤️ */}
+                        {errors.notice_period && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
                       </span>
                     </div>
-                    <input type="text" {...register("notice_period")} />
+                    <input
+                      type="text"
+                      {...register("notice_period", { required: true })}
+                    />
                   </div>
 
                   <div>
@@ -1087,10 +1105,16 @@ export default function Employee(props: any) {
                       <span>
                         Basic Salary*
                         {/* 💰 */}
+                        {errors.basic_salary && (
+                          <span style={{ color: "red" }}>[Required]</span>
+                        )}
                       </span>
                     </div>
 
-                    <input type="text" {...register("basic_salary")} />
+                    <input
+                      type="text"
+                      {...register("basic_salary", { required: true })}
+                    />
                   </div>
                   {/* <div>
               <div>
