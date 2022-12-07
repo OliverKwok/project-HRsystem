@@ -968,7 +968,7 @@ export default function Employee() {
           </>
         )}
 
-        <button type="submit">Add</button>
+        <button type="submit" className="submitButton">Add</button>
       </form>
     </div>
   );

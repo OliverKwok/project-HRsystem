@@ -91,3 +91,24 @@
   background-color: #8ef3db;
   font-size: 20px;
 }
+
+button.submitButton {
+  background-color: #267a65;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 22px;
+  padding: 10px;
+  border: solid;
+  border-width: 0.5px;
+  transition: all 150ms ease-out;
+  width: 100%;
+  margin: 10px;
+}
+
+button.submitButton:hover {
+  transform: scale(1.01);
+}
+
+button.submitButton:active {
+  transform: scale(0.95);
+}
