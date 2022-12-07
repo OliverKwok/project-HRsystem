@@ -1,0 +1,40 @@
+button.confirm {
+  background-color: #267a65;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 22px;
+  padding: 10px;
+  border: solid;
+  border-width: 0.5px;
+  transition: all 150ms ease-out;
+  border-radius: 4px;
+  font-weight: 400;
+}
+
+button.confirm:hover {
+  transform: scale(1.05);
+}
+
+button.confirm:active {
+  transform: scale(0.95);
+}
+
+div.payroll-review-word > div > button.payroll-review-status {
+  background-color: #267a65;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 22px;
+  border: solid;
+  border-width: 0.5px;
+  transition: all 150ms ease-out;
+  border-radius: 4px;
+  font-weight: 400;
+  padding: 10px;
+}
+
+div.payroll-review-word > div > button.payroll-review-status:hover {
+  transform: scale(1.05);
+}
+div.payroll-review-word > div > button.payroll-review-status:active {
+  transform: scale(0.95);
+}
