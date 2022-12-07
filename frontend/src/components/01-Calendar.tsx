@@ -228,7 +228,7 @@ export default function Calendar() {
         },
       ];
 
-      let show = [
+      let show: Array<any> = [
         ...array1,
         array1nextYear,
         ...array2,
@@ -239,7 +239,7 @@ export default function Calendar() {
       ];
 
       // sort by date;
-      show.sort(function (a, b) {
+      let showResult = show.sort(function (a, b) {
         var keyA = new Date(a.start),
           keyB = new Date(b.start);
         // Compare the 2 dates
@@ -248,7 +248,11 @@ export default function Calendar() {
         return 0;
       });
 
-      setInitialEvent(show);
+      // showResult = showResult.slice(0, 12);
+      // console.log(showResult);
+      // show.filter((item, index) => show.indexOf(item) <= 12);
+
+      setInitialEvent(showResult);
     }
     main();
   }, []);
@@ -292,7 +296,9 @@ export default function Calendar() {
 function renderSidebarEvent(event: any) {
   return (
     <>
-      {new Date(event.start) >= new Date() ? (
+      {new Date(event.start) >= new Date() &&
+      new Date(event.start) <
+        new Date(new Date().setDate(new Date().getDate() + 10)) ? (
         <li key={event.id} className="dot">
           <b>
             {formatDate(event.start, {

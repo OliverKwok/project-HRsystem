@@ -312,7 +312,7 @@ export default function PaySummary() {
 
   const noPayLeaveBodyTemplate = (rowData: any) => {
     // const stockClassName = classNames({
-    //   redNumber: rowData.nopay_leave > 0 || rowData.nopay_leave < 0,
+    //   redNumber: true,
     // });
 
     let numberShown = new Intl.NumberFormat("en-US", {
@@ -409,7 +409,7 @@ export default function PaySummary() {
           </LocalizationProvider>
         </div>
       </div>
-      <div className="payroll-editing">
+      <div className="payroll-summary">
         <div className="card p-fluid">
           {/* <h5>Row Editing</h5> */}
           <DataTable
