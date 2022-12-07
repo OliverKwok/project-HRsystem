@@ -153,8 +153,42 @@ function Attendance_compo({
               new Date(
                 `${header_info.year},${header_info.month},${index + 1}`
               ).getDay() == 0 ? (
-              <SatOrSun className="attendance-loop" key={index}>
-                {day_of_week.length == 1 ? day_of_week[0]["status"] : ""}
+              <SatOrSun
+                className="attendance-loop"
+                key={index}
+                onClick={() => {
+                  console.log("hi");
+
+                  let status = day_of_week[0] ? day_of_week[0]["status"] : "";
+                  let employeeId = day_of_week[0]
+                    ? day_of_week[0]["employeeId"]
+                    : show_word["id"];
+                  let date = day_of_week[0]
+                    ? day_of_week[0]["date"]
+                    : `${header_info.year}-${header_info.month}-${index + 1}`;
+                  let time_checkedin = day_of_week[0]
+                    ? day_of_week[0]["time_checkedin"]
+                    : "";
+                  let time_checkedout = day_of_week[0]
+                    ? day_of_week[0]["time_checkedout"]
+                    : "";
+                  handleClick(
+                    status,
+                    employeeId,
+                    date,
+                    time_checkedin,
+                    time_checkedout,
+                    show_word["employeeid"]
+                  );
+                }}
+              >
+                {day_of_week.length == 1
+                  ? day_of_week[0]["status"] == "late"
+                    ? "L"
+                    : day_of_week[0]["status"] == "punctual"
+                    ? "P"
+                    : day_of_week[0]["status"].match(/\b(\w)/g).join("")
+                  : ""}
               </SatOrSun>
             ) : day_of_week.length == 1 ? (
               day_of_week[0]["status"] == "punctual" ? (
@@ -303,7 +337,7 @@ export default Attendance_compo;
 
 export const SatOrSun = styled.div`
   background-color: #9294a2;
-  pointer-events: none;
+  // pointer-events: none;
 `;
 
 export const Punctual = styled.div`

@@ -47,6 +47,7 @@ interface attendRecordType {
   last_name: string;
   gender: string;
   dept_name: string;
+  full_name: string;
 }
 
 const Attendance = () => {
@@ -64,12 +65,73 @@ const Attendance = () => {
   const [attend_preData, setAttend_preData] = useState<Array<attendRecordType>>(
     []
   );
-  // console.log(new Date(value).getFullYear());
-  // console.log(new Date(value).getMonth() + 1);
+  // const [searchFilter, setSearchFilter] = useState("");
 
-  // setAttendanceYear(new Date(value).getFullYear());
-  // setAttendanceMonth(new Date(value).getMonth() + 1);
+  //import csv file in react
+  const [file, setFile] = useState();
+  const [array, setArray] = useState<any>([]);
+  const [attendanceforSearch, setAttendanceforSearch] = useState([]);
 
+  const fileReader = new FileReader();
+
+  const handleOnChange = (e: any) => {
+    setFile(e.target.files[0]);
+  };
+
+  const csvFileToArray = async (string: string) => {
+    const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
+    const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
+
+    const array = csvRows.map((i) => {
+      const values = i.split(",");
+      const obj = csvHeader.reduce((object: any, header, index) => {
+        object[header] = values[index];
+        return object;
+      }, {});
+      return obj;
+    });
+    console.log(array, "from 90");
+
+    console.log(
+      new Date(array[0]["time_checkedin"]).getTime() >
+        new Date(`${array[0]["date"]} 09:00:00`).getTime()
+    );
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(array),
+      // headers: { "Content-Type": "multi-type/form-data" },
+      // body: formData,
+    };
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/attendance/importAttendanceRecord`,
+      requestOptions
+    );
+    const import_res = await res.json();
+    console.log(import_res);
+
+    setArray(array);
+  };
+
+  const handleOnSubmit = (e: any) => {
+    e.preventDefault();
+
+    if (file) {
+      fileReader.onload = function (event: any) {
+        const text = event.target.result;
+        csvFileToArray(text);
+      };
+
+      fileReader.readAsText(file);
+    }
+    // console.log(array, "from 106");
+    getAttendance();
+  };
+
+  const headerKeys = Object.keys(Object.assign({}, ...array));
+
+  //get the record of attendance
   async function getAttendance() {
     try {
       const options = { method: "GET" };
@@ -80,6 +142,22 @@ const Attendance = () => {
 
       let attendanceRecord = await res.json();
       attendanceRecord = attendanceRecord["res"];
+
+      for (let x = 0; x < attendanceRecord.length; x++) {
+        // Object.assign(
+        //   attendanceRecord[x],
+        //   (attendanceRecord[x]["full_name"] =
+        //     attendanceRecord[x]["last_name"] +
+        //     " " +
+        //     attendanceRecord[x]["first_name"])
+        // );
+        attendanceRecord[x]["full_name"] =
+          attendanceRecord[x]["last_name"] +
+          " " +
+          attendanceRecord[x]["first_name"];
+        // console.log(attendanceRecord[x]);
+      }
+
       // attendanceRecord.sort((a: any, b: any) => {
       //   const firstName = a["last_name"].toUpperCase();
       //   const secondName = b["last_name"].toUpperCase();
@@ -91,6 +169,7 @@ const Attendance = () => {
       //   }
       //   return 0;
       // });
+      setAttendanceforSearch(attendanceRecord);
       setAttend_preData(attendanceRecord);
     } catch {
       console.log("fetch fail");
@@ -183,6 +262,53 @@ const Attendance = () => {
   return (
     <div className="bigPageContainer">
       <div className="month-picker-container">
+        <div className="searchFilterContainer">
+          <div className="searchText">Search by name :</div>
+          <input
+            type="text"
+            name="name"
+            className="searchFilter"
+            onChange={(e) => {
+              // setSearchFilter(e.target.value);
+              console.log(attend_preData);
+              // console.log(searchFilter);
+              console.log(e.target.value);
+              setAttend_preData(attendanceforSearch);
+
+              const results = attendanceforSearch.filter((data: any) => {
+                // if (e.target.value == "") {
+                //   return;
+                // }
+                return (data["full_name"] as any)
+                  .toLowerCase()
+                  .includes(e.target.value.toLowerCase());
+              });
+              console.log(results);
+              setAttend_preData(results);
+            }}
+          />
+        </div>
+
+        <div className="importCSVpartContainer">
+          <form>
+            <input
+              // className="CSVinput custom-file-input"
+              type={"file"}
+              id={"csvFileInput"}
+              accept={".csv"}
+              onChange={handleOnChange}
+            />
+
+            <button
+              className="importCSVbutton"
+              onClick={(e) => {
+                handleOnSubmit(e);
+              }}
+            >
+              IMPORT CSV
+            </button>
+          </form>
+        </div>
         <div className="month-picker">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={3}>

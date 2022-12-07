@@ -23,6 +23,7 @@ import EmployeeList from "./pages/02c-EmployeeList";
 import StatusUpdate from "./pages/02e-StatusUpdate";
 // import StatusUpdate2 from "./pages/02e-StatusUpdate2";
 import Attendance from "./pages/03-Attendance";
+import ReviewSummary from "./pages/04a-ReviewSummary";
 import PaySummary from "./pages/04a-PaySummary";
 import PayExport from "./pages/04b-PayExport";
 import PaySetting from "./pages/04c-PaySetting";
@@ -218,6 +219,15 @@ function App() {
               <>
                 <NavLink
                   className="sub-item"
+                  to={"reviewSummary"}
+                  style={NavLinkStyle}
+                >
+                  <div>
+                    <SlOrganization /> <span>review</span>
+                  </div>
+                </NavLink>
+                <NavLink
+                  className="sub-item"
                   to={"paySummary"}
                   style={NavLinkStyle}
                 >
@@ -369,6 +379,7 @@ function App() {
                 <Route path="statusUpdate" element={<StatusUpdate />}></Route>
                 {/* <Route path="statusUpdate2" element={<StatusUpdate2 />}></Route> */}
                 <Route path="attendance" element={<Attendance />}></Route>
+                <Route path="reviewSummary" element={<ReviewSummary />}></Route>
                 <Route path="paySummary" element={<PaySummary />}></Route>
                 <Route path="payExport" element={<PayExport />}></Route>
                 <Route path="paySetting" element={<PaySetting />}></Route>

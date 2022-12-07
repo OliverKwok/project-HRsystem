@@ -11,7 +11,7 @@ import Attendance from './Attendance';
 import Leave from './Leave';
 import Notification from './Notification';
 import Salary from './Salary';
-import Setting from './Setting';
+import Profile from './Profile';
 
 function BottomBar() {
   const Tab = createBottomTabNavigator();
@@ -51,8 +51,8 @@ function BottomBar() {
               ? 'notifications-circle'
               : 'notifications-circle-outline';
             size = focused ? size + 8 : size;
-          } else if (route.name === 'Settings') {
-            iconName = focused ? 'settings' : 'settings-outline';
+          } else if (route.name === 'Profile') {
+            iconName = focused ? 'people-sharp' : 'people-outline';
             size = focused ? size + 8 : size;
           }
           return <Ionic name={iconName} size={size} color={color} />;
@@ -68,7 +68,7 @@ function BottomBar() {
 
       <Tab.Screen name="Salary" component={Salary} />
       <Tab.Screen name="Notification" component={Notification} />
-      <Tab.Screen name="Settings" component={Setting} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 }

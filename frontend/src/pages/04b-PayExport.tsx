@@ -64,18 +64,18 @@ const PayExport = () => {
   // ];
 
   useEffect(() => {
-    setId(data[0].id);
+    // setId(data[0].id);
     setYear(data[0].year);
     setMonth(data[0].month);
-    setEmployeeid(data[0].employeeid);
-    setName(data[0].name);
-    setBasicSalary(data[0].basic_salary);
-    setOtPay(data[0].ot_pay);
-    setBonus(data[0].bonus);
-    setNopayLeave(data[0].nopay_leave);
-    setMpfEmployee(data[0].mpf_employee);
-    setTotal(data[0].total);
-    setJson(JSON.stringify(data));
+    // setEmployeeid(data[0].employeeid);
+    // setName(data[0].name);
+    // setBasicSalary(data[0].basic_salary);
+    // setOtPay(data[0].ot_pay);
+    // setBonus(data[0].bonus);
+    // setNopayLeave(data[0].nopay_leave);
+    // setMpfEmployee(data[0].mpf_employee);
+    // setTotal(data[0].total);
+    // setJson(JSON.stringify(data));
   });
 
   return (
@@ -85,7 +85,7 @@ const PayExport = () => {
       </PDFViewer>
       <PDFDownloadLink
         document={<MyDocument year={year} month={month} />}
-        fileName={"Payslip"}
+        fileName={`Payslip of all employees ${year}-${month}`}
       >
         <button> Download </button>
       </PDFDownloadLink>

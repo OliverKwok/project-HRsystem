@@ -71,7 +71,7 @@ export class IosAppController {
     return await this.iosAppService.getHolidaysName();
   }
 
-  @Get('getNotification')
+  @Get('getNotifications')
   async getNotifications() {
     return await this.iosAppService.getNotifications();
   }
@@ -90,6 +90,12 @@ export class IosAppController {
     return await this.iosAppService.addFirebaseToken(data);
   }
 
+  @Get('getProfile/:userId')
+  async getProfile(@Param('userId') userId: string) {
+    console.log(userId);
+
+    return await this.iosAppService.getProfile(+userId);
+  }
   // @Post()
   // create(@Body() createIosAppDto: CreateIosAppDto) {
   //   return this.iosAppService.create(createIosAppDto);
