@@ -29,15 +29,17 @@ export default function PopupDeleteType(props: any) {
         setCurrentLeavesType(data);
       });
     console.log(currentLeavesType);
-  }, [deleteType, props.toggleRefreshDelete]);
+  }, [deleteType, props.toggleRefresh, props.toggleRefreshDelete]);
 
   async function deleteTypeHandler(event: any) {
     event.preventDefault();
 
+    let typeidDelete: number = 0;
     currentLeavesType.forEach((object: any) => {
       for (let key in object) {
         if (object["type"] == deleteType) {
-          setTypeID(object["id"]);
+          // setTypeID(object["id"]);
+          typeidDelete = object["id"];
         }
       }
     });
@@ -53,11 +55,12 @@ export default function PopupDeleteType(props: any) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         type: deleteType,
-        id: typeid,
+        // id: typeid,
+        id: typeidDelete,
       }),
     };
     await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/leave/deletetype/${typeid}`,
+      `${process.env.REACT_APP_BACKEND_URL}/leave/deletetype/${typeidDelete}`,
       requestOptions
     )
       .then((response) => response.json())
@@ -67,6 +70,7 @@ export default function PopupDeleteType(props: any) {
     props.setToggleRefreshDelete(
       (toggleRefreshDelete: any) => !toggleRefreshDelete
     );
+    props.onDelete(deleteType);
   }
 
   return (
@@ -90,8 +94,12 @@ export default function PopupDeleteType(props: any) {
                 console.log(event.target.value);
               }}
             >
-              {currentLeavesType.length > 0 &&
+              {/* {currentLeavesType.length > 0 &&
                 currentLeavesType.map((type: any, key: number) => (
+                  <option value={type["type"]}>{type["type"]}</option>
+                ))} */}
+              {props.leaveTypes.length > 0 &&
+                props.leaveTypes.map((type: any, key: number) => (
                   <option value={type["type"]}>{type["type"]}</option>
                 ))}
             </select>
