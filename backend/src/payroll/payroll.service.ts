@@ -501,31 +501,28 @@ export class PayrollService {
          where payroll.year = ${year} and payroll.month = ${month} and payroll.employeeid = ${realid}
          `);
 
-      // let OneMonthPayroll = await this.knex.select(
-      //   'payroll.id',
-      //   'payroll.year',
-      //   'payroll.month',
-      //   'payroll.basic_salary',
-      //   'payroll.ot_pay',
-      //   'payroll.bonus',
-      //   'payroll.nopay_leave',
-      //   'payroll.mpf_employee',
-      //   'payroll.total',
-      //   'pay'
-      //   'employee.employeeid',
-      //   this.knex.raw(
-      //     `concat(employee.last_name, ' ', employee.first_name,', ',employee.alias) as name`,
-      //   ),
-      // )
-      // .from('payroll')
-      // .where({
-      //   year: year,
-      //   month: month,
-      //   employeeid: realid,
-      // })
-      // .join('employee', 'employee.id', 'payroll.employeeid');
-
       return OneMonthPayroll.rows;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async isConfirmed(year: number, month: number) {
+    try {
+      let result = await this.knex.raw(`
+      select 
+         payroll.year,
+         payroll.month
+         from payroll
+         where payroll.year = ${year} and payroll.month = ${month}
+         `);
+
+      // return result.rows;
+      if (result.rows.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }

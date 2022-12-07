@@ -48,6 +48,7 @@ function App() {
   const [username, setUsername] = useState("");
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const [latestEvent, setLatestEvent] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -75,6 +76,29 @@ function App() {
       checkLogin();
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    const requestOptions = {
+      method: "Get",
+    };
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/notification/getEventRecord`,
+      requestOptions
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setLatestEvent(
+          data["res"][0]["event_name"] +
+            " (Date: " +
+            data["res"][0]["date"].substring(0, 10) +
+            ", Time: " +
+            data["res"][0]["details"] +
+            ")"
+        );
+      });
+  }, []);
 
   const SideBarStyle = {
     minWidth: "300px",
@@ -351,18 +375,18 @@ function App() {
               <div className="navbar-grid">
                 <HiOutlineSpeakerphone />
               </div>
-              <div id="announcement">Sample Company Announcement</div>
+              <div id="announcement">{latestEvent}</div>
 
               {/* <div className="navbar-grid-username">
                 Welcome back: {username}
               </div> */}
-              <div className="navbar-grid">
+              {/* <div className="navbar-grid">
                 <MdNotificationsNone />
                 <span>1</span>
               </div>
               <div className="navbar-grid">
                 <FiSettings />
-              </div>
+              </div> */}
               <div className="navbar-grid">
                 <AiOutlineLogout onClick={() => dispatch(logout())} />
               </div>
