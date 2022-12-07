@@ -15,6 +15,7 @@ button.editButton {
   border: solid;
   border-width: 0.5px;
   transition: all 150ms ease-out;
+  border-radius: 4px;
 }
 
 button.editButton:hover {

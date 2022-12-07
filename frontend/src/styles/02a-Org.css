@@ -27,6 +27,7 @@
   background-color: #d6d6d6;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-radius: 4px;
   transition: all 150ms ease-out;
 }
 
