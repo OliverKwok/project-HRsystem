@@ -28,7 +28,6 @@ export default function PaySummary() {
   // const [products4, setProducts4] = useState<any[]>();
   const [editingRows, setEditingRows] = useState({});
   const [toggleRefresh, setToggleRefresh] = useState(false);
-  const [loading, setLoading] = useState(false);
   const toast = useRef();
 
   // date picker
@@ -70,12 +69,6 @@ export default function PaySummary() {
     // products3: setProducts3,
     // products4: setProducts4,
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(true);
-    }, 3000);
-  }, [toggleRefresh]);
 
   useEffect(() => {
     fetchProductData("products2");
@@ -344,42 +337,22 @@ export default function PaySummary() {
     return (
       // <button onClick={() => handleClickDownload(rowData)}> Download </button>
       <div>
-        {loading && (
-          <PDFDownloadLink
-            document={
-              <MyDocument
-                year={yearValue}
-                month={monthValue}
-                realid={rowData.realid}
-              />
-            }
-            fileName={`Payslip  ${yearValue}-${monthValue}`}
-          >
-            <button> Download </button>
-          </PDFDownloadLink>
-        )}
+        <PDFDownloadLink
+          document={
+            <MyDocument
+              year={yearValue}
+              month={monthValue}
+              realid={rowData.realid}
+            />
+          }
+          fileName={`Payslip  ${yearValue}-${monthValue}`}
+        >
+          <button> Download </button>
+        </PDFDownloadLink>
       </div>
     );
   };
 
-  // function handleSubmitPayrollEdit() {
-  //   const requestOptions = {
-  //     method: "Post",
-  //   };
-  //   fetch(
-  //     `${process.env.REACT_APP_BACKEND_URL}/payroll/confirm/${yearValue}/${monthValue}`,
-  //     requestOptions
-  //   )
-  //     .then((response) => {
-  //       // console.log(response);
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       if (data.rowCount > 0) {
-  //         alert(`payroll confirmed for ${yearValue}-${monthValue}`);
-  //       }
-  //     });
-  // }
   return (
     <>
       <div className="month-picker-container">
