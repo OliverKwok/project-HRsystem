@@ -588,7 +588,10 @@ export default function Employee(props: any) {
                   </div>
                   <div>
                     <div>
-                      <span>Chinese Name 🇭🇰</span>
+                      <span>
+                        Chinese Name
+                        {/* 🇭🇰 */}
+                      </span>
                     </div>
 
                     <input type="text" {...register("chinese_name")} />

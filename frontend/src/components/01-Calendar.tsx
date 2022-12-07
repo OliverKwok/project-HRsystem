@@ -37,7 +37,7 @@ export default function Calendar() {
         item["start"] = changeBirthdayDateFormat(item["start"]);
         item["title"] = "Birthday: " + item["title"];
         item["backgroundColor"] = "#eab676";
-        item["borderColor"] = "#0EB3B3";
+        item["borderColor"] = "#eab676";
         i++;
       }
       return response;
@@ -117,7 +117,7 @@ export default function Calendar() {
           item["borderColor"] = "#d5dfe1";
         } else if (item["status"] == "approved") {
           item["backgroundColor"] = "#9fa0f4";
-          item["borderColor"] = "#42adf5";
+          item["borderColor"] = "#9fa0f4";
         } else if (item["status"] == "taken") {
           item["backgroundColor"] = "#534666";
           item["borderColor"] = "#534666";
@@ -174,7 +174,7 @@ export default function Calendar() {
         item["start"] = item["start"];
         item["title"] = "Contract End: " + item["title"];
         item["backgroundColor"] = "#873e23";
-        item["borderColor"] = "#0EEEEE";
+        item["borderColor"] = "#873e23";
         i++;
       }
       return response;
@@ -198,7 +198,7 @@ export default function Calendar() {
         item["start"] = item["start"];
         item["title"] = "Probation End: " + item["title"];
         item["backgroundColor"] = "#095f9c";
-        item["borderColor"] = "#0EEEEE";
+        item["borderColor"] = "#095f9c";
         i++;
       }
       return response;
@@ -224,7 +224,7 @@ export default function Calendar() {
           start: "2022-12-28",
           title: "Last Day: Cheung Ka Yee, Mia",
           backgroundColor: "#ec6480",
-          borderColor: "#0EEEEE",
+          borderColor: "#ec6480",
         },
       ];
 
