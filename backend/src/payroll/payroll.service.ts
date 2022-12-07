@@ -292,7 +292,7 @@ export class PayrollService {
         }
       });
 
-      return OneMonthPayroll; 
+      return OneMonthPayroll;
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
@@ -523,6 +523,32 @@ export class PayrollService {
       } else {
         return false;
       }
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async checkConfirmMonth() {
+    try {
+      let result = await this.knex.select('year', 'month').from('payroll');
+
+      result = result.filter((value, index) => {
+        const _value = JSON.stringify(value);
+        return (
+          index ===
+          result.findIndex((obj) => {
+            return JSON.stringify(obj) === _value;
+          })
+        );
+      });
+
+      let resultArr = [];
+
+      result.map((item) => {
+        resultArr.push(item.year + '-' + item.month);
+      });
+
+      return resultArr;
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
