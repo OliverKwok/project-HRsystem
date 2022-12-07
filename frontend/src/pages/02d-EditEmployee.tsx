@@ -599,7 +599,7 @@ export default function Employee(props: any) {
                       <span>
                         HKID* 🆔{" "}
                         {errors.hkid && (
-                          <span style={{ color: "red" }}>[Wrong format]</span>
+                          <span style={{ color: "red" }}>[Wrong Format]</span>
                         )}
                       </span>
                     </div>
