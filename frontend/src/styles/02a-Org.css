@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   background-color: #3bccc4;
+  border-radius: 4px;
 }
 
 /* Style the buttons that are used to open the tab content */

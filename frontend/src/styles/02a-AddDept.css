@@ -4,6 +4,8 @@
   border-color: rgb(22, 52, 52);
   margin: 20px;
   padding: 20px 40px;
+  border-radius: 4px;
+  background-color: rgb(241, 241, 241);
 }
 
 .fills {

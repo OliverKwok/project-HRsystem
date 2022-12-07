@@ -389,19 +389,19 @@ export default function Employee() {
       <div className="tabNewEmployee">
         <div>
           <button className="tablinks" onClick={showTab1}>
-            1.Basic Information
+            1.Basic Information 🪪
           </button>
           <button className="tablinks" onClick={showTab2}>
-            2.Contact Infomation
+            2.Contact Infomation ☎️
           </button>
           <button className="tablinks" onClick={showTab3}>
-            3.Education and Previous Job
+            3.Education & Previous Job 🎓💼
           </button>
           <button className="tablinks" onClick={showTab4}>
-            4.Employment Detail
+            4.Employment Detail 🏢
           </button>
           <button className="tablinks" onClick={showTab5}>
-            5.Payment Detail
+            5.Payment Detail 💰
           </button>
         </div>
       </div>
@@ -455,7 +455,7 @@ export default function Employee() {
                 </div>
                 <div>
                   <div>
-                    <span>Chinese Name</span>
+                    <span>Chinese Name 🇭🇰</span>
                   </div>
 
                   <input type="text" {...register("chinese_name")} />
@@ -499,7 +499,7 @@ export default function Employee() {
 
                 <div>
                   <div>
-                    <span>Gender*</span>
+                    <span>Gender* 👩🏻‍⚕️👨🏻‍⚕️</span>
                   </div>
 
                   <select {...register("gender")}>
