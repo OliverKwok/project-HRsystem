@@ -1,0 +1,25 @@
+button.downloadPayslip {
+  background-color: #267a65;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 22px;
+  padding: 10px;
+  border: solid;
+  border-width: 0.5px;
+  transition: all 150ms ease-out;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+button.downloadPayslip:hover {
+  transform: scale(1.05);
+}
+
+button.downloadPayslip:active {
+  transform: scale(0.95);
+}
+
+iframe {
+  width: 100%;
+}
