@@ -30,9 +30,9 @@ export default function StatusUpdateCard(props: any) {
 
   let statusColor: any = "";
   if (props.status === "End of Contract") {
-    statusColor = { backgroundColor: "#cca0ff" };
+    statusColor = { backgroundColor: "#D6C775" };
   } else if (props.status === "End of Probation") {
-    statusColor = { backgroundColor: "#fbffa0" };
+    statusColor = { backgroundColor: "#C2C3AD" };
   }
 
   const navigate = useNavigate();
