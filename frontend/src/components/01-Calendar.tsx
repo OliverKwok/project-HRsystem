@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 // import { INITIAL_EVENTS, createEventId } from "./01-eventSetting";
+import "../styles/01-Calendar.css";
 
 import moment from "moment";
 moment().format();
@@ -277,10 +278,10 @@ export default function Calendar() {
         </div>
         <div className="calendar-info">
           <div className="calendar-sidebar">
-            <h2>Upcoming Events</h2>
+            <h2 className="board-title">Upcoming Events</h2>
             {/* <h2>Upcoming Events ({initialEvent.length})</h2> */}
 
-            <ul>{initialEvent.map(renderSidebarEvent)}</ul>
+            <ul className="dotspace">{initialEvent.map(renderSidebarEvent)}</ul>
           </div>
         </div>
       </div>
@@ -292,7 +293,7 @@ function renderSidebarEvent(event: any) {
   return (
     <>
       {new Date(event.start) >= new Date() ? (
-        <li key={event.id}>
+        <li key={event.id} className="dot">
           <b>
             {formatDate(event.start, {
               year: "numeric",

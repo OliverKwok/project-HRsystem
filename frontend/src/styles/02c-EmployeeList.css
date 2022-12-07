@@ -2,6 +2,8 @@ img.title_employee_photo {
   height: auto;
   width: 100px;
   border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 button.editButton {
@@ -21,4 +23,45 @@ button.editButton:hover {
 
 button.editButton:active {
   transform: scale(0.95);
+}
+
+button.sc-hhOBVt {
+  background-color: rgb(14, 178, 179);
+  height: 35px;
+  border-style: none;
+  color: white;
+}
+
+#search {
+  width: 80%;
+  height: 35px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  box-sizing: border-box;
+}
+.main {
+  padding: 20px;
+}
+
+.rdt_TableCell {
+  font-size: 20px;
+}
+
+.rdt_TableCol_Sortable {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(14, 178, 179);
+}
+
+span.sc-bYMpWt {
+  font-size: 20px;
+  color: rgb(14, 178, 179);
+}
+select.sc-cwSeag {
+  font-size: 20px;
+  color: rgb(14, 178, 179);
 }

@@ -1,0 +1,39 @@
+.fc.fc-theme-standard .fc-toolbar .fc-button-group .fc-button {
+  background-color: rgb(14, 178, 179);
+  border-color: rgb(192, 255, 255);
+  margin: 5px;
+}
+
+.fc.fc-theme-standard .fc-toolbar .fc-button:disabled {
+  background-color: rgb(14, 178, 179);
+  border-color: rgb(192, 255, 255);
+  margin: 5px;
+}
+
+div.calendar-sidebar {
+  background-color: #27d5d5;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-style: solid;
+  border-color: rgb(167, 167, 167);
+  border-width: 2px;
+  border-radius: 10px;
+}
+
+h2.board-title {
+  color: rgb(255, 255, 255);
+}
+
+li.dot {
+  list-style-type: none;
+  margin-top: 20px;
+}
+
+li.dot > b {
+  color: rgb(36, 108, 84);
+}
+
+ul.dotspace {
+  padding: 0;
+  margin: 0;
+}
