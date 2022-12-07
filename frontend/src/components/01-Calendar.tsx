@@ -118,7 +118,7 @@ export default function Calendar() {
         } else if (item["status"] == "approved") {
           item["backgroundColor"] = "#9fa0f4";
           item["borderColor"] = "#42adf5";
-        } else if (item["status"] == "approved") {
+        } else if (item["status"] == "taken") {
           item["backgroundColor"] = "#534666";
           item["borderColor"] = "#534666";
         }
