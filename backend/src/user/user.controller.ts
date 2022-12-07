@@ -53,13 +53,33 @@ export class UserController {
     return this.userService.leaveShowCalendar();
   }
 
+  @Get('firstDateShowCalendar')
+  async firstDateShowCalendar() {
+    return this.userService.firstDateShowCalendar();
+  }
+
+  // @Get('lastDateShowCalendar')
+  // async lastDateShowCalendar() {
+  //   return this.userService.lastDateShowCalendar();
+  // }
+
+  @Get('contractEndShowCalendar')
+  async contractEndShowCalendar() {
+    return this.userService.contractEndShowCalendar();
+  }
+
+  @Get('probationEndShowCalendar')
+  async probationEndShowCalendar() {
+    return this.userService.probationEndShowCalendar();
+  }
+
   @Get('getUpdateStatus')
-  async getUpdateStatus(){
+  async getUpdateStatus() {
     return this.userService.getUpdateStatus();
   }
 
   @Get('checkEID/:eid')
- checkEID(@Param('eid') eid:string){
+  checkEID(@Param('eid') eid: string) {
     return this.userService.checkEID(eid);
   }
 }
