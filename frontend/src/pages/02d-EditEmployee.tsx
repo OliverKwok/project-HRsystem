@@ -464,8 +464,9 @@ export default function Employee(props: any) {
     const jsonData = await res.json();
 
     if (jsonData.updateEmployee) {
-      alert("updated in the employee table");
+      alert("Employee's info is updateed");
     }
+    props.editShowList(true);
   }
 
   // auto calculate the age

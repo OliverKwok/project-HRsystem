@@ -182,7 +182,8 @@ export default function Title() {
               />
             ),
             edit: (
-              <button className="editButton"
+              <button
+                className="editButton"
                 onClick={() => {
                   setShowList(false);
                   setPassId(employee.id);
@@ -372,11 +373,15 @@ export default function Title() {
           editBankPayee={passBankPayee}
           editPaymentRemark={passPaymentRemark}
           //
-          // editShowList={showList}
+          editShowList={setShowList}
         />
       )}
 
-      {!showList && <button onClick={() => setShowList(true)} className="cancelButton">Cancel</button>}
+      {!showList && (
+        <button onClick={() => setShowList(true)} className="cancelButton">
+          Cancel
+        </button>
+      )}
     </>
   );
 }
