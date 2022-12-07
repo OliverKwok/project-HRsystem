@@ -62,9 +62,9 @@
   overflow: visible;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
-  display: flex;
-  justify-content: space-evenly;
   background-color: #3bccc4;
+  height: 4.5em;
+  border-radius: 4px;
 }
 
 .tabNewEmployee button {
@@ -77,10 +77,14 @@
   transition: 0.3s;
   color: #276047;
   font-size: 22px;
+  width: 20%;
+  height: 3em;
+  border-radius: 4px;
 }
 
 .tabNewEmployee button:hover {
   background-color: rgb(103, 230, 189);
+  height: 4em;
 }
 
 .tabNewEmployee button:focus {
