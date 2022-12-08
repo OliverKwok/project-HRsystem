@@ -222,9 +222,9 @@ export default function Calendar() {
 
       const lastDay = [
         {
-          id: "lastday1",
-          start: "2022-12-28",
           title: "Last Day: Cheung Ka Yee, Mia",
+          start: "2022-12-28",
+          id: "lastday1",
           backgroundColor: "#ec6480",
           borderColor: "#ec6480",
         },
@@ -303,7 +303,8 @@ function renderSidebarEvent(event: any) {
       {new Date(event.start) >= new Date() &&
       new Date(event.start) <
         new Date(new Date().setDate(new Date().getDate() + 30)) ? (
-        <li key={event.id} className="dot">
+        <li key={Math.random().toString().substring(2)} className="dot">
+          {/* <li key={Math.random().toString().substring(2)} className="dot"> */}
           <b>
             {formatDate(event.start, {
               year: "numeric",

@@ -245,9 +245,9 @@ export default function PaySummary() {
                 return response.json();
               })
               .then((editData) => {
-                console.log(editData);
+                // console.log(editData);
+                setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
               });
-            setToggleRefresh((toggleRefresh: any) => !toggleRefresh);
           }}
           mode="currency"
           currency="USD"
@@ -270,7 +270,7 @@ export default function PaySummary() {
 
   const otPayBodyTemplate = (rowData: any) => {
     const stockClassName = classNames({
-      redNumber: rowData.ot_pay > 0 || rowData.ot_pay < 0,
+      blueNumber: rowData.ot_pay > 0 || rowData.ot_pay < 0,
     });
 
     let numberShown = new Intl.NumberFormat("en-US", {
@@ -283,7 +283,7 @@ export default function PaySummary() {
 
   const bonusBodyTemplate = (rowData: any) => {
     const stockClassName = classNames({
-      redNumber: rowData.bonus > 0 || rowData.bonus < 0,
+      blueNumber: rowData.bonus > 0 || rowData.bonus < 0,
     });
 
     let numberShown = new Intl.NumberFormat("en-US", {
@@ -296,7 +296,7 @@ export default function PaySummary() {
 
   const noPayLeaveBodyTemplate = (rowData: any) => {
     const stockClassName = classNames({
-      redNumber: rowData.nopay_leave > 0 || rowData.nopay_leave < 0,
+      blueNumber: rowData.nopay_leave > 0 || rowData.nopay_leave < 0,
     });
 
     let numberShown = new Intl.NumberFormat("en-US", {
@@ -309,8 +309,8 @@ export default function PaySummary() {
 
   const mpfBodyTemplate = (rowData: any) => {
     const stockClassName = classNames({
-      redNumber: rowData.mpf_employee_isAmended == true,
-      blueNumber: rowData.mpf_employee_isAmended == false,
+      blueNumber: rowData.mpf_employee_isAmended == true,
+      // blueNumber: rowData.mpf_employee_isAmended == false,
     });
 
     let numberShown = new Intl.NumberFormat("en-US", {
@@ -323,8 +323,8 @@ export default function PaySummary() {
 
   const totalBodyTemplate = (rowData: any) => {
     const stockClassName = classNames({
-      redNumber: rowData.total_isAmended == true,
-      blueNumber: rowData.total_isAmended == false,
+      blueNumber: rowData.total_isAmended == true,
+      // blueNumber: rowData.total_isAmended == false,
     });
 
     let numberShown = new Intl.NumberFormat("en-US", {
