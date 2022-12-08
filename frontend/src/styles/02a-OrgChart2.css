@@ -6,6 +6,7 @@
 .organizationchart-demo .p-organizationchart .p-person {
   padding: 0;
   border: 0 none;
+  margin-bottom: 10px;
   /* min-width: 40px; */
 }
 
@@ -59,7 +60,8 @@ button.exportPDF {
   border-width: 0.5px;
   margin-top: 10px;
   transition: all 150ms ease-out;
-   border-radius: 4px;
+  border-radius: 4px;
+  margin-bottom: 20px;
 }
 button.exportPDF:hover {
   transform: scale(1.02);
