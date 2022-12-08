@@ -130,7 +130,8 @@ export default function Calendar() {
     }
 
     function changeBirthdayDateFormat(date: string) {
-      return moment(new Date()).format("YYYY") + date.substring(4);
+      return "2022" + date.substring(4);
+      // return moment(new Date()).format("YYYY") + date.substring(4);
     }
 
     async function checkFirstDayShowCalendar() {
@@ -207,8 +208,9 @@ export default function Calendar() {
 
     async function main() {
       let array1 = await checkBirthdayShowCalendar();
-      let array1nextYear = [...array1];
-      array1nextYear.map((item) => {
+      // console.log(array1);
+      let array1nextYear = JSON.parse(JSON.stringify(array1));
+      array1nextYear.map((item: any) => {
         item["start"] =
           (+item["start"].substring(0, 4) + 1).toString() +
           item["start"].substring(4);
@@ -230,13 +232,15 @@ export default function Calendar() {
 
       let show: Array<any> = [
         ...array1,
-        array1nextYear,
+        ...array1nextYear,
         ...array2,
         ...array3,
         ...array4,
         ...array5,
         ...lastDay,
       ];
+
+      // console.log(show);
 
       // sort by date;
       let showResult = show.sort(function (a, b) {
@@ -298,7 +302,7 @@ function renderSidebarEvent(event: any) {
     <>
       {new Date(event.start) >= new Date() &&
       new Date(event.start) <
-        new Date(new Date().setDate(new Date().getDate() + 10)) ? (
+        new Date(new Date().setDate(new Date().getDate() + 30)) ? (
         <li key={event.id} className="dot">
           <b>
             {formatDate(event.start, {

@@ -16,7 +16,7 @@ import Stack from "@mui/material/Stack";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import "../styles/04a-PayrollReview.css"
+import "../styles/04a-PayrollReview.css";
 
 export default function PaySummary() {
   // const [products1, setProducts1] = useState<any[]>();
@@ -386,7 +386,9 @@ export default function PaySummary() {
         <div className="payroll-review-word">
           {!isConfirmed ? (
             <div>
-              <button className="confirm" onClick={handleSubmitPayrollEdit}>Confirm</button>
+              <button className="confirm" onClick={handleSubmitPayrollEdit}>
+                Confirm
+              </button>
             </div>
           ) : (
             <div>
