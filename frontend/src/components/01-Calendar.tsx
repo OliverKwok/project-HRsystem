@@ -5,6 +5,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import "../styles/01-Calendar.css";
 
 import moment from "moment";
+import { eventNames } from "process";
 moment().format();
 
 interface state {
@@ -214,6 +215,7 @@ export default function Calendar() {
         item["start"] =
           (+item["start"].substring(0, 4) + 1).toString() +
           item["start"].substring(4);
+        item["id"] = "next" + item["id"];
       });
       let array2 = await checkLeaveShowCalendar();
       let array3 = await checkFirstDayShowCalendar();
@@ -298,13 +300,13 @@ export default function Calendar() {
 }
 
 function renderSidebarEvent(event: any) {
+  // console.log(event.uniqueid);
   return (
     <>
       {new Date(event.start) >= new Date() &&
       new Date(event.start) <
         new Date(new Date().setDate(new Date().getDate() + 30)) ? (
-        <li key={Math.random().toString().substring(2)} className="dot">
-          {/* <li key={Math.random().toString().substring(2)} className="dot"> */}
+        <li key={event.id} className="dot">
           <b>
             {formatDate(event.start, {
               year: "numeric",
