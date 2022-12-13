@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, RefreshControl, StyleSheet, Text, View} from 'react-native';
 import Config from 'react-native-config';
+import {ScrollView} from 'react-native-gesture-handler';
 import {GlobalStyles} from '../constants/styles';
 import {logout} from '../redux/auth/actions';
 import {useAppDispatch, useAppSelector} from '../store';
@@ -12,6 +13,20 @@ function Profile() {
   const logoutHandler = () => {
     dispatch(logout());
   };
+
+  const wait = (timeout: any) => {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  };
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    getProfile();
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   // date formatter
   function dateFormatter(dateString: string) {
@@ -57,83 +72,89 @@ function Profile() {
   // let jobNature = profile['job_nature'].replace('_', ' ');
 
   return (
-    <View style={styles.bigPageContainer}>
-      <View style={styles.profileContainer}>
-        <View style={styles.itemContainer}>
-          <Text style={[styles.itemText, styles.firstColumn]}>
-            Employee ID :
-          </Text>
-          <Text
-            style={[styles.itemText, styles.backerText, styles.firstColumn]}>
-            {profile['employeeid']}
-          </Text>
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.itemText}>Last Name :</Text>
-          <Text style={[styles.itemText, styles.backerText]}>
-            {profile['last_name']}
-          </Text>
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.itemText}>First Name :</Text>
-          <Text style={[styles.itemText, styles.backerText]}>
-            {profile['first_name']}
-          </Text>
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.itemText}>Gender : </Text>
-          <Text style={[styles.itemText, styles.backerText]}>
-            {profile['gender']}
-          </Text>
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.itemText}>Work Phone no. :</Text>
-          <Text style={[styles.itemText, styles.backerText]}>
-            {profile['work_phone_no']}
-          </Text>
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.itemText}>Date of Birth :</Text>
-          <Text style={[styles.itemText, styles.backerText]}>
-            {dateFormatter(profile['date_of_birth'])}
-          </Text>
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.itemText}>Email :</Text>
-          <Text style={[styles.itemText, styles.backerText]}>
-            {profile['email_work']}
-          </Text>
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.itemText}>Status :</Text>
-          <Text style={[styles.itemText, styles.backerText]}>
-            {profile['status']}
-          </Text>
-        </View>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+      style={styles.scrollview}>
+      <View style={styles.bigPageContainer}>
+        <View style={styles.profileContainer}>
+          <View style={styles.itemContainer}>
+            <Text style={[styles.itemText, styles.firstColumn]}>
+              Employee ID :
+            </Text>
+            <Text
+              style={[styles.itemText, styles.backerText, styles.firstColumn]}>
+              {profile['employeeid']}
+            </Text>
+          </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>Last Name :</Text>
+            <Text style={[styles.itemText, styles.backerText]}>
+              {profile['last_name']}
+            </Text>
+          </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>First Name :</Text>
+            <Text style={[styles.itemText, styles.backerText]}>
+              {profile['first_name']}
+            </Text>
+          </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>Gender : </Text>
+            <Text style={[styles.itemText, styles.backerText]}>
+              {profile['gender']}
+            </Text>
+          </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>Work Phone no. :</Text>
+            <Text style={[styles.itemText, styles.backerText]}>
+              {profile['work_phone_no']}
+            </Text>
+          </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>Date of Birth :</Text>
+            <Text style={[styles.itemText, styles.backerText]}>
+              {dateFormatter(profile['date_of_birth'])}
+            </Text>
+          </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>Email :</Text>
+            <Text style={[styles.itemText, styles.backerText]}>
+              {profile['email_work']}
+            </Text>
+          </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>Status :</Text>
+            <Text style={[styles.itemText, styles.backerText]}>
+              {profile['status']}
+            </Text>
+          </View>
 
-        <View style={styles.itemContainer}>
-          <Text style={styles.itemText}>Annual Leave Taken :</Text>
-          <Text style={[styles.itemText, styles.backerText]}>
-            {profile['al_leave_taken']}
-          </Text>
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>Annual Leave Taken :</Text>
+            <Text style={[styles.itemText, styles.backerText]}>
+              {profile['al_leave_taken']}
+            </Text>
+          </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>Annual Leave Entitled :</Text>
+            <Text style={[styles.itemText, styles.backerText]}>
+              {profile['al_leave_entitled_peryear']}
+            </Text>
+          </View>
         </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.itemText}>Annual Leave Entitled :</Text>
-          <Text style={[styles.itemText, styles.backerText]}>
-            {profile['al_leave_entitled_peryear']}
-          </Text>
-        </View>
+        <Pressable
+          onPress={logoutHandler}
+          style={({pressed}) =>
+            pressed ? styles.pressed : styles.ButtonContainer
+          }>
+          <View>
+            <Text style={{fontSize: 20}}>Log out</Text>
+          </View>
+        </Pressable>
       </View>
-      <Pressable
-        onPress={logoutHandler}
-        style={({pressed}) =>
-          pressed ? styles.pressed : styles.ButtonContainer
-        }>
-        <View>
-          <Text style={{fontSize: 20}}>Log out</Text>
-        </View>
-      </Pressable>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -142,19 +163,27 @@ export default Profile;
 const styles = StyleSheet.create({
   bigPageContainer: {
     backgroundColor: GlobalStyles.colors.backgroundColor,
-    // borderWidth: 1,
     padding: 15,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    marginTop: 40,
   },
+
+  scrollview: {
+    backgroundColor: GlobalStyles.colors.backgroundColor,
+    flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    width: '100%',
+  },
+
   profileContainer: {
     // borderWidth: 1,
-    height: '60%',
+    height: '90%',
     width: '100%',
-    marginTop: -80,
-    marginBottom: 70,
+    marginBottom: 50,
     padding: 30,
     backgroundColor: GlobalStyles.colors.backgroundColorDarker,
     borderRadius: 25,

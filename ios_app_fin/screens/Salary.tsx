@@ -98,9 +98,7 @@ function Salary() {
         style={{width: '100%', flex: 1}}>
         {!payrollRecord || payrollRecord.length == 0 ? (
           <View style={styles.noRecordContainer}>
-            <Text style={styles.noRecordText}>
-              No Payslip Application Record
-            </Text>
+            <Text style={styles.noRecordText}>No Payslip Record</Text>
           </View>
         ) : (
           payrollRecord.map((data, index) => {
