@@ -5,6 +5,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import "../styles/01-Calendar.css";
 
 import moment from "moment";
+import { eventNames } from "process";
 moment().format();
 
 interface state {
@@ -130,7 +131,8 @@ export default function Calendar() {
     }
 
     function changeBirthdayDateFormat(date: string) {
-      return moment(new Date()).format("YYYY") + date.substring(4);
+      return "2022" + date.substring(4);
+      // return moment(new Date()).format("YYYY") + date.substring(4);
     }
 
     async function checkFirstDayShowCalendar() {
@@ -207,11 +209,13 @@ export default function Calendar() {
 
     async function main() {
       let array1 = await checkBirthdayShowCalendar();
-      let array1nextYear = [...array1];
-      array1nextYear.map((item) => {
+      // console.log(array1);
+      let array1nextYear = JSON.parse(JSON.stringify(array1));
+      array1nextYear.map((item: any) => {
         item["start"] =
           (+item["start"].substring(0, 4) + 1).toString() +
           item["start"].substring(4);
+        item["id"] = "next" + item["id"];
       });
       let array2 = await checkLeaveShowCalendar();
       let array3 = await checkFirstDayShowCalendar();
@@ -220,9 +224,9 @@ export default function Calendar() {
 
       const lastDay = [
         {
-          id: "lastday1",
-          start: "2022-12-28",
           title: "Last Day: Cheung Ka Yee, Mia",
+          start: "2022-12-28",
+          id: "lastday1",
           backgroundColor: "#ec6480",
           borderColor: "#ec6480",
         },
@@ -230,13 +234,15 @@ export default function Calendar() {
 
       let show: Array<any> = [
         ...array1,
-        array1nextYear,
+        ...array1nextYear,
         ...array2,
         ...array3,
         ...array4,
         ...array5,
         ...lastDay,
       ];
+
+      // console.log(show);
 
       // sort by date;
       let showResult = show.sort(function (a, b) {
@@ -294,11 +300,12 @@ export default function Calendar() {
 }
 
 function renderSidebarEvent(event: any) {
+  // console.log(event.uniqueid);
   return (
     <>
       {new Date(event.start) >= new Date() &&
       new Date(event.start) <
-        new Date(new Date().setDate(new Date().getDate() + 10)) ? (
+        new Date(new Date().setDate(new Date().getDate() + 30)) ? (
         <li key={event.id} className="dot">
           <b>
             {formatDate(event.start, {

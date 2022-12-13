@@ -25,21 +25,12 @@
 }
 
 // payroll show edited number
-.payroll-editing .redNumber {
-  color: white;
+.payroll-editing .blueNumber {
+  color: white !important;
   // color: #ff5c5c;
-  background: #03045e;
+  background: #03045e !important;
   padding: 0.5rem;
 }
-
-.payroll-editing .blueNumber {
-  color: #00b4ab;
-}
-
-// .whiteNumber {
-//   color: rgba(160, 0, 0, 0.5);
-//   padding: 1rem;
-// }
 
 // payroll summary column height
 .payroll-summary .p-datatable .p-datatable-tbody > tr > td {

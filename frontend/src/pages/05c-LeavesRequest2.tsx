@@ -148,7 +148,7 @@ export default function LeavesRequest2() {
               action_cancel: (
                 <button
                   id={`appId-${app.application_id}`}
-                  name="pending"
+                  name="cancelled"
                   onClick={pendingAction}
                   className="actionButton cancelledApp"
                 >
